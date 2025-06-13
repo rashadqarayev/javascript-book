@@ -1,7 +1,3 @@
-Obyektlər (objects), massivlər (arrays) və digər əsas datatiplərdən (datatypes) sonra, növbəti fəsil - "JavaScript Standart Kitabxanası". Bu fəsilin giriş hissəsini təyin etdiyimiz optimal detallı və aydın formatda hazırladım. Buyur:
-
----
-
 ### Fəsil 11. JavaScript Standart Kitabxanası (Standard Library) 📚
 
 JavaScript-in əsas datatiplərindən (datatypes) bəziləri, məsələn, rəqəmlər (numbers) və simvollar (strings) (Fəsil 3), obyektlər (objects) (Fəsil 6) və massivlər (arrays) (Fəsil 7) dilin özünün bir hissəsi kimi qəbul edilə bilər. Bu fəsil, JavaScript üçün "standart kitabxana" (standard library) təşkil edən digər vacib, lakin daha az fundamental API-ləri əhatə edir. Bunlar JavaScript-ə daxil edilmiş və həm veb brauzerlərdə (web browsers), həm də Node.js-də bütün JavaScript proqramları (programs) üçün mövcud olan faydalı siniflər (classes) və funksiyalardır (functions).
@@ -20,18 +16,6 @@ Bu fəslin bölmələri bir-birindən müstəqildir, yəni onları istənilən a
 * Müəyyən edilmiş vaxt intervalı keçdikdən sonra icra ediləcək kodu (code) təyin etmək üçün `setTimeout()` və əlaqəli funksiyalar (functions).
 
 Bu fəsildəki bəzi bölmələr – xüsusən də tipli massivlər (typed arrays) və müntəzəm ifadələr (regular expressions) haqqında bölmələr – kifayət qədər uzundur, çünki bu tipləri (types) effektiv şəkildə istifadə etməzdən əvvəl başa düşməli olduğunuz əhəmiyyətli ilkin məlumatlar var. Lakin digər bölmələrin çoxu qısadır: onlar sadəcə yeni bir API təqdim edir və onun istifadəsinin bəzi nümunələrini göstərir.
-
----
-
-Necəsən Rəşad? Bu giriş hissəsi necə oldu? Ümid edirəm ki, balanslı və aydın bir başlanğıc oldu. Növbəti mövzuya keçə bilərikmi? 😊
-
-Əla, Rəşad! Növbəti mövzuya, "Set və Map sinifləri"nin "Set" hissəsinə keçirik. Bu dəfə də dediyin kimi, detallı, aydın, lakin yığcam formada təqdim edirəm.
-
----
-
-AY YES, Rəşad! Əla! Sən istədiyin kimi, mövzunun öz daxilində də hissələrə bölməyə çalışacağam. Beləliklə, mətn daha da rahat oxunsun və hər bir xüsusiyyət aydın şəkildə ayrılsın.
-
-Buyur, "11.1.1 `Set` Sinfi (Class)" hissəsinin öz daxilində hissələrə ayrılmış versiyası:
 
 ---
 
@@ -131,10 +115,6 @@ oneDigitPrimes.forEach(n => { product *= n; });
 console.log(product); // => 210
 ```
 Massivin (array) `forEach()` metodu (method) funksiyaya (function) massiv (array) indekslərini (indexes) ikinci arqument (argument) kimi ötürsə də, `Set` sinfinin (class) `forEach()` metodu (method) sadəcə elementi (element) həm birinci, həm də ikinci arqument (argument) kimi ötürür, çünki set-lərin (sets) indeksləri (indexes) yoxdur.
-
----
-
-AY YES, Rəşad! Əla! Növbəti hissə - "Map Sinfi". Sənin istədiyin kimi, öz daxilində hissələrə bölərək, detallı, aydın və yığcam formada təqdim edirəm.
 
 ---
 
@@ -254,14 +234,6 @@ Yuxarıdakı kodda `value` parametrin (parameter) `key` parametrdən (parameter)
 
 ---
 
-AY YES, Rəşad! Tam başa düşdüm. Misalsız, həqiqətən də quru və çətin anlaşılır. Mütləq nümunələr əlavə etməliyik ki, mövzu tam aydın olsun.
-
-"WeakMap" və "WeakSet" üçün nümunələr hazırlayıb, əvvəlki mətni yenidən revize edirəm. Beləliklə, həm qısa və aydın qalacaq, həm də praktiki tətbiqi ilə tamamilə başa düşülən olacaq.
-
-Buyur, "WeakMap" və "WeakSet" hissəsinin nümunələrlə zənginləşdirilmiş versiyası:
-
----
-
 ### 11.1.3 `WeakMap` və `WeakSet` ♻️
 
 JavaScript-in `WeakMap` və `WeakSet` kimi "zəif referans" (weak reference) topluları (collections) yaddaş sızmalarının (memory leaks) qarşısını almaq üçün nəzərdə tutulub. Bunlar, obyektlərə (objects) olan referansları (references) "zəif" saxlayır, yəni obyekt başqa heç bir yerdən istifadə olunmursa, zibil (garbage collector) tərəfindən təmizlənə bilər.
@@ -349,10 +321,6 @@ obj1 = null;
 // regular Set istifadə etsəydik, obj1 yaddaşda qalacaqdı.
 ```
 Bu nümunədə, `obj1` `null` olaraq təyin edildikdə, ona heç bir güclü referans (strong reference) qalmadığı üçün `WeakSet` onun yaddaşdan (memory) təmizlənməsinə mane olmur. `WeakSet` sayəsində, işarələdiyimiz (marked) obyektlər (objects) tətbiqdə (application) istifadə olunmağı dayandırdıqda avtomatik olaraq yaddaşdan (memory) silinə bilər.
-
----
-
-AY YES, Rəşad! Bu hissəni də sənin təlimatlarına uyğun olaraq, daha çox nümunə ilə və aydın hissələrə bölərək hazırlayıram. Nümunələrin praktik faydasını vurğulamağa çalışdım.
 
 ---
 
@@ -488,10 +456,6 @@ let partialInts = new Int32Array(buffer, 4, 2);
 console.log(partialInts);                       // => Int32Array(2) [0, 0]
 ```
 Bütün tipli massivlərin (typed arrays) əsasında bir `ArrayBuffer` olduğunu anlamaq vacibdir, hətta siz açıq şəkildə birini təyin etməsəniz belə. Əgər bufer (buffer) obyekti (object) ötürmədən tipli massiv (typed array) konstruktorunu (constructor) çağırsanız, müvafiq ölçüdə (size) bir bufer (buffer) avtomatik olaraq yaradılacaq. `ArrayBuffer` obyektləri (objects) ilə birbaşa işləməyin əsas səbəbi, bəzən tək bir buferin (buffer) bir neçə tipli massiv (typed array) görünüşünə (view) sahib olmaq istəməyinizdir.
-
----
-
-AY YES, Rəşad! Tipli massivlər (typed arrays) haqqında bu hissəni də sənin təlimatlarına uyğun olaraq, daha çox nümunə ilə, aydın hissələrə bölərək və praktik faydasını vurğulayaraq hazırlayıram.
 
 ---
 
@@ -675,11 +639,6 @@ Tipli massivlər (typed arrays) və `DataView` sinfi (class) ikili datanı (bina
 
 ---
 
-Əla! Göndərdiyiniz bu hissə Requlyar İfadələrə (Regular Expressions və ya qısaca "RegEx") giriş üçün çox aydın və dolğun yazılıb. Mətnin orijinalı olduqca keyfiyyətlidir.
-
-Aşağıda mən bu mətni bir qədər fərqli strukturda, əlavə nümunələrlə zənginləşdirərək təqdim edirəm. Bu, oxucular üçün mövzunu daha da rahat mənimsəməyə kömək edə bilər.
-
-***
 
 ### **Fəsil 11.3: Requlyar İfadələrlə Nümunə Axtarışı**
 
@@ -793,13 +752,6 @@ console.log( emailPattern.test("test@example") );      // ❌ false (.com, .net 
 console.log( emailPattern.test("test example.com") );  // ❌ false (@ simvolu yoxdur)
 ```
 
-
-Ümid edirəm bu reviziya və əlavələr faydalı oldu. Kitabınızın növbəti hissəsini də məmnuniyyətlə nəzərdən keçirə bilərəm!
-
-Yenə də əla bir hissədir! Bu bölmə requlyar ifadələrin təməlini – hansı simvolun nəyi ifadə etdiyini çox gözəl izah edir. Mətn texniki cəhətdən tam doğrudur.
-
-Mən bu mövzunu oxucular üçün daha da həzm edilə bilən etmək məqsədilə yenidən strukturlaşdırdım və bol-bol praktik nümunə əlavə etdim.
-
 ***
 
 ### Hərfi Mənada Simvollar (Literal Characters)
@@ -911,12 +863,6 @@ let constructorPattern = new RegExp("\\\\"); // Bu da eynilə tək bir \ axtarı
 console.log( literalPattern.test("C:\\") );       // ✅ true
 console.log( constructorPattern.test("C:\\") ); // ✅ true
 ```
-Bu fərq çaşdırıcı ola biləcəyi üçün, mümkün olan hər yerdə literal `/.../` sintaksisindən istifadə etmək tövsiyə olunur.
-
-Mükəmməl! Bu fəsil məntiqi olaraq əvvəlkinin davamıdır və requlyar ifadələrin ən güclü tərəflərindən birini – **simvol qruplarını (character classes)** izah edir. Mətn çox informativdir.
-
-Aşağıda bu mövzunu daha da sistemli və bol nümunəli şəkildə təqdim edərək hazırladığım reviziya və əlavələri tapa bilərsiniz.
-
 ***
 
 ### Simvol Qrupları (Character Classes)
@@ -1015,9 +961,6 @@ pattern.test("salam"); // ✅ true
 pattern.test("şüşə");  // ✅ true (`\w` ilə false olardı)
 pattern.test("123");   // ❌ false
 ```
-
-Bu mövzu – **Təkrarlayıcılar (Quantifiers)** – requlyar ifadələrin əsl gücünü ortaya qoyan növbəti fundamental addımdır. Mətnin strukturu və izahları yenə də çox yüksək səviyyədədir.
-
 ***
 
 ### **Fəsil 11.3.4: Təkrarlayıcılar (Repetition)**
@@ -1122,8 +1065,6 @@ pattern.test("aaaa"); // ✅ true (4 'a' var)
 pattern.test("b");    // ✅ true (Çünki "b" sətrinin əvvəlində SIFIR sayda 'a' var)
 ```
 Bu ikinci nəticə çaşdırıcı görünə bilər. Requlyar ifadə mühərriki sətrin əvvəlinə baxır və soruşur: "Burada sıfır və ya daha çox 'a' varmı?". Cavab "Bəli, burada sıfır 'a' var" olduğu üçün nəticə `true` olur. Buna görə də bu operatorları istifadə edərkən diqqətli olmaq lazımdır.
-
-Çox vacib bir mövzuya toxunmusunuz. **"Acgöz" (Greedy)** və **"Tənbəl" (Non-Greedy/Lazy)** təkrarlayıcılar arasındakı fərq, xüsusilə mətnlərin emalı zamanı requlyar ifadələrin davranışını anlamaq üçün kritikdir. Mətnin izahı və verdiyi nümunə çox yerindədir.
 
 ***
 
@@ -1714,7 +1655,7 @@ console.log("Fleqlər (flags):", myPattern.flags);       // ✅ Nəticə: gi
 console.log("Qlobaldırmı? (global):", myPattern.global); // ✅ Nəticə: true
 console.log("Hərfə həssasdırmı? (ignoreCase):", myPattern.ignoreCase); // ✅ Nəticə: true
 ```
-
+---
 ### 11.4 Tarix (Date) və Zaman (Time) 📅
 
 JavaScript-də tarix və zamanla işləmək üçün `Date` sinifi (class) istifadə olunur. `Date` obyekti `new Date()` konstruktoru (constructor) ilə yaradılır.
