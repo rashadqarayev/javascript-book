@@ -1714,3 +1714,959 @@ console.log("Fleqlər (flags):", myPattern.flags);       // ✅ Nəticə: gi
 console.log("Qlobaldırmı? (global):", myPattern.global); // ✅ Nəticə: true
 console.log("Hərfə həssasdırmı? (ignoreCase):", myPattern.ignoreCase); // ✅ Nəticə: true
 ```
+
+### 11.4 Tarix (Date) və Zaman (Time) 📅
+
+JavaScript-də tarix və zamanla işləmək üçün `Date` sinifi (class) istifadə olunur. `Date` obyekti `new Date()` konstruktoru (constructor) ilə yaradılır.
+
+**Obyekt Yaratma Nümunələri:**
+
+**1. Arqumentsiz - Hazırkı vaxt** 🕰️
+```javascript
+const now = new Date();
+console.log("Hazırkı vaxt:", now.toString());
+// ✅ Nəticə (təxmini): Fri Jun 13 2025 19:26:51 GMT+0400 (Azerbaijan Standard Time)
+```
+
+**2. Rəqəmlərlə - Detallı tarix**
+Konstruktora 2 və ya daha çox rəqəm verdikdə, onlar yerli (local) vaxt qurşağına görə İL, AY, GÜN, SAAT... kimi qəbul edilir.
+```javascript
+// ❗️ Diqqət: Aylar 0-dan başlayır (0 = Yanvar, 5 = İyun)!
+// Günlər isə 1-dən başlayır.
+
+// 13 İyun 2025, saat 19:30 (Bakı vaxtı ilə)
+const someDay = new Date(2025, 5, 13, 19, 30, 0); 
+console.log("Müəyyən edilmiş tarix:", someDay.toLocaleString('az-AZ'));
+// ✅ Nəticə: 13.06.2025, 19:30:00
+```
+
+**3. Sətir (string) ilə**
+`new Date()` standart formatda olan sətirləri (strings) də emal edə bilir. Ən çox istifadə olunan format ISO 8601 formatıdır.
+```javascript
+// 'Z' hərfi vaxtın UTC olduğunu bildirir
+const isoDate = new Date("2025-01-20T10:00:00Z");
+console.log("ISO formatlı tarix (Bakı vaxtı ilə):", isoDate.toLocaleString('az-AZ', { timeZone: 'Asia/Baku' }));
+// ✅ Nəticə: 20.1.2025, 14:00:00
+```
+---
+### 11.4.1 Zaman Damğası (Timestamp) ⏱️
+
+Hər bir `Date` obyekti arxa planda sadəcə bir rəqəm saxlayır: 1 Yanvar 1970-ci il saat 00:00:00-dan (UTC vaxtı ilə) keçən millisaniyələrin sayı. Buna **zaman damğası (timestamp)** deyilir.
+
+* `.getTime()`: Obyektin zaman damğasını (timestamp) qaytarır.
+* `.setTime()`: Obyektin zaman damğasını (timestamp) dəyişir.
+* `Date.now()`: Hal-hazırkı zaman damğasını (timestamp) birbaşa qaytarır.
+
+**Nümunə: Kodun işləmə müddətini ölçmək** 🚀
+```javascript
+console.log("Əməliyyat başlayır...");
+const startTime = Date.now();
+
+// Bir qədər vaxt aparan bir əməliyyat simulyasiyası
+for (let i = 0; i < 100000000; i++) { /* Boş dövr */ }
+
+const endTime = Date.now();
+const duration = endTime - startTime;
+
+console.log(`✅ Əməliyyat ${duration} ms (millisaniyə) çəkdi.`);
+```
+---
+### 11.4.2 Tarix üzərində Hesablamalar (Date Arithmetic) 셈️
+
+`Date` obyektləri ilə riyazi əməliyyatlar aparmaq mümkündür.
+
+**Tarix Hissələrini Almaq və Dəyişmək (Getters & Setters)**
+Hesablama aparmaq üçün əvvəlcə tarixin hissələrini almalı (`get`) və ya dəyişməliyik (`set`).
+* `getFullYear()` / `setFullYear()`
+* `getMonth()` / `setMonth()`
+* `getDate()` / `setDate()` (❗️ Ayın gününü verir)
+* `getDay()` (❗️ Həftənin gününü verir: 0 = Bazar, 1 = Bazar ertəsi...)
+
+**Nümunə 1: İki tarix arasındakı fərqi tapmaq**
+```javascript
+const newYear = new Date("2026-01-01");
+const today = new Date("2025-06-13");
+
+const diffMilliseconds = newYear - today;
+// Fərqi günə çeviririk (1000ms * 60s * 60m * 24h)
+const diffDays = Math.floor(diffMilliseconds / (1000 * 60 * 60 * 24));
+
+console.log(`💡 Yeni ilə ${diffDays} gün qalıb.`); // ✅ Nəticə: Yeni ilə 202 gün qalıb.
+```
+
+**Nümunə 2: Tarixə vaxt əlavə etmək (overflow nümunəsi)**
+`set` metodları "daşma" (overflow) problemini avtomatik həll edir. Məsələn, aya 12-dən böyük dəyər verdikdə, il avtomatik artır.
+```javascript
+const d = new Date(2025, 10, 20); // 20 Noyabr 2025
+console.log("Başlanğıc tarixi:", d.toLocaleDateString('az-AZ'));
+
+// 20 Noyabrın üstünə 2 ay gəlirik. Nəticədə 20 Yanvar 2026 alınır.
+d.setMonth(d.getMonth() + 2); 
+
+console.log("Nəticə:", d.toLocaleDateString('az-AZ')); // ✅ Nəticə: "20.01.2026"
+```
+---
+### 11.4.3 Tarixin Formatlanması və Emalı (Formatting and Parsing) 📜
+
+`Date` obyektini istifadəçiyə göstərmək üçün onu sətirə (string) çevirmək lazımdır.
+
+**Nümunə: Müxtəlif formatlama metodları**
+```javascript
+const d = new Date("2025-10-26T20:30:00");
+
+console.log("toString():", d.toString());
+console.log("toUTCString():", d.toUTCString());
+console.log("toISOString():", d.toISOString()); // ❗️ API-lar üçün standart format
+console.log("toLocaleDateString('az-AZ'):", d.toLocaleDateString('az-AZ')); // ✅ "26.10.2025"
+console.log("toLocaleTimeString('az-AZ'):", d.toLocaleTimeString('az-AZ')); // ✅ "20:30:00"
+console.log("toDateString():", d.toDateString());
+```
+
+**`Date.parse()`:** Sətir (string) formatında olan tarixi analiz edərək onun zaman damğasını (timestamp) qaytarır. Bu, formatlamanın əksidir.
+```javascript
+const dateString = "2025-01-01T00:00:00Z";
+const timestamp = Date.parse(dateString);
+
+console.log("Alınan timestamp:", timestamp); // ✅ Nəticə: 1735689600000
+
+// Həmin timestamp-dən yeni Date obyekti yaratmaq
+const newDate = new Date(timestamp);
+console.log(newDate.toUTCString()); // ✅ Nəticə: "Wed, 01 Jan 2025 00:00:00 GMT"
+```
+
+
+***
+### 11.5 Xəta Sinifləri (Error Classes)
+JavaScript-də `throw` və `catch` istənilən dəyəri xəta kimi istifadə edə bilsə də, ən yaxşı təcrübə (best practice) `Error` sinifindən (class) və ya onun alt-siniflərindən (subclasses) istifadə etməkdir.
+
+**Niyə `Error` obyekti istifadə etməliyik?** 🤔
+Çünki `Error` obyekti yaradıldıqda, o, kodun hansı ardıcıllıqla çağırıldığını göstərən **yaddaş stekini (stack trace)** özündə saxlayır. Bu, xətanın mənbəyini tapmaq (debug) üçün çox vacibdir.
+
+`Error` obyektinin 3 əsas xüsusiyyəti (property) var:
+* **`.name`**: Xətanın növü (məsələn, "Error", "TypeError").
+* **`.message`**: Konstruktora (constructor) ötürülən xəta mesajı.
+* **`.stack`**: Xətanın baş verdiyi yerə qədər olan bütün funksiya çağırışlarını göstərən uzun sətir (string).
+
+**Nümunə: `try...catch` bloku ilə xətanı tutmaq**
+```javascript
+function checkAge(age) {
+  if (typeof age !== 'number' || age < 18) {
+    // Xəta yaradırıq və onu "throw" edirik
+    throw new Error("İstifadəçi 18 yaşından kiçikdir və ya yaşı rəqəm deyil.");
+  }
+  return "İstifadəçi qeydiyyatdan keçə bilər.";
+}
+
+try {
+  let message = checkAge("iyirmi"); // Səhv tipdə dəyər ötürürük
+  console.log(message);
+} catch (error) {
+  console.log("❗️ Bir xəta baş verdi!");
+  console.log("Xətanın adı (name):", error.name);
+  console.log("Xətanın mesajı (message):", error.message);
+  console.log("-------------------");
+  console.log("Stek izi (stack trace):", error.stack);
+}
+```
+**JavaScript-in Standart Xəta Növləri**
+JavaScript-in özünün də standart xətalar üçün alt-sinifləri var:
+* **`TypeError`**: Dəyər üzərində səhv tipdə əməliyyat aparıldıqda. Məsələn, `(10).toUpperCase()`.
+* **`ReferenceError`**: Mövcud olmayan bir dəyişənə müraciət edildikdə. Məsələn, `console.log(x)`.
+* **`SyntaxError`**: Kodun sintaksisi səhv olduqda. Məsələn, `let x = ;`.
+* `RangeError`, `URIError`, `EvalError`...
+
+**Fərdi Xəta Sinifləri Yaratmaq (Custom Error Classes)**
+Bəzən proqramın məntiqinə uyğun xüsusi xəta sinifləri yaratmaq daha faydalı olur. Məsələn, şəbəkə (network) sorğuları üçün `HTTPError` yaradaq.
+
+**Nümunə: `HTTPError` sinifi**
+```javascript
+// Error sinifini genişləndirərək öz xəta sinifimizi yaradırıq
+class HTTPError extends Error {
+  constructor(status, statusText, url) {
+    // `super()` ilə ana Error sinifinin konstruktoruna mesaj göndəririk
+    super(`${status} ${statusText}: ${url}`);
+    
+    // Öz xüsusiyyətlərimizi əlavə edirik
+    this.name = "HTTPError";
+    this.status = status;
+    this.statusText = statusText;
+    this.url = url;
+  }
+}
+
+function fetchSomeData(url) {
+  // Tutaq ki, sorğu uğursuz oldu və 404 statusu qayıtdı
+  throw new HTTPError(404, "Not Found", url);
+}
+
+try {
+  fetchSomeData("http://example.com/non-existent-page");
+} catch (error) {
+  console.error("Xəta baş verdi:", error.message);
+  
+  // Xətanın bizim yaratdığımız HTTPError olub-olmadığını yoxlayırıq
+  if (error instanceof HTTPError) {
+    console.error(`HTTP Status: ${error.status}`);
+    console.error(`Sorğu edilən URL: ${error.url}`);
+  }
+}
+```
+---
+### 11.6 JSON Seriləşdirmə (Serialization) və Emal (Parsing) 🔄
+**Seriləşdirmə (Serialization)** – proqramdakı obyekt, massiv (array) kimi data strukturlarını saxlamaq və ya şəbəkə (network) üzərindən ötürmək üçün sətirə (string) çevirmə prosesidir.
+
+JavaScript-də bu proses üçün **JSON (JavaScript Object Notation)** formatı və iki əsas funksiya istifadə olunur:
+* `JSON.stringify()`: Obyekti JSON formatlı sətirə (string) çevirir.
+* `JSON.parse()`: JSON formatlı sətri (string) yenidən obyektə çevirir.
+
+JSON əksər primitiv tipləri (string, number, boolean, null), massivləri (arrays) və obyektləri (objects) dəstəkləyir, ancaq `Date`, `Map`, `Set`, `RegExp` kimi mürəkkəb tipləri birbaşa dəstəkləmir.
+
+**Nümunə 1: Əsas istifadə və formatlı çıxış**
+```javascript
+const user = {
+  id: 101,
+  username: "johndoe",
+  isAdmin: false,
+  roles: ["editor", "viewer"],
+  profile: null
+};
+
+// 1. Obyekti JSON sətirinə çeviririk
+const jsonString = JSON.stringify(user);
+console.log("Normal JSON:", jsonString);
+// ✅ Nəticə: {"id":101,"username":"johndoe","isAdmin":false,"roles":["editor","viewer"],"profile":null}
+
+// 2. İnsanların oxuması üçün formatlı (pretty-print) JSON yaradırıq
+// 3-cü arqument boşluqların sayını bildirir
+const prettyJsonString = JSON.stringify(user, null, 2);
+console.log("Formatlı JSON:\n", prettyJsonString);
+/* ✅ Nəticə:
+{
+  "id": 101,
+  "username": "johndoe",
+  "isAdmin": false,
+  "roles": [
+    "editor",
+    "viewer"
+  ],
+  "profile": null
+}
+*/
+
+// 3. Sətri yenidən obyektə çeviririk
+const userCopy = JSON.parse(jsonString);
+console.log("Kopyalanmış obyekt:", userCopy);
+```
+
+---
+### 11.6.1 Fərdi Dəyişikliklər (JSON Customizations) 🛠️
+`JSON.stringify` və `JSON.parse` metodlarının davranışını xüsusi ehtiyaclara görə dəyişmək mümkündür.
+
+**`toJSON()` Metodu**
+Əgər bir obyektin `.toJSON()` adlı metodu varsa, `JSON.stringify` həmin obyekti deyil, bu metodun qaytardığı dəyəri sətirə çevirəcək. `Date` obyektləri bu metoddan istifadə edərək özlərini ISO formatlı sətirə çevirir.
+
+**`JSON.parse()` ilə "Canlandırıcı" (Reviver) Funksiyası**
+`JSON.parse` metodunun ikinci arqumenti **reviver** funksiyasıdır. Bu funksiya emal edilən hər bir `key:value` cütü üçün çağırılır və dəyəri çevirməyə (transform) imkan verir. Bu, `Date` sətirlərini yenidən `Date` obyektinə çevirmək üçün idealdır.
+
+**Geniş Nümunə: `Date` obyektini seriləşdirib yenidən canlandırmaq**
+```javascript
+const event = {
+  title: "JavaScript Konfransı",
+  date: new Date() // Hazırkı vaxt
+};
+
+// 1. stringify edirik. `date` xüsusiyyəti toJSON() metodu sayəsində ISO sətirinə çevriləcək.
+const eventString = JSON.stringify(event);
+console.log("Seriləşdirilmiş:", eventString); 
+// ✅ Nəticə: {"title":"JavaScript Konfransı","date":"2025-06-13T15:28:51.520Z"}
+
+// 2. parse edərkən reviver funksiyası ilə `date`-i yenidən Date obyektinə çeviririk
+const revivedEvent = JSON.parse(eventString, (key, value) => {
+  // Əgər dəyər tarix formatlı bir sətirdirsə...
+  if (key === 'date' && typeof value === 'string') {
+    return new Date(value); // ...onu Date obyektinə çevir
+  }
+  return value; // Əks halda dəyəri olduğu kimi saxla
+});
+
+console.log("Canlandırılmış:", revivedEvent);
+console.log("Tarixin tipi:", revivedEvent.date instanceof Date); // ✅ Nəticə: true
+```
+
+**`JSON.stringify()` ilə "Əvəzləyici" (Replacer) Funksiyası**
+`JSON.stringify`-ın ikinci arqumenti həm də **replacer** funksiyası və ya massiv (array) ola bilər.
+* **Massiv (Array):** Yalnız massivdə adları olan xüsusiyyətləri seriləşdirir.
+* **Funksiya (Function):** Hər bir dəyəri seriləşdirmədən əvvəl dəyişməyə imkan verir. `undefined` qaytardıqda, həmin xüsusiyyət nəticəyə daxil edilmir.
+
+**Nümunə: `replacer` ilə seriləşdirməni idarə etmək**
+```javascript
+const product = {
+  id: 123,
+  name: "Laptop",
+  price: 2500,
+  internalCode: "XYZ-987-A", // Bu xüsusiyyəti istifadəçiyə göstərmək istəmirik
+  specs: { cpu: 'i7', ram: 16 }
+};
+
+// 1. Yalnız müəyyən xüsusiyyətləri seçmək (massiv ilə)
+const publicData = JSON.stringify(product, ["name", "price", "specs"], 2);
+console.log("İctimai data:\n", publicData);
+/* ✅ Nəticə:
+{
+  "name": "Laptop",
+  "price": 2500,
+  "specs": {
+    "cpu": "i7",
+    "ram": 16
+  }
+}
+*/
+
+// 2. Müəyyən xüsusiyyətləri gizlətmək (funksiya ilə)
+const privateData = JSON.stringify(product, (key, value) => {
+  if (key === "internalCode") {
+    return undefined; // Bu xüsusiyyəti nəticədən çıxar
+  }
+  return value;
+}, 2);
+console.log("Daxili kodu gizlədilmiş data:\n", privateData);
+```
+***
+### 11.7 Beynəlxalqlaşdırma API-ı (The Internationalization API) 🌍
+JavaScript-in beynəlxalqlaşdırma (internationalization) API-ı, proqramları fərqli dillər, regionlar və mədəniyyətlər üçün uyğunlaşdırmağa kömək edən bir alətlər toplusudur. Bu API 3 əsas sinifdən (class) ibarətdir:
+* **`Intl.NumberFormat`**: Rəqəmləri, valyutaları və faizləri formatlamaq üçün.
+* **`Intl.DateTimeFormat`**: Tarix və zamanı formatlamaq üçün.
+* **`Intl.Collator`**: Sətirləri (strings) yerli əlifba qaydalarına görə müqayisə etmək və sıralamaq (sort) üçün.
+
+Bu fəsildə bu siniflərin hər birini ayrı-ayrılıqda araşdıracağıq.
+
+---
+### 11.7.1 Rəqəmlərin Formatlanması (Formatting Numbers) 💵
+Fərqli ölkələrdə insanlar rəqəmləri fərqli yazır. Məsələn, bəziləri kəsr hissəni ayırmaq üçün nöqtə (`.`), bəziləri isə vergül (`,`) istifadə edir. Minlik ayırıcıları da fərqli ola bilir. `Intl.NumberFormat` sinifi bu məsələni bizim üçün həll edir.
+
+Onu `new Intl.NumberFormat(locale, options)` konstruktoru ilə yaradırıq:
+* **`locale`**: Formatlamanın hansı dil və region üçün ediləcəyini göstərən sətir (string). Məsələn, `"az-AZ"` (Azərbaycan), `"en-US"` (ABŞ İngiliscəsi), `"fr-FR"` (Fransa Fransızcası). Boş buraxılarsa, sistemin lokalını götürür.
+* **`options`**: Formatlamanın detallarını bildirən bir obyekt (object).
+
+**Nümunə 1: Sadə rəqəm formatlanması (fərqli lokallar ilə)**
+Görək eyni rəqəm fərqli ölkələrdə necə görünür.
+```javascript
+const number = 1234567.89;
+
+// Azərbaycan lokalı (az-AZ)
+const azFormatter = new Intl.NumberFormat('az-AZ');
+console.log("Azərbaycan formatı:", azFormatter.format(number));
+// ✅ Nəticə: 1 234 567,89
+
+// ABŞ lokalı (en-US)
+const usFormatter = new Intl.NumberFormat('en-US');
+console.log("ABŞ formatı:", usFormatter.format(number));
+// ✅ Nəticə: 1,234,567.89
+
+// Almaniya lokalı (de-DE)
+const deFormatter = new Intl.NumberFormat('de-DE');
+console.log("Almaniya formatı:", deFormatter.format(number));
+// ✅ Nəticə: 1.234.567,89
+```
+
+**Nümunə 2: Valyuta formatlanması (currency)** 💰
+Bu, ən çox istifadə olunan xüsusiyyətlərdən biridir. `style: 'currency'` və `currency: 'KOD'` opsiyalarını tələb edir.
+```javascript
+const amount = 1550.75;
+
+// Azərbaycan Manatı (AZN)
+const aznFormatter = new Intl.NumberFormat('az-AZ', {
+  style: 'currency',
+  currency: 'AZN'
+});
+console.log("Manatla:", aznFormatter.format(amount)); // ✅ Nəticə: 1.550,75 ₼
+
+// ABŞ Dolları (USD)
+const usdFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD'
+});
+console.log("Dollarla:", usdFormatter.format(amount)); // ✅ Nəticə: $1,550.75
+
+// Avro (EUR) - valyutanın adını tam göstərmək
+const eurFormatter = new Intl.NumberFormat('de-DE', {
+  style: 'currency',
+  currency: 'EUR',
+  currencyDisplay: 'name' // 'symbol' (default), 'code', 'name' ola bilər
+});
+console.log("Avro ilə:", eurFormatter.format(amount)); // ✅ Nəticə: 1.550,75 Euro
+```
+
+**Nümunə 3: Faiz formatlanması (percent)**
+```javascript
+const value = 0.895;
+
+const percentFormatter = new Intl.NumberFormat('az-AZ', {
+  style: 'percent',
+  minimumFractionDigits: 1 // Kəsr hissədə minimum 1 rəqəm göstər
+});
+
+console.log(percentFormatter.format(value)); // ✅ Nəticə: 89,5 %
+```
+
+**Nümunə 4: Rəqəm hissələrinin idarə edilməsi**
+Bəzən qiymətləri göstərərkən hər zaman iki kəsr rəqəmi olmasını istəyirik (məsələn, 15.00).
+```javascript
+const price = 1299;
+const precisePrice = 49.956;
+const simplePrice = 78.5;
+
+const priceFormatter = new Intl.NumberFormat('az-AZ', {
+  style: 'currency',
+  currency: 'AZN',
+  minimumFractionDigits: 2, // Həmişə minimum 2 kəsr rəqəmi göstər
+  maximumFractionDigits: 2  // Maksimum 2 kəsr rəqəmi göstər (yuvarlaqlaşdırır)
+});
+
+console.log(priceFormatter.format(price));        // ✅ Nəticə: 1.299,00 ₼
+console.log(priceFormatter.format(precisePrice)); // ✅ Nəticə: 49,96 ₼ (yuvarlaqlaşdırdı)
+console.log(priceFormatter.format(simplePrice));  // ✅ Nəticə: 78,50 ₼ (sonuna sıfır əlavə etdi)
+```
+**Nümunə 5: Format metodunu birbaşa istifadə etmək**
+Formatter obyektinin `.format` metodunu birbaşa bir dəyişənə mənimsədib, onu bir funksiya kimi istifadə edə bilərsiniz.
+```javascript
+const data = [100, 2500, 98765];
+
+// Formatter yaradıb, onun format metodunu birbaşa bir dəyişənə veririk
+const formatWithGrouping = new Intl.NumberFormat('az-AZ').format;
+
+const formattedData = data.map(formatWithGrouping);
+console.log(formattedData); // ✅ Nəticə: ["100", "2.500", "98.765"]
+```
+
+
+---
+### 11.7.2 Tarix və Zamanın Formatlanması (Formatting Dates and Times) 🗓️
+
+`Date` obyektinin `.toLocaleDateString()` kimi sadə metodları olsa da, onlar formatlama üzərində tam nəzarət imkanı vermir. Məsələn, bəlkə də ilin göstərilməsini istəmir, amma həftənin gününün əlavə olunmasını istəyirsiniz? Ayın adı tam yazılsın, yoxsa qısaldılmış?
+
+Bütün bu detallı nəzarəti **`Intl.DateTimeFormat`** sinifi təmin edir. O da `Intl.NumberFormat` kimi `new Intl.DateTimeFormat(locale, options)` konstruktoru ilə yaradılır və `.format()` metodu ilə istifadə olunur.
+
+* **`locale`**: Formatlamanın hansı dil və region üçün ediləcəyini göstərir (məsələn, `"az-AZ"`).
+* **`options`**: Tarix və zamanın hansı hissələrinin və necə göstəriləcəyini təyin edən bir obyekt (object).
+
+**Əsas `options` Xüsusiyyətləri:**
+* **`year`, `month`, `day`, `weekday`**: Tarix hissələri. Dəyərləri `"numeric"`, `"2-digit"`, `"long"` (uzun, məs. "İyun"), `"short"` (qısa, məs. "İyn") ola bilər.
+* **`hour`, `minute`, `second`**: Zaman hissələri. Dəyərləri `"numeric"`, `"2-digit"` ola bilər.
+* **`timeZone`**: Tarixi fərqli bir zaman qurşağı (timezone) üçün göstərməyə imkan verir (məsələn, `"America/New_York"`).
+* **`hour12`**: `true` və ya `false` dəyəri ilə 12 saatlıq və ya 24 saatlıq formatı seçir.
+
+---
+**Geniş Nümunələr**
+
+**Nümunə 1: Sadə və detallı formatların müqayisəsi**
+Hazırkı vaxtı (`new Date()`) götürərək onu fərqli detallarla formatlayaq.
+```javascript
+const today = new Date(); // Hazırkı vaxt: 13 İyun 2025, 19:33
+
+// 1. Standart, qısa format (Azərbaycan lokalı ilə)
+const simpleFormatter = new Intl.DateTimeFormat('az-AZ');
+console.log("Sadə format:", simpleFormatter.format(today));
+// ✅ Nəticə: 13.06.2025
+
+// 2. Bütün detalları özündə cəmləyən geniş format
+const fullOptions = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit'
+};
+const fullFormatter = new Intl.DateTimeFormat('az-AZ', fullOptions);
+console.log("Geniş format:", fullFormatter.format(today));
+// ✅ Nəticə: Cümə, 13 iyun 2025, 19:33:03
+```
+
+**Nümunə 2: Eyni formatın fərqli lokallarda (locales) göstərilməsi**
+Yuxarıdakı `fullOptions` obyektini fərqli dillər üçün istifadə edək.
+```javascript
+const date = new Date('2025-06-13T19:30:00');
+const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+
+const az_format = new Intl.DateTimeFormat('az-AZ', options).format(date);
+const en_format = new Intl.DateTimeFormat('en-US', options).format(date);
+const ja_format = new Intl.DateTimeFormat('ja-JP', options).format(date);
+
+console.log("🇦🇿 Azərbaycan:", az_format); // ✅ Nəticə: Cümə, 13 iyun 2025
+console.log("🇺🇸 ABŞ:", en_format);       // ✅ Nəticə: Friday, June 13, 2025
+console.log("🇯🇵 Yaponiya:", ja_format);   // ✅ Nəticə: 2025年6月13日金曜日
+```
+Gördüyünüz kimi, eyni qaydalar hər dilin öz qrammatikasına uyğun tətbiq olunur.
+
+**Nümunə 3: Zaman qurşağının (Timezone) dəyişdirilməsi** ✈️
+Hazırda Bakıda saatın neçə olduğunu bilirik. Görəsən eyni anda Nyu-Yorkda saat neçədir?
+```javascript
+const now = new Date(); // Hazırkı vaxt
+
+const timeOptions = {
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  timeZoneName: 'short'
+};
+
+// Bakı vaxtı
+const bakuTime = new Intl.DateTimeFormat('az-AZ', { ...timeOptions, timeZone: 'Asia/Baku' });
+console.log("Bakı vaxtı:", bakuTime.format(now));
+// ✅ Nəticə: 19:33:03 GMT+4
+
+// Nyu-York vaxtı
+const newYorkTime = new Intl.DateTimeFormat('en-US', { ...timeOptions, timeZone: 'America/New_York' });
+console.log("Nyu-York vaxtı:", newYorkTime.format(now));
+// ✅ Nəticə: 11:33:03 AM EDT
+```
+
+**Nümunə 4: Müxtəlif format stilləri**
+Fərqli məqsədlər üçün fərqli formatlar yarada bilərik.
+```javascript
+const eventDate = new Date('2025-12-25T20:00:00');
+
+// Stil 1: Yalnız ay və gün
+const monthDay = new Intl.DateTimeFormat('az-AZ', { month: 'long', day: 'numeric' }).format(eventDate);
+console.log("🗓️ Tədbir tarixi:", monthDay); // ✅ Nəticə: 25 dekabr
+
+// Stil 2: Qısa tarix və 12-saatlıq zaman formatı
+const shortWithAmPm = new Intl.DateTimeFormat('en-US', {
+  year: '2-digit',
+  month: 'numeric',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  hour12: true
+}).format(eventDate);
+console.log("⏰ ABŞ formatı:", shortWithAmPm); // ✅ Nəticə: 12/25/25, 8:00 PM
+```
+**Nümunə 5 (Bonus): Fərqli təqvimlər**
+Tarixi başqa təqvim sistemlərinə görə də formatlamaq olar.
+```javascript
+const d = new Date("2025-06-13");
+const opts = { year: 'numeric', era: 'short' };
+
+console.log("İslami Təqvim:", new Intl.DateTimeFormat('ar-SA-u-ca-islamic', opts).format(d));
+// ✅ Nəticə: ١٤٤٦ هـ
+console.log("İbrani Təqvimi:", new Intl.DateTimeFormat('he-IL-u-ca-hebrew', opts).format(d));
+// ✅ Nəticə: ה'תשפ"ה
+```
+
+---
+
+### 11.7.3 Sətirlərin Müqayisəsi və Sıralanması (Comparing and Sorting Strings) 🔤
+Sətirləri (strings) əlifba sırasına görə sıralamaq (sort) düşündüyümüzdən daha mürəkkəb bir məsələdir. Məsələn, JavaScript-in standart `.sort()` metodu simvolları onların Unicode kodlarına görə sıralayır. Bu, bir çox dil üçün, o cümlədən Azərbaycan dili üçün düzgün nəticə vermir.
+
+**Problem Nədir?** 🤔
+Standart `.sort()` metodu Azərbaycan dilinin xüsusi hərflərini (`ç`, `ş`, `ğ`, `ə`, `ö`, `ü`) və onların əlifbadakı yerini tanımır.
+
+```javascript
+const words = ['şüşə', 'səbət', 'çanta', 'can'];
+
+// Standart sort metodu səhv nəticə verir
+words.sort();
+console.log("Səhv sıralama:", words);
+// ❌ Nəticə (təxmini): ["can", "səbət", "çanta", "şüşə"] (çünki 's' hərfi 'ç'-dən əvvəl gəlir)
+```
+
+**Həll Yolu: `Intl.Collator`** ✅
+`Intl.Collator` sinifi (class) sətirləri müxtəlif dillərin və regionların qaydalarına uyğun olaraq müqayisə etmək və sıralamaq üçün yaradılıb. O, `.compare` adlı bir metod təqdim edir ki, bu metodu birbaşa `.sort()` metoduna ötürmək olar.
+
+`new Intl.Collator(locale, options)` konstruktoru ilə yaradılır:
+* **`locale`**: Müqayisənin hansı dilin qaydalarına görə aparılacağını bildirir (`"az-AZ"`).
+* **`options`**: Müqayisənin davranışını tənzimləyən bir obyekt (object).
+
+**Əsas `options` Xüsusiyyətləri:**
+* **`usage`**: İstifadə məqsədi. `"sort"` (sıralama) və ya `"search"` (axtarış) ola bilər.
+* **`sensitivity`**: Həssaslıq dərəcəsi.
+    * `"base"`: Həm hərflərin böyük-kiçikliyinə, həm də aksentlərə məhəl qoymur (məsələn, `e` == `ə` == `E`).
+    * `"accent"`: Aksentləri nəzərə alır, amma böyük-kiçikliyi yox (`e` != `ə`, amma `ə` == `Ə`).
+    * `"case"`: Böyük-kiçikliyi nəzərə alır, amma aksentləri yox (`e` != `E`, amma `e` == `ə`).
+    * `"variant"`: Hər şeyi nəzərə alır (tam həssaslıq). Bu, `"sort"` üçün standart dəyərdir.
+* **`numeric`**: `true` olarsa, sətirlərin içindəki rəqəmləri ədədi dəyərlərinə görə sıralayır (məsələn, "Fəsil 2" "Fəsil 10"-dan əvvəl gəlir).
+* **`ignorePunctuation`**: `true` olarsa, durğu işarələri və boşluqlar nəzərə alınmır.
+
+---
+**Geniş Nümunələr**
+
+**Nümunə 1: Azərbaycan dili üçün düzgün əlifba sırası**
+Yuxarıdakı səhv sıralama problemini `Intl.Collator` ilə həll edək.
+```javascript
+const words = ['şüşə', 'səbət', 'çanta', 'can'];
+
+// Azərbaycan lokalı üçün bir müqayisəçi (collator) yaradırıq
+const azCollator = new Intl.Collator('az-AZ').compare;
+
+// .sort() metoduna öz müqayisəçimizi ötürürük
+words.sort(azCollator);
+
+console.log("Düzgün sıralama:", words);
+// ✅ Nəticə: ["can", "çanta", "səbət", "şüşə"]
+```
+
+**Nümunə 2: Rəqəmlərin nəzərə alınması (Numeric Sorting)** 🔢
+Fayl adları və ya başlıqlar kimi rəqəmli sətirləri sıralamaq üçün `numeric: true` əvəzsizdir.
+```javascript
+const files = ['report-10.pdf', 'report-2.pdf', 'report-1.pdf'];
+
+// Standart sort səhv nəticə verəcək: ["report-1.pdf", "report-10.pdf", "report-2.pdf"]
+files.sort();
+console.log("Səhv rəqəm sıralaması:", files);
+
+// Düzgün sıralama üçün `numeric: true` istifadə edirik
+const numericCollator = new Intl.Collator(undefined, { numeric: true }).compare;
+files.sort(numericCollator);
+console.log("Düzgün rəqəm sıralaması:", files);
+// ✅ Nəticə: ["report-1.pdf", "report-2.pdf", "report-10.pdf"]
+```
+
+**Nümunə 3: Həssaslığın (Sensitivity) idarə edilməsi**
+Böyük-kiçik hərf və ya aksent fərqlərini nəzərə alıb-almamağı seçə bilərik.
+```javascript
+const names = ['Emin', 'əmin', 'emin', 'Əmin'];
+
+// `sensitivity: 'base'` - nə böyük-kiçikliyə, nə də aksentə fikir verir
+const baseCollator = new Intl.Collator('az-AZ', { sensitivity: 'base' }).compare;
+names.sort(baseCollator);
+console.log("Əsas hərfə görə sıralama:", names);
+// ✅ Nəticə (təxmini): ["Emin", "emin", "əmin", "Əmin"] (eyni baza hərflər qruplaşdırılır)
+
+// `sensitivity: 'variant'` (standart) - hər şeyi nəzərə alır
+const variantCollator = new Intl.Collator('az-AZ', { sensitivity: 'variant' }).compare;
+names.sort(variantCollator);
+console.log("Tam həssas sıralama:", names);
+// ✅ Nəticə: ["Emin", "emin", "Əmin", "əmin"] (düzgün əlifba sırası)
+```
+
+**Nümunə 4: "Yumşaq" axtarış (Fuzzy Search)** 🔍
+`usage: 'search'` və `sensitivity: 'base'` ilə aksent və böyük-kiçik hərf fərqi olmadan axtarış etmək olar.
+```javascript
+const cityList = ['Gəncə', 'Şəki', 'Gence', 'gəncə'];
+const searchTerm = 'gence';
+
+const fuzzyMatcher = new Intl.Collator('az-AZ', { 
+  usage: 'search', 
+  sensitivity: 'base' 
+}).compare;
+
+// `searchTerm`-ə bərabər olan ilk elementi tapırıq
+const found = cityList.find(city => fuzzyMatcher(city, searchTerm) === 0);
+
+console.log(`'${searchTerm}' üçün tapılan ilk uyğunluq: ${found}`);
+// ✅ Nəticə: 'gence' üçün tapılan ilk uyğunluq: Gəncə
+```
+
+---
+
+### 11.8 Konsol (Console) API-ı 💻
+`console` obyekti, JavaScript kodunu yazarkən və sazlayarkən (debug) ən yaxın dostumuzdur. O, sadəcə `console.log()`-dan ibarət deyil və bir çox faydalı metoda malikdir. Bu API standart olmasa da, bütün müasir brauzerlər və Node.js tərəfindən tam dəstəklənir.
+
+**Log Səviyyələri (Log Levels): `log`, `info`, `warn`, `error`**
+Bu metodlar mesajları fərqli vaciblik səviyyələrinə görə konsola çıxarmaq üçündür. Brauzerlər adətən hər birini fərqli ikon və rənglə göstərir.
+```javascript
+console.log("Bu, sadə bir log mesajıdır.");
+console.info("💡 Bu, informativ bir mesajdır."); // Adətən yanında (i) ikonu olur.
+console.warn("⚠️ Bu, bir xəbərdarlıqdır."); // Adətən sarı rəngdə və xəbərdarlıq ikonu ilə.
+console.error("❌ Bu isə bir xətadır.");    // Adətən qırmızı rəngdə və xəta ikonu ilə.
+```
+
+**Yoxlama (Assertion): `assert()`**
+Birinci arqumenti `false` olarsa, qalan arqumentləri bir xəta mesajı kimi konsola çıxarır. Bu, kodun müəyyən bir şərtə cavab verib-vermədiyini yoxlamaq üçün faydalıdır.
+```javascript
+const x = 5;
+const y = 10;
+
+// Şərt doğru olduğu üçün heç nə çıxmır.
+console.assert(x < y, "X y-dən kiçik olmalıdır.");
+
+// Şərt səhv olduğu üçün xəta mesajı çıxır.
+console.assert(x > y, "X y-dən böyük deyil!", { x_dəyəri: x, y_dəyəri: y });
+// ❌ Nəticə: Assertion failed: X y-dən böyük deyil! {x_dəyəri: 5, y_dəyəri: 10}
+```
+
+**Cədvəl Formatı (Table Formatting): `table()`** 📊
+Massivləri (arrays of objects) və ya obyektləri oxunaqlı cədvəl formatında göstərmək üçün super bir vasitədir.
+```javascript
+const users = [
+  { ad: "Elvin", soyad: "Əliyev", yas: 28 },
+  { ad: "Ayan", soyad: "Məmmədova", yas: 25 },
+  { ad: "Tural", soyad: "Hüseynov", yas: 32 }
+];
+
+console.log("İstifadəçilər cədvəl formatında:");
+console.table(users);
+
+console.log("Yalnız 'ad' və 'yas' sütunları ilə cədvəl:");
+console.table(users, ["ad", "yas"]);
+```
+
+**Qruplaşdırma (Grouping): `group()`, `groupEnd()`**
+Əlaqəli konsol mesajlarını bir başlıq altında, iç-içə və səliqəli şəkildə qruplaşdırmağa imkan verir.
+```javascript
+console.group("İstifadəçi Məlumatları");
+  console.log("Ad: Elvin Əliyev");
+  console.log("Yaş: 28");
+  console.group("📍 Ünvan"); // İç-içə qrup
+    console.log("Şəhər: Bakı");
+    console.log("Küçə: Nizami");
+  console.groupEnd(); // Daxili qrupu bağlayır
+console.groupEnd(); // Əsas qrupu bağlayır
+```
+
+**Sayğac (Counter): `count()`, `countReset()`**
+Müəyyən bir hadisənin neçə dəfə baş verdiyini izləmək üçün idealdır.
+```javascript
+for (let i = 0; i < 5; i++) {
+  if (i % 2 === 0) {
+    console.count("Cüt rəqəm");
+  } else {
+    console.count("Tək rəqəm");
+  }
+}
+// Nəticə:
+// Cüt rəqəm: 1
+// Tək rəqəm: 1
+// Cüt rəqəm: 2
+// Tək rəqəm: 2
+// Cüt rəqəm: 3
+
+console.countReset("Cüt rəqəm"); // "Cüt rəqəm" sayğacını sıfırlayır
+console.count("Cüt rəqəm"); // ✅ Nəticə: Cüt rəqəm: 1
+```
+
+**Zamanlayıcı (Timer): `time()`, `timeLog()`, `timeEnd()`** ⏱️
+Müəyyən bir əməliyyatın nə qədər vaxt apardığını ölçmək üçün `Date.now()`-dan daha rahat bir üsuldur.
+```javascript
+// "Məlumat yükləmə" adlı zamanlayıcını başladırıq
+console.time("Məlumat yükləmə");
+
+// Müəyyən bir müddət sonra...
+setTimeout(() => {
+  console.timeLog("Məlumat yükləmə", "İlkin datalar yükləndi.");
+}, 500);
+
+// Daha bir müddət sonra...
+setTimeout(() => {
+  // Zamanlayıcını dayandırırıq və ümumi keçən vaxtı göstəririk
+  console.timeEnd("Məlumat yükləmə");
+}, 1200);
+
+// Nəticə:
+// Məlumat yükləmə: 505.12ms İlkin datalar yükləndi.
+// Məlumat yükləmə: 1201.34ms - timer ended
+```
+
+---
+### 11.8.1 Konsol ilə Formatlı Çıxış (Formatted Output) 🎨
+
+`console.log` və bənzəri metodların ilk arqumenti C proqramlaşdırma dilindəki kimi formatlaşdırma təyin edə bilər. `%s`, `%d` kimi xüsusi işarələr sonrakı arqumentlərin dəyərləri ilə əvəz olunur.
+
+* **`%s`**: Sətir (String)
+* **`%d`** və **`%i`**: Tam rəqəm (Integer)
+* **`%f`**: Həqiqi rəqəm (Floating-point)
+* **`%o`** və **`%O`**: Obyekt (Object)
+* **`%c`**: CSS stili (yalnız brauzerdə işləyir)
+
+**Nümunə 1: Müxtəlif tiplərin formatlanması**
+```javascript
+const name = "Ayan";
+const age = 25;
+const balance = 152.75;
+const user = { name: "Ayan", age: 25 };
+
+console.log(
+  "İstifadəçi: %s, Yaş: %d, Balans: %f AZN",
+  name,
+  age,
+  balance
+);
+
+console.log("Obyektin detallı görünüşü: %O", user);
+```
+
+**Nümunə 2: CSS ilə rəngli çıxış (Brauzer Konsolu üçün)**
+Bu, konsolda mesajları daha diqqətəçarpan etmək üçün əla bir yoldur.
+```javascript
+console.log(
+  "Bu normal mətndir. %cBu hissə qırmızı və qalındır!%c Bu isə yenidən normaldır.",
+  "color: red; font-weight: bold; font-size: 16px;", // Birinci %c-nin stili
+  "color: black;" // İkinci %c stili sıfırlayır
+);
+```
+---
+
+
+### 11.9 URL API-ları (URL APIs) 🔗
+Veb proqramlaşdırmada URL-lərlə işləmək çox yayğın bir tələbatdır. JavaScript-də URL-ləri emal etmək, hissələrə ayırmaq (parse), dəyişdirmək və düzgün formatlamaq üçün müasir **`URL`** sinifi (class) mövcuddur.
+
+`URL` sinifi standart ECMAScript-in bir hissəsi olmasa da, bütün müasir brauzerlər və Node.js tərəfindən tam dəstəklənir.
+
+#### `URL` Obyektinin Yaradılması və Xüsusiyyətləri (Properties)
+`new URL()` konstruktoru ilə bir URL obyekti yaradılır. Bu obyekt URL-i avtomatik olaraq hissələrə ayırır və bu hissələrə xüsusiyyətlər (properties) vasitəsilə asanlıqla müraciət etmək olur.
+
+**Nümunə 1: URL-in hissələrə ayrılması**
+```javascript
+const myUrl = "https://www.example.com:8080/axtarish?q=JavaScript&lang=az#netice-1";
+const url = new URL(myUrl);
+
+console.log("Bütün URL (href):", url.href);
+console.log("Protokol (protocol):", url.protocol); // "https:"
+console.log("Host (host):", url.host);             // "www.example.com:8080"
+console.log("Hostname (hostname):", url.hostname); // "www.example.com"
+console.log("Port (port):", url.port);             // "8080"
+console.log("Yol (pathname):", url.pathname);       // "/axtarish"
+console.log("Axtarış hissəsi (search):", url.search);   // "?q=JavaScript&lang=az"
+console.log("Lövbər (hash):", url.hash);             // "#netice-1"
+console.log("Mənbə (origin):", url.origin);         // "https://www.example.com:8080"
+```
+
+**Nümunə 2: URL hissələrini dəyişdirmək və avtomatik formatlama**
+`URL` sinifinin ən böyük üstünlüklərindən biri, xüsusi simvolları avtomatik olaraq düzgün formatlamasıdır (escaping).
+```javascript
+const url = new URL("https://mysite.com");
+
+// Pathname-ə boşluq və Azərbaycan hərfləri olan bir yol əlavə edirik
+url.pathname = "/məhsullar/yeni məhsul";
+
+// search hissəsinə # kimi xüsusi simvol əlavə edirik
+url.search = "filter=yeni#";
+
+console.log("Avtomatik formatlanmış URL:", url.href);
+// ✅ Nəticə: https://mysite.com/m%C9%99hsullar/yeni%20m%C9%99hsul?filter=yeni%23
+// Gördüyünüz kimi, 'ə', ' ' (boşluq) və '#' simvolları düzgün kodlaşdırıldı.
+```
+
+#### Axtarış Parametrləri (Search Params): `URLSearchParams`
+URL-in `?`-dən sonrakı hissəsini (`q=test&cat=tech` kimi) idarə etmək üçün `search` xüsusiyyəti əvəzinə, daha güclü olan `searchParams`-dan istifadə etmək daha rahatdır. Bu, `URLSearchParams` adlı xüsusi bir obyekt qaytarır.
+
+**Geniş `URLSearchParams` Nümunəsi:**
+```javascript
+const url = new URL("https://example.com/search");
+console.log("Başlanğıc URL:", url.href);
+
+// 1. Parametrlər əlavə edirik: .append()
+url.searchParams.append('q', 'JavaScript');
+url.searchParams.append('cat', 'proqramlaşdırma');
+console.log("Parametr əlavə edildi:", url.href); // ...?q=JavaScript&cat=proqramlaşdırma
+
+// 2. Parametrin dəyərini dəyişirik: .set()
+url.searchParams.set('q', 'ECMAScript'); // 'q'-nin köhnə dəyərini silib yenisini yazır
+console.log("Parametr dəyişdirildi:", url.href); // ...?q=ECMAScript&cat=proqramlaşdırma
+
+// 3. Eyni adlı ikinci bir parametr əlavə edirik
+url.searchParams.append('cat', 'veb');
+console.log("Eyni adlı parametr əlavə edildi:", url.href); // ...&cat=proqramlaşdırma&cat=veb
+
+// 4. Parametrləri alırıq: .get() və .getAll()
+console.log("`q` parametrinin dəyəri:", url.searchParams.get('q')); // ✅ "ECMAScript"
+console.log("`cat` parametrinin bütün dəyərləri:", url.searchParams.getAll('cat')); // ✅ ["proqramlaşdırma", "veb"]
+
+// 5. Parametri silirik: .delete()
+url.searchParams.delete('cat');
+console.log("Parametr silindi:", url.href); // ...?q=ECMAScript
+
+// 6. Bütün parametrlər üzərində dövr etmək (loop)
+for (const [key, value] of url.searchParams) {
+  console.log(`Açar: ${key}, Dəyər: ${value}`);
+}
+```
+
+---
+### 11.9.1 Köhnə (Legacy) URL Funksiyaları 📜
+`URL` sinifindən əvvəl, JavaScript-də URL kodlaşdırması üçün qlobal funksiyalar mövcud idi. Onları bilmək faydalıdır, amma istifadələri məsləhət görülmür.
+
+* **`escape()`/`unescape()`**: Ən köhnə və **istifadədən qalxmış (deprecated)** funksiyalar. **Heç vaxt istifadə etməyin.**
+* **`encodeURI()`/`decodeURI()`**: Bütöv bir URL-i kodlaşdırmaq üçündür. URL ayırıcılarını (`:`, `/`, `?`, `#`, `&`) kodlaşdırmır.
+* **`encodeURIComponent()`/`decodeURIComponent()`**: URL-in tək bir hissəsini (məsələn, axtarış dəyərini) kodlaşdırmaq üçündür. Bütün xüsusi simvolları, o cümlədən ayırıcıları kodlaşdırır.
+
+**`encodeURI` və `encodeURIComponent` arasındakı fərq:**
+```javascript
+const fullUrl = "http://example.com/search?q=c++ kod";
+const urlComponent = "c++ kod";
+
+// encodeURI bütün URL üçün nəzərdə tutulub, / : ? & = # simvollarını dəyişmir.
+console.log("encodeURI:", encodeURI(fullUrl));
+// ✅ Nəticə: http://example.com/search?q=c++%20kod
+
+// encodeURIComponent isə bir hissə üçün nəzərdə tutulub, bütün xüsusi simvolları dəyişir.
+console.log("encodeURIComponent:", encodeURIComponent(urlComponent));
+// ✅ Nəticə: c%2B%2B%20kod
+```
+**Son Nəticə:** Bu köhnə funksiyalarla başınızı ağrıtmaqdansa, URL ilə bağlı bütün əməliyyatlar üçün **hər zaman müasir `URL` sinifindən istifadə edin.** O, həm daha güclü, həm də daha təhlükəsizdir.
+
+---
+
+### 11.10 Zamanlayıcılar (Timers) ⏳
+JavaScript-in ilk günlərindən bəri brauzerlər və Node.js, proqramlara müəyyən bir müddət sonra və ya periodik olaraq funksiya çağırmaq imkanı verən iki əsas funksiya təqdim edir: **`setTimeout()`** və **`setInterval()`**. Bu funksiyalar kodun dərhal yox, gələcəkdə icra olunmasını təmin edir və asinxron (asynchronous) proqramlaşdırmanın təməlini təşkil edir.
+
+---
+#### `setTimeout()` — Birdəfəlik Gecikmə
+Bu funksiya, verilmiş bir funksiyanı (callback) müəyyən bir gecikmədən (delay) sonra **yalnız bir dəfə** icra etmək üçün istifadə olunur.
+`setTimeout(funksiya, gecikmə_ms)`
+
+* **`funksiya`**: Gecikmədən sonra icra olunacaq funksiya.
+* **`gecikmə_ms`**: Gecikmə müddəti (millisaniyə ilə). `1000ms = 1 saniyə`.
+
+**❗️ Vacib Məqam:** `setTimeout` asinxron işləyir. Yəni, o, funksiyanı icra üçün "növbəyə" qoyur və dərhal sonrakı kodun icrasına davam edir, gecikmənin bitməsini gözləmir.
+
+**Nümunə 1: Asinxron davranış**
+```javascript
+console.log("Birinci mesaj (dərhal icra olunur)");
+
+setTimeout(() => {
+  console.log("İkinci mesaj (2 saniyə sonra icra olunur)");
+}, 2000);
+
+console.log("Üçüncü mesaj (dərhal icra olunur)");
+
+// Konsolun çıxışı:
+// ✅ Birinci mesaj (dərhal icra olunur)
+// ✅ Üçüncü mesaj (dərhal icra olunur)
+// ...2 saniyə sonra...
+// ✅ İkinci mesaj (2 saniyə sonra icra olunur)
+```
+
+**Nümunə 2: Zamanlayıcını ləğv etmək (`clearTimeout`)**
+`setTimeout` çağırıldıqda bir "ID" dəyəri qaytarır. Bu ID-ni `clearTimeout()` funksiyasına ötürərək, planlaşdırılmış əməliyyatı ləğv etmək olar.
+```javascript
+// 5 saniyə sonra "Partlayış!" mesajı çıxmalı olan bir "bomba" quraşdırırıq
+const bombTimerId = setTimeout(() => {
+  console.log("💣 Partlayış!");
+}, 5000);
+
+// Ancaq 3 saniyə sonra fikrimizi dəyişirik və bombanı zərərsizləşdiririk
+setTimeout(() => {
+  clearTimeout(bombTimerId);
+  console.log("😌 Bomba zərərsizləşdirildi, partlayış olmayacaq.");
+}, 3000);
+```
+
+---
+#### `setInterval()` — Təkrarlanan Gecikmə
+Bu funksiya, verilmiş bir funksiyanı müəyyən bir interval (interval) ilə **davamlı olaraq, təkrar-təkrar** icra edir.
+`setInterval(funksiya, interval_ms)`
+
+**`clearInterval()`** isə `setInterval` ilə başladılmış təkrarlanan prosesi dayandırmaq üçün istifadə olunur.
+
+**Geniş Nümunə: Rəqəmsal Saat ⏰**
+Gəlin `setInterval` ilə hər saniyə yenilənən bir rəqəmsal saat düzəldək və 10 saniyə sonra onu dayandıraq.
+```javascript
+console.log("Rəqəmsal saat başladıldı... (10 saniyə sonra dayanacaq)");
+
+// Hər 1000ms-dən (1 saniyə) bir konsolu təmizləyib, hazırkı vaxtı yazdırırıq
+const clockIntervalId = setInterval(() => {
+  console.clear(); // Konsolu təmizləyir
+  const now = new Date();
+  const timeString = now.toLocaleTimeString('az-AZ'); // Vaxtı Azərbaycan formatında götürürük
+  console.log(`🕒 ${timeString}`);
+}, 1000);
+
+// 10 saniyə sonra `clearInterval` ilə saatı dayandırırıq
+setTimeout(() => {
+  clearInterval(clockIntervalId);
+  console.log("Saat dayandırıldı.");
+}, 10000);
+```
