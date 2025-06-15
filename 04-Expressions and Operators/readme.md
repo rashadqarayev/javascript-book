@@ -4,7 +4,7 @@ Bu fəsil, JavaScript-in təməl quruluş daşları olan **ifadələri (expressi
 **İfadə (Expression)** – JavaScript-də qiymətləndirilərək (evaluated) bir **dəyər (value)** yaradan istənilən kod parçasıdır. Sadə bir rəqəm, bir dəyişənin adı və ya daha mürəkkəb riyazi əməliyyatlar – bunların hamısı bir ifadədir. Operatorlar isə, bu sadə ifadələri birləşdirərək daha mürəkkəb ifadələr yaratmaq üçün istifadə olunur. Məsələn, `x` və `y` birer ifadədirsə, `x * y` da onların hasilini yaradan yeni bir ifadədir.
 
 ---
-### 4.1 İlkin İfadəlar (Primary Expressions)
+### 4.1 İlkin İfadələr (Primary Expressions)
 Ən sadə ifadələr, yəni özündən daha sadə bir ifadədən təşkil olunmayan ifadələrə **ilkin ifadələr (primary expressions)** deyilir. Bunlar JavaScript-in "atoları"dır. Üç əsas növü var:
 
 **1. Literallar (Literals)**
@@ -350,7 +350,7 @@ w = x + y * z;
 
 
 ***
-### 4.8 Riyazi (Arithmetic) İfadəlar 🧮
+### 4.8 Riyazi (Arithmetic) İfadələr 🧮
 Bu bölmə, operandlar üzərində riyazi və ya rəqəmsal əməliyyatlar aparan operatorları əhatə edir.
 
 Əsas riyazi operatorlar bunlardır: `**` (qüvvətə yüksəltmə), `*` (vurma), `/` (bölmə), `%` (qalıq-modulo), `+` (toplama) və `-` (çıxma).
@@ -640,7 +640,7 @@ console.log(a instanceof Object);   // true → massivlər də obyekt sayılır
 
 ---
 
-### 4.10 Məntiqi İfadəlar (Logical Expressions)
+### 4.10 Məntiqi İfadələr (Logical Expressions)
 Bu bölmədə, adətən müqayisə operatorları ilə birlikdə istifadə edilən `&&` (VƏ), `||` (VƏ YA), və `!` (DEYİL) məntiqi operatorlarını araşdıracağıq. Bu operatorları tam anlamaq üçün, JavaScript-dəki **"doğru" (truthy)** və **"yanlış" (falsy)** anlayışlarını xatırlamaq vacibdir.  
 
 Xatırlatma: `false`, `null`, `undefined`, `0`, `NaN`, və `""` falsy-dir, qalan hər şey isə truthy
