@@ -1,8 +1,10 @@
-# Chapter 3: Tipler, Dəyərlər və Dəyişənlər
+# Chapter 3: Tiplər, Dəyərlər və Dəyişənlər
 
-Komputer proqramları rəqəmlər (`3.1`) və ya mətnlər (`"Hello, world!"`) kimi dəyərləri idarə edən dəyişənlər üzərində işləyir. Proqramlaşdırma dilində təmsil oluna və dəyişdirilə bilən dəyərlər *tip* adlanır və proqramlaşdırma dilinin əsas xüsusiyyətlərindən biri onun dəstəklədiyi tiplər toplusudur.
+JavaScript proqramları rəqəmlər (`3.1`), mətnlər (`"Hello, world!"`) və digər məlumatlar üzərində işləyir. Bu məlumatlara **dəyər (value)** deyilir. Dəyərləri yadda saxlamaq, onlara istinad etmək və dəyişmək üçün isə **dəyişənlər (variables)** istifadə olunur.
 
-Əgər proqram bu dəyəri gələcəkdə istifadə edəcəksə, bu dəyəri *dəyişənə* mənimsədir. Dəyişənlərin adları olur və biz bu adlardan istifadə edərək həmin dəyərlərə istinad edirik.
+Dəyərlərin hər biri müəyyən bir **tipə (type)** aiddir. Proqramlaşdırma dillərində tip anlayışı — verilən dəyərin hansı formada olduğunu (məsələn, ədəd, mətn, obyekt və s.) müəyyən edir.
+
+Əgər proqramda bir dəyəri gələcəkdə də istifadə etməyi planlaşdırırıqsa, onu dəyişənə mənimsədirik. Dəyişənin adı olur və həmin adla dəyərə istinad edirik.
 
 ---
 
@@ -10,36 +12,36 @@ Komputer proqramları rəqəmlər (`3.1`) və ya mətnlər (`"Hello, world!"`) k
 
 JavaScript-də tiplər 2 əsas kateqoriyaya bölünür:
 
-- **Primitiv tiplər**
-- **Obyekt tipləri**
+* **Primitiv tiplər**
+* **Obyekt tipləri**
 
 ### Primitiv Tiplər
 
 JavaScript-də primitiv tiplərə aşağıdakılar daxildir:
 
-- `number` – rəqəmlər
-- `string` – mətnlər
-- `boolean` – `true` və ya `false`
-- `null`
-- `undefined`
-- `symbol` (ES6 ilə əlavə olunub)
+* `number` – rəqəmlər
+* `string` – mətnlər
+* `boolean` – `true` və ya `false`
+* `null`
+* `undefined`
+* `symbol` (ES6 ilə əlavə olunub)
 
 **Misal:**
 
 ```js
-let age = 25;           // number
-let name = "Ali";       // string
-let isAdmin = true;     // boolean
-let empty = null;       // null
-let notDefined;         // undefined
-let uniqueId = Symbol(); // symbol
+let age = 25;           // number  
+let name = "Ali";       // string  
+let isAdmin = true;     // boolean  
+let empty = null;       // null  
+let notDefined;         // undefined  
+let uniqueId = Symbol(); // symbol  
 ```
 
 ### Obyekt Tipləri
 
 Əgər dəyər `number`, `string`, `boolean`, `null`, `undefined` və ya `symbol` deyilsə, o zaman bu dəyər *obyektdir*.
 
-Obyekt – ad(`key`) və dəyər(`value`) cütlüklərindən ibarət olan bir kolleksiyadır.
+Obyekt – ad (`key`) və dəyər (`value`) cütlüklərindən ibarət olan bir kolleksiyadır.
 
 ```js
 let person = {
@@ -48,222 +50,225 @@ let person = {
 };
 ```
 
-## ✅ Xüsusi Obyekt Tipləri
+## Xüsusi Obyekt Tipləri
 
 JavaScript-də adi `object` tipindən başqa, məlumatları fərqli yollarla saxlamaq və işləmək üçün istifadə olunan **xüsusi obyekt tipləri** də mövcuddur. Onlar aşağıdakılardır:
 
-### 1. 🔢 **Array** – ardıcıl və nömrələnmiş dəyərlərin toplusu
+### 1. Array – ardıcıl və nömrələnmiş dəyərlərin toplusu
 
 Array – birdən çox dəyəri bir yerdə saxlamaq üçün istifadə olunur. Bu dəyərlərin **sırası və nömrəsi (index)** var.
 
 ```js
-let numbers = [1, 2, 3]; // index-lər: 0 → 1, 1 → 2, 2 → 3
-console.log(numbers[0]); // 1
+let numbers = [1, 2, 3]; // index-lər: 0 → 1, 1 → 2, 2 → 3  
+console.log(numbers[0]); // 1  
 ```
 
 ---
 
-### 2. 🔁 **Set** – təkrarsız dəyərlərin toplusu
+### 2. Set – təkrarsız dəyərlərin toplusu
 
 Set – içində **eyni dəyər bir neçə dəfə ola bilməz**. Yəni, təkrar dəyərlər avtomatik çıxarılır.
 
 ```js
-let unique = new Set([1, 2, 2, 3]);
-console.log(unique); // Set(3) {1, 2, 3}
+let unique = new Set([1, 2, 2, 3]);  
+console.log(unique); // Set(3) {1, 2, 3}  
 ```
 
-➡ Faydalıdır: Məsələn, bir massivin içində neçə fərqli dəyər olduğunu tapmaq üçün.
+Faydalıdır: Məsələn, bir massivin içində neçə fərqli dəyər olduğunu tapmaq üçün.
 
 ---
 
-### 3. 🗺️ **Map** – açar-dəyər (key-value) cütlükləri
+### 3. Map – açar-dəyər (key-value) cütlükləri
 
 Map – hər açarın qarşısında bir dəyər saxlanılır. Obyektdən fərqli olaraq:
-- Açar hər şey ola bilər (`string`, `number`, `object`, və s.)
-- Əlavə olunma sırası qorunur
+
+* Açar hər şey ola bilər (`string`, `number`, `object` və s.)
+* Əlavə olunma sırası qorunur
 
 ```js
-let capitals = new Map();
-capitals.set("Azerbaijan", "Baku");
-capitals.set("Turkey", "Ankara");
+let capitals = new Map();  
+capitals.set("Azerbaijan", "Baku");  
+capitals.set("Turkey", "Ankara");  
 
-// dəyəri əldə etmək:
-console.log(capitals.get("Turkey")); // "Ankara"
+// dəyəri əldə etmək:  
+console.log(capitals.get("Turkey")); // "Ankara"  
 ```
 
 #### Niyə Map istifadə edirik?
-- `Object`-dən daha çevikdir
-- Açarın tipi daha müxtəlif ola bilər
-- `.size` ilə uzunluq asan tapılır
+
+* `Object`-dən daha çevikdir
+* Açarın tipi daha müxtəlif ola bilər
+* `.size` ilə uzunluq asan tapılır
 
 ```js
-console.log(capitals.size); // 2
+console.log(capitals.size); // 2  
 ```
 
 ---
 
-### 4. 👨‍🔬 **Typed Arrays** – xüsusi tipli massivlər
+### 4. Typed Arrays – xüsusi tipli massivlər
 
 Bunlar `Int8Array`, `Float32Array` kimi xüsusi massivlərdir və **yalnız müəyyən tipdə ədədlər** saxlayır. Daha çox **performans** tələb edən hesablama və ya WebGL kimi sahələrdə istifadə olunur.
 
 ```js
-let intArray = new Int16Array([10, 20, 30]);
+let intArray = new Int16Array([10, 20, 30]);  
 ```
 
 ---
 
-### 5. 🔍 **RegExp (Regular Expression)** – mətnlə işləmək üçün qaydalar
+### 5. RegExp (Regular Expression) – mətnlə işləmək üçün qaydalar
 
 Mətnlərdə müəyyən nümunələr tapmaq və ya dəyişmək üçün istifadə olunur.
 
 ```js
-let pattern = /hello/i;
-console.log(pattern.test("Hello World")); // true
+let pattern = /hello/i;  
+console.log(pattern.test("Hello World")); // true  
 ```
 
 ---
 
-### 6. 📅 **Date** – tarix və saat obyektləri
+### 6. Date – tarix və saat obyektləri
 
 Tarix və saatla işləmək üçün `Date` obyekti istifadə olunur.
 
 ```js
-let now = new Date();
-console.log(now.toDateString()); // məsələn: "Tue Apr 23 2025"
+let now = new Date();  
+console.log(now.toDateString()); // məsələn: "Tue Apr 23 2025"  
 ```
 
 ---
 
-### 7. ❗ **Error və alt tipləri** – səhvlərlə işləmək üçün
+### 7. Error və alt tipləri – səhvlərlə işləmək üçün
 
 JavaScript-də `Error`, `TypeError`, `SyntaxError` və s. kimi səhv tipləri var. Proqramın gedişində bir problem olduqda istifadə olunur.
 
 ```js
-try {
-  throw new Error("Nə isə səhv getdi");
-} catch (err) {
-  console.log(err.message); // "Nə isə səhv getdi"
-}
+try {  
+  throw new Error("Nə isə səhv getdi");  
+} catch (err) {  
+  console.log(err.message); // "Nə isə səhv getdi"  
+}  
 ```
 
 ---
 
-## 📌 Yekun
+## Yekun
 
-| Tip             | Nə üçündür?                                     |
-|------------------|-------------------------------------------------|
-| `Array`          | Dəyərləri sıra ilə saxlamaq                     |
-| `Set`            | Təkrarsız dəyərlər saxlamaq                     |
-| `Map`            | Açar-dəyər cütləri saxlamaq                     |
-| `TypedArray`     | Performanslı nömrə massivləri                   |
-| `RegExp`         | Mətnlərdə nümunə tapmaq                         |
-| `Date`           | Tarix və saatla işləmək                         |
-| `Error`          | Səhvləri idarə etmək və bildirmək              |
+| Tip          | Nə üçündür?                       |
+| ------------ | --------------------------------- |
+| `Array`      | Dəyərləri sıra ilə saxlamaq       |
+| `Set`        | Təkrarsız dəyərlər saxlamaq       |
+| `Map`        | Açar-dəyər cütləri saxlamaq       |
+| `TypedArray` | Performanslı nömrə massivləri     |
+| `RegExp`     | Mətnlərdə nümunə tapmaq           |
+| `Date`       | Tarix və saatla işləmək           |
+| `Error`      | Səhvləri idarə etmək və bildirmək |
 
 ---
 
 ## Funksiya və Klasslar
 
-JavaScript-də funksiyalar və klasslar da dəyər sayılır və özləri də obyektlərin xüsusi növüdür.
+JavaScript-də funksiyalar və klasslar da dəyər sayılır və özləri obyektlərin xüsusi növüdür.
 
 ```js
-function greet() {
-  console.log("Salam!");
-}
+function greet() {  
+  console.log("Salam!");  
+}  
 ```
 
 ```js
-class Car {
-  constructor(brand) {
-    this.brand = brand;
-  }
-}
+class Car {  
+  constructor(brand) {  
+    this.brand = brand;  
+  }  
+}  
 ```
+
 ---
 
-## 🧠 Yaddaş İdarəetməsi və Garbage Collection
+## Yaddaş İdarəetməsi və Garbage Collection
 
 JavaScript-də yaddaş **avtomatik şəkildə** idarə olunur. Sən bir dəyişən yaradanda, yaddaşda yer ayrılır. Əgər o dəyişənə artıq istinad (link) yoxdursa, **garbage collector** həmin obyektin artıq lazım olmadığını başa düşür və onu yaddaşdan silir.
 
-### ✅ Sadə Nümunə:
+### Sadə Nümunə:
 
 ```js
-function createUser() {
-  let user = {
-    name: "Rauf",
-    age: 25,
-  };
-  return user;
-}
+function createUser() {  
+  let user = {  
+    name: "Rauf",  
+    age: 25,  
+  };  
+  return user;  
+}  
 
-let user1 = createUser(); // user obyektinə istinad var
+let user1 = createUser(); // user obyektinə istinad var  
 ```
 
-🔹 Burada `user` adlı obyekt yaranır və `user1` dəyişəni ona istinad edir. Bu obyekt **hələki istifadə olunur**, ona görə yaddaşda qalır.
+Burada `user` adlı obyekt yaranır və `user1` dəyişəni ona istinad edir. Bu obyekt **hələ istifadə olunur**, ona görə yaddaşda qalır.
 
 ---
 
-### 🗑️ Garbage Collection nə vaxt baş verir?
+### Garbage Collection nə vaxt baş verir?
 
 Əgər obyektə **artıq heç bir istinad yoxdursa**, JavaScript onun "lazımsız" olduğunu düşünür və avtomatik silir.
 
 ```js
-let user2 = {
-  name: "Aysel",
-};
+let user2 = {  
+  name: "Aysel",  
+};  
 
-user2 = null; // artıq obyektə istinad yoxdur
+user2 = null; // artıq obyektə istinad yoxdur  
 ```
 
-🔹 Burada `user2` əvvəlcə bir obyektə işarə edir, sonra `null` veririk. Artıq heç kim o obyektə işarə etmir. JavaScript-in garbage collector mexanizmi bir müddət sonra bu obyekti **yaddaşdan çıxarır**.
+Burada `user2` əvvəlcə bir obyektə işarə edir, sonra `null` veririk. Artıq heç kim o obyektə işarə etmir. JavaScript-in garbage collector mexanizmi bir müddət sonra bu obyekti **yaddaşdan çıxarır**.
 
 ---
 
-## 🎯 Əsas Məqam: JavaScript-də metodlar **obyektlərə bağlıdır**
+## Əsas Məqam: JavaScript-də metodlar **obyektlərə bağlıdır**
 
 JavaScript-də bir çox funksiyalar **obyektin içindəki metod** kimi tanınır. `sort` da onlardan biridir və **yalnız Array obyektinə aid olan bir metod**dur.
 
 ---
 
-## ❌ `sort(a)` – Niyə Səhvdir?
+## `sort(a)` – Niyə Səhvdir?
 
 ```js
-sort(a);
+sort(a);  
 ```
 
 Bu formada yazanda sən deyirsən ki, "adı `sort` olan bir **global funksiyanı** çağır, və `a` array-ni ona ötür."
 
-Amma problem budur ki:  
-➡️ JavaScript-də `sort` adlı **global (ümumi) funksiya yoxdur!**  
+Amma problem budur ki:
+➡️ JavaScript-də `sort` adlı **global (ümumi) funksiya yoxdur!**
 ➡️ `sort` sadəcə `Array.prototype`-ə məxsus bir metoddur, yəni yalnız array-lərdə mövcuddur.
 
 ---
 
-## ✅ `a.sort()` – Niyə Doğrudur?
+## `a.sort()` – Niyə Doğrudur?
 
 ```js
-a.sort();
+a.sort();  
 ```
 
-Bu isə deməkdir ki:  
+Bu isə deməkdir ki:
 ➡️ `a` adlı array obyektinin `sort()` adlı metodunu çağır.
 
 Bu doğrudur, çünki `sort()` metodu **Array** tipinə aiddir:
 
 ```js
-let a = [3, 1, 2];
-a.sort(); // [1, 2, 3]
+let a = [3, 1, 2];  
+a.sort(); // [1, 2, 3]  
 ```
 
 Burada `a` array-dir və `.sort()` metodu `Array.prototype.sort` funksiyası ilə işləyir.
 
 ---
 
-## 🔬 Bunu necə sübut edə bilərik?
+## Bunu necə sübut edə bilərik?
 
 ```js
-console.log(typeof sort); // undefined (səhv)
-console.log(typeof [].sort); // 'function' (doğru)
+console.log(typeof sort);       // undefined (səhv)  
+console.log(typeof [].sort);    // 'function' (doğru)  
 ```
 
 JavaScript-də `sort()`, `map()`, `filter()`, `push()` kimi bir çox funksiyalar **obyektə bağlı metodlardır**. Onlara **obyektin adından sonra nöqtə qoyaraq** müraciət etməliyik.
@@ -271,8 +276,8 @@ JavaScript-də `sort()`, `map()`, `filter()`, `push()` kimi bir çox funksiyalar
 Yalnız obyektlər deyil, `string`, `number`, `boolean`, `symbol` kimi primitiv tiplərin də öz metodları olur:
 
 ```js
-let text = "salam";
-console.log(text.toUpperCase()); // "SALAM"
+let text = "salam";  
+console.log(text.toUpperCase()); // "SALAM"  
 ```
 
 Yeganə istisna: `null` və `undefined`. Bu tiplər metodlara malik deyil və onlarla birbaşa metod istifadə etmək mümkün deyil.
@@ -281,22 +286,22 @@ Yeganə istisna: `null` və `undefined`. Bu tiplər metodlara malik deyil və on
 
 ## Mutable və Immutable Tiplər
 
-- **Primitiv tiplər**: immutable (dəyişməz)
-- **Obyekt tipləri**: mutable (dəyişə bilən)
+* **Primitiv tiplər**: immutable (dəyişməz)
+* **Obyekt tipləri**: mutable (dəyişə bilən)
 
 ```js
-let num = 5;
-num = 10; // bu yeni dəyərdir, əvvəlki dəyişmir, əvəz olunur
+let num = 5;  
+num = 10; // bu yeni dəyərdir, əvvəlki dəyişmir, əvəz olunur  
 
-let arr = [1, 2, 3];
-arr[0] = 99; // array mutable olduğu üçün dəyişə bilər
+let arr = [1, 2, 3];  
+arr[0] = 99; // array mutable olduğu üçün dəyişə bilər  
 ```
 
-**Qeyd:** `string` tipi xarici görünüşcə array kimi olsa da, immutable-dır:
+Qeyd: `string` tipi xarici görünüşcə array kimi olsa da, immutable-dır:
 
 ```js
-let word = "salam";
-word[0] = "S"; // bu dəyişiklik işləmir
+let word = "salam";  
+word[0] = "S"; // bu dəyişiklik işləmir  
 ```
 
 ---
@@ -306,8 +311,8 @@ word[0] = "S"; // bu dəyişiklik işləmir
 JavaScript dəyərləri avtomatik olaraq bir tipdən digərinə çevirə bilər.
 
 ```js
-let x = "5" + 1; // "51" (number → string)
-let y = "5" - 1; // 4   (string → number)
+let x = "5" + 1; // "51" (number → string)  
+let y = "5" - 1; // 4   (string → number)  
 ```
 
 ---
@@ -316,47 +321,49 @@ let y = "5" - 1; // 4   (string → number)
 
 Dəyərlərə istinad etmək üçün dəyişənlər və sabitlərdən istifadə edirik.
 
-- `let` – dəyişən yaratmaq üçün
-- `const` – sabit yaratmaq üçün
-- `var` – köhnə sintaksis, istifadəsi tövsiyə olunmur
+* `let` – dəyişən yaratmaq üçün
+* `const` – sabit yaratmaq üçün
+* `var` – köhnə sintaksis, istifadəsi tövsiyə olunmur
 
 ```js
-let a = 10;
-const b = 20;
+let a = 10;  
+const b = 20;  
 ```
 
 JavaScript-də dəyişənlər tipsizdir – hansı tipdə dəyər alacağını əvvəlcədən müəyyən etmir:
 
 ```js
-let value = 5;
-value = "now it's a string";
+let value = 5;  
+value = "now it's a string";  
 ```
 
 ---
 
-## 3.2 JavaScript Rəqəmləri
+### 3.2 JavaScript Rəqəmləri
 
-JavaScript-də rəqəmlər `Number` tipi ilə təmsil olunur. Bu tip həm **tam ədədləri** (məsələn, 3, -7), həm də **ondalıklı ədədləri** (məsələn, 3.14, -5.6) təmsil edir.
+JavaScript-də rəqəmlər `Number` tipi ilə təmsil olunur. Bu tip həm **tam ədədləri** (məsələn, 3, -7), həm də **onluq kəsr ədədləri** (məsələn, 3.14, -5.6) təmsil edir.
 
-### Rəqəmlərin Dəqiqliyi
+#### Rəqəmlərin Dəqiqliyi
 
 JavaScript, **IEEE 754** standartına əsaslanan bir formatdan istifadə edir ki, bu da rəqəmlərin yaddaşda necə saxlanacağını müəyyən edir. Bu format 64 bitlik bir **floating-point** formatıdır, yəni həm çox **böyük**, həm də çox **kiçik** ədədləri təmsil edə bilir. Məsələn, JavaScript çox böyük ədədləri belə təmsil edə bilir:
 
-- **Böyük ədədlər:** ±1.7976931348623157 × 10^308
-- **Kiçik ədədlər:** ±5 × 10^−324
+* **Böyük ədədlər:** ±1.7976931348623157 × 10^308
+* **Kiçik ədədlər:** ±5 × 10^−324
 
-### Dəqiqlıq Aralığı
+#### Dəqiqlıq Aralığı
 
 JavaScript-də rəqəmlər yalnız müəyyən bir aralıqda dəqiq təmsil oluna bilir. Bu aralıq:
 
-- **Ən kiçik dəqiq rəqəm**: -2^53 (−9,007,199,254,740,992)
-- **Ən böyük dəqiq rəqəm**: 2^53 (9,007,199,254,740,992)
+* **Ən kiçik dəqiq rəqəm**: -2^53 (−9,007,199,254,740,992)
+* **Ən böyük dəqiq rəqəm**: 2^53 (9,007,199,254,740,992)
 
 Bu aralıqdan daha böyük rəqəmlər istifadə edildikdə, təmsil edilən rəqəmin sonuncu hissələri səhv ola bilər. Məsələn, çox böyük ədədlər istifadə edildikdə, yalnız ilk rəqəmlər dəqiq olur və sonrakılar səhv ola bilər.
 
-### Rəqəm Literalları
+#### Rəqəm Literalları
 
 Rəqəm JavaScript proqramında göründüyü zaman buna **numeric literal** (rəqəmli literal) deyilir. JavaScript bir çox növ numeric literal dəstəkləyir. Əlavə olaraq, istənilən numeric literalı mənfi etmək üçün onun qarşısına **-** işarəsi əlavə edə bilərik.
+
+---
 
 ### 3.2.1 Tam Ədədlər (Integer Literals)
 
@@ -382,9 +389,11 @@ let bin = 0b10101;     // 21: (1*16 + 0*8 + 1*4 + 0*2 + 1*1)
 let oct = 0o377;       // 255: (3*64 + 7*8 + 7*1)
 ```
 
-### 3.2.2 Ondalıklı Ədədlər (Floating-Point Literals)
+---
 
-Ondalıklı ədədlər (floating-point literals) real ədədlərdir və onlar iki hissədən ibarətdir: bir **tam hissə** və bir **kesir hissəsi**. Bu ədədlər, eksponensial formatda da yazıla bilər. Məsələn:
+### 3.2.2 Onluq kəsr Ədədləri (Floating-Point Literals)
+
+Onluq kəsr ədədləri (floating-point literals) real ədədlərdir və onlar iki hissədən ibarətdir: bir **tam hissə** və bir **kəsr hissəsi**. Bu ədədlər, eksponensial formatda da yazıla bilər. Məsələn:
 
 ```js
 let float1 = 3.14;
@@ -409,11 +418,11 @@ let fraction = 0.123_456_789;
 
 JavaScript proqramlarında rəqəmlərlə işləyərkən, müxtəlif arifmetik operatorlardan istifadə edilir. Bu operatorlara aşağıdakılar daxildir:
 
-- `+` — toplamaq
-- `-` — çıxmaq
-- `*` — vurmaq
-- `/` — bölmək
-- `%` — qalıq tapmaq
+* `+` — toplamaq
+* `-` — çıxmaq
+* `*` — vurmaq
+* `/` — bölmək
+* `%` — qalıq tapmaq
 
 Bu barədə daha ətraflı məlumat **Chapter 4**-də veriləcək.
 
@@ -449,7 +458,7 @@ ES6 ilə `Math` obyektinə daha çox yeni funksiyalar əlavə olunub:
 Math.cbrt(27)       // 3: 27-nin kub kökü
 Math.hypot(3, 4)    // 5: kvadratların cəminin kvadrat kökü
 Math.log10(100)     // 2: 100-un onluqlu logaritması
-Math.log2(1024)     // 10: 1024-ün iki cəmlü logaritması
+Math.log2(1024)     // 10: 1024-ün ikilik loqarifması
 Math.log1p(x)       // 1 + x-in təbii logaritması
 Math.expm1(x)       // e^x - 1
 Math.sign(x)        // x-in işarəsi
@@ -458,7 +467,7 @@ Math.clz32(0xf)     // 28: 32-bitlik tam ədəddə başdakı sıfırların sayı
 Math.trunc(3.9)     // 3: tam hissəsini alır
 Math.fround(x)      // 32-bitlik float olaraq yuvarlaqlaşdırır
 Math.sinh(x)        // hiperbollu sinus
-Math.tanh(x)        // hiperbollu tərs sinus
+Math.tanh(x)        // hiperbollu tangens
 Math.asinh(x)       // hiperbollu sinus funksiyasının tərsi
 Math.atanh(x)       // hiperbollu tərs tangens
 ```
@@ -512,21 +521,148 @@ x !== x            // true: NaN özünü bərabər deyil
 Number.isNaN(x)    // true: NaN olub olmadığını yoxlayır
 ```
 
-### Number Obyektinin Funksiyaları
+---
 
-JavaScript-də `Number` obyektinin bəzi funksiyaları var:
+### Number Obyektinin Ən Vacib Funksiyaları və Sabitləri
 
-```javascript
-Number.parseInt(x)    // Tam ədəd olaraq çevrilən dəyəri verir
-Number.parseFloat(x)  // Ondalıklı ədəd olaraq çevrilən dəyəri verir
-Number.isNaN(x)       // NaN olub olmadığını yoxlayır
-Number.isFinite(x)    // `Infinity` və `-Infinity` xaricindəki ədədlər üçün true qaytarır
-Number.isInteger(x)   // Tam ədəd olub olmadığını yoxlayır
-Number.isSafeInteger(x) // x-in təhlükəsiz tam ədəd olub olmadığını yoxlayır
-Number.MIN_SAFE_INTEGER // => -(2**53 - 1) 
-Number.MAX_SAFE_INTEGER // => 2**53 - 1
-Number.EPSILON // => 2**-52: rəqəmlər arasındakı ən kiçik fərq
+JavaScript-də `Number` obyekti **ədədi dəyərlərlə işləmək üçün xüsusi funksiyalar və sabitlər təqdim edir**. Bunlar istər **parsing** (çevirilmə), istərsə də **doğrulama və yoxlama əməliyyatlarında** istifadə olunur.
+
+---
+
+### `Number.parseInt(x)`
+
+Verilən dəyəri **tam ədədə** çevirməyə çalışır. Əgər mətnin əvvəlində ədəd varsa, onu oxuyur və tam ədəd kimi qaytarır.
+
+**Nümunə:**
+
+```js
+Number.parseInt("123")       // 123
+Number.parseInt("123.45")    // 123
+Number.parseInt("123abc")    // 123
+Number.parseInt("abc123")    // NaN
 ```
+
+**Qeyd:** Ədəddən sonra gələn yazılar nəzərə alınmır, amma ədəd əvvəl gəlməlidir.
+
+---
+
+### `Number.parseFloat(x)`
+
+Verilən dəyəri **onluq kəsr ədədə** çevirməyə çalışır.
+
+**Nümunə:**
+
+```js
+Number.parseFloat("123.45")   // 123.45
+Number.parseFloat("5.67abc")  // 5.67
+Number.parseFloat("abc5.67")  // NaN
+```
+
+---
+
+### `Number.isNaN(x)`
+
+`x` dəyərinin **NaN** (Not a Number) olub olmadığını **dəqiq** yoxlayır.
+
+**Nümunə:**
+
+```js
+Number.isNaN(NaN)            // true
+Number.isNaN("hello")        // false (çünki bu NaN deyil, sadəcə stringdir)
+Number.isNaN(parseInt("abc")) // true
+```
+
+`isNaN()` ilə `Number.isNaN()` fərqlidir. `Number.isNaN()` daha **dəqiqdir**, yalnız **NaN** olan hallarda `true` verir.
+
+---
+
+### `Number.isFinite(x)`
+
+Dəyərin **sonlu (finite)** ədəd olub olmadığını yoxlayır. `Infinity`, `-Infinity` və `NaN` üçün `false` qaytarır.
+
+**Nümunə:**
+
+```js
+Number.isFinite(42)         // true
+Number.isFinite(Infinity)   // false
+Number.isFinite(NaN)        // false
+Number.isFinite("123")      // false (çünki bu stringdir, number deyil)
+```
+
+---
+
+### `Number.isInteger(x)`
+
+Dəyərin **tam ədəd** (yəni, onluq hissəsi olmayan) olub olmadığını yoxlayır.
+
+**Nümunə:**
+
+```js
+Number.isInteger(10)      // true
+Number.isInteger(10.5)    // false
+Number.isInteger("10")    // false (çünki stringdir)
+```
+
+---
+
+### `Number.isSafeInteger(x)`
+
+**Məqsəd:**
+Dəyərin həm **tam ədəd**, həm də **təhlükəsiz ədəd** (JavaScript-də düzgün təmsil oluna bilən aralıqda) olub olmadığını yoxlayır.
+
+Təhlükəsiz tam ədədlər `-(2^53 - 1)` ilə `2^53 - 1` aralığındadır.
+
+**Nümunə:**
+
+```js
+Number.isSafeInteger(100)              // true
+Number.isSafeInteger(2 ** 53 - 1)      // true
+Number.isSafeInteger(2 ** 53)          // false
+```
+
+---
+
+### Əlavə Faydalı Sabitlər
+
+```js
+Number.MIN_SAFE_INTEGER     // -(2^53 - 1) = -9007199254740991
+Number.MAX_SAFE_INTEGER     // 2^53 - 1 = 9007199254740991
+```
+
+**Nümunə:**
+
+```js
+console.log(Number.EPSILON);  // 2.220446049250313e-16
+console.log(0.1 + 0.2 === 0.3); // false!
+```
+
+Bəzən onluq kəsr ədədlərin toplanmasında **kiçik fərqlər** olur. `Number.EPSILON` bu fərqləri müqayisə etmək üçün istifadə olunur:
+
+```js
+function almostEqual(a, b) {
+  return Math.abs(a - b) < Number.EPSILON;
+}
+
+almostEqual(0.1 + 0.2, 0.3); // true
+```
+
+---
+
+### Yekun Cədvəl (Qısa xülasə)
+
+| Funksiya/Sabit | İstifadə məqsədi |
+| :--- | :--- |
+| `Number.parseInt(x)` | Tam ədədə çevirmək |
+| `Number.parseFloat(x)` | Onluq kəsr ədədə çevirmək |
+| `Number.isNaN(x)` | NaN olub olmadığını yoxlamaq |
+| `Number.isFinite(x)` | Sonsuz olmayan ədəd olub olmadığını yoxlamaq |
+| `Number.isInteger(x)` | Tam ədəd olub olmadığını yoxlamaq |
+| `Number.isSafeInteger(x)` | Təhlükəsiz tam ədəd olub olmadığını yoxlamaq |
+| `Number.MIN_SAFE_INTEGER` | Ən kiçik təhlükəsiz tam ədəd `-(2^53 - 1)` |
+| `Number.MAX_SAFE_INTEGER` | Ən böyük təhlükəsiz tam ədəd `(2^53 - 1)` |
+| `Number.EPSILON` | Ən kiçik fərq, `2^-52` |
+
+---
 
 ### Mənfi 0
 
@@ -539,8 +675,6 @@ let negz = -0;
 zero === negz           // true: 0 və -0 bərabərdir
 1 / zero === 1 / negz   // false: `Infinity` və `-Infinity` fərqli nəticələrdir
 ```
-
-Əla gedir, bro! Bu hissəni də tam markdown formatında aşağıda sənə təqdim edirəm:
 
 ---
 
@@ -562,59 +696,76 @@ Bu problem yalnız JavaScript-ə xas deyil – C, Java, Python kimi digər proqr
 
 ### 3.2.5 BigInt ilə ixtiyari dəqiq tam ədədlər
 
-> ⚠️ **Bu bölmə gələcəkdə izah olunacaq.**
+**Qeyd:** Bu bölmə gələcəkdə izah olunacaq.
 
 BigInt JavaScript-də çox böyük tam ədədlərlə işləməyə imkan verir. Standart `Number` tipindən fərqli olaraq, `BigInt` tipində olan ədədlər çox böyük ölçüləri də dəqiq yadda saxlaya bilir.
 
 ---
 
-### 3.2.6 Tarix və zaman
+### 3.2.6 Tarix və Zaman
 
-JavaScript tarix və zamanla işləmək üçün `Date` obyektindən istifadə edir. Bu obyekt tarixi və zamanı idarə etmək üçün çoxsaylı metodlara malikdir.
+JavaScript tarix və zamanla işləmək üçün `Date` obyektindən istifadə edir. Bu obyekt vasitəsilə istifadəçi hazırki tarixi öyrənə, onu formatlaşdıra və ya zaman fərqlərini hesablaya bilər.
 
 ```js
-let timestamp = Date.now();         // Hazırki zaman millisaniyə formatında (timestamp).
-let now = new Date();               // Hazırki zamanı Date obyekti kimi alırıq.
-let ms = now.getTime();             // Date obyektini millisaniyə timestamp-ına çevirir.
-let iso = now.toISOString();        // ISO formatında string olaraq tarixi verir.
+let timestamp = Date.now();         
+console.log(timestamp);   // 1750008800000 (Məsələn)
+// 1 yanvar 1970 UTC-dən bəri keçən millisaniyəni (Unix timestamp) qaytarır
+
+let now = new Date();               
+console.log(now) // Sun Jun 15 2025 14:33:20 GMT+0400 (Azerbaijan Standard Time)
+// Hal-hazırdakı tarixi və saatı `Date` obyekti kimi verir
 ```
+
+### 📘 Əlavə Faydalı Metodlar:
+
+#### Tarixin elementlərini almaq:
+
+```js
+let day = now.getDate();         // → 15
+let month = now.getMonth();      // → 5 (İyun ayı, 0-dan başlayır)
+let year = now.getFullYear();    // → 2025
+let hour = now.getHours();       // → 14
+let minute = now.getMinutes();   // → 33
+let second = now.getSeconds();   // → 20
+```
+
+> **Qeyd:** JavaScript-də aylar 0-dan başlayır:
+> `0 → Yanvar`, `1 → Fevral`, ..., `11 → Dekabr`
+
 
 🕒 Timestamp – bu, **1970-01-01T00:00:00Z** tarixindən indiyə qədər keçən **millisaniyələrin** sayıdır.
 
-Super, sən demişkən, 3.3 bölməsini də tam, gözəl formatda yazdım. ChatGPT olaraq mənim də əlavəm 3.3.2-dədir 😎
 
 ---
 
-## 3.3 Mətn
 
-JavaScript-də mətnləri təmsil edən tiplər **string** adlanır. String — dəyişməyən, sıralanmış **16-bit** dəyərlərin ardıcıllığıdır və hər biri bir **Unicode** simvolunu təmsil edir.
+## 3.3 Mətn(Strings)
 
-String-in uzunluğu onun tərkibindəki 16-bit-lik dəyərlərin sayıdır. JavaScript string-ləri sıfırdan başlayan indekslə işləyir. Boş string-in (`""`) uzunluğu 0 olur.
+JavaScript-də mətnləri təmsil edən tip **string** adlanır. String — dəyişməyən (immutable), sıralanmış **16-bit** dəyərlərin ardıcıllığıdır və hər biri bir **Unicode** simvolunu ifadə edir.
 
-JavaScript-də string-i təmsil edən ayrıca bir “char” (tək simvol) tipi yoxdur. Əgər yalnız bir simvol saxlamaq istəyiriksə, uzunluğu 1 olan string istifadə olunur.
+> **Qeyd:** JavaScript-də ayrıca `char` (tək simvol) tipi yoxdur. Tək simvol saxlamaq üçün uzunluğu 1 olan string istifadə olunur.
 
-JavaScript **UTF-16 Unicode** şrift cədvəlindən istifadə edir. Bu səbəblə bəzi simvollar bir dənə 16-bit-lik dəyərlə, digərləri isə iki ədəd 16-bit-lik kodla ifadə oluna bilər.
+JavaScript **UTF-16** Unicode kodlamasından istifadə edir. Bu səbəbdən bəzi simvollar 1 ədəd 16-bit dəyərlə, bəziləri isə 2 ədəd 16-bit dəyər (surrogate pair) ilə təmsil olunur.
 
 ```js
 let euro = "€";
-let love = "❤";
+let love = "💙"; // Bu, mavi ürək emojisidir
 
-euro.length      // => 1: bu simvol yalnız bir 16-bit elementlə təmsil olunur
-love.length      // => 2: UTF-16 ilə ❤ belə kodlanır: "\ud83d\udc99"
+console.log(euro.length); // 1 — bu simvol 1 ədəd 16-bit elementdən ibarətdir
+console.log(love.length); // 2 — “💙” surroqat cütü (surrogate pair) olaraq 2 elementlə kodlanır: "\ud83d\udc99"
 ```
 
 ---
 
 ### 3.3.1 String literal-ları
 
-JavaScript-də string yaratmaq üçün mətn sadəcə **tək (‘ ’)**, **iki (“ ”)** və ya **backtick (` `)** içində yazılır.
+JavaScript-də string yaratmaq üçün mətn sadəcə **tək (‘ ’)**, **ikiqat (“ ”)** və ya **backtick (` `)** dırnaqlar içində yazılır.
 
 ```js
 ""                           // Boş string: uzunluğu 0
 "testing"                   // Sadə mətn
 "3.14"                      // Ədədi string şəklində
-'name="myform"'            // HTML atributu
-"Wouldn't you prefer O'Reilly's book?" // Tək dırnaq ikiqat dırnaq içində problemsizdir
+"Wouldn't you prefer O'Reilly's book?" // İkiqat dırnaqla yaradılan string daxilində tək dırnaq problemsiz işləyir
 "τ is the ratio of a circle's circumference to its radius"
 
 `"She said 'hi'", he said.`  // Backtick stringləri
@@ -627,7 +778,7 @@ JavaScript-də string yaratmaq üçün mətn sadəcə **tək (‘ ’)**, **iki 
  long\
  line"
 
-// İki sətrli string, literal kimi newline daxil edilir:
+// İki sətrli string, sətir sonu (newline) daxil edilir:
 `the newline character at the end of this line
 is included literally in this string`
 
@@ -639,7 +790,7 @@ is included literally in this string`
 
 ### 3.3.2 String literal-larında qaçış ardıcıllığı
 
-String literal-larında xüsusi simvolları (məsələn, dırnaq, newline və s.) təmsil etmək üçün **escape sequence** (qaçış ardıcıllığı) istifadə olunur. Bu `\` simvolu ilə başlayır.
+String literal-larında xüsusi simvolları (məsələn, dırnaq, yeni sətir və s.) təmsil etmək üçün **escape sequence** (qaçış ardıcıllığı) istifadə olunur. Bu `\` simvolu ilə başlayır.
 
 ```js
 'You\'re right, it can\'t be a quote' // \ ilə tək dırnaq qaçırılır
@@ -648,133 +799,174 @@ String literal-larında xüsusi simvolları (məsələn, dırnaq, newline və s.
 
 Ən çox istifadə olunan qaçış ardıcıllıqları:
 
-| Qaçış simvolu | Mənası                |
-|---------------|------------------------|
-| `\'`          | Tək dırnaq             |
-| `\"`          | İkiqat dırnaq          |
-| `\\`          | Tərs slash (`\`)       |
-| `\n`          | Yeni sətr              |
-| `\t`          | Tab boşluğu            |
-| `\uXXXX`      | Unicode simvolu        |
-
----
-Əla, gəlin bu notları daha səliqəli və aydın şəkildə təqdim edək, həm də davam etdirək. Burada sən JavaScript-də stringlərlə işləməyin əsaslarını öyrənirsən və çox vacib bir hissəni əhatə etmisən. İndi isə bu notları daha strukturlu şəkildə təqdim edirəm və davamını əlavə edirəm:
+| Qaçış simvolu | Mənası |
+| :--- | :--- |
+| `\'` | Tək dırnaq |
+| `\"` | İkiqat dırnaq |
+| `\\` | Tərs slash (`\`) |
+| `\n` | Yeni sətr |
+| `\t` | Tab boşluğu |
+| `\uXXXX` | Unicode simvolu |
 
 ---
 
-## **3.3.3 Stringlərlə İş**
+## 3.3.3 Stringlərlə İş
 
-### 🧩 **Stringlərin birləşdirilməsi**
-JavaScript-də stringləri `+` operatoru ilə birləşdirə bilərik:
+### Stringlərin Birləşdirilməsi (Concatenation)
+
+JavaScript-də stringləri `+` operatoru ilə asanlıqla birləşdirə bilərik:
+
 ```js
-let msg = "Hello, " + "world"; // "Hello, world"
-let greeting = "Welcome to my blog, " + name;
+let msg = "Hello, " + "world";   // Nəticə: "Hello, world"
+
+let name = "Rəşad";
+let greeting = "Welcome to my blog, " + name; // Nəticə: "Welcome to my blog, Rəşad"
 ```
 
-### 🧪 **Stringlərin müqayisəsi**
-Stringlər `===`, `!==`, `<`, `<=`, `>`, `>=` operatorları ilə müqayisə oluna bilər. Bu müqayisələr UTF-16 kodlarına əsaslanır.
+---
+
+### Stringlərin Müqayisəsi
+
+Stringləri `===`, `!==`, `<`, `>`, `<=`, `>=` operatorları ilə müqayisə etmək mümkündür. Müqayisə UTF-16 kodları əsasında aparılır:
+
+```js
+console.log("abc" === "abc");   // true
+console.log("abc" < "abd");     // true (çünki 'c' < 'd')
+console.log("a" > "A");         // true (çünki kiçik hərfin UTF-16 kodu böyük hərfdən böyükdür)
+```
 
 ---
 
-### 📏 **String uzunluğu**
-Stringin uzunluğunu `length` xüsusiyyəti ilə öyrənə bilərik:
+### String Uzunluğu
+
+String-in uzunluğunu `.length` xüsusiyyəti ilə öyrənə bilərik:
+
 ```js
 let s = "Hello";
-console.log(s.length); // 5
+console.log(s.length);  // 5
 ```
 
 ---
 
-### ✂️ **Stringdən hissə almaq**
+### Stringdən Hissə Almaq
+
+Stringdən müəyyən hissələri almaq üçün müxtəlif metodlardan istifadə edə bilərik:
+
 ```js
 let s = "Hello, world";
 
-s.substring(1, 4); // "ell"
-s.slice(1, 4);     // "ell"
-s.slice(-3);       // "rld"
-s.split(", ");     // ["Hello", "world"]
+console.log(s.substring(1, 4)); // "ell" — 1-dən 4-ə (4 daxil deyil)
+console.log(s.slice(1, 4));     // "ell" — eyni nəticə verir
+console.log(s.slice(-3));       // "rld" — sondan 3 simvolu götürür
+console.log(s.split(", "));     // ["Hello", "world"] — vergülə görə ayırır
 ```
 
 ---
 
-### 🔍 **Stringdə axtarış**
+### Stringdə Axtarış
+
+String daxilində simvolların və ya alt-stringlərin mövqeyini tapmaq üçün:
+
 ```js
-s.indexOf("l");       // 2
-s.indexOf("l", 3);    // 3
-s.indexOf("zz");      // -1
-s.lastIndexOf("l");   // 10
+console.log(s.indexOf("l"));      // 2 — ilk "l"-in yeri
+console.log(s.indexOf("l", 3));   // 3 — 3-cü indeksdən sonra axtarır
+console.log(s.indexOf("zz"));     // -1 — tapılmadı
+console.log(s.lastIndexOf("l"));  // 10 — sondan axtarış
 
-s.startsWith("Hell"); // true
-s.endsWith("!");      // false
-s.includes("or");     // true
+console.log(s.startsWith("Hell"));  // true
+console.log(s.endsWith("!"));       // false
+console.log(s.includes("or"));      // true
 ```
 
 ---
 
-### ✏️ **Stringin dəyişdirilməsi**
+### Stringin Dəyişdirilməsi
+
+Stringdə müəyyən hissəni dəyişmək və ya formatlamaq üçün:
+
 ```js
-s.replace("llo", "ya");    // "Heya, world"
-s.toLowerCase();           // "hello, world"
-s.toUpperCase();           // "HELLO, WORLD"
-s.normalize();             // Unicode normalizasiya
+console.log(s.replace("llo", "ya"));  // "Heya, world"
+console.log(s.toLowerCase());          // "hello, world"
+console.log(s.toUpperCase());          // "HELLO, WORLD"
+console.log(s.normalize());            // Unicode normalizasiyası üçün
 ```
 
 ---
 
-### 🔠 **Simvollarla işləmək**
+### Simvollarla İşləmək
+
+Stringdə tək-tək simvollarla işləmək üçün:
+
 ```js
-s.charAt(0);           // "H"
-s.charAt(s.length-1);  // "d"
-s.charCodeAt(0);       // 72
-s.codePointAt(0);      // 72
+console.log(s.charAt(0));           // "H" — ilk simvol
+console.log(s.charAt(s.length-1)); // "d" — son simvol
+console.log(s.charCodeAt(0));       // 72 — ilk simvolun UTF-16 kodu
+console.log(s.codePointAt(0));      // 72 — ilk simvolun Unicode nöqtəsi
 ```
 
 ---
 
-### 🧱 **String padding (ES2017)**
+### String Padding (Doldurma) — ES2017
+
+Stringləri sağdan və ya soldan müəyyən simvolla doldurmaq üçün:
+
 ```js
-"x".padStart(3);         // "  x"
-"x".padEnd(3);           // "x  "
-"x".padStart(3, "*");    // "**x"
-"x".padEnd(3, "-");      // "x--"
+console.log("x".padStart(3));          // "  x" — əvvəlinə boşluqla doldurur
+console.log("x".padEnd(3));            // "x  " — sonuna boşluq əlavə edir
+console.log("x".padStart(3, "*"));     // "**x" — əvvəlinə ulduzlarla doldurur
+console.log("x".padEnd(3, "-"));       // "x--" — sonuna tire əlavə edir
 ```
 
 ---
 
-### 🧼 **Boşluqların təmizlənməsi**
+### Boşluqların Təmizlənməsi
+
+Stringin əvvəlində və ya sonunda olan boşluqları təmizləmək üçün:
+
 ```js
-" test ".trim();        // "test"
-" test ".trimStart();   // "test "
-" test ".trimEnd();     // " test"
+console.log(" test ".trim());         // "test"
+console.log(" test ".trimStart());    // "test "
+console.log(" test ".trimEnd());      // " test"
 ```
 
 ---
 
-### 🧬 **Əlavə metodlar**
+### Əlavə Metodlar
+
 ```js
-s.concat("!");          // "Hello, world!"
-"<>".repeat(5);         // "<><><><><>"
+console.log(s.concat("!"));           // "Hello, world!"
+console.log("es".repeat(5));          // "eseseseses"
 ```
 
 ---
 
-### 🔒 **Stringlər immutable-dir**
-`replace()` və `toUpperCase()` kimi metodlar yeni string qaytarır, köhnəni dəyişmir.
+### Stringlər Dəyişməzdir (Immutable)
 
----
+String metodları yeni string qaytarır, mövcud stringi dəyişmir:
 
-### 📚 **Stringləri massiv kimi istifadə**
 ```js
-let s = "hello, world";
-s[0];               // "h"
-s[s.length - 1];    // "d"
-```
+let text = "hello";
+let upperText = text.toUpperCase();
 
-Çox gözəl! Aşağıdakı kimi bu hissəni daha oxunaqlı və təmiz bir formatda təqdim edirəm. Həmçinin bəzi əlavə şərhlər və başlıqlar da əlavə edirəm ki, öyrənmə daha rahat olsun:
+console.log(text);       // "hello" — dəyişməyib
+console.log(upperText);  // "HELLO" — yeni string
+```
 
 ---
 
-## **3.3.4 📌 Template Literalları**
+### Stringləri Massiv Kimi İstifadə Etmək
+
+String-dəki simvollara indekslərlə müraciət edə bilərik:
+
+```js
+let s = "hello";
+console.log(s[0]);          // "h"
+console.log(s[s.length-1]); // "o"
+```
+
+---
+
+## 3.3.4 Template Literalları
 
 ES6-dan etibarən JavaScript-də stringləri `backtick` (`` ` ``) işarəsi ilə yarada bilərik:
 
@@ -782,7 +974,7 @@ ES6-dan etibarən JavaScript-də stringləri `backtick` (`` ` ``) işarəsi ilə
 let s = `hello world`;
 ```
 
-### 💡 **Template literal-ların yaranma səbəbi**
+### Template literal-ların yaranma səbəbi
 String içərisində dəyişənləri və ifadələri asanlıqla yerləşdirmək üçün istifadə olunur:
 
 ```js
@@ -790,17 +982,17 @@ let name = "Bill";
 let greeting = `Hello ${name}.`; // greeting = "Hello Bill."
 ```
 
-> `${}` içərisində istənilən JavaScript ifadəsi (`expression`) yaza bilərsən.  
-> `{} — curly braces` (fiqurlu mötərizə) adlanır.  
+> `${}` içərisində istənilən JavaScript ifadəsi (`expression`) yaza bilərsiniz.
+> `{} — curly braces` (fiqurlu mötərizə) adlanır.
 > `${}` xaricindəki hər şey sadə string literal mətnidir.
 
 ---
 
-## **3.3.5 🧪 Model Uyğunluğu (Regular Expressions - RegExp)**
+## 3.3.5 Model Uyğunluğu (Regular Expressions - RegExp)
 
 JavaScript mətn sətirlərində nümunələri tapmaq üçün **regular expression** (`RegExp`) adlı xüsusi data tipi təqdim edir.
 
-### 🔣 **RegExp nümunələri**
+### RegExp nümunələri
 ```js
 /^HTML/;             // "HTML" ilə başlayan string
 /[1-9][0-9]*/;       // 0 olmayan bir rəqəm + istənilən sayda rəqəm
@@ -809,7 +1001,7 @@ JavaScript mətn sətirlərində nümunələri tapmaq üçün **regular expressi
 
 ---
 
-### 🧰 **RegExp ilə işləyən metodlar**
+### RegExp ilə işləyən metodlar
 
 ```js
 let text = "testing: 1, 2, 3";
@@ -822,45 +1014,46 @@ text.replace(pattern, "#"); // "testing: #, #, #"
 text.split(/\D+/);         // ["", "1", "2", "3"]: rəqəm olmayan simvollar üzrə parçala
 ```
 
-> `\d` — rəqəmlər  
-> `\D` — rəqəm olmayanlar  
-> `\b` — söz sərhədi  
-> `i` — case-insensitive (böyük/kiçik fərq etməz)  
+> `\d` — rəqəmlər
+> `\D` — rəqəm olmayanlar
+> `\b` — söz sərhədi
+> `i` — case-insensitive (böyük/kiçik fərq etməz)
 > `g` — global axtarış (bir dəfədən çox tapmaq üçün)
 
 ---
 
-## **3.4 🔁 Boolean Dəyərlər**
+## 3.4 Boolean Dəyərlər
 
-### ✅ **Boolean nədir?**
-Boolean dəyər yalnız **iki mümkün nəticədən birini** ifadə edə bilər:  
-- `true` (doğru)  
-- `false` (səhv)  
+### Boolean nədir?
+Boolean dəyər yalnız **iki mümkün nəticədən birini** ifadə edə bilər:
+- `true` (doğru)
+- `false` (səhv)
 
 Bu dəyərlər əsasən **müqayisə nəticəsində** və **şərt bloklarında** istifadə olunur.
 
-### 🔍 **Müqayisə nümunəsi**
+### Müqayisə nümunəsi
 ```js
 let a = 4;
 console.log(a === 4); // true
 ```
 
-### 🧠 **Boolean ilə if/else istifadə**
+### Boolean ilə if/else istifadəsi
 ```js
+let a = 4;
 if (a === 4) {
-  console.log("SALAM TRUE");
+  console.log("Şərt doğrudur");
 } else {
-  console.log("SALAM FALSE");
+  console.log("Şərt səhvdir");
 }
 ```
 
 ---
 
-### 🛠️ **JavaScript-də avtomatik boolean çevrilməsi**
+### JavaScript-də avtomatik boolean çevrilməsi
 
-JavaScript-də bəzi dəyərlər **avtomatik olaraq `boolean`** tipinə çevrilir.  
+JavaScript-də bəzi dəyərlər şərtlərdə yoxlanılarkən **avtomatik olaraq `boolean`** tipinə çevrilir.
 
-#### ❌ **Falsy (yalançı) dəyərlər:**
+#### Falsy (yalançı) dəyərlər:
 Aşağıdakı dəyərlər `false` kimi qəbul olunur:
 - `undefined`
 - `null`
@@ -869,16 +1062,16 @@ Aşağıdakı dəyərlər `false` kimi qəbul olunur:
 - `NaN`
 - `""` (boş string)
 
-#### ✅ **Truthy (doğru) dəyərlər:**
-Bütün digər dəyərlər, o cümlədən:
+#### Truthy (doğru) dəyərlər:
+"Falsy" dəyərlər istisna olmaqla bütün digər dəyərlər, o cümlədən:
 - string-lər (`"hello"`)
-- array-lar (`[]`)
+- array-lər (`[]`)
 - obyektlər (`{}`)
 `true` kimi qiymətləndirilir.
 
 ---
 
-### 🔁 **Boolean ilə `.toString()` metodu**
+### Boolean ilə `.toString()` metodu
 ```js
 let a = true;
 a.toString(); // "true"
@@ -886,21 +1079,21 @@ a.toString(); // "true"
 
 ---
 
-## **🔗 Müqayisə operatorları və məntiqi əməliyyatlar**
+## Müqayisə operatorları və məntiqi əməliyyatlar
 
-### `&&` — **AND** operatoru
-İki tərəf də `true` olarsa nəticə `true` olur:
+### `&&` — AND operatoru
+Hər iki tərəf də `true` olarsa, nəticə `true` olur:
 ```js
 4 > 3 && 5 > 4 // true && true => true
 ```
 
-### `||` — **OR** operatoru
-Tərəflərdən **ən az biri** `true` olarsa nəticə `true` olur:
+### `||` — OR operatoru
+Tərəflərdən **ən az biri** `true` olarsa, nəticə `true` olur:
 ```js
 4 > 3 || 4 > 5 // true || false => true
 ```
 
-### `!` — **NOT** operatoru
+### `!` — NOT operatoru
 Dəyərin **əksini** qaytarır:
 ```js
 !(4 > 6) // !(false) => true
@@ -908,36 +1101,33 @@ Dəyərin **əksini** qaytarır:
 
 ---
 
-Bu mövzu JavaScript-də çox vacibdir, çünki demək olar ki, **bütün şərt blokları və dövrlər** `boolean` dəyərlərlə işləyir.
----
+## 3.5 Null və Undefined
 
-## **3.5 🌀 Null və Undefined**
-
-JavaScript-də **dəyərin olmamasını və ya boşluğunu** ifadə etmək üçün iki əsas dəyər var:  
-**`null`** və **`undefined`**
+JavaScript-də **dəyərin olmamasını və ya boşluğunu** ifadə etmək üçün iki əsas dəyər var:
+**`null`** və **`undefined`**.
 
 ---
 
-### 🕳️ **`null` – Məlum şəkildə boşluq**
-- **`null`** bir dəyərin **qəsdən boş olduğunu** göstərmək üçün istifadə olunur.
+### `null` – Məlum şəkildə boşluq
+- **`null`** bir dəyərin **qəsdən boş olduğunu** göstərmək üçün proqramçı tərəfindən istifadə olunur.
 - Sanki “burada dəyər olmalı idi, amma mən qəsdən boş buraxıram” deməkdir.
-- `typeof null` nəticəsi `object` olur (JavaScript-in tarixi bir səhvidir).
+- `typeof null` nəticəsi `object` olur (bu, JavaScript-in ilk versiyalarından qalma bir xəta hesab olunur).
 
 ```js
 let a = null;
 console.log(typeof a); // "object"
 ```
 
-> ✅ Digər dillərdə ekvivalentləri:
+Digər dillərdə ekvivalentləri:
 - Python: `None`
 - SQL: `NULL`
 - Ruby: `nil`
 
 ---
 
-### 🕳️ **`undefined` – Naməlum və ya təyin olunmamış**
-- **`undefined`** isə o deməkdir ki, dəyişən yaradılıb, amma **heç bir dəyər təyin edilməyib**.
-- JavaScript özü avtomatik bu dəyəri verir.
+### `undefined` – Naməlum və ya təyin olunmamış
+- **`undefined`** isə o deməkdir ki, dəyişən yaradılıb, amma ona **hələ heç bir dəyər təyin edilməyib**.
+- JavaScript mühərriki özü bu dəyəri avtomatik verir.
 
 ```js
 let b;
@@ -947,55 +1137,54 @@ console.log(typeof b); // "undefined"
 
 ---
 
-### 🔍 **Fərqləri və ortaq cəhətləri**
+### Fərqləri və ortaq cəhətləri
 
-| Özəllik           | `null`                 | `undefined`            |
-|------------------|------------------------|------------------------|
-| Təyin edən       | Proqramçı              | JavaScript özü         |
-| Tip (`typeof`)   | `"object"`             | `"undefined"`          |
-| Məna             | Qəsdən boş             | Təyin edilməyib        |
-| Boolean kimi     | `false`                | `false`                |
-| Metod/funksiyası | Yoxdur                 | Yoxdur                 |
+| Özəllik | `null` | `undefined` |
+| :--- | :--- | :--- |
+| Təyin edən | Proqramçı | JavaScript mühərriki |
+| Tip (`typeof`) | `"object"` | `"undefined"` |
+| Boolean kimi | `false` | `false` |
+| Metod/funksiyası | Yoxdur | Yoxdur |
 
 ---
 
-### ❗ **== və === fərqi**
+### `==` və `===` fərqi
 ```js
-null == undefined // true (dəyərləri oxşardır)
+null == undefined // true (dəyərləri boş olduğu üçün oxşar qəbul edilir)
 null === undefined // false (tipləri fərqlidir)
 ```
 
 ---
 
-### 🧠 **Tövsiyə və şəxsi yanaşma**
-- **`undefined`**: sistem səviyyəsində, yəni dəyişən hələ dəyər almamışsa.
-- **`null`**: proqram səviyyəsində, yəni "bu dəyər bilərəkdən boşdur".
+### Tövsiyə və yanaşma
+- **`undefined`**: sistem səviyyəsində, yəni dəyişənin hələ dəyər almadığını bildirir.
+- **`null`**: proqram məntiqi səviyyəsində, yəni "bu dəyər bilərəkdən boşdur" mənasında.
 
-> 💡 Əgər dəyişkənə və ya funksiyaya mütləq bir boşluq ötürmək lazımdırsa, adətən `null` istifadə etmək **daha aydın və məqsədli** görünür.
+Əgər bir dəyişənə və ya funksiyaya mütləq bir "boş" dəyər ötürmək lazımdırsa, adətən `null` istifadə etmək **daha aydın və məqsədli** bir yanaşmadır.
 
 ---
 
-## **3.6 🧩 Symbols (Simvollar)**
+## 3.6 Symbols (Simvollar)
 
-### ✨ **Symbol nədir?**
-`Symbol` — **ES6 ilə gəlmiş**, unikal və dəyişməz bir **data tipi**dir. String olmayan property name-lər yaratmaq və **unikallıq təmin etmək** üçün istifadə olunur.
+### Symbol nədir?
+`Symbol` — **ES6 ilə gəlmiş**, unikal və dəyişməz bir **primitiv data tipi**dir. String olmayan property adları yaratmaq və **unikallıq təmin etmək** üçün istifadə olunur.
 
 ```js
 let strname = "string name"; // Adi string property
 let symname = Symbol("propname"); // Simvol olaraq property adı
 ```
 
-| İfadə             | Nəticə        |
-|------------------|---------------|
-| `typeof strname` | `"string"`    |
-| `typeof symname` | `"symbol"`    |
+| İfadə | Nəticə |
+| :--- | :--- |
+| `typeof strname` | `"string"` |
+| `typeof symname` | `"symbol"` |
 
 ---
 
-### 🧠 **Simvolların əsas xüsusiyyətləri:**
-- `Symbol()` **həmişə unikal bir dəyər** qaytarır, **eyni arqumentlə belə**.
-- `Symbol` **literal sintaksisə malik deyil**, sadəcə `Symbol()` funksiyası ilə yaradılır.
-- Simvollar **obyektlərdə propery adı** kimi istifadə oluna bilər.
+### Simvolların əsas xüsusiyyətləri:
+- `Symbol()` funksiyası **həmişə unikal bir dəyər** qaytarır, hətta arqumentləri eyni olsa belə.
+- `Symbol` **literal sintaksisə malik deyil**, yalnız `Symbol()` funksiyası ilə yaradılır.
+- Simvollar **obyektlərdə property adı** kimi istifadə oluna bilər.
 
 ```js
 let o = {};
@@ -1008,17 +1197,17 @@ console.log(o[symname]);  // 2
 
 ---
 
-### 🧪 **toString() metodu**
+### `toString()` metodu
 ```js
 let s = Symbol("sym_x");
 console.log(s.toString()); // "Symbol(sym_x)"
 ```
-> ✅ Bu metod simvolun adına baxmağa imkan verir (debug məqsədilə faydalıdır).
+Bu metod simvolun adına baxmağa imkan verir (əsasən sazlama (debug) məqsədilə faydalıdır).
 
 ---
 
-### 🌍 **Symbol.for() və Symbol.keyFor()**
-`Symbol.for()` — simvolu **global registrdə** saxlayır. Əgər eyni açarla yenidən çağırsan, **eyni simvolu qaytarır**.
+### `Symbol.for()` və `Symbol.keyFor()`
+`Symbol.for()` — simvolu **qlobal simvol registrində** axtarır və ya yaradır. Əgər eyni açar sözlə yenidən çağırılsa, **eyni simvolu qaytarır**.
 
 ```js
 let s = Symbol.for("shared");
@@ -1030,52 +1219,50 @@ console.log(Symbol.keyFor(t)); // "shared"
 ```
 
 #### Fərq:
-| Metod          | Xüsusiyyət                             |
-|----------------|----------------------------------------|
-| `Symbol()`     | **Həmişə yeni və unikal** dəyər yaradır |
-| `Symbol.for()` | **Global və paylaşılan** dəyər yaradır  |
+| Metod | Xüsusiyyət |
+| :--- | :--- |
+| `Symbol()` | **Həmişə yeni və unikal** dəyər yaradır |
+| `Symbol.for()` | **Qlobal və paylaşılan** dəyər yaradır və ya qaytarır |
 
 ---
 
-### 🧭 **Simvollar niyə faydalıdır?**
-- **Adların toqquşmasının qarşısını almaq** üçün.
-- Obyektdə **gizli və ya xüsusi property-lər** yaratmaq üçün.
-- Məsələn: framework və ya kitabxanalarda daxili istifadə üçün.
+### Simvollar niyə faydalıdır?
+- Obyekt property-lərində **adların toqquşmasının qarşısını almaq** üçün.
+- Obyektdə **gizli və ya xüsusi daxili property-lər** yaratmaq üçün.
+- Məsələn, framework və ya kitabxanalarda daxili istifadə üçün ideal vasitədir.
 
 ---
 
-## **3.7 🌐 Qlobal Obyektlər (Global Objects)**
+## 3.7 Qlobal Obyektlər (Global Objects)
 
-### 🧾 **Qlobal obyekt nədir?**
-Qlobal obyekt — JavaScript mühərriki işə düşən kimi avtomatik **yaradılan** və proqram boyu **mövcud olan** obyektlər toplusudur.
-
-Bu obyektin xassələri və metodları **hər yerdə mövcuddur**, çünki onlar **global scope**-a aiddir.
+### Qlobal obyekt nədir?
+Qlobal obyekt — JavaScript mühərriki işə düşən kimi avtomatik **yaradılan** və proqram boyu **hər yerdən əlçatan olan** obyektlər və dəyişənlər toplusudur. Bu obyektin xassələri və metodları **global scope**-a aiddir.
 
 ---
 
-### 🪄 **Qlobal Sabitlər (Global Constants)**
+### Qlobal Sabitlər (Global Constants)
 
-| Ad         | Açıqlama                          |
-|------------|-----------------------------------|
-| `undefined`| Təyin olunmamış dəyər             |
-| `Infinity` | Sonsuz dəyər                      |
-| `NaN`      | "Not a Number" – Ədədi olmayan    |
-
----
-
-### ⚙️ **Qlobal Funksiyalar (Global Functions)**
-
-| Funksiya       | Açıqlama                                     |
-|----------------|----------------------------------------------|
-| `isNaN(x)`     | Dəyərin NaN olub olmadığını yoxlayır         |
-| `parseInt(str)`| String-i tam ədədə çevirir                   |
-| `eval(str)`    | String ifadəni icra edir (riskli ola bilər)  |
+| Ad | Açıqlama |
+| :--- | :--- |
+| `undefined`| Təyin olunmamış dəyər |
+| `Infinity` | Sonsuz dəyər |
+| `NaN` | "Not a Number" – Ədəd olmayan dəyər |
 
 ---
 
-### 🏗️ **Qurucu (Constructor) Funksiyalar**
+### Qlobal Funksiyalar (Global Functions)
 
-Qlobal obyekt tərəfindən təmin edilən `new` açarı ilə istifadə olunan sinifvari funksiyalar:
+| Funksiya | Açıqlama |
+| :--- | :--- |
+| `isNaN(x)` | Dəyərin NaN olub olmadığını yoxlayır |
+| `parseInt(str)`| String-i tam ədədə çevirir |
+| `eval(str)` | String ifadəni icra edir (istifadəsi riskli sayılır) |
+
+---
+
+### Qurucu (Constructor) Funksiyalar
+
+Qlobal obyekt tərəfindən təmin edilən və `new` açar sözü ilə istifadə olunan əsas siniflər:
 
 ```js
 new Date();      // Tarix və saat obyektləri
@@ -1087,14 +1274,14 @@ new Array();     // Array (massiv)
 
 ---
 
-### 📦 **Qlobal obyektlər (Global objects)**
+### Qlobal obyektlər (Global objects)
 
 - **`Math`** — Riyazi funksiyalar və sabitlər üçün.
-- **`JSON`** — JSON məlumatları ilə işləmək üçün (`stringify`, `parse`).
+- **`JSON`** — JSON formatlı məlumatlarla işləmək üçün (`stringify`, `parse`).
 
 ---
 
-### 🪟 **Brauzerdə qlobal obyekt: `window`**
+### Brauzerdə qlobal obyekt: `window`
 
 - Web brauzerdə `window` obyekti **bütün qlobal dəyişənləri və funksiyaları özündə saxlayır**.
 - Misal:
@@ -1103,48 +1290,48 @@ new Array();     // Array (massiv)
   console.log(window.x); // 10
   ```
 
-> 📌 Qeyd: Node.js mühitində isə bu obyektin adı `global` olur, `window` deyil.
+**Qeyd:** Node.js mühitində isə bu obyektin adı `global` olur, `window` deyil.
 
-### 🧠 Nəticə
-Qlobal obyektlər JavaScript-in **əsas dayaqlarıdır**. Onlar bizə **ilk gündən** müxtəlif funksiyalar, sabitlər və obyektlər təqdim edir.
+### Nəticə
+Qlobal obyektlər JavaScript-in **əsas dayaqlarıdır**. Onlar bizə ilk andan etibarən müxtəlif funksiyalar, sabitlər və obyektlər təqdim edir.
 
 ---
 
-### **3.8 İmmutabl Primitiv Dəyərlər və Mutable Obyekt Referansları**
+## 3.8 Dəyişməz Primitiv Dəyərlər və Dəyişən Obyekt Referansları
 
-JavaScript-də **primitiv dəyərlər** və **obyektlər** arasında çox əhəmiyyətli fərqlər mövcuddur. 
+JavaScript-də **primitiv dəyərlər** və **obyektlər** arasında çox əhəmiyyətli bir fərq var.
 
-#### **Primitivlər (İmmutabl)**
+#### Primitivlər (Immutable - Dəyişməz)
 
-Primitiv dəyərlər (undefined, null, boolean, number, string) **değişdirilə bilməz**. Yəni, bu tiplə bağlı olan dəyişənlər yaradıldıqdan sonra onların dəyəri dəyişdirilə bilməz.
+Primitiv dəyərlər (undefined, null, boolean, number, string, symbol) **dəyişdirilə bilməz**. Yəni, bu tiplə bağlı olan dəyişənlər yaradıldıqdan sonra onların dəyəri birbaşa dəyişdirilə bilməz.
 
-##### **Məsələn:**
+##### Məsələn:
 ```js
 let s = "hello"; // String yaradılır
 s.toUpperCase(); // "HELLO" qaytarır, amma `s` dəyişməz qalır
-s                // "hello": original string dəyişməyib
+console.log(s);  // "hello": orijinal string dəyişməyib
 ```
 
-- **Stringlər**: Stringlərin xarakterlərdən ibarət olduğunu düşünsək də, **onları dəyişmək mümkün deyil**. String metodları yalnız **yeni string qaytarır**.
+- **Stringlər**: Stringlərin simvollardan ibarət olduğunu düşünsək də, onların hər hansı bir simvolunu dəyişmək mümkün deyil. String metodları həmişə **yeni bir string qaytarır**.
 
-##### **Primitivlər müqayisə olunur:**
+##### Primitivlərin müqayisəsi:
 
 İki primitiv dəyər yalnız **eyni dəyəri saxladıqları halda** bərabər sayılır.
 
 ```js
-const friend = "Rashad"
-const father = "Rashad"
-friend === father  // true: çünki eyni dəyəri saxlayırlar
+const text1 = "test"
+const text2 = "test"
+text1 === text2  // true: çünki eyni dəyəri saxlayırlar
 ```
 
-#### **Obyektlər (Mutable)**
+#### Obyektlər (Mutable - Dəyişdirilə bilən)
 
-Obyektlər (array-lər və funksiyalar) **mutable** (değişdirilə bilən) olub, onların **xassələri** dəyişdirilə bilər.
+Obyektlər (array-lər və funksiyalar da daxil olmaqla) **mutable** (dəyişdirilə bilən) sayılır, çünki onların **xassələri** sonradan dəyişdirilə bilər.
 
-##### **Məsələn:**
+##### Məsələn:
 ```js
 let o = {x: 1};   // Obyekt yaradılır
-o.x = 2;          // Obyekti dəyişdiririk
+o.x = 2;          // Obyektin xassəsini dəyişdiririk
 o.y = 3;          // Yeni xassə əlavə edirik
 
 let a = [1, 2, 3]; // Array yaradılır
@@ -1152,38 +1339,38 @@ a[0] = 0;          // Array-in bir elementini dəyişirik
 a[3] = 4;          // Yeni element əlavə edirik
 ```
 
-#### **Obyektlərin müqayisəsi**
+#### Obyektlərin müqayisəsi
 
-İki obyekt **eyni dəyəri** saxlasalar belə, onlar **bərabər sayılmır**. Çünki obyektlər referans tipləridir və onları müqayisə edərkən **referanslar** yoxlanılır.
+İki fərqli obyekt, xassələri **eyni olsa belə**, bir-birinə bərabər sayılmır. Çünki obyektlər referans tipləridir və onları müqayisə edərkən yaddaşdakı **referanslar** yoxlanılır.
 
 ```js
 let o = {x: 1};
 let p = {x: 1};
-o === p // false: Çünki onlar iki fərqli obyektlərdir
+o === p // false: Çünki onlar yaddaşda iki fərqli obyektdir
 
 let a = [], b = [];  // İki boş array
 a === b // false: Çünki onlar fərqli array-lardır
 ```
 
-#### **Referans Tipi**
+#### Referans Tipi
 
-Obyektlər **referans tipləridir** və müqayisə zamanı **onların eyni obyektə istinad edib-etmədiyi** yoxlanılır.
+Obyektlər dəyişənlərə dəyər olaraq deyil, **referans olaraq** mənimsədilir. Müqayisə zamanı **onların eyni obyektə istinad edib-etmədiyi** yoxlanılır.
 
 ```js
 let a = [];  // Array yaradılır
-let b = a;   // `b` `a` ilə eyni array-a istinad edir
+let b = a;   // `b` dəyişəni `a` ilə eyni array-a istinad edir
 b[0] = 1;    // `b` vasitəsilə array-ı dəyişirik
-a[0]         // 1: `a` da dəyişdi, çünki `a` və `b` eyni obyektə istinad edir
+console.log(a[0]); // 1: `a` da dəyişdi, çünki `a` və `b` eyni obyektdir
 a === b      // true: `a` və `b` eyni obyektə istinad edir
 ```
 
-#### **Yeni Kopya Yaratmaq (Copying Arrays)**
+#### Yeni Kopya Yaratmaq (Copying Arrays)
 
-Obyektin (və ya array-in) yeni kopyasını yaratmaq üçün onun bütün elementlərini eyni ilə kopyalamaq lazımdır. Aşağıda array-lərin necə kopyalanması göstərilib:
+Obyektin (və ya array-in) yeni kopyasını yaratmaq üçün onun bütün elementlərini bir-bir yeni obyektə köçürmək lazımdır.
 
 ```js
 let a = ["a", "b", "c"];  // Orijinal array
-let b = [];  // Yeni array yaradılır
+let b = [];  // Yeni boş array yaradılır
 
 // Array-i dövr edərək kopyalayırıq
 for (let i = 0; i < a.length; i++) {
@@ -1193,76 +1380,72 @@ for (let i = 0; i < a.length; i++) {
 let c = Array.from(b);  // ES6-da Array.from() ilə kopyalama
 ```
 
-#### **Array-ləri müqayisə etmək (Array Comparison)**
+#### Array-ləri müqayisə etmək (Array Comparison)
 
-İki array-i müqayisə etmək üçün aşağıdakı funksiyanı istifadə edə bilərik:
+İki array-in elementlərinin eyni olub-olmadığını yoxlamaq üçün aşağıdakı kimi bir funksiya yazmaq olar:
 
 ```js
 function equalArrays(a, b) {
-    if (a === b) return true; // Eyni array-lər bərabərdir
-    if (a.length !== b.length) return false; // Uzunluqları fərqli olan array-lər bərabər deyil
+    if (a === b) return true; // Eyni array-lərdirsə, bərabərdir
+    if (a.length !== b.length) return false; // Uzunluqları fərqlidirsə, bərabər deyil
     for (let i = 0; i < a.length; i++) {
-        if (a[i] !== b[i]) return false; // Hər hansı bir element fərqlidirsə, array-lər bərabər deyil
+        if (a[i] !== b[i]) return false; // Hər hansı bir element fərqlidirsə, bərabər deyil
     }
-    return true; // Əks halda, array-lər bərabərdir
+    return true; // Bütün yoxlamalardan keçdisə, deməli bərabərdir
 }
 ```
 
-#### **Nəticə**
+#### Nəticə
 
-- **Primitiv dəyərlər** dəyişdirilə bilməz və **dəyər əsaslı** müqayisə edilir.
-- **Obyektlər** dəyişdirilə bilər və **referans əsaslı** müqayisə edilir.
-
-Bu xüsusiyyətləri başa düşmək, JavaScript-də yaddaş idarəsi və dəyişənlər üzərində işləməkdə çox faydalıdır.
-
-Çox gözəl, bu bölmə 3.9 Type Conversions JavaScript-in ən vacib və praktik hissələrindən biridir. Mən sənə bu notları bir az daha strukturlaşdırılmış və aydın şəkildə **Azerbaycanca** aşağıda təqdim edirəm. İstəsən, Markdown və ya PDF faylı kimi də verə bilərəm.
+- **Primitiv dəyərlər** dəyişdirilə bilməz və **dəyərlərinə görə** müqayisə edilir.
+- **Obyektlər** dəyişdirilə bilər və **referanslarına görə** müqayisə edilir.
 
 ---
 
-## 📘 3.9 Tip Çevrilmələri (Type Conversions)
+## 3.9 Tip Çevrilmələri (Type Conversions)
 
-JavaScript-də tip çevrilməsi çox geniş yayılmışdır. Bəzi dəyərlər `truthy` və `falsy` olaraq `boolean` tipinə çevrilə bilər.
+JavaScript-də tip çevrilməsi tez-tez baş verir. Məsələn, bəzi dəyərlər `truthy` və `falsy` olaraq `boolean` tipinə çevrilə bilər.
 
 ---
 
-### 🔁 Avtomatik Tip Çevrilmələri
+### Avtomatik Tip Çevrilmələri
 
 ```js
 10 + " objects"   // "10 objects": ədəd `string`-ə çevrilir
 "7" * "4"         // 28: hər iki string `number`-a çevrilir
-let n = 1 - "x";  // NaN: "x" sayı deyil
-n + " objects"    // "NaN objects": NaN stringə çevrilir
+let n = 1 - "x";  // NaN: "x" ədədə çevrilə bilmir
+n + " objects"    // "NaN objects": NaN string-ə çevrilir
 ```
 
 ---
 
-### 🔢 Dəyərlərin Tipə Çevrilməsi
+### Dəyərlərin Tipə Çevrilmə Cədvəli
 
-| Dəyər          | `String`-ə        | `Number`-a | `Boolean`-a |
-| -------------- | ----------------- | ---------- | ----------- |
-| `undefined`    | `"undefined"`     | `NaN`      | `false`     |
-| `null`         | `"null"`          | `0`        | `false`     |
-| `true`         | `"true"`          | `1`        | `true`      |
-| `false`        | `"false"`         | `0`        | `false`     |
-| `""`           | `""`              | `0`        | `false`     |
-| `"1.2"`        | `"1.2"`           | `1.2`      | `true`      |
-| `"one"`        | `"one"`           | `NaN`      | `true`      |
-| `0`            | `"0"`             | `0`        | `false`     |
-| `-0`           | `"0"`             | `-0`       | `false`     |
-| `Infinity`     | `"Infinity"`      | `Infinity` | `true`      |
-| `NaN`          | `"NaN"`           | `NaN`      | `false`     |
-| `1`, `-1`      | `"1"`, `"-1"`     | `1`, `-1`  | `true`      |
-| `[]`           | `""`              | `0`        | `true`      |
-| `[9]`          | `"9"`             | `9`        | `true`      |
-| `['a']`        | `"a"`             | `NaN`      | `true`      |
-| `{}`           | `[object Object]` | `NaN`      | `true`      |
-| `function(){}` | `function...`     | `NaN`      | `true`      |
+| Dəyər | `String`-ə | `Number`-a | `Boolean`-a |
+| :--- | :--- | :--- | :--- |
+| `undefined` | `"undefined"` | `NaN` | `false` |
+| `null` | `"null"` | `0` | `false` |
+| `true` | `"true"` | `1` | `true` |
+| `false` | `"false"` | `0` | `false` |
+| `""` | `""` | `0` | `false` |
+| `"1.2"` | `"1.2"` | `1.2` | `true` |
+| `"one"` | `"one"` | `NaN` | `true` |
+| `0` | `"0"` | `0` | `false` |
+| `-0` | `"0"` | `-0` | `false` |
+| `Infinity` | `"Infinity"` | `Infinity` | `true` |
+| `NaN` | `"NaN"` | `NaN` | `false` |
+| `1`, `-1` | `"1"`, `"-1"` | `1`, `-1` | `true` |
+| `[]` | `""` | `0` | `true` |
+| `[9]` | `"9"` | `9` | `true` |
+| `['a']` | `"a"` | `NaN` | `true` |
+| `{}` | `"[object Object]"`| `NaN` | `true` |
+| `function(){}` | `"function..."` | `NaN` | `true` |
 
 ---
 
-### 🧮 3.9.1 Bərabərlik və Tip Çevrilməsi
+### 3.9.1 Bərabərlik və Tip Çevrilməsi
 
-`==` operatoru **tip çevrilməsi** edir, `===` isə etmir.
+`==` operatoru müqayisə etməzdən əvvəl **tip çevrilməsi** edir, `===` isə etmir və həm dəyəri, həm də tipi yoxlayır.
 
 ```js
 null == undefined    // true
@@ -1273,72 +1456,75 @@ null == undefined    // true
 
 ---
 
-### ✍️ 3.9.2 Açıq (Explicit) Çevrilmələr
+### 3.9.2 Açıq (Explicit) Çevrilmələr
+
+Bəzən tipləri özümüzün birbaşa çevirməsi lazım gəlir.
 
 ```js
 Number("3")        // 3
 String(false)      // "false"
 Boolean([])        // true
 
-x + ""             // String(x)
-+x                 // Number(x)
-x - 0              // Number(x)
-!!x                // Boolean(x)
+// Qısayollar
+let x = "5";
+x + ""             // String(x) ilə eyni
++x                 // Number(x) ilə eyni
+!!x                // Boolean(x) ilə eyni
 ```
 
-### 🔢 Ədədləri fərqli əsaslara çevirmək
+### Ədədləri fərqli say sistemlərinə çevirmək
 
 ```js
 let n = 17;
-n.toString(2);   // "10001"
-n.toString(8);   // "21"
-n.toString(16);  // "11"
+n.toString(2);   // "10001" (ikilik)
+n.toString(8);   // "21" (səkkizlik)
+n.toString(16);  // "11" (onaltılıq)
 ```
 
-### 📐 Say formatlama metodları
+### Say formatlama metodları
 
 ```js
 let n = 123456.789;
-n.toFixed(2)        // "123456.79"
-n.toExponential(3)  // "1.235e+5"
-n.toPrecision(4)    // "1.235e+5"
+n.toFixed(2)        // "123456.79" (kəsr hissəni 2 rəqəmə qədər saxlayır)
+n.toExponential(3)  // "1.235e+5" (eksponensial formada göstərir)
+n.toPrecision(7)    // "123456.8" (ümumi 7 rəqəm dəqiqliklə göstərir)
 ```
 
 ---
 
-### 🧾 `parseInt()` və `parseFloat()`
+### `parseInt()` və `parseFloat()`
+
+Bu funksiyalar string-in başlanğıcındakı rəqəmləri oxuyur və onları ədədə çevirir.
 
 ```js
 parseInt("3 blind mice")    // 3
 parseFloat(" 3.14 meters")  // 3.14
 parseInt("-12.34")          // -12
-parseInt("0xFF")            // 255
-parseInt("077", 8)          // 63
-parseInt("077", 10)         // 77
-parseInt("11", 2)           // 3
-parseInt("ff", 16)          // 255
-parseInt("zz", 36)          // 1295
+parseInt("0xFF")            // 255 (onaltılıq)
+parseInt("077", 8)          // 63 (səkkizlik)
+parseInt("077", 10)         // 77 (onluq)
+parseInt("11", 2)           // 3 (ikilik)
 ```
 
-> **Qeyd**: `parseInt()` ikinci arqument kimi **say sistemini** (radix) qəbul edir.
+**Qeyd**: `parseInt()` ikinci arqument kimi **say sistemini** (radix) qəbul edə bilir.
 
 ---
 
-### 🧠 3.9.3 Object-dən Primitive-ə Çevrilmə
+### 3.9.3 Obyektdən Primitivə Çevrilmə
 
-> Bu hissə gələcəkdə əlavə olunacaq. (`valueOf()` və `toString()` metodları istifadə olunur.)
-
----
-
-### **3.10 Dəyişənlərin Təyini və Qiymət Verilməsi**
-
-Proqramlaşdırmada ən əsas anlayışlardan biri adlardan (yəni **identifikatorlardan**) istifadə edərək dəyərləri təmsil etməkdir. Bir ada dəyər təyin etdikdə, bu ada **dəyişən** deyirik. Dəyişən o deməkdir ki, bu dəyər proqramın işləmə gedişində dəyişə bilər. Əgər bir ada sabit (dəyişməyən) dəyər təyin etsək, buna **sabit (constant)** deyirik.
+**Qeyd:** Bu hissə gələcəkdə əlavə olunacaq. (Prosesdə `valueOf()` və `toString()` metodları istifadə olunur.)
 
 ---
 
-### **3.10.1 `let` və `const` ilə Təyin**
+## 3.10 Dəyişənlərin Təyini və Qiymət Verilməsi
 
-#### ✅ `let` ilə dəyişən təyini:
+Proqramlaşdırmada ən əsas anlayışlardan biri adlardan (yəni **identifikatorlardan**) istifadə edərək dəyərləri yadda saxlamaqdır. Bir ada dəyər təyin etdikdə, bu ada **dəyişən** deyirik, çünki bu dəyər proqramın işləmə gedişində dəyişə bilər. Əgər bir ada sabit (dəyişməyən) dəyər təyin etsək, buna **sabit (constant)** deyirik.
+
+---
+
+### 3.10.1 `let` və `const` ilə Təyin
+
+#### `let` ilə dəyişən təyini:
 
 ```js
 let i;
@@ -1347,10 +1533,10 @@ let i = 0, j = 0, k = 0;
 let x = 2, y = x * x;
 ```
 
-* **Yaxşı təcrübə:** Dəyişəni yaradanda ona ilkin dəyər vermək.
-* Əgər `let` ilə dəyişən yaradılıbsa amma dəyər verilməyibsə, onun dəyəri `undefined` olacaq.
+- **Yaxşı təcrübə:** Dəyişəni yaradanda ona ilkin dəyər vermək.
+- Əgər `let` ilə dəyişən yaradılıbsa, amma ona dəyər verilməyibsə, ilkin dəyəri `undefined` olacaq.
 
-#### ✅ `const` ilə sabit təyini:
+#### `const` ilə sabit təyini:
 
 ```js
 const H0 = 74; // Hubble sabiti
@@ -1358,47 +1544,46 @@ const C = 299792.458; // İşıq sürəti
 const AU = 1.496E8; // Astronomik vahid (km)
 ```
 
-* `const` ilə təyin olunan dəyərlər dəyişdirilə bilməz.
+- `const` ilə təyin olunan dəyərlər sonradan dəyişdirilə bilməz.
 
 ---
 
-### **Dəyişən və Sabitlərin Göstəriş Sahəsi (Scope)**
+### Dəyişən və Sabitlərin Göstəriş Sahəsi (Scope)
 
-* `let` və `const` **blok səviyyəli skop**-a malikdir. Yəni yalnız təyin edildiyi blok daxilində keçərlidir.
+- `let` və `const` **blok səviyyəli göstəriş sahəsinə** malikdir. Yəni, yalnız təyin edildiyi `{}` bloku daxilində keçərlidir.
 
 ---
 
-### **Təkrar Təyinlər və Səhvlər**
+### Təkrar Təyinlər və Səhvlər
 
-* Eyni dəyişəni `let` və ya `const` ilə birdən çox dəfə təyin etmək **sintaksis xətasıdır**:
+- Eyni skop daxilində eyni dəyişəni `let` və ya `const` ilə birdən çox dəfə təyin etmək **sintaksis xətasıdır**:
 
 ```js
 const x = 1;
 if (x === 1) {
-    let x = 2; // Bu blok daxilində fərqli x-dir
+    let x = 2; // Bu, blok daxilində fərqli bir x dəyişənidir
     console.log(x); // 2
 }
 console.log(x); // 1
-let x = 3; // Xəta! x artıq təyin olunub
+let x = 3; // Xəta! x artıq bu skopda təyin olunub
 ```
 
 ---
 
-### **Təyinlər və Tiplər**
+### Təyinlər və Tiplər
 
-* C və Java kimi statik tiplərdə dəyişənin tipi əvvəlcədən yazılır.
-* Amma JavaScript dinamik tiplidir:
+- C və Java kimi statik tipli dillərdən fərqli olaraq, JavaScript dinamik tiplidir, yəni dəyişənin tipi sonradan dəyişə bilər:
 
 ```js
 let i = 10;
-i = "Rashad"; // tip dəyişir, bu normaldır
+i = "ten"; // Tip dəyişir, bu normaldır
 ```
 
 ---
 
-### **3.10.2 `var` ilə Dəyişən Təyini (köhnə üsul)**
+### 3.10.2 `var` ilə Dəyişən Təyini (köhnə üsul)
 
-* **ES6-dan əvvəl** dəyişənləri yalnız `var` ilə təyin etmək olurdu:
+- **ES6-dan (2015-ci ildən) əvvəl** dəyişənlər yalnız `var` ilə təyin edilirdi:
 
 ```js
 var x;
@@ -1406,102 +1591,15 @@ var data = [], count = data.length;
 for(var i = 0; i < count; i++) console.log(data[i]);
 ```
 
-#### 🔍 `var` ilə `let` arasındakı əsas fərqlər:
+#### `var` ilə `let` arasındakı əsas fərqlər:
 
-1. `var` **blok skop** deyil, **funksiya skop**-dur.
-2. `var` ilə təyin olunan dəyişənlər qlobal obyektin (`globalThis`) bir hissəsi olur və silinə bilməz.
-3. `var` ilə eyni adda dəyişəni təkrar təyin etmək mümkündür.
-4. `var` təyin olunan dəyişənlər **hoisting** edilir – yəni, kodun yuxarısına "qaldırılır". Bu zaman dəyəri `undefined` olur və xəta çıxmır:
+1.  `var` **blok skopuna** deyil, **funksiya skopuna** malikdir.
+2.  Qlobal skopda `var` ilə təyin olunan dəyişənlər qlobal obyektin (`window`) bir hissəsi olur.
+3.  `var` ilə eyni adda dəyişəni təkrar təyin etmək mümkündür və bu, xəta vermir.
+4.  `var` ilə təyin olunan dəyişənlər **hoisting** edilir – yəni, skopun yuxarısına "qaldırılır". Bu zaman dəyəri təyin olunana qədər `undefined` olur:
 
 ```js
-console.log(x); // undefined
+console.log(x); // undefined (xəta vermir)
 var x = 5;
 ```
-
-Amma `let` və `const` ilə belə hal xəta verir.
-
----
-
-### **3.10.3 Parçalanmış Mənimsətmə (Destructuring Assignment)**
-
-**Destructuring**, yəni **parçalayaraq mənimsətmə**, massiv və obyektlərdən müəyyən dəyərləri rahatlıqla çıxarmağa imkan verir.
-
-#### **Array-lərlə istifadə**
-
-```js
-let [x, y] = [1, 2]; // x = 1, y = 2
-[x, y] = [x + 1, y + 1]; // x = 2, y = 3
-[x, y] = [y, x]; // x = 3, y = 2 (dəyərləri dəyişdilər)
-```
-
-#### **Funksiya ilə istifadə**
-
-```js
-function toPolar(x, y) {
-  return [Math.sqrt(x*x + y*y), Math.atan2(y, x)];
-}
-function toCartesian(r, theta) {
-  return [r * Math.cos(theta), r * Math.sin(theta)];
-}
-let [r, theta] = toPolar(1, 1);
-let [x, y] = toCartesian(r, theta);
-```
-
-#### **Obyektlərdə istifadə**
-
-```js
-let o = { x: 1, y: 2 };
-for (const [name, value] of Object.entries(o)) {
-  console.log(name, value); // "x 1", "y 2"
-}
-```
-
-#### **Əlavə Misallar**
-
-```js
-let [x, y] = [1]; // x = 1, y = undefined
-[x, y] = [1, 2, 3]; // x = 1, y = 2
-[, x, , y] = [1, 2, 3, 4]; // x = 2, y = 4
-let [x, ...y] = [1, 2, 3, 4]; // x = 1, y = [2, 3, 4]
-```
-
-#### **İç-içə strukturlar**
-
-```js
-let [a, [b, c]] = [1, [2, 2.5]]; // a = 1, b = 2, c = 2.5
-```
-
-#### **String-lə istifadə (iterable)**
-
-```js
-let [first, ...rest] = "Hello"; // first = "H", rest = ["e", "l", "l", "o"]
-```
-
-#### **Obyekt Parçalanması**
-
-```js
-let transparent = { r: 0.0, g: 0.0, b: 0.0, a: 1.0 };
-let { r, g, b } = transparent; // r = 0.0, g = 0.0, b = 0.0
-```
-
-#### **Alias (ad dəyişmə)**
-
-```js
-const { cos: cosine, tan: tangent } = Math; // cosine = Math.cos, tangent = Math.tan
-```
-
-#### **İç-içə obyektlərdən/parçalanma**
-
-```js
-let points = [{ x: 1, y: 2 }, { x: 3, y: 4 }];
-let [{ x: x1, y: y1 }, { x: x2, y: y2 }] = points;
-// x1 = 1, y1 = 2, x2 = 3, y2 = 4
-```
-
-#### **Object of Array parçalama (tövsiyə olunur)**
-
-```js
-let points = { p1: [1, 2], p2: [3, 4] };
-let { p1: [x1, y1], p2: [x2, y2] } = points;
-// x1 = 1, y1 = 2, x2 = 3, y2 = 4
-```
+`let` və `const` ilə bu cür istifadə isə xətaya səbəb olur. Müasir JavaScript-də `var` istifadə etmək tövsiyə edilmir.-
