@@ -11,7 +11,7 @@ Bu fəsil, JavaScript-in təməl quruluş daşları olan **ifadələri (expressi
 Proqramın içinə birbaşa yazılan sabit dəyərlərdir.
 ```javascript
 1.23         // Rəqəm (Number) literalı
-"salam"      // Sətir (String) literalı
+"salam"      // String (String) literalı
 /pattern/    // Requlyar İfadə (RegExp) literalı
 ```
 
@@ -52,9 +52,10 @@ console.log(sparse.length); // ✅ Nəticə: 4
 **Obyekt İnisiatorları (Object Initializers)**
 Fiqurlu mötərizə `{}` içində, `açar: dəyər` formatında cütlüklərdən ibarətdir.
 ```javascript
-{} // Boş bir obyekt
 
-let point = { x: 10, y: 20 }; // İki xüsusiyyətli obyekt
+let p = { x: 2.3, y: -1.2 }; // 2 propertili obyekt
+let q = {}; // Boş obyekt
+q.x = 2.3; q.y = -1.2; // hal hazırda q obyektində də x və y propertiləri var
 
 // İç-içə obyektlər
 let rectangle = {
@@ -83,8 +84,8 @@ Funksiyaları təyin etməyin `function` ifadəsindən başqa, `function` bəyan
 ### 4.4 Xüsusiyyətə Müraciət İfadələri (Property Access Expressions) `.` `[]`
 **Xüsusiyyətə müraciət (property access)** ifadəsi, bir obyektin xüsusiyyətinin və ya bir massivin (array) elementinin dəyərini əldə etmək üçün istifadə olunur. JavaScript-də bunun üçün iki fərqli sintaksis var:
 
-1.  **Nöqtə Sintaksisi (Dot Notation):** `ifade.identifikator`
-2.  **Kvadrat Mötərizə Sintaksisi (Bracket Notation):** `ifade[ifade]`
+1.  **Nöqtə Sintaksisi (Dot Notation):** `ifadə.identifikator`
+2.  **Kvadrat Mötərizə Sintaksisi (Bracket Notation):** `ifadə[ifadə]`
 
 **Geniş Nümunə:**
 ```javascript
@@ -107,6 +108,7 @@ console.log(user["age"]); // ✅ 25
 console.log(data[0]["address"]["city"]); // ✅ "Bakı"
 
 // Nə vaxt kvadrat mötərizə məcburidir?
+
 // 1. Əgər xüsusiyyətin adı düzgün identifikator deyilsə (məsələn, boşluq varsa)
 // console.log(user.first name); // ❌ Səhv! Bu işləməyəcək.
 console.log(user["first name"]); // ✅ "Ayan"
@@ -119,9 +121,9 @@ console.log(user[propName]); // ✅ 25
 
 ---
 ### 4.4.1 Şərti Müraciət (Conditional Access / Optional Chaining) `?.`
-Yuxarıda qeyd etdiyimiz `TypeError` xətasından qaçmaq üçün əvvəllər uzun-uzun `if` yoxlamaları yazmaq lazım gəlirdi. ES2020-də gələn **Optional Chaining** operatoru (`?.`) bu problemi çox zərif bir şəkildə həll edir.
+Yuxarıda qeyd etdiyimiz `TypeError` xətasından qaçmaq üçün əvvəllər uzun-uzun `if` yoxlamaları yazmaq lazım gəlirdi. ES2020-də gələn **Optional Chaining** operatoru (`?.`) bu problemi həll edir.
 
-**Necə İşləyir?**
+**Necə İşləyir?**  
 `?.` operatoru, solundakı dəyərin `null` və ya `undefined` olub-olmadığını yoxlayır.
 * Əgər dəyər `null` və ya `undefined`-dırsa, ifadənin qalan hissəsini heç icra etmədən dərhal `undefined` qaytarır və xəta baş vermir (**short-circuiting**).
 * Əgər dəyər `null` və ya `undefined` deyilsə, müraciət normal şəkildə davam edir.
@@ -148,7 +150,7 @@ console.log("Köhnə üsulla küçə:", street); // ✅ undefined
 ```javascript
 const user = { name: "Ayan", profile: null };
 
-// Eyni məntiq, tək bir zərif sətirlə!
+// Eyni məntiq, tək sətirlə!
 const street = user.profile?.address?.street;
 
 console.log("Yeni üsulla küçə:", street); // ✅ undefined (HEÇ BİR XƏTA OLMADAN!)
@@ -158,10 +160,12 @@ console.log("Yeni üsulla küçə:", street); // ✅ undefined (HEÇ BİR XƏTA 
 ### 4.5 Funksiya Çağırış İfadələri (Invocation Expressions) `()`
 Adi mötərizə `()` cütlüyü, JavaScript-də **funksiya çağırma (invocation)** operatorudur. O, özündən əvvəl gələn ifadənin bir funksiya olduğunu güman edir və onu arqumentlərlə birlikdə icra edir.
 ```javascript
-Math.max(10, 20); // Math.max funksiyasını çağırır
-myArray.sort();   // myArray obyektinin sort metodunu çağırır
+f(0)  // f funksiya ifadəsidir; `0` isə arqument ifadəsidir.  
+Math.max(x, y, z)  // `Math.max` funksiyadır; `x`, `y` və `z` isə arqumentlərdir.  
+newArray.sort()  // `a.sort` funksiyadır; arqument yoxdur.
+
 ```
-Əgər çağırılan ifadə bir xüsusiyyətə müraciətdirsə (`myArray.sort`), bu, **metod çağırışı (method invocation)** adlanır və funksiyanın daxilindəki `this` açar sözü həmin obyektə (`myArray`-a) işarə edir.
+Əgər çağırılan ifadə bir xüsusiyyətə müraciətdirsə (`newArray.sort`), bu, **metod çağırışı (method invocation)** adlanır və funksiyanın daxilindəki `this` açar sözü həmin obyektə (`newArray`-a) işarə edir.
 
 ---
 ### 4.5.1 Şərti Çağırış (Conditional Invocation) `?.()`
@@ -190,6 +194,16 @@ function square(x, log) {
   return x * x;
 }
 ```
+
+```javascript
+o.m()  
+// Regular property access, regular invocation, Adi propertiyə çıxış, adi çağırış (invocation)
+o?.m() 
+// Conditional property access, regular invocation, Şərti (conditional) propertiyə çıxış, adi çağırış.
+o.m?.() 
+// Regular property access, conditional invocationAdi propertiyə çıxış, şərti çağırış.
+```
+
 **`o.m()`, `o?.m()`, və `o.m?.()` arasındakı fərq:**
 Bu üç ifadənin fərqini anlamaq çox vacibdir:
 * `o.m()`: `o` mütləq bir obyekt olmalıdır və onun `m` adlı bir funksiya xüsusiyyəti olmalıdır. Əks halda `TypeError`.
@@ -214,7 +228,6 @@ class Point {
 
 // `new` ilə bu sinifdən yeni bir obyekt (nüsxə - instance) yaradırıq
 const p1 = new Point(10, 20);
-const p2 = new Point(5, 5);
 
 console.log(p1); // ✅ Point { x: 10, y: 20 }
 
@@ -231,71 +244,110 @@ Bu bölmə, JavaScript-dəki bütün operatorların ümumi bir icmalı və onlar
 #### Operatorların Üstünlük Cədvəli (sadələşdirilmiş)
 Aşağıda operatorlar, ən yüksək üstünlükdən ən aşağıya doğru qruplaşdırılıb. Eyni qrupdakı operatorlar eyni üstünlüyə malikdir.
 
-1.  **Ən Yüksək: Qruplaşdırma** `()`
-2.  **Üzvlük və Çağırış:** `.` (obyekt xüsusiyyəti), `[]` (massiv elementi), `?.` (optional chaining), `()` (funksiya çağırışı), `new`
-3.  **Artırma/Azaltma (Postfix):** `++`, `--`
-4.  **Unar Operatorlar:** `!` (not), `~` (bitwise not), `+` (rəqəmə çevirmə), `-` (mənfi etmə), `++`/`--` (prefix), `typeof`, `delete`
-5.  **Qüvvət:** `**`
-6.  **Vurma/Bölmə/Qalıq:** `*`, `/`, `%`
-7.  **Toplama/Çıxma:** `+`, `-`
-8.  **Bit Sürüşdürmə:** `<<`, `>>`, `>>>`
-9.  **Müqayisə:** `<`, `<=`, `>`, `>=`, `instanceof`, `in`
-10. **Bərabərlik:** `==`, `!=`, `===`, `!==`
-11. **Bit Məntiqi:** `&`, `^`, `|`
-12. **Məntiqi Operatorlar:** `&&` (və), `||` (və ya), `??` (nullish coalescing)
-13. **Şərt (Ternary) Operatoru:** `... ? ... : ...`
-14. **Mənimsətmə (Assignment):** `=`, `+=`, `-=`, `*=`, `**=` və s.
-15. **Vergül Operatoru:** `,`
-
----
-#### Operator Anlayışları
-**4.7.1 Operandların Sayı (Arity)**
-* **Unar (Unary):** Tək operand qəbul edir. Məsələn, `-x` ifadəsində `-` operatoru.
-* **Binar (Binary):** İki operand qəbul edir. Əksər operatorlar binar-dır. Məsələn, `x + y`.
-* **Ternar (Ternary):** Üç operand qəbul edir. JavaScript-də yeganə ternar operator `?:` şərt operatorudur.
+| Prioritet | Kateqoriya                | Operatorlar                                        |    |          |
+| --------- | ------------------------- | -------------------------------------------------- | -- | -------- |
+| 1         | Ən Yüksək: Qruplaşdırma   | `()`                                               |    |          |
+| 2         | Üzvlük və Çağırış         | `.`, `[]`, `?.`, `()`, `new`                       |    |          |
+| 3         | Artırma/Azaltma (Postfix) | `++`, `--`                                         |    |          |
+| 4         | Unar Operatorlar          | `!`, `~`, `+`, `-`, `++`, `--`, `typeof`, `delete` |    |          |
+| 5         | Qüvvət                    | `**`                                               |    |          |
+| 6         | Vurma/Bölmə/Qalıq         | `*`, `/`, `%`                                      |    |          |
+| 7         | Toplama/Çıxma             | `+`, `-`                                           |    |          |
+| 8         | Bit Sürüşdürmə            | `<<`, `>>`, `>>>`                                  |    |          |
+| 9         | Müqayisə                  | `<`, `<=`, `>`, `>=`, `instanceof`, `in`           |    |          |
+| 10        | Bərabərlik                | `==`, `!=`, `===`, `!==`                           |    |          |
+| 11        | Bit Məntiqi               | `&`, `^`, \`                                       | \` |          |
+| 12        | Məntiqi Operatorlar       | `&&`, \`                                           |    | `, `??\` |
+| 13        | Şərt (Ternary) Operatoru  | `... ? ... : ...`                                  |    |          |
+| 14        | Mənimsətmə (Assignment)   | `=`, `+=`, `-=`, `*=`, `**=`, və s.                |    |          |
+| 15        | Vergül Operatoru          | `,`                                                |    |          |
 
 ---
 
-**4.7.2 Operand və Nəticə Tipləri**
-Əksər operatorlar müəyyən bir tipdə operandlar gözləyir. Əgər fərqli bir tipdə dəyər verilsə, JavaScript onu avtomatik olaraq çevirməyə çalışır.
-`"3" * "5"` → `3` və `5` rəqəmlərinə çevrilir və nəticə `15` olur (rəqəm olaraq).
+### 🔢 **4.7.1 Operandların Sayı (Arity)**
+
+| Növ        | Təsviri                            | Nümunə                   |
+| ---------- | ---------------------------------- | ------------------------ |
+| **Unar**   | Tək operand qəbul edir             | `-x`, `!flag`            |
+| **Binar**  | İki operandla işləyir              | `x + y`, `a * b`         |
+| **Ternar** | Üç operandla işləyir (yalnız `?:`) | `age > 18 ? "ok" : "no"` |
 
 ---
 
-**4.7.3 Operatorların Əlavə Təsirləri (Side Effects)**
-Bəzi operatorlar, dəyər hesablamaqla yanaşı, proqramın vəziyyətini də dəyişir. Buna **yan təsir (side effect)** deyilir.
-* Mənimsətmə operatorları (`=`, `+=`): Dəyişənin dəyərini dəyişir.
-* `++` və `--`: Dəyişənin dəyərini artırır və ya azaldır.
-* `delete`: Obyektin bir xüsusiyyətini silir.
+### 🧠 **4.7.2 Operand və Nəticə Tipləri**
 
----
-**4.7.4 Operatorların Üstünlüyü (Precedence)**
-Bu, mürəkkəb bir ifadədə hansı əməliyyatın birinci yerinə yetiriləcəyini müəyyən edir.
-`w = x + y * z;`
-Burada, `*` operatorunun üstünlüyü `+`-dan daha yüksək olduğu üçün, əvvəlcə `y` və `z` vurulur. `=` isə ən aşağı üstünlüyə malik olduğu üçün ən sonda icra olunur. Üstünlüyü dəyişmək üçün mötərizələrdən `()` istifadə olunur:
-`w = (x + y) * z;`
+JavaScript lazım gəldikdə **tip çevirməsi** edir.
 
----
+**Nümunə:**
 
-**4.7.5 Operatorların Assosiativliyi (Associativity)**
-Eyni üstünlüyə malik operatorlar bir ifadədə ardıcıl gəldikdə, onların hansı istiqamətdə icra olunacağını bildirir.
-* **Soldan-sağa (Left-to-Right):** Əksər operatorlar belədir. Məsələn:
-  `w = x - y - z;` eynidir `w = ((x - y) - z);`
-* **Sağdan-sola (Right-to-Left):** Mənimsətmə (`=`), qüvvət (`**`) və şərt (`?:`) operatorları belədir. Məsələn:
-  `w = x = y = z;` eynidir `w = (x = (y = z));`
+```js
+"3" * "5"  // nəticə: 15 (string → number çevrilir)
+"10" + 2   // nəticə: "102" (number → string çevrilir)
+```
 
 ---
 
-**4.7.6 Qiymətləndirmə Ardıcıllığı (Order of Evaluation)**
-Bu, ən vacib qaydalardan biridir. Operatorların üstünlüyündən və assosiativliyindən asılı olmayaraq, JavaScript ifadələri **həmişə ciddi şəkildə soldan-sağa** qiymətləndirir.
+### ⚠️ **4.7.3 Yan Təsirlər (Side Effects)**
 
-`w = x + y * z;` ifadəsində:
-1. Əvvəlcə `w` dəyişəni tapılır.
-2. Sonra `x` dəyişəni tapılır.
-3. Sonra `y` dəyişəni tapılır.
-4. Sonra `z` dəyişəni tapılır.
-5. Yalnız bundan sonra, üstünlüyə görə, `y * z` əməliyyatı aparılır.
-6. Sonra toplama, sonda isə mənimsətmə icra olunur.
+Bəzi operatorlar **dəyərlə yanaşı proqramın vəziyyətini dəyişir.**
+
+| Operator | Təsiri                      | Nümunə            |
+| -------- | --------------------------- | ----------------- |
+| `=`      | Dəyişənə dəyər mənimsədir   | `x = 10`          |
+| `++/--`  | Dəyişəni artırır/azaldır    | `count++`         |
+| `delete` | Obyektdən xüsusiyyəti silir | `delete obj.name` |
+
+---
+
+### ⚖️ **4.7.4 Operator Üstünlüyü (Precedence)**
+
+Əməliyyatların hansı sıra ilə icra olunacağını müəyyən edir.
+
+**Nümunə:**
+
+```js
+w = x + y * z;
+// əvvəl: y * z → sonra: x + (y * z) → sonda: mənimsətmə
+```
+
+**Dəyişdirmək üçün:**
+
+```js
+w = (x + y) * z;
+```
+
+---
+
+### 🔄 **4.7.5 Assosiativlik (Associativity)**
+
+**Eyni səviyyəli operatorlar** üçün icra istiqaməti.
+
+| İstiqamət   | Operatorlar              | Nümunə                      |
+| ----------- | ------------------------ | --------------------------- |
+| Soldan-sağa | `+`, `-`, `*`, `/` və s. | `a - b - c` → `(a - b) - c` |
+| Sağdan-sola | `=`, `**`, `?:`          | `a = b = 5` → `a = (b = 5)` |
+
+---
+
+### 🧭 **4.7.6 Qiymətləndirmə Ardıcıllığı (Evaluation Order)**
+
+JavaScript ifadələri **həmişə soldan-sağa** oxuyur. Bu, **operantların oxunma ardıcıllığıdır**, **icra sırası deyil!**
+
+**Nümunə:**
+
+```js
+w = x + y * z;
+```
+
+| Addım | Əməliyyat              |
+| ----- | ---------------------- |
+| 1     | `w` tapılır            |
+| 2     | `x` tapılır            |
+| 3     | `y`, sonra `z` tapılır |
+| 4     | `y * z` hesablanır     |
+| 5     | `x + (y * z)`          |
+| 6     | `w = nəticə`           |
+
 
 ***
 ### 4.8 Riyazi (Arithmetic) İfadəlar 🧮
@@ -317,20 +369,20 @@ Bu operatorlar (toplama istisna olmaqla), operandları rəqəm deyilsə, onları
 
 ---
 #### 4.8.1 Toplama Operatoru (+): "Toplama yoxsa Birləşdirmə?"
-`+` operatorunun iki fərqli rolu var: rəqəmləri toplayır və sətirləri (strings) birləşdirir (concatenation).
+`+` operatorunun iki fərqli rolu var: rəqəmləri toplayır və stringləri (strings) birləşdirir (concatenation).
 
-**Qızıl Qayda:** Əgər operandlardan **heç olmasa biri sətirdirsə**, həmişə **birləşdirmə (concatenation)** baş verir. Yalnız hər iki tərəf rəqəmə çevrilə biləndə **toplama (addition)** olur.
+**Qızıl Qayda:** Əgər operandlardan heç olmasa biri **string** olarsa, həmişə **birləşdirmə (concatenation)** baş verir. Yalnız hər iki tərəf rəqəmə çevrilə biləndə **toplama (addition)** olur.
 
 **Geniş Nümunə Cədvəli:**
 ```javascript
 // Rəqəm + Rəqəm = Toplama
 1 + 2;            // ✅ 3
 
-// Sətir + Sətir = Birləşdirmə
-"salam" + " " + "dünya"; // ✅ "salam dünya"
+// string + string = Birləşdirmə
+"Salam" + " " + "Ayan"; // ✅ "Salam Ayan"
 "1" + "2";        // ✅ "12"
 
-// Sətir + Rəqəm = Birləşdirmə (rəqəm sətirə çevrilir)
+// string + Rəqəm = Birləşdirmə (rəqəm stringə çevrilir)
 "1" + 2;            // ✅ "12"
 1 + "2";            // ✅ "12"
 
@@ -338,13 +390,13 @@ Bu operatorlar (toplama istisna olmaqla), operandları rəqəm deyilsə, onları
 true + true;        // ✅ 2        (true 1-ə çevrilir)
 2 + null;           // ✅ 2        (null 0-a çevrilir)
 2 + undefined;      // ✅ NaN      (undefined rəqəmə çevrilmir)
-1 + {};             // ✅ "1[object Object]" (obyekt sətirə çevrilir)
+1 + {};             // ✅ "1[object Object]" (obyekt stringə çevrilir)
 ```
 **Assosiativlik (Associativity) Nümunəsi:**
 `+` operatoru soldan-sağa işlədiyi üçün, mötərizələr nəticəni tamamilə dəyişə bilər.
 ```javascript
-1 + 2 + " kor siçan"; // Əvvəlcə 1+2 hesablanır -> 3, sonra birləşir -> "3 kor siçan"
-1 + (2 + " kor siçan"); // Əvvəlcə 2 " kor siçan"-la birləşir -> "2 kor siçan", sonra 1 birləşir -> "12 kor siçan"
+1 + 2 + " javascript"; // "3 javascript"
+1 + (2 + " javascript"); // "12 javascript"
 ```
 
 ---
@@ -360,30 +412,108 @@ Bu operatorlar tək bir operand üzərində işləyir.
 * **Post-inkrement (`i++`):** Əvvəlcə **köhnə dəyəri** qaytarır, sonra dəyəri artırır.
 
 **Geniş Nümunə:**
-```javascript
-let pre_i = 10;
-let pre_j = ++pre_i; // pre_i olur 11, pre_j-ə 11 mənimsədilir
-console.log(`Pre-increment: i=${pre_i}, j=${pre_j}`); // ✅ i=11, j=11
 
-let post_i = 10;
-let post_j = post_i++; // post_j-ə köhnə dəyər olan 10 mənimsədilir, sonra post_i 11 olur
-console.log(`Post-increment: i=${post_i}, j=${post_j}`); // ✅ i=11, j=10
+#### ▶️ Pre-increment (`++a`)
+
+```js
+let a = 10;
+let b = ++a;  // Əvvəlcə a = 11 olur, sonra b = 11 təyin olunur
+console.log(a); // 11
+console.log(b); // 11
 ```
----
-#### 4.8.3 Bitlər Üzərində Əməliyyat Operatorları (Bitwise Operators) 👾
-Bu, aşağı səviyyəli (low-level) bir mövzudur və əksər veb proqramçılar bunlardan demək olar ki, heç vaxt istifadə etmir. Bu operatorlar rəqəmlərin özləri ilə deyil, onların ikilik (binary) say sistemindəki bitləri ilə işləyir.
 
-Əsas bitwise operatorları bunlardır:
-* **`&` (Bitwise AND):** Hər iki operandda eyni mövqedəki bit `1` olarsa, nəticədə də həmin bit `1` olur.
-* **`|` (Bitwise OR):** Operandlardan birində müvafiq bit `1` olarsa, nəticədə də `1` olur.
-* **`^` (Bitwise XOR):** Yalnız operandlardan birində (hər ikisində eyni anda yox) müvafiq bit `1` olarsa, nəticədə `1` olur.
-* **`~` (Bitwise NOT):** Bütün bitləri tərsinə çevirir (`0`-ları `1`, `1`-ləri `0`).
-* **`<<` (Left Shift)**, **`>>` (Sign-propagating Right Shift)**, **`>>>` (Zero-fill Right Shift)**: Bitləri sola və ya sağa sürüşdürür.
+#### ▶️ Post-increment (`x++`)
 
-Bunlar adətən icazələr (permissions) kimi bayraq (flag) sistemləri qurmaqda və ya aşağı səviyyəli qrafika və ya cihaz proqramlaşdırmasında istifadə olunur.
-
+```js
+let x = 10;
+let y = x++;  // Əvvəlcə y = 10 təyin olunur, sonra x = 11 olur
+console.log(x); // 11
+console.log(y); // 10
+```
 
 ***
+
+### 4.8.3 Bitlər Üzərində Əməliyyat Operatorları (Bitwise Operators)
+
+Bu, aşağı səviyyəli (low-level) bir mövzudur və əksər veb proqramçılar bunlardan demək olar ki, heç vaxt istifadə etmir. Bu operatorlar rəqəmlərin özləri ilə deyil, onların **ikilik (binary) say sistemindəki bitləri** ilə birbaşa işləyir.
+
+Əməliyyatdan əvvəl JavaScript rəqəmləri 32-bitlik tam ədədə çevirir və əməliyyatı bitlər üzərində apardıqdan sonra nəticəni yenidən standart rəqəm formatına qaytarır.
+
+---
+
+#### Əsas Bitwise Operatorları və Nümunələr
+
+* **`&` (Bitwise AND)**
+    Hər iki operandda eyni mövqedəki bit `1` olarsa, nəticədə də həmin bit `1` olur. Əks halda `0` olur.
+
+    ```js
+    // 5 & 1
+    // İkilik sistemdə:
+    // 0101  (5)
+    // 0001  (1)
+    // ----
+    // 0001  (Nəticə: 1)
+    console.log(5 & 1); // 1
+    ```
+
+* **`|` (Bitwise OR)**
+    Operandlardan ən az birində müvafiq mövqedəki bit `1` olarsa, nəticədə də həmin bit `1` olur.
+
+    ```js
+    // 5 | 1
+    // İkilik sistemdə:
+    // 0101  (5)
+    // 0001  (1)
+    // ----
+    // 0101  (Nəticə: 5)
+    console.log(5 | 1); // 5
+    ```
+
+* **`^` (Bitwise XOR)**
+    Yalnız operandlardan birində (hər ikisində eyni anda yox) müvafiq bit `1` olarsa, nəticədə `1` olur. Bitlər eyni olarsa (`0` və `0`, `1` və `1`), nəticə `0` olur.
+
+    ```js
+    // 5 ^ 1
+    // İkilik sistemdə:
+    // 0101  (5)
+    // 0001  (1)
+    // ----
+    // 0100  (Nəticə: 4)
+    console.log(5 ^ 1); // 4
+    ```
+
+* **`~` (Bitwise NOT)**
+    Tək operand qəbul edir və bütün bitləri tərsinə çevirir (`0`-ları `1`, `1`-ləri `0`). Nəticə `-(x + 1)` düsturu ilə hesablanır.
+
+    ```js
+    // ~5
+    // İkilik sistemdə 5: ...00000101
+    // Tərsi:             ...11111010 (bu isə -6 deməkdir)
+    console.log(~5); // -6
+    ```
+
+* **`<<` (Left Shift)**
+    Bitləri müəyyən sayda sola sürüşdürür. Hər bir sürüşdürmə ədədi `2`-yə vurmağa bərabərdir.
+
+    ```js
+    // 5 << 1  (5-in bitlərini 1 dəfə sola sürüşdür)
+    // 0101 (5) -> 1010 (10)
+    console.log(5 << 1); // 10
+    ```
+
+* **`>>` (Sign-Propagating Right Shift)**
+    Bitləri sağa sürüşdürür. Ədədin işarəsini (`+` və ya `-`) qoruyur. Hər bir sürüşdürmə tam ədədi `2`-yə bölməyə bərabərdir.
+
+    ```js
+    // 5 >> 1  (5-in bitlərini 1 dəfə sağa sürüşdür)
+    // 0101 (5) -> 0010 (2)
+    console.log(5 >> 1); // 2
+    ```
+
+#### İstifadə Sahələri
+Bu operatorlar adətən icazələr (permissions) kimi bayraq (flag) sistemləri qurmaqda, aşağı səviyyəli qrafika, cihaz proqramlaşdırması və ya performansın kritik olduğu alqoritmlərdə istifadə olunur.
+
+---
 ### 4.9 Nisbət Operatorları (Relational Expressions)
 Bu bölmədə, iki dəyər arasında bir əlaqəni (bərabərlik, kiçiklik, mənsubiyyət) yoxlayan və nəticə olaraq `true` və ya `false` qaytaran operatorları araşdıracağıq. Bu ifadələr, proqramın axışını idarə edən `if`, `while` kimi strukturların təməlini təşkil edir.
 
@@ -396,37 +526,65 @@ JavaScript-də bərabərliyi yoxlamaq üçün iki fərqli operator var. Onların
 * **`===` (Ciddi Bərabərlik / Strict Equality):** İki dəyərin həm **tipini**, həm də **dəyərini** müqayisə edir. Heç bir tip çevrilməsi aparmır. Əgər tiplər fərqlidirsə, dərhal `false` qaytarır.
 * **`==` (Mücərrəd Bərabərlik / Loose Equality):** Dəyərləri müqayisə etməzdən əvvəl, onların tiplərini eyniləşdirmək üçün arxa planda **tip çevrilmələri** aparır. Bu, çox vaxt gözlənilməz nəticələr verir.
 
-**Geniş Nümunə: `==` tələləri**
+**Geniş Nümunə**  
 Aşağıdakı cədvəl, `==` operatorunun nə qədər çaşdırıcı ola biləcəyini göstərir.
 
 | İfadə (Expression)  | `==` Nəticəsi | `===` Nəticəsi | İzah                                             |
 | ------------------- | :-----------: | :------------: | ------------------------------------------------ |
-| `5 == "5"`          | ✅ `true`     | ❌ `false`     | `==` sətiri rəqəmə çevirir                       |
+| `5 == "5"`          | ✅ `true`     | ❌ `false`     | `==` stringi rəqəmə çevirir                       |
 | `0 == false`        | ✅ `true`     | ❌ `false`     | `==` boolean-ı rəqəmə çevirir (false -> 0)       |
 | `null == undefined` | ✅ `true`     | ❌ `false`     | `==` üçün xüsusi bir istisnadır                  |
 | `[] == 0`           | ✅ `true`     | ❌ `false`     | Boş massiv primitivə çevrildikdə 0 olur          |
-| `"" == 0`           | ✅ `true`     | ❌ `false`     | Boş sətir rəqəm 0-a çevrilir                     |
-| `" \t\r\n" == 0`    | ✅ `true`     | ❌ `false`     | Yalnız boşluqlardan ibarət sətir də 0-a çevrilir |
+| `"" == 0`           | ✅ `true`     | ❌ `false`     | Boş string rəqəm 0-a çevrilir                     |
 
-**Obyektlərin Müqayisəsi:** `==` və `===` operatorlarının hər ikisi obyektləri **istinadla (by reference)** müqayisə edir, dəyərlə yox. Yəni, iki fərqli obyektin daxilindəki xüsusiyyətlər eyni olsa belə, onlar bərabər sayılmır.
+---
+
+### **Obyektlərin Müqayisəsi Nümunəsi:**
+
+```js
+const obj1 = { name: "Rəşad" };
+const obj2 = { name: "Rəşad" };
+
+console.log(obj1 === obj2); // ❌ false
+console.log(obj1 == obj2);  // ❌ false
+```
+
+**İzah:** `obj1` və `obj2` ayrı-ayrı obyektlərdir, **eyni dəyərlərə malik olsalar belə**, JavaScript onları **eyni deyil** hesab edir, çünki **fərqli yaddaş ünvanlarında yerləşirlər**.
+
+---
+
+### **Eyni İstinadlı Müqayisə (True olan hal):**
+
+```js
+const obj3 = { name: "Ayan" };
+const obj4 = obj3;
+
+console.log(obj3 === obj4); // ✅ true
+```
+
+**İzah:** Burada `obj4` dəyişəni, `obj3` obyektinə istinad edir — yəni **eyni obyektə baxırlar**, buna görə də bərabərdirlər.
 
 ---
 #### 4.9.2 Müqayisə Operatorları (`<`, `>`, `<=`, `>=`)
 Bu operatorlar iki dəyərin sıralamasını (ədədi və ya əlifba sırası) yoxlayır.
 
 **Əsas İşləmə Məntiqi:**
-* Əgər hər iki operand sətirdirsə, müqayisə əlifba sırası ilə (Unicode kodlarına görə) aparılır.
+* Əgər hər iki operand stringdirsə, müqayisə əlifba sırası ilə (Unicode kodlarına görə) aparılır.
 * Əks halda, hər iki operand rəqəmə çevrilir və rəqəmsal müqayisə aparılır.
 
-**Geniş Nümunə Cədvəli:**
-| İfadə        | Nəticə     | İzah                                                       |
-| ------------ | :---------: | ---------------------------------------------------------- |
-| `10 < 3`     | ❌ `false`  | Rəqəm müqayisəsi                                           |
-| `"10" < "3"` | ✅ `true`   | Sətir müqayisəsi ("1" simvolu "3"-dən əvvəl gəlir)          |
-| `"2" < 10`   | ✅ `true`   | Rəqəm müqayisəsi ("2" sətiri rəqəm 2-yə çevrilir)         |
-| `"Z" < "a"`  | ✅ `true`   | Sətir müqayisəsi (böyük hərflərin Unicode kodu kiçiklərdən əvvəl gəlir) |
+```js
+console.log(10 < 3);        
+// false → 10, 3-dən kiçik deyil (rəqəm müqayisəsi)
 
-**Doğru sıralama üçün** `String.prototype.localeCompare()` və ya `Intl.Collator` istifadə etmək daha düzgündür.
+console.log("10" < "3");    
+// true → "1" simvolu "3"-dən əvvəl gəlir (string müqayisəsi)
+
+console.log("2" < 10);      
+// true → "2" stringini 2 rəqəminə çevrilir → 2 < 10
+
+console.log("Z" < "a");     
+// true → Unicode'a görə "Z" < "a" (böyük hərflər kiçiklərdən əvvəl gəlir)
+```
 
 ---
 #### 4.9.3 `in` Operatoru
@@ -446,29 +604,46 @@ console.log("toString" in user); // ✅ true (çünki Object.prototype-dan miras
 console.log("1" in numbers);     // ✅ true (indeks 1 var)
 console.log(3 in numbers);       // ❌ false (indeks 3 yoxdur)
 ```
+---
+
+### 4.9.4 `instanceof` Operatoru nədir?
+
+`instanceof` operatoru yoxlayır ki, **bir obyekt müəyyən bir `class`-dan (növdən)** yaranıbmı?
+
+### Sintaksis:
+
+```js
+obyekt instanceof Constructor
+```
+
+Bu ifadə **`true`** qaytarırsa, deməli obyekt həmin `class`-dan yaranıb.
 
 ---
-#### 4.9.4 `instanceof` Operatoru
-`instanceof` operatoru, bir obyektin müəyyən bir sinifin (class) nüsxəsi (instance) olub-olmadığını yoxlayır.
 
-**Necə İşləyir?**
-`o instanceof C` ifadəsi, arxa planda `C.prototype` obyektinin `o` obyektinin prototip zəncirində mövcud olub-olmadığını yoxlayır.
+### Misallar:
 
-**Nümunə:**
-```javascript
+```js
 const d = new Date();
 const a = [];
 
-console.log(d instanceof Date);    // ✅ true
-console.log(d instanceof Object);  // ✅ true (bütün obyektlər Object-dən törəyir)
-console.log(d instanceof Array);   // ❌ false
+console.log(d instanceof Date);     // true → d, Date obyektidir
+console.log(d instanceof Object);   // true → bütün obyektlər Object-dən yaranır
+console.log(d instanceof Array);    // false → d, array deyil
 
-console.log(a instanceof Array);   // ✅ true
-console.log(a instanceof Object);  // ✅ true (bütün massivlər obyektdir)
+console.log(a instanceof Array);    // true → a bir masssivdir
+console.log(a instanceof Object);   // true → massivlər də obyekt sayılır
 ```
-***
+
+* `instanceof`, obyektin hansı **class**-a və ya **növə** aid olduğunu yoxlayır.
+* Bütün obyektlər əsasda **`Object`**-dən yaranır.
+* Massivlər (`Array`) də əslində bir **Object**-dir.
+
+---
+
 ### 4.10 Məntiqi İfadəlar (Logical Expressions)
-Bu bölmədə, adətən müqayisə operatorları ilə birlikdə istifadə edilən `&&` (VƏ), `||` (VƏ YA), və `!` (DEYİL) məntiqi operatorlarını araşdıracağıq. Bu operatorları tam anlamaq üçün, JavaScript-dəki **"doğru-bənzər" (truthy)** və **"yalan-bənzər" (falsy)** anlayışlarını xatırlamaq vacibdir. (Xatırlatma: `false`, `null`, `undefined`, `0`, `NaN`, və `""` falsy-dir, qalan hər şey isə truthy).
+Bu bölmədə, adətən müqayisə operatorları ilə birlikdə istifadə edilən `&&` (VƏ), `||` (VƏ YA), və `!` (DEYİL) məntiqi operatorlarını araşdıracağıq. Bu operatorları tam anlamaq üçün, JavaScript-dəki **"doğru" (truthy)** və **"yanlış" (falsy)** anlayışlarını xatırlamaq vacibdir.  
+
+Xatırlatma: `false`, `null`, `undefined`, `0`, `NaN`, və `""` falsy-dir, qalan hər şey isə truthy
 
 ---
 #### 4.10.1 Məntiqi VƏ (Logical AND `&&`)
@@ -521,7 +696,6 @@ welcome("Ayan"); // ✅ Xoş gəldin, Ayan!
 welcome("");     // ✅ Xoş gəldin, Qonaq! (çünki "" falsy-dir)
 welcome(null);   // ✅ Xoş gəldin, Qonaq!
 ```
-❗️ **Qeyd:** Bu üsul, `0` rəqəmi keçərli bir dəyər olduqda problem yarada bilər, çünki `0` da `falsy`-dir. Müasir JavaScript-də bu problemi həll etmək üçün **nullish coalescing operator (`??`)** istifadə olunur.
 
 ---
 #### 4.10.3 Məntiqi DEYİL (Logical NOT `!`)
@@ -534,7 +708,9 @@ welcome(null);   // ✅ Xoş gəldin, Qonaq!
 **Nümunə: `!!` ilə boolean-a çevirmək**
 İkiqat NOT (`!!`) istənilən bir dəyəri onun həqiqi boolean ekvivalentinə çevirmək üçün istifadə olunan bir "trick"-dir.
 ```javascript
-console.log(!!"Salam");   // ✅ true (sətir truthy-dir)
+console.log(!true);       // ✅ false
+console.log(!false);      // ✅ true
+console.log(!!"Salam");   // ✅ true (string truthy-dir)
 console.log(!!0);         // ✅ false (0 falsy-dir)
 console.log(!!{});        // ✅ true (boş obyekt truthy-dir)
 console.log(!!undefined); // ✅ false (undefined falsy-dir)
@@ -552,6 +728,7 @@ x = y = z = 10; // Əvvəlcə z=10, sonra y=z, sonra x=y olur.
 
 console.log(x, y, z); // ✅ 10 10 10
 ```
+---
 #### 4.11.1 Əməliyyatla Birlikdə Mənimsətmə (`+=`, `-=`, `*=`, ...)
 Bu operatorlar, bir riyazi əməliyyatı və mənimsətməni birləşdirən qısayollardır.
 `a += b;` ifadəsi, `a = a + b;` ifadəsinə demək olar ki, ekvivalentdir.
@@ -572,113 +749,178 @@ score *= 2; // score = score * 2;
 console.log(score); // ✅ 20
 ```
 
-***
-### 4.12 Qiymətləndirmə İfadələri (Evaluation Expressions)
-JavaScript-in ən güclü, lakin eyni zamanda ən təhlükəli xüsusiyyətlərindən biri, sətir (string) şəklində olan JavaScript kodunu icra etmək bacarığıdır. Bu, qlobal **`eval()`** funksiyası ilə edilir.
+---
 
-❗️ **ÇOX VACİB TƏHLÜKƏSİZLİK XƏBƏRDARLIĞI** ☢️
-`eval()` çox güclü, amma bir o qədər də **təhlükəlidir**.
-* **Təhlükəsizlik Boşluğu:** İstifadəçidən və ya hər hansı bir kənar mənbədən gələn mətni heç vaxt `eval()`-a ötürməyin. Bu, hakerin sizin saytınızda istənilən kodu işə salmasına imkan verən böyük bir təhlükəsizlik boşluğudur.
-* **Performans:** JavaScript mühərrikləri (engines), içində `eval()` olan funksiyaları optimallaşdıra bilmir, bu da kodun sürətini kəskin şəkildə aşağı salır.
-**Nəticə:** Peşəkar kodda demək olar ki, **heç vaxt** istifadə edilmir. Ondan uzaq durun!
+### 🚨 4.12 Qiymətləndirmə İfadələri – `eval()` funksiyası
 
-#### `eval()`-ın növləri: Lokal və Qlobal
-`eval()`-ın davranışı, onun necə çağırılmasından asılıdır:
-* **Direkt `eval()` (Direct Eval):** `eval(...)` şəklində birbaşa çağırıldıqda, o, **hazırkı skopda (local scope)** işləyir. Yəni, olduğu funksiyanın daxili dəyişənlərini oxuya və dəyişə bilər.
-* **Qeyri-direkt `eval()` (Indirect Eval):** Əgər `eval` başqa bir adla (məsələn, `let myEval = eval; myEval(...)`) çağırılarsa, o, **qlobal skopda (global scope)** işləyir və lokal dəyişənlərə toxuna bilmir.
+JavaScript-də `eval()` funksiyası vasitəsilə `string` şəklində olan kodu birbaşa icra etmək mümkündür. Bu çox güclü, amma **çox təhlükəli** bir vasitədir.
 
-**Nümunə:**
-```javascript
-const geval = eval; // `eval`-a başqa ad veririk (qeyri-direkt çağırış üçün)
+---
 
-let x = "qlobal", y = "qlobal";
+### ⚠️ Niyə `eval()` təhlükəlidir?
 
-function localEval() {
-  let x = "lokal"; // Lokal `x`
-  eval("x += ' (dəyişdirildi)';"); // Direkt `eval` lokal `x`-i dəyişir
-  return x;
+* **Təhlükəsizlik Riski:** İstifadəçidən gələn yazıları `eval()`-a ötürmək **hakerlərin sizin kodunuzu manipulyasiya etməsinə** şərait yarada bilər.
+* **Sürət Problemi:** `eval()` olan kodlar JavaScript mühərriki tərəfindən **optimallaşdırılmır**, bu isə kodu **yavaşdırır**.
+* **Nəticə:** Müasir proqramlaşdırmada `eval()` istifadə **tövsiyə olunmur**. Əvəzində `JSON.parse()`, `Function` constructor-u kimi alternativlərə baxmaq daha təhlükəsizdir.
+
+---
+
+### 📌 `eval()` necə işləyir?
+
+`eval()`-ın işləmə davranışı onun necə çağırıldığına görə dəyişir:
+
+| Növ               | İstifadə                   | Əhatə dairəsi (Scope)               |
+| ----------------- | -------------------------- | ----------------------------------- |
+| **Direct eval**   | `eval("x = 5")`            | Cari funksiyanın içində işləyir     |
+| **Indirect eval** | `let e = eval; e("x = 5")` | Qlobal dəyişkənlər üzərində işləyir |
+
+---
+
+### ✅ Aydın Nümunə:
+
+```js
+const indirectEval = eval; // qeyri-direkt çağırış
+
+let city = "Baku";
+let country = "Azerbaijan";
+
+function testDirectEval() {
+  let city = "Bilasuvar";
+  eval("city = city + ' City';"); // ⚠️ Lokal `city` dəyişir
+  return city;
 }
 
-function globalEval() {
-  let y = "lokal"; // Lokal `y`
-  geval("y += ' (dəyişdirildi)';"); // Qeyri-direkt `eval` qlobal `y`-i dəyişir
-  return y; // Lokal `y` dəyişməz qalır
+function testIndirectEval() {
+  let country = "Turkey";
+  indirectEval("country = country + ' Republic';"); // ⚠️ Qlobal `country` dəyişir
+  return country;
 }
 
-console.log("Lokal eval nəticəsi:", localEval(), " | Qlobal x:", x);
-// ✅ Nəticə: Lokal eval nəticəsi: lokal (dəyişdirildi)  | Qlobal x: qlobal
+console.log("Direct eval nəticəsi:", testDirectEval());  // 🔸 Bilasuvar City
+console.log("Qlobal city:", city);                       // 🔸 Baku (dəyişməyib)
 
-console.log("Qlobal eval nəticəsi:", globalEval(), "| Qlobal y:", y);
-// ✅ Nəticə: Qlobal eval nəticəsi: lokal | Qlobal y: qlobal (dəyişdirildi)
+console.log("Indirect eval nəticəsi:", testIndirectEval()); // 🔸 Turkey (dəyişməyib)
+console.log("Qlobal country:", country);                   // 🔸 Azerbaijan Republic ✅ dəyişdi
+
 ```
+
+
+* `eval()` əgər birbaşa yazılırsa → **lokal dəyişkənləri dəyişə bilər**
+* `eval()` əgər dolayı yolla çağırılırsa → **yalnız qlobal dəyişkənləri dəyişir**
 
 ---
 ### 4.13 Müxtəlif Operatorlar (Miscellaneous Operators)
 Bu bölmədə, digər kateqoriyalara tam sığmayan, amma çox faydalı olan bir neçə operatorla tanış olacağıq.
 
-#### 4.13.1 Şərt Operatoru (Conditional Operator `?:`)
-Bu, JavaScript-dəki yeganə **ternar (üç operandlı)** operatordur. `if/else` ifadəsinin qısa bir alternativdir.
-**Sintaksis:** `şərt ? dəyər_eğer_doğrudursa : dəyər_eğer_yanlışdırsa`
+---
+
+### ✅ 4.13.1 **Şərt Operatoru `?:` (Ternary Operator)**
+
+Bu, `if/else`-in qısa yazılış formasıdır. Üç hissədən ibarətdir:
+**`şərt ? doğrudursa : yalnışdırsa`**
 
 ```javascript
-const age = 20;
-const status = (age >= 18) ? "Yetkin" : "Yeniyetmə";
-console.log(status); // ✅ "Yetkin"
+const score = 85;
+const result = score >= 50 ? "Keçdi ✅" : "Kəsildi ❌";
+console.log(result); // ✅ Keçdi
 ```
 
-#### 4.13.2 "Nullish Coalescing" Operatoru (`??`)
-Bu ES2020 ilə gələn çox faydalı bir operatordur. `||` (OR) operatoruna bənzəyir, amma ondan daha ağıllıdır.
-* `||` sol tərəfdəki dəyər **falsy** (`0`, `""`, `false`, `null`, `undefined`) olduqda sağ tərəfi qaytarır.
-* `??` isə yalnız sol tərəfdəki dəyər **`null` və ya `undefined`** olduqda sağ tərəfi qaytarır.
+---
 
-Bu, `0` və ya boş sətir `""` kimi dəyərlərin keçərli olduğu hallarda çox vacibdir.
+### ✅ 4.13.2 **Nullish Coalescing Operatoru `??`**
 
-**Nümunə:**
+Yalnız **`null`** və ya **`undefined`** olduqda sağdakı dəyəri verir.
+`||`-dan fərqi odur ki, `0`, `false`, `""` kimi dəyərləri **atlamır**.
+
 ```javascript
-let userSettings = { volume: 0, theme: "" };
+const settings = {
+  brightness: 0,
+  theme: ""
+};
 
-// `||` ilə səhv nəticə
-const volume_or = userSettings.volume || 50; // volume 0 (falsy) olduğu üçün 50 götürülür
-console.log("`||` ilə səs səviyyəsi:", volume_or); // ❌ 50
+console.log(settings.brightness || 100); // ❌ 0 "falsy" olduğuna görə: 100
+console.log(settings.brightness ?? 100); // ✅ 0 (null/undefined deyil)
 
-// `??` ilə düzgün nəticə
-const volume_qq = userSettings.volume ?? 50; // volume 0, null və ya undefined olmadığı üçün elə 0 götürülür
-console.log("`??` ilə səs səviyyəsi:", volume_qq); // ✅ 0
+console.log(settings.theme || "dark");   // ❌ "" olduğu üçün: "dark"
+console.log(settings.theme ?? "dark");   // ✅ "" qorunur, çünki null deyil
 ```
 
-#### 4.13.3 `typeof` Operatoru
-Bir dəyərin tipini sətir (string) olaraq qaytaran unar bir operatordur.
+---
+
+### ✅ 4.13.3 **`typeof` Operatoru**
+
+Dəyərin tipini string olaraq qaytarır:
+
 ```javascript
-console.log(typeof 42);          // ✅ "number"
-console.log(typeof "salam");     // ✅ "string"
-console.log(typeof true);        // ✅ "boolean"
-console.log(typeof {});          // ✅ "object"
-console.log(typeof []);          // ✅ "object" (massivlər də obyektdir)
-console.log(typeof function(){}); // ✅ "function"
-console.log(typeof undefined);   // ✅ "undefined"
-console.log(typeof null);        // ❗️ "object" (bu, JavaScript-in tarixi bir səhvidir)
+console.log(typeof 100);            // "number"
+console.log(typeof "JS");           // "string"
+console.log(typeof true);           // "boolean"
+console.log(typeof [1, 2, 3]);      // "object" ❗️ (array də object-dir)
+console.log(typeof { key: "val" }); // "object"
+console.log(typeof function() {});  // "function"
+console.log(typeof null);           // "object" ❗️ (köhnə JS səhvidir)
+console.log(typeof undefined);      // "undefined"
 ```
-#### 4.13.4 `delete` Operatoru
-Bir obyektin xüsusiyyətini və ya bir massivin elementini silir.
-```javascript
-const person = { name: "Ayan", city: "Bakı" };
-delete person.city;
-console.log(person); // ✅ { name: "Ayan" }
 
-const numbers = [10, 20, 30];
-delete numbers[1];
-console.log(numbers); // ✅ [10, <1 empty item>, 30] (elementi silir, amma massivin uzunluğu dəyişmir)
+---
+
+### ✅ 4.13.4 **`delete` Operatoru**
+
+Obyektin xüsusiyyətini və ya massivin elementini silir.
+
+```javascript
+const user = { name: "Rəşad", age: 23 };
+delete user.age;
+console.log(user); // ✅ { name: "Rəşad" }
+
+const fruits = ["alma", "armud", "banan"];
+delete fruits[1];
+console.log(fruits); // ✅ [ 'alma', <1 empty item>, 'banan' ]
 ```
-#### 4.13.5 `await` Operatoru
-Bu operator, `Promise`-lərlə işləmək üçün nəzərdə tutulub və asinxron funksiyaların (`async function`) daxilində istifadə olunur. Fəsil 13-də detallı şəkildə araşdırdıq.
 
-#### 4.13.6 `void` Operatoru
-Nadir hallarda istifadə olunur. Öz operandını qiymətləndirir, amma nəticəsini nəzərə almadan həmişə `undefined` qaytarır. `void 0` yazılışı, `undefined`-ın dəyişdirilmə ehtimalı olan köhnə mühitlərdə, 100% `undefined` dəyəri almaq üçün istifadə olunurdu.
+---
 
-#### 4.13.7 Vergül Operatoru (`,`)
-Vergül operatoru, sol tərəfindəki ifadəni qiymətləndirir, nəticəsini atır, sonra sağ tərəfdəki ifadəni qiymətləndirir və onun nəticəsini qaytarır. Yeganə praktik istifadə yeri, `for` dövründə birdən çox dəyişəni eyni anda idarə etməkdir.
+### ✅ 4.13.5 **`await` Operatoru**
+
+Asinxron əməliyyatları gözləmək üçün `async` funksiyalarda istifadə olunur.
+
 ```javascript
-for (let i = 0, j = 10; i <= 10; i++, j--) {
-  console.log(`i=${i}, j=${j}`);
+async function getData() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts/1");
+  const data = await response.json();
+  console.log(data.title);
 }
+getData();
+```
+
+---
+
+### ✅ 4.13.6 **`void` Operatoru**
+
+Dəyəri qiymətləndirir, amma **daima `undefined`** qaytarır.
+
+```javascript
+console.log(void 123); // ✅ undefined
+
+// İstifadə sahəsi (məsələn, linkə klik zamanı yönləndirmə etməmək):
+<a href="javascript:void(0)">Heç nə etmə</a>
+```
+
+---
+
+### ✅ 4.13.7 **Vergül Operatoru `,`**
+
+Birdən çox ifadəni bir yerdə yazmağa imkan verir – soldakılar işləyir, **sağdakının nəticəsi qaytarılır**.
+
+```javascript
+let x = (1 + 2, 3 + 4);
+console.log(x); // ✅ 7 (yalnız sonuncunun nəticəsi qaytarılır)
+
+for (let i = 0, j = 5; i < j; i++, j--) {
+  console.log(`i = ${i}, j = ${j}`);
+}
+// ✅ i = 0, j = 5
+// ✅ i = 1, j = 4
+// ✅ i = 2, j = 3
+
 ```
