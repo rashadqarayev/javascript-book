@@ -1,4 +1,4 @@
-### Fəsil 4. İfadəlar və Operatorlar (Expressions and Operators)
+### Fəsil 4. İfadələr və Operatorlar (Expressions and Operators)
 Bu fəsil, JavaScript-in təməl quruluş daşları olan **ifadələri (expressions)** və onların qurulmasında istifadə olunan **operatorları** əhatə edir.
 
 **İfadə (Expression)** – JavaScript-də qiymətləndirilərək (evaluated) bir **dəyər (value)** yaradan istənilən kod parçasıdır. Sadə bir rəqəm, bir dəyişənin adı və ya daha mürəkkəb riyazi əməliyyatlar – bunların hamısı bir ifadədir. Operatorlar isə, bu sadə ifadələri birləşdirərək daha mürəkkəb ifadələr yaratmaq üçün istifadə olunur. Məsələn, `x` və `y` birer ifadədirsə, `x * y` da onların hasilini yaradan yeni bir ifadədir.
