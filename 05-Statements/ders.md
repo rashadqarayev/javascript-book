@@ -1,30 +1,28 @@
 # Fəsil 5: Statements (Əmrlər)
 
-### Giriş
+4-cü fəsildə **ifadələr** JavaScript-də “ifadələr” (phrases) kimi izah olunurdu. Eyni analogiya ilə, **statements** isə JavaScript-in “cümlələri” və ya **əmrləri** kimidir.
 
-4-cü fəsildə **ifadələr** JavaScript-də "ifadələr" (phrases) kimi izah olunurdu. Eyni analoji ilə, **statements** isə JavaScript-in "cümlələri" və ya **əmrləri** kimidir.
+İngilis dilində cümlələr nöqtə (`.`) ilə bitdiyi kimi, JavaScript-də də əmrlər **nöqtəli vergül** (`;`) ilə tamamlanır.
 
-İngilis dilində cümlələr nöqtə (`.`) ilə bitdiyi kimi, JavaScript-də də əmrlər **nöqtəli vergül** (`;`) ilə tamamlanır (bax: §2.6).
-
-> 🔸 **İfadələr** bir **dəyər** qaytarır,
-> 🔸 **Əmrlər (statements)** isə **nə isə baş verir** deyə icra olunur.
+**İfadələr** bir **dəyər** qaytarır,
+**Əmrlər (statements)** isə **hər hansı bir hadisəni** həyata keçirir.
 
 ---
 
 ### İfadə Əmrləri (Expression Statements)
 
-İfadələr bəzən **side effect** (yəni nəticə olaraq proqram vəziyyətində dəyişiklik) yaradır. Məsələn:
+Bəzi ifadələr **side effect** (yəni proqramın vəziyyətində dəyişiklik) yaradır. Məsələn:
 
 * dəyişənə qiymət təyin etmək (assignment)
 * funksiyanı çağırmaq (function invocation)
 
-Bu tip ifadələr təkbaşına da istifadə oluna bilər və onlar bu zaman **expression statement** adlanır.
+Bu cür ifadələr təkbaşına istifadə olunduqda, onlar **ifadə əmri** (expression statement) adlanır.
 
 ---
 
 ### Təyinat Əmrləri (Declaration Statements)
 
-Bunlar yeni dəyişən və ya funksiya **təqdim etmək (declare)** üçün istifadə olunur:
+Bu əmrlər yeni dəyişən və ya funksiya **elan etmək (declare)** üçün istifadə olunur:
 
 * `let`, `const`, `var` — dəyişənlər üçün
 * `function` — funksiyalar üçün
@@ -33,32 +31,32 @@ Bunlar yeni dəyişən və ya funksiya **təqdim etmək (declare)** üçün isti
 
 ### JavaScript Proqramları Necə Qurulur?
 
-JavaScript proqramları sadəcə **əmrlər ardıcıllığıdır**.
+JavaScript proqramları sadəcə **əmrlər ardıcıllığından** ibarətdir.
 
-1. Proqramda əmrlər **yuxarıdan aşağıya**, **sıra ilə** icra olunur.
-2. Amma bu sıranı dəyişmək də mümkündür — bunun üçün müxtəlif **idarəetmə strukturları (control structures)** mövcuddur:
+1. Proqramdakı əmrlər **yuxarıdan aşağıya doğru**, **sıra ilə** icra olunur.
+2. Lakin bu ardıcıllığı dəyişmək də mümkündür — bunun üçün müxtəlif **idarəetmə strukturları (control structures)** mövcuddur.
 
 ---
 
-### Əsas İdarəetmə Struktur Tipi Əmrlər:
+### Əsas İdarəetmə Struktur Tipli Əmrlər:
 
 #### ✅ Şərti Əmrlər (Conditionals)
 
-Belə əmrlər ifadənin qiymətindən asılı olaraq digər əmrləri **icra edir** və ya **ötürür**:
+Bu tip əmrlər ifadənin nəticəsindən asılı olaraq digər əmrləri ya **icra edir**, ya da **ötürür**:
 
 * `if`
 * `switch`
 
 #### 🔁 Dövr Əmrləri (Loops)
 
-Digər əmrləri **dəfələrlə təkrarlamaq** üçün istifadə olunur:
+Əmrləri **dəfələrlə təkrarlamaq** üçün istifadə olunur:
 
 * `while`
 * `for`
 
-#### 🔀 Tullanma Əmrləri (Jumps)
+#### 🔀 Tullanma Əmrləri (Jump Statements)
 
-Proqramın axarını başqa yerə **tullanmaq** üçün istifadə olunur:
+Proqramın axışını başqa istiqamətə **yönləndirmək** üçün istifadə olunur:
 
 * `break`
 * `return`
@@ -66,18 +64,14 @@ Proqramın axarını başqa yerə **tullanmaq** üçün istifadə olunur:
 
 ---
 
-### Nəticə
-
-Bu fəsildə JavaScript-in müxtəlif əmrləri və onların sintaksisi öyrədiləcək. Fəsilin sonunda yerləşən **Cədvəl 5-1** bu əmrlərin sintaksisini ümumiləşdirəcək.
-
 > JavaScript proqramı — sadəcə **əmrlər ardıcıllığıdır**.
-> Hər bir əmr **nöqtəli vergül** (`;`) ilə ayrılır.
+> Hər bir əmr **nöqtəli vergül** (`;`) ilə tamamlanır.
 > Bu əmrləri öyrəndikdən sonra **öz JavaScript proqramlarını yazmağa** başlaya bilərsən!
 
 ---
 ## 5.1 İfadə Əmrləri (Expression Statements)
 
-JavaScript-də ən sadə əmrlər — **side effect** yaradan **ifadələr**dir. Bu cür əmrlər haqqında **4-cü fəsildə** də məlumat verilmişdi.
+JavaScript-də ən sadə əmrlər — **side effect** (yan təsir) yaradan **ifadələr**dir. Bu cür ifadələr haqqında **4-cü fəsildə** də məlumat verilmişdi.
 
 ---
 
@@ -100,7 +94,7 @@ Bu operatorlar da əslində **təyinat əməli** kimi davranır: dəyişənin d�
 counter++;
 ```
 
-Bu əmrlər **sadəcə qiymət qaytarmır**, həm də **dəyişəni dəyişir** — yəni **side effect** yaradır.
+Bu əmrlər **sadəcə dəyər qaytarmır**, həm də **dəyişəni dəyişdirir** — yəni **yan təsir (side effect)** yaradır.
 
 ---
 
@@ -123,18 +117,18 @@ Funksiya çağırışları da çox vaxt **ifadə əmri** kimi istifadə olunur, 
 
 ```js
 console.log(debugMessage);
-displaySpinner(); // Tutaq ki, bu funksiya web tətbiqdə spinner göstərir
+displaySpinner(); // Tutaq ki, bu funksiya veb tətbiqdə yükləmə ikonunu göstərir
 ```
 
-Bu funksiyalar bir **dəyər** qaytara bilər, amma əsas məqsəd **nə isə baş verməsi** — side effect yaratmaqdır.
+Bu funksiyalar bir **dəyər** qaytara bilər, lakin əsas məqsəd — **hər hansı bir hadisənin baş verməsi**, yəni **yan təsir yaratmaqdır**.
 
 Əgər bir funksiyanın heç bir yan təsiri yoxdursa, onu sadəcə çağırmaq **mənasızdır**:
 
 ```js
-Math.cos(x); // Mənasız, çünki nəticə istifadə olunmur
+Math.cos(x); // Mənasızdır, çünki nəticə istifadə olunmur
 ```
 
-Amma həmin nəticəni **saxlayıb istifadə edəcəksənsə**, bu zaman mənalı olur:
+Lakin həmin nəticə **saxlanılır və istifadə olunursa**, bu zaman **mənalı** olur:
 
 ```js
 cx = Math.cos(x); // Dəyəri dəyişəndə saxladıq
@@ -142,19 +136,13 @@ cx = Math.cos(x); // Dəyəri dəyişəndə saxladıq
 
 ---
 
-### ℹ️ Qeyd
-
-Bütün bu nümunələrdəki kod sətrləri **nöqtəli vergül** (`;`) ilə bitir. JavaScript-də bu — ifadənin bitdiyini göstərir və çox vacibdir.
-
----
-
 ## 5.2 Mürəkkəb və Boş Əmrlər (Compound and Empty Statements)
 
 ### 🧱 Mürəkkəb Əmr (Compound Statement)
 
-**Virgül operatoru** (§4.13.7) bir neçə ifadəni birləşdirib tək ifadə etdiyinə bənzər şəkildə, **əmr blokları** bir neçə əmri birləşdirərək **tək əmr** kimi istifadə olunmasına imkan verir.
+**Vergül operatoru** bir neçə ifadəni birləşdirib tək ifadəyə çevirdiyi kimi, **əmr blokları** da bir neçə əmri birləşdirərək **tək əmr** kimi istifadə olunmasına imkan verir.
 
-Əmr bloku sadəcə **sağ və sol qıvrım mötərizələr** (`{}`) arasında yazılmış **əmr ardıcıllığıdır**. Məsələn:
+Əmr bloku — sadəcə **süslü mötərizələr** (`{}`) içində yazılmış **əmrlər ardıcıllığıdır**. Məsələn:
 
 ```js
 {
@@ -164,30 +152,30 @@ Bütün bu nümunələrdəki kod sətrləri **nöqtəli vergül** (`;`) ilə bit
 }
 ```
 
-Bu blok — tək bir əmr kimi istənilən yerdə istifadə oluna bilər.
+Bu blok — **tək bir əmr** kimi istənilən yerdə istifadə oluna bilər.
 
 ---
 
-#### 📌 Nəzərə alın:
+#### 📌 Nəzərə Alın:
 
 1. **Blok özü nöqtəli vergüllə bitmir.**
-   — Blokdakı daxili əmrlər `;` ilə bitir, amma `block` özü `;` ilə bitmir.
+   — Blok daxilindəki əmrlər `;` ilə bitir, lakin `block` özü `;` ilə tamamlanmır.
 
 2. **Daxili sətrlər adətən indent (boşluq) ilə yazılır.**
-   — Bu məcburi deyil, amma kodun oxunaqlığını artırır.
+   — Bu məcburi olmasa da, kodun oxunaqlığını artırır.
 
 ---
 
 ### 🔁 Alt-Əmrlər (Substatements)
 
-Bir çox JavaScript əmrinin **daxilində başqa bir əmr** olur. Məsələn, `while` dövrü yalnız **bir alt-əmr** tələb edir:
+Bir çox JavaScript əmrinin daxilində başqa bir əmr olur. Məsələn, `while` dövrü yalnız **bir alt-əmr** tələb edir:
 
 ```js
 while (i < 10)
   i++;
 ```
 
-Amma əgər biz **bir neçə əmr** yazmaq istəyiriksə, onları `{}` içində birləşdirərək **mürəkkəb əmr** halına salırıq:
+Lakin əgər **bir neçə əmr** yazmaq lazımdırsa, onları `{}` içində birləşdirib **mürəkkəb əmr** halına salmaq lazımdır:
 
 ```js
 while (i < 10) {
@@ -200,13 +188,13 @@ while (i < 10) {
 
 ### ❌ Boş Əmr (Empty Statement)
 
-**Boş əmr** — heç bir əmrin olmadığı, sadəcə `;` olan bir sətrdir:
+**Boş əmr** — heç bir əmrin olmadığı, yalnız `;` işarəsindən ibarət bir sətrdir:
 
 ```js
 ;
 ```
 
-Bu, JavaScript tərəfindən **sadəcə ötülür** — heç bir iş görülmür. Nadir hallarda, bəzi dövrlərdə faydalı ola bilər.
+Bu, JavaScript tərəfindən **ötürülür** — yəni heç bir iş görmür. Nadir hallarda, bəzi dövrlərdə bu faydalı ola bilər.
 
 #### Məsələn:
 
@@ -214,39 +202,40 @@ Bu, JavaScript tərəfindən **sadəcə ötülür** — heç bir iş görülmür
 for (let i = 0; i < a.length; a[i++] = 0) ;
 ```
 
-Bu `for` dövründə bütün iş `a[i++] = 0` ifadəsində görülür, dövr bədəninə ehtiyac yoxdur. Amma JavaScript `for` sintaksisində mütləq bir bədən (statement) tələb etdiyi üçün, **boş əmr** (`;`) istifadə olunur.
+Bu `for` dövründə bütün iş `a[i++] = 0` ifadəsində görülür. Dövr bədəninə ehtiyac yoxdur. Lakin JavaScript sintaksisində dövr üçün mütləq bir **bədən (statement)** tələb olunduğuna görə, **boş əmr** (`;`) istifadə olunur.
 
 ---
 
 ### ⚠️ Diqqət: Səhvən Yazılmış `;`
 
-Aşağıdakı kimi **səhvən qoyulmuş nöqtəli vergül** kodun işləmə məntiqini poza bilər:
+Aşağıdakı kimi **səhvən qoyulmuş nöqtəli vergül** kodun məntiqini poza bilər:
 
 ```js
 if ((a === 0) || (b === 0)); // Ups! Bu sətr heç nə etmir
-  o = null; // bu sətr isə HƏR ZAMAN icra olunur
+  o = null; // Bu isə HƏR ZAMAN icra olunur
 ```
 
-Yəni `if` heç bir şərt yerinə yetirmir, `o = null` isə həmişə işləyir.
+Yəni `if` heç bir şərti yoxlamır, `o = null` isə istisnasız şəkildə işləyir.
 
-#### ✅ Doğru istifadə üçün belə şərh əlavə etmək yaxşıdır:
+#### ✅ Doğru istifadə üçün belə şərh yazmaq məqsədəuyğundur:
 
 ```js
 for (let i = 0; i < a.length; a[i++] = 0) /* boş dövr */ ;
 ```
 
-Bu cür **şərh (comment)**, məqsədli olaraq boş əmr yazdığını göstərir.
+Belə **şərhlər (comment)** kod oxuyan şəxsə göstərir ki, boş əmr məqsədli şəkildə yazılıb
 
 ---
 
 ## 5.3 Şərt Əmrləri (Conditionals)
 
-Şərt əmrləri (`conditional statements`) — bir ifadənin dəyərinə əsasən digər əmrləri **icra edir və ya ötürür**.
-Bu əmrlər **kodun qərar nöqtələridir** və bəzən **"budaqlanma (branching)"** əmrləri də adlanır.
+**Şərt əmrləri** (`conditional statements`) — ifadənin nəticəsinə əsasən müəyyən əmrləri **icra edən və ya ötürən** strukturlardır.
 
-JavaScript interpretatorunun kod boyunca getdiyini təsəvvür etsək, **şərt əmrləri** onun hansı yolla gedəcəyini müəyyən edir.
+Bu cür əmrlər proqramın **qərar vermə nöqtələridir** və bəzən **"budaqlanma (branching)"** əmrləri adlanır.
 
-Bu bölmədə aşağıdakılar izah edilir:
+JavaScript interpretatorunun kod boyunca addım-addım getdiyini təsəvvür etsək, **şərt əmrləri** onun **hansı istiqamətə dönəcəyini** müəyyənləşdirir.
+
+Bu bölmədə aşağıdakılar izah olunur:
 
 * Əsas `if/else` əmri
 * Daha mürəkkəb və çoxyollu `switch` əmri
@@ -255,19 +244,19 @@ Bu bölmədə aşağıdakılar izah edilir:
 
 ## 5.3.1 `if`
 
-`if` — JavaScript-də ən əsas **nəzarət əmri**dir. Onun köməyi ilə **şərtə əsasən əmrlərin icrası** həyata keçirilir.
+`if` — JavaScript-dəki ən sadə və əsas **nəzarət strukturudur**. Onun vasitəsilə **şərtə əsasən əmrlərin icrası** təmin olunur.
 
-### `if` Əmri – 1-ci Forma:
+---
+
+### `if` Əmri — Sadə Forma:
 
 ```js
 if (şərt)
-  əməl
+  əməl;
 ```
 
-* Əgər `şərt` doğru (`truthy`) dəyər qaytarırsa, **əməl icra olunur**.
-* Əgər `şərt` yanlış (`falsy`) dəyər qaytarırsa, **əməl ötürülür**.
-
-📌 **Truthiness və Falsiness** haqqında ətraflı məlumat üçün bax: §3.4
+* Əgər `şərt` **doğru** (`truthy`) dəyər qaytarırsa, `əməl` **icra olunur**.
+* Əgər `şərt` **yanlış** (`falsy`) dəyər qaytarırsa, `əməl` **ötürülür**.
 
 #### Nümunə:
 
@@ -276,22 +265,22 @@ if (username == null)
   username = "John Doe";
 ```
 
-və ya daha qısa şəkildə:
+və ya daha qısa formada:
 
 ```js
 if (!username)
   username = "John Doe";
 ```
 
-Bu, `username` dəyişəni `null`, `undefined`, `false`, `0`, `""`, və ya `NaN` olduqda yeni dəyər təyin edir.
+Bu kod `username` dəyişəni boş, `null`, `undefined`, `0`, `""` və ya `NaN` olduqda yeni dəyər verir.
 
-📌 **Qeyd**: `if` şərtindəki mötərizə **məcburidir**.
+📌 **Qeyd:** `if` şərtindəki `()` mötərizələri **məcburidir**.
 
 ---
 
-### `if` Bloklu Forma:
+### `if` — Bloklu Forma:
 
-Əgər `if`-dən sonra **bir neçə əmri birlikdə** yazmaq istəyirsənsə, `{}` istifadə et:
+Bir neçə əmri birlikdə `if` şərti daxilində icra etmək istəyirsənsə, əmrləri `{}` içində yazmalısan:
 
 ```js
 if (!address) {
@@ -302,13 +291,13 @@ if (!address) {
 
 ---
 
-### `if/else` Əmri – 2-ci Forma:
+### `if/else` Əmri — İkiyollu Forma:
 
 ```js
 if (şərt)
-  əməl1
+  əməl1;
 else
-  əməl2
+  əməl2;
 ```
 
 * Əgər `şərt` doğrudursa → `əməl1` icra olunur.
@@ -323,70 +312,95 @@ else
   console.log(`${n} yeni mesajınız var.`);
 ```
 
----
-
-## ❗ `else` ilə iç-içə (`nested if`) diqqətli olun
-
-Aşağıdakı kodda `else` hansı `if`-ə aiddir? Diqqətlə baxın:
-
-```js
-i = j = 1;
-k = 2;
-
-if (i === j)
-  if (j === k)
-    console.log("i = k");
-  else
-    console.log("i j-yə bərabər deyil"); // PROBLEM!
-```
-
-Burada `else`, **ən yaxın `if`**-ə aiddir (`j === k`). Amma indent (boşluq) bizə başqa cür göstərə bilər.
-
-JavaScript bunu belə başa düşür:
-
-```js
-if (i === j) {
-  if (j === k)
-    console.log("i = k");
-  else
-    console.log("i j-yə bərabər deyil"); // Həqiqətdə bu işləyir!
-}
-```
 
 ---
 
-### ✅ Düzgün yazılış (qarışıqlığın qarşısını almaq üçün):
+### ⚠️ `else` ilə iç-içə `if` — Başqa bir nümunə
 
 ```js
-if (i === j) {
-  if (j === k) {
-    console.log("i = k");
+let user = "admin";
+let isLoggedIn = false;
+
+if (user === "admin")
+  if (isLoggedIn)
+    console.log("Panelə giriş icazəsi verildi");
+  else
+    console.log("Zəhmət olmasa daxil olun"); // Problem haradadır?
+```
+
+Bu kodda `else` yalnız `isLoggedIn` şərtinə aiddir. Yəni `user === "admin"` olsa da, `isLoggedIn` false-dursa, "Zəhmət olmasa daxil olun" mesajı görünəcək.
+Amma sənin niyyətin belə ola bilərdi ki: **əgər user "admin" deyilsə**, bu mesaj yazılsın.
+
+---
+
+### ✅ Qarışıqlığın qarşısını alan düzgün forma:
+
+```js
+if (user === "admin") {
+  if (isLoggedIn) {
+    console.log("Panelə giriş icazəsi verildi");
   }
 } else {
-  console.log("i j-yə bərabər deyil");
+  console.log("Zəhmət olmasa daxil olun");
 }
 ```
 
-💡 **Qayda**: JavaScript-də `else` **həmişə ən yaxın `if`** ilə bağlı olur.
+İndi isə `else` artıq `user === "admin"` şərtinə aiddir, və bu daha aydındır.
 
 ---
 
-## 💡 TÖVSİYƏ
-
-Bir çox proqramçı **həmişə** `if`, `else`, `while` və digər strukturlarda əmrləri `{}` ilə yazır, **tək sətr olsa belə**:
+Əksər proqramçılar **həmişə** `if`, `else`, `while` və digər strukturlarda əmrləri **blok şəklində** (`{}` içində) yazır, hətta **tək sətrlik** olsa belə:
 
 ```js
 if (x > 0) {
-  console.log("müsbət");
+  console.log("Müsbət ədəddir.");
 }
 ```
 
 Bu vərdiş:
 
 * Qarışıqlığın qarşısını alır
-* Kodu oxumağı və dəyişməyi asanlaşdırır
+* Kodun oxunuşunu və dəyişdirilməsini asanlaşdırır
 
-📌 Qeyd: Bu kitabda kodlar daha yığcam görünsün deyə bu qayda bəzən pozulur.
+---
+
+## 🔍 Əlavə Nümunələr
+
+#### 1. Sadə `if/else`:
+
+```js
+let age = 20;
+
+if (age >= 18) {
+  console.log("Siz yetkinsiniz.");
+} else {
+  console.log("Siz hələ uşaqsınız.");
+}
+```
+
+#### 2. İki `if` ard-arda:
+
+```js
+if (score > 90) {
+  console.log("Əla!");
+}
+
+if (score < 50) {
+  console.log("Zəif nəticə.");
+}
+```
+
+#### 3. `if` ilə `return`:
+
+```js
+function checkPassword(pw) {
+  if (pw.length < 6) {
+    return "Şifrə çox qısadır!";
+  }
+
+  return "Qəbul edildi.";
+}
+```
 
 ---
 
@@ -408,36 +422,29 @@ Bu, birdən çox `if/else` blokunun **ardıcıl və səliqəli yazılmasıdır**
 
 ---
 
-### `else if` Sintaksisi:
+### 🎯 Nümunə: İstifadəçinin Yaşına görə Kateqoriya
 
 ```js
-if (n === 1) {
-  // Kod bloku #1
-} else if (n === 2) {
-  // Kod bloku #2
-} else if (n === 3) {
-  // Kod bloku #3
+let age = 25;
+
+if (age < 13) {
+  console.log("Uşaq");
+} else if (age >= 13 && age < 18) {
+  console.log("Yeniyetmə");
+} else if (age >= 18 && age < 65) {
+  console.log("Böyüklər");
 } else {
-  // Əgər yuxarıdakılar heç biri ödənmirsə — Kod bloku #4
+  console.log("Pensiya yaşında");
 }
 ```
 
-Bu yazılışda:
+**İzah:**
 
-* Əgər `n === 1` → blok #1 işləyir
-* Əgər `n === 2` → blok #2
-* Əgər `n === 3` → blok #3
-* Əks halda → blok #4 (default vəziyyət)
+* `age < 13` olduqda: "Uşaq"
+* `13–17` yaş aralığında: "Yeniyetmə"
+* `18–64` yaş aralığında: "Böyüklər"
+* `65+` olduqda: "Pensiya yaşında"
 
----
-
-### Niyə `else if` istifadə etməliyik?
-
-Bu yazılış:
-
-* Daha **səliqəli** görünür
-* Daha **oxunaqlıdır**
-* Yazmaq və anlamaq **daha asandır**
 
 ---
 
@@ -446,19 +453,20 @@ Bu yazılış:
 Aşağıdakı kod **tam sintaktik olaraq doğrudur**, amma **oxumaq çətindir**:
 
 ```js
-if (n === 1) {
-  // Kod #1
+if (user.role === "admin") {
+  // Admin üçün panel
 } else {
-  if (n === 2) {
-    // Kod #2
+  if (user.role === "editor") {
+    // Editor üçün alətlər
   } else {
-    if (n === 3) {
-      // Kod #3
+    if (user.role === "viewer") {
+      // Yalnız baxış rejimi
     } else {
-      // Kod #4
+      // Naməlum istifadəçi rolu
     }
   }
 }
+
 ```
 
 Bu, **tam iç-içə (`nested`)** formada yazılıb. Amma `else if` ilə bu eyni kod **daha aydın** şəkildə ifadə olunur.
@@ -473,22 +481,21 @@ Bu, **tam iç-içə (`nested`)** formada yazılıb. Amma `else if` ilə bu eyni 
 
 ---
 
-## 5.3.3 `switch` – çoxyönlü şərtləri daha təmiz yazmaq üçün
+## 5.3.3 `switch` – çoxyönlü şərtləri daha rahat yazmaq üçün
 
 Bir `if` ifadəsi proqramın axışında budaqlanma (yəni şaxələnmə) yaradır və `else if` istifadə etməklə çoxyönlü budaqlanmalar etmək mümkündür.
 
-Ancaq belə bir çoxyönlü `if` blokları hər dəfə **eyni ifadəni** yoxlayırsa (məsələn: `n === 1`, `n === 2`, və s.), bu zaman həmin ifadənin **dəfələrlə təkrar yoxlanılması** artıq olur. Həm oxunaqlılığı azaldır, həm də performans baxımından səmərəsiz olur.
+Ancaq belə bir çoxyönlü `if` blokları hər dəfə **eyni ifadəni** yoxlayırsa (məsələn: `age === 24`, `age === 25`, və s.), bu zaman həmin ifadənin **dəfələrlə təkrar yoxlanılması** artıq olur. Həm oxunaqlılığı azaldır, həm də performans baxımından səmərəsiz olur.
 
 ---
 
-### 🧠 Nə vaxt `switch` istifadə etməliyik?
+### Nə vaxt `switch` istifadə etməliyik?
 
 Əgər **bütün şərtlər eyni ifadəyə (deyək ki, `n`) əsaslanırsa**, `switch` daha münasibdir. Çünki `switch` həmin ifadəni **yalnız bir dəfə** hesablayır və sonra onun nəticəsini `case`-lərlə müqayisə edir.
 
 ---
 
-## 📘 `switch` ifadəsinin sintaksisi:
-
+##  `switch` ifadəsinin sintaksisi:
 ```js
 switch (ifadə) {
   case dəyər1:
@@ -507,41 +514,46 @@ switch (ifadə) {
 
 ---
 
-## 🧪 Əvvəlki `if/else` nümunəsi ilə müqayisə:
+##  Əvvəlki `if/else` nümunəsi ilə müqayisə:
 
 Əgər `if/else` belədirsə:
 
 ```js
-if (n === 1) {
-  // kod bloku #1
-} else if (n === 2) {
-  // kod bloku #2
-} else if (n === 3) {
-  // kod bloku #3
+let age = 25;
+
+if (age < 13) {
+  console.log("Uşaq");
+} else if (age >= 13 && age < 18) {
+  console.log("Yeniyetmə");
+} else if (age >= 18 && age < 65) {
+  console.log("Böyüklər");
 } else {
-  // kod bloku #4 (default)
+  console.log("Pensiya yaşında");
 }
 ```
 
 Bu `switch` ilə belə yazılır:
 
 ```js
-switch (n) {
-  case 1:
-    // kod bloku #1
+let age = 25;
+
+switch (age) {
+  case 5:
+    console.log("5 yaşındasınız");
     break;
-  case 2:
-    // kod bloku #2
+  case 10:
+    console.log("10 yaşındasınız");
     break;
-  case 3:
-    // kod bloku #3
+  case 18:
+    console.log("18 yaşınız tamamdır, səs vermək hüququnuz var");
+    break;
+  case 25:
+    console.log("25 yaşınız var, artıq gənc yetkinlikdə sayılırsınız");
     break;
   default:
-    // kod bloku #4
-    break;
+    console.log("Yaşınız xüsusi kateqoriyaya aid deyil");
 }
 ```
-
 ---
 
 ## ⚠️ `break` sözü niyə vacibdir?
@@ -580,49 +592,12 @@ Yalnız uyğun `case` icra olunur və sonra `switch`-dən çıxılır.
 
 ---
 
-## 👨‍💻 Daha realist nümunə:
-
-```js
-function convert(x) {
-  switch (typeof x) {
-    case "number":
-      // Əgər x rəqəmdir, onu 16-lıq formada qaytar
-      return x.toString(16);
-
-    case "string":
-      // Əgər x sətirdirsə, onu dırnaqlara al
-      return '"' + x + '"';
-
-    default:
-      // Digər hallarda String() ilə çevrilir
-      return String(x);
-  }
-}
-```
-
-Bu funksiyada `switch` dəyişənin tipinə (`typeof x`) əsaslanır və müxtəlif çevirmələr edir:
-
-* Əgər ədəddirsə → 16-lıq formada (hex)
-* Əgər sətrdirsə → qoşa dırnaqla əhatələnir
-* Əgər başqa tipdirsə → `String()` funksiyası ilə çevrilir
-
----
 
 ## 💡 Əlavə qeydlər:
 
 * Ən çox hallarda `case`-dən sonra **sabit dəyərlər** yazılır (`1`, `"string"`, və s.).
 * Amma ECMAScript standartına görə, `case`-dən sonra **istənilən ifadə** (expression) yaza bilərsən.
-* Uyğunluq **`===` ilə yoxlanılır**, `==` yox! Yəni **tip uyğunluğu da olmalıdır**.
-* Hər `switch` işlədildikdə **bütün `case` ifadələri hesablanmır**. Ona görə də, `case` ifadələrində **funksiya çağırışı və ya yan təsirli (side-effect) kodlar** yazmaq tövsiyə edilmir.
-
----
-
-## 🎯 Nəticə:
-
-* `switch` – çoxsaylı şərtlər üçün **daha təmiz və performanslı** yanaşmadır.
-* `break` və `default` düzgün istifadə olunmalıdır.
-* `case` uyğunluğu `===` ilə aparılır, ona görə də **dəqiq uyğunluq** vacibdir.
-* Yan təsiri olmayan sabit `case` ifadələri daha təhlükəsizdir.
+* Uyğunluq **`===` ilə yoxlanılır**, `==` yox! Yəni **tip uyğunluğu da olmalıdır**..
 
 ---
 
@@ -639,9 +614,6 @@ JavaScript-də beş növ dövr var:
 * `for/of` (və onun `for/await` variantı)
 * `for/in`
 
-Aşağıdakı alt-bölmələrdə hər birinin izahı veriləcək.
-
-> Dövrlərin ən çox istifadə olunduğu yerlərdən biri massivlərin elementləri üzərində təkrarlama (iteration) aparmaqdır. Bu mövzu §7.6-da ətraflı şəkildə izah olunub və Array sinfinin xüsusi dövr metodları da orada təsvir edilir.
 
 ---
 
@@ -653,21 +625,15 @@ Sintaksisi belədir:
 
 ```js
 while (ifadə)
-  ifadə_bloqu
+  ifadə_bloku
 ```
 
 **İzahı:**
 
 * Tərcüməçi (interpreter) əvvəlcə `ifadə`-ni qiymətləndirir (yəni yoxlayır).
-* Əgər `ifadə` **false** (yalan) dəyər verirsə, o zaman dövrün bədəni (`ifadə_bloqu`) atlanır və proqram növbəti əmri icra edir.
+* Əgər `ifadə` **false** (yalan) dəyər verirsə, o zaman dövrün bədəni (`ifadə_bloku`) atlanır və proqram növbəti əmri icra edir.
 * Əgər `ifadə` **true** (doğru) dəyər verirsə, dövr bədəni icra olunur və sonra yenidən `ifadə` yoxlanılır.
 * Bu proses `ifadə` yalan dəyər alana qədər davam edir.
-
----
-
-### Sonsuz dövr
-
-Məsələn, `while(true)` sonsuz dövr yaradır, yəni proqram o anda dayanmır.
 
 ---
 
@@ -685,7 +651,7 @@ Adətən, hər dövrün sonunda bir və ya bir neçə dəyişən dəyişir. Bu d
 let count = 0;
 
 while (count < 10) {
-  console.log(count);
+  console.log(count); // 0 1 2 3 4 5 7 8 9 
   count++;
 }
 ```
@@ -715,7 +681,7 @@ Sintaksisi:
 
 ```js
 do
-  ifadə_bloqu
+  ifadə_bloku
 while (ifadə);
 ```
 
@@ -728,27 +694,25 @@ while (ifadə);
 
 ---
 
-### Misal: massiv elementlərini çap etmək
+Nümunə:
 
 ```js
-function printArray(a) {
-  let len = a.length, i = 0;
-  
-  if (len === 0) {
-    console.log("Empty Array");
-  } else {
-    do {
-      console.log(a[i]);
-    } while (++i < len);
-  }
-}
+let number;
+
+do {
+  number = prompt("0-dan böyük bir rəqəm daxil edin:");
+} while (number <= 0);
+
+console.log("Daxil etdiyiniz rəqəm:", number);
 ```
+
+---
 
 **İzah:**
 
-* Əgər massiv boşdursa (`len === 0`), "Empty Array" mesajı çap olunur.
-* Əks halda, `do` bloku ən azı bir dəfə işə düşür və massiv elementləri tək-tək çap olunur.
-* Dövr `i` dəyişəni massiv uzunluğundan kiçik olduğu müddətcə davam edir.
+* `do` bloku ən azı bir dəfə işə düşür, istifadəçidən rəqəm soruşur.
+* `while` şərti yoxlayır: rəqəm 0-dan kiçik və ya bərabərdirsə, sorğu yenidən verilir.
+* Beləliklə, düzgün rəqəm daxil edilənə qədər dövr təkrarlanır.
 
 ---
 
@@ -790,7 +754,7 @@ for (initialization; condition; increment) {
 ```js
 // for loop
 for (let i = 0; i < 10; i++) {
-  console.log(i);
+  console.log(i); // 0 1 2 3 4 5 6 7 8 9
 }
 
 // eyni while loop
@@ -846,11 +810,13 @@ Burada **initialization** yoxdur, sadəcə **condition** və **increment** var.
 
 ## 5.4.4 for/of
 
-**for/of** — ES6-da əlavə olunmuş yeni dövr (loop) operatorudur. Bu, `for` açar sözü ilə başlayır, amma adi `for` dövründən tam fərqlidir. Həmçinin, əvvəlki `for/in` dövründən də fərqlidir (onun izahı §5.4.5-dədir).
+**for/of** — ES6-da əlavə olunmuş yeni dövr (loop) operatorudur. Bu, `for` açar sözü ilə başlayır, amma adi `for` dövründən tam fərqlidir. Həmçinin, əvvəlki `for/in` dövründən də fərqlidir.
+
+---
 
 ### Iterable Objects (İterasiya oluna bilən obyektlər)
 
-`for/of` dövrü **iterable** obyektlərlə işləyir. İterable obyektlər barədə daha geniş izahı 12-ci fəsildə verəcəyik, amma sadəcə bilmək kifayətdir ki, **arrays (massivlər), strings (sətirlər), sets və maps** iterable hesab olunur. Bu obyektlər elementlər ardıcıllığını təmsil edir və `for/of` ilə üzərində addım-addım hərəkət etmək mümkündür.
+`for/of` dövrü **iterable** obyektlərlə işləyir. İterable obyektlər barədə daha geniş izahı 12-ci fəsildə verəcəyik, amma sadəcə bilmək kifayətdir ki, **arrays (massivlər), stringlər, sets və maps** iterable hesab olunur. Bu obyektlər elementlər ardıcıllığını təmsil edir və `for/of` ilə üzərində addım-addım hərəkət etmək mümkündür.
 
 ### `for/of` nümunəsi:
 
@@ -884,7 +850,7 @@ for (let variable of iterableObject) {
 
 ---
 
-## FOR/OF İlə OBJECT-lər
+## For/of İlə obyektlər
 
 * **Object-lər iterable deyil**, ona görə `for/of`-u adi object-lə istifadə etmək **TypeError** verir.
 
@@ -900,24 +866,23 @@ for(let element of o) { // TypeError!
 * `for/in` istifadə et (bölmə §5.4.5-də).
 * Yoxsa, `for/of` ilə `Object.keys()` və ya `Object.values()` metodlarından istifadə et.
 
-```js
-let o = { x: 1, y: 2, z: 3 };
-for(let k of Object.keys(o)) {
-  console.log(k); // x, y, z
-}
-
-let sum = 0;
-for(let v of Object.values(o)) {
-  sum += v;
-}
-console.log(sum); // 6
-```
-
-* `Object.entries()` isə həm açarları, həm də dəyərləri almağa imkan verir, destructuring ilə rahat işləyir:
 
 ```js
-for(let [k, v] of Object.entries(o)) {
-  console.log(k, v); // x 1, y 2, z 3
+let obj = { a: 10, b: 20 };
+
+// Açarları almaq:
+for (let key of Object.keys(obj)) {
+  console.log(key); // a, b
+}
+
+// Dəyərləri almaq:
+for (let value of Object.values(obj)) {
+  console.log(value); // 10, 20
+}
+
+// Hər açar və dəyəri birlikdə almaq:
+for (let [key, value] of Object.entries(obj)) {
+  console.log(key, value); // a 10, b 20
 }
 ```
 
@@ -928,11 +893,21 @@ for(let [k, v] of Object.entries(o)) {
 * String-lər ES6-da hər bir simvol üzrə iterasiya olunur.
 
 ```js
-let frequency = {};
-for(let letter of "mississippi") {
-  frequency[letter] = (frequency[letter] || 0) + 1;
+let word = "hello";
+for (let char of word) {
+  console.log(char);
 }
-console.log(frequency); // {m:1, i:4, s:4, p:2}
+// h, e, l, l, o
+
+let count = 0;
+for (let letter of "apple") {
+  if (letter === "p") {
+    count++;
+  }
+}
+console.log(`'p' hərfi sayı: ${count}`); // 'p' hərfi sayı: 2
+
+
 ```
 
 * Qeyd: String-lər UTF-16 simvoluna deyil, Unicode codepoint-lərə görə iterasiya olunur.
@@ -944,22 +919,28 @@ console.log(frequency); // {m:1, i:4, s:4, p:2}
 * **Set** və **Map** sinifləri də iterable-dir.
 
 ```js
-let wordSet = new Set("Na na na na na na na na Batman!".split(" "));
-for(let word of wordSet) {
-  console.log(word);
+let colors = new Set(["red", "green", "blue"]);
+
+for (let color of colors) {
+  console.log(color);
 }
+// red, green, blue
 ```
 
 * **Map** iterasiya ediləndə hər iterasiyada açar/dəyər cütü qaytarılır:
 
 ```js
-let m = new Map([[1, "one"]]);
-for(let [key, value] of m) {
-  console.log(key, value); // 1 "one"
-}
-```
+let capitals = new Map([
+  ["Azerbaijan", "Baku"],
+  ["Turkey", "Ankara"]
+]);
 
----
+for (let [country, capital] of capitals) {
+  console.log(country, capital);
+}
+// Azerbaijan Baku
+// Turkey Ankara
+```
 
 ## ASYNCHRONOUS ITERATION WITH FOR/AWAIT
 
@@ -967,18 +948,26 @@ for(let [key, value] of m) {
 * `for/await` **async iterator** ilə işləyir, yəni asinxron məlumat axını üçün istifadə olunur.
 
 ```js
-async function printStream(stream) {
-  for await (let chunk of stream) {
-    console.log(chunk);
+async function demo() {
+  const arr = ["salam", "necesen", "yaxşıyam"];
+
+  for await (let word of arr) {
+    console.log(word);
   }
 }
+
+demo();
+
+// salam, necesen , yaxşıyam
 ```
 
 ---
 
 ### 5.4.5 for/in
 
-`for/in` döngüsü `for/of` döngüsünə çox bənzəyir, sadəcə `of` açarı `in` ilə əvəz olunur. `for/of` döngüsündə `of`-dan sonra iterasiya edilə bilən obyekt tələb olunur, amma `for/in` döngüsü `in`-dən sonra istənilən obyektlə işləyir. `for/of` ES6 ilə gəlib, amma `for/in` JavaScript-in əvvəldən olan xüsusiyyətidir, ona görə də sintaksisi daha təbii səslənir.
+`for/in` döngüsü `for/of` döngüsünə çox bənzəyir, sadəcə `of` açarı `in` ilə əvəz olunur. 
+`for/of` döngüsündə `of`-dan sonra iterasiya edilə bilən obyekt tələb olunur, amma `for/in` döngüsü `in`-dən sonra istənilən obyektlə işləyir.  
+`for/of` ES6 ilə gəlib, amma `for/in` JavaScript-in əvvəldən olan xüsusiyyətidir, ona görə də sintaksisi daha təbii səslənir.
 
 `for/in` ifadəsi müəyyən obyektin **property (xassə) adları** üzərində dövr edir. Sintaksisi belədir:
 
@@ -994,37 +983,64 @@ for (variable in object)
 Misal üçün belə istifadə olunur:
 
 ```js
-for(let p in o) {
-  // p dəyişəninə o obyektinin property adları verilir
-  console.log(o[p]); // Hər property-nin dəyərini çap edir
+let adam = {
+  ad: "Rəşad",
+  yas: 25,
+  seher: "Bakı"
+};
+
+for (let açar in adam) {
+  console.log(açar + ":", adam[açar]);
 }
+// ad: Rəşad
+// yas: 25
+// seher: Bakı
 ```
 
-`for/in` işlədilərkən, əvvəlcə `object` ifadəsi qiymətləndirilir. Əgər nəticə `null` və ya `undefined` olsa, döngü keçir və növbəti ifadəyə keçir. Daha sonra obyektin bütün **enumerable** (sayğacda olan) property-ləri üçün döngü gövdəsi bir dəfə işləyir. Hər iterasiyadan əvvəl, `variable` dəyişəninə həmin property-nin adı (string) təyin edilir.
 
 Qeyd etmək lazımdır ki, `for/in`-də `variable` istənilən sol tərəf ifadəsi ola bilər, yəni hər iterasiyada fərqli qiymət ala bilər. Məsələn, bütün property adlarını array-a kopyalamaq üçün belə istifadə edilə bilər:
 
+
 ```js
-let o = { x: 1, y: 2, z: 3 };
-let a = [], i = 0;
-for(a[i++] in o) /* boş */;
+let car = {
+  brand: "BMW",
+  model: "X5",
+  year: 2020
+};
+
+let keys = [];
+
+for (let key in car) {
+  keys.push(key);
+}
+
+console.log(keys); // ["brand", "model", "year"]
 ```
+
+---
+
+### 💬 İzah:
+
+* `car` adlı obyektimiz var.
+* `for...in` ilə `car` obyektinin **açar adlarını** (property adlarını) bir-bir əldə edirik (`"brand"`, `"model"`, `"year"`).
+* Hər açarı `keys` adlı massivə `push` edirik.
+
+---
+
 
 JavaScript-də massivlər sadəcə xüsusi obyektlərdir və onların indeksləri obyektin property-ləri sayılır, buna görə `for/in` ilə massiv indekslərini də dövr etmək olar. Məsələn:
 
 ```js
-for(let i in a) console.log(i);
+let a = ["alma", "armud", "banan"];
+
+for (let i in a) {
+  console.log(i);
+}
+
+// 0 , 1 , 2
 ```
 
 bu, massiv `a`-nın indekslərini (0, 1, 2 və s.) çap edir.
-
-Mənim öz kodumda tez-tez səhvən massivlərdə `for/in` istifadə etdiyim üçün səhvlər baş verir, əslində massivlərlə işləyərkən demək olar ki, həmişə `for/of` istifadə etmək lazımdır.
-
-`for/in` döngüsü obyektin bütün property-lərini deyil, yalnız enumerable (sayğacda olan) string adlarını dövr edir. Symbol tipli property-ləri dövr etmir. Məsələn, `toString()` metodu bütün obyektlərdə mövcuddur, amma bu metod `for/in`-də siyahıya düşmür, çünki o enumerable deyil. Sənin kodunda yaradılan bütün property-lər default olaraq enumerable olur (yəni siyahıya düşür), amma sən onları qeyri-enumerable də edə bilərsən.
-
-`for/in` həmçinin **inherit edilmiş enumerable** property-ləri də dövr edir. Bu o deməkdir ki, əgər sən kodunda bütün obyektlərə miras qalan property-lər əlavə etmisənsə, döngü gözlənilməz nəticələr verə bilər. Buna görə çox proqramçılar `for/in` yerinə `for/of` ilə `Object.keys()` istifadə etməyi üstün tuturlar.
-
-Əgər döngünün içində hələ siyahıya düşməmiş bir property silinərsə, o property dövr olunmur. Əgər yeni property əlavə edilərsə, onlar bəzən siyahıya düşə bilər, bəzən yox. Daha ətraflı məlumat üçün JavaScript-ın property enumerasiyası qaydalarına baxmaq lazımdır.
 
 ---
 
@@ -1038,8 +1054,6 @@ JavaScript-də **tullanma operatorları** kodunuzun icra axınını dəyişməy�
 * **`continue`**: Bir dövrün cari addımının (iterasiyasının) qalan hissəsini atlayır və dövrün növbəti addımına başlayır.
 * **`return`**: Bir funksiyadan çıxır və lazım gələrsə, bir dəyər qaytarır.
 * **`throw`**: Bir xəta (exception) yaradır və proqramın ən yaxın xəta idarəedicisinə keçməsinə səbəb olur.
-
-Bu operatorlar haqqında daha ətraflı məlumat növbəti bölmələrdə veriləcək.
 
 ---
 
@@ -1058,14 +1072,18 @@ Etiketlər əsasən **`break`** və **`continue`** operatorları ilə birlikdə,
 Bu nümunədə, `mainloop` adlı bir `while` dövrü var. `continue mainloop` əmri `mainloop` dövrünün cari addımını atlayıb növbəti addıma keçir:
 
 ```javascript
-mainloop: while(token !== null) {
-  // Bəzi kodlar...
+mainLoop: while (true) {
+  let token = getNextToken();
 
-  if (token === "skip") {
-    continue mainloop; // mainloop dövrünün növbəti addımına keçir
+  if (token === null) {
+    break mainLoop; // mainLoop adlı dövrü dayandırırıq
   }
 
-  // Daha çox kod...
+  if (token === "skip") {
+    continue mainLoop; // mainLoop dövrünün növbəti iterasiyasına keçir
+  }
+
+  console.log(token); // Token çap olunur, əgər "skip" deyilsə
 }
 ```
 
@@ -1092,260 +1110,508 @@ Bu formada `break` yalnız bir dövrün və ya `switch` operatorunun içərisind
 **Nümunə:** Bir `array`də dəyər axtarışı. Dəyər tapılsa, dövr dərhal dayanır:
 
 ```javascript
-for(let i = 0; i < a.length; i++) {
-  if (a[i] === target) break; // `target` tapıldıqda dövrü dayandırır
-}
-// Əgər dövr buradan çıxıbsa, ya `target` tapılıb, ya da `array`in sonuna çatılıb.
-```
+let numbers = [3, 7, 10, 15, 20];
+let limit = 12;
 
-**Labeled `break` (`break labelname;`)**
-
-`break` operatorunu bir `label`lə də istifadə edə bilərsiniz:
-
-```javascript
-break labelname;
-```
-
-**Labeled `break`** etiketlənmiş `statement`in sonuna tullanır və onu dayandırır. Bu, əsasən iç-içə dövrlərdən (`nested loops`) və ya digər `labeled` bloklardan çıxmaq üçün faydalıdır. `Labeled statement` dövr və ya `switch` olmaya da bilər, hər hansı bir `labeled statement` ola bilər.
-
-**Vacib qeyd:** `break` sözü ilə `labelname` arasına yeni sətir (`newline`) qoymaq olmaz. Əks halda JavaScript onu sadə `break;` kimi qəbul edə bilər.
-
-**Nümunə:** Matrisdə (2D `array`) cəmləmə zamanı xəta olarsa, dərhal `computeSum` blokundan çıxmaq:
-
-```javascript
-let matrix = getData(); // İki ölçülü `array` əldə et
-let sum = 0, success = false;
-
-computeSum: if (matrix) { // `computeSum` adlı labeled blok
-  for(let x = 0; x < matrix.length; x++) {
-    let row = matrix[x];
-    if (!row) break computeSum; // Sətr boşdursa, `computeSum` blokundan çıx
-
-    for(let y = 0; y < row.length; y++) {
-      let cell = row[y];
-      if (isNaN(cell)) break computeSum; // Dəyər ədəd deyilsə, `computeSum` blokundan çıx
-      sum += cell;
-    }
+for (let num of numbers) {
+  if (num > limit) {
+    break; // 12-dən böyük ədədi tapanda dövrü dayandırır
   }
-  success = true; // Hər şey uğurla tamamlandı
+  console.log(num); // 12-dən kiçik və ya bərabər ədədləri çap edir
 }
-
-// Bura ya bütün cəmləmə bitəndə, ya da `break computeSum` işə düşəndə gəlinir.
-// `success == false` olarsa, matrisdə problem var idi.
-// Əks halda, `sum` matrisdəki bütün ədədlərin cəmini saxlayır.
 ```
 
-**Mühüm məhdudiyyət:** `break` operatoru, `labeled` olsun ya olmasın, funksiya sərhədlərini aşmır. Yəni, bir funksiya təyinini `label`ləyib, funksiyanın içərisindən o `label`i istifadə edərək "tullana" bilməzsiniz.
 
 ---
 
-### 5.5.3 `continue` operatoru
+## **Labeled break (break labelname;)
 
-`continue` operatoru `break` operatoruna bənzəyir, lakin dövrü dayandırmaq əvəzinə, dövrü növbəti `iteration`dan yenidən başladır.
+JavaScript-də `break` əmri ilə bir **etiket (label)** istifadə edə bilərsiniz. Etiket — bu, operatora verilən ad (label), məsələn: `labelname:`. `break labelname;` əmri həmin etiketlə işarələnmiş blokdan çıxır.
 
-**Sadə istifadəsi:**
+Bu xüsusiyyət ən çox **iç-içə dövrlərdən (nested loops)** və ya başqa etiketlənmiş bloklardan dərhal çıxmaq üçün faydalıdır.
 
-```javascript
+---
+
+### Vacib Qaydalar
+
+* `break` ilə `labelname` arasında **yeni sətir (newline)** qoymaq olmaz, yoxsa JavaScript onu adi `break;` kimi qəbul edər.
+* `break` funksiyanın sərhədlərini keçə bilməz. Yəni funksiyanın içindən xarici bir etiketə `break` etmək mümkün deyil.
+
+---
+
+### Sadə Nümunə: İki iç-içə dövrdən etiketlə çıxmaq
+
+```js
+outerLoop: for (let i = 0; i < 3; i++) {
+  for (let j = 0; j < 3; j++) {
+    if (i === 1 && j === 1) {
+      break outerLoop; // Hər iki dövrdən dərhal çıxır
+    }
+    console.log(i, j);
+  }
+}
+
+console.log("Dövr bitdi");
+```
+
+**İzah:**
+`i === 1 && j === 1` olduqda `break outerLoop;` yazılır və həm `j` dövrü, həm də `i` dövrü dərhal dayandırılır. Əks halda, bütün `(i, j)` cütlükləri çap olunur.
+
+---
+
+### Alternativ nümunə: `if` bloku üçün etiketlə `break`
+
+```js
+checkBlock: {
+  console.log("Başladı");
+
+  if (true) {
+    break checkBlock; // Bu blokdan dərhal çıxır
+  }
+
+  console.log("Bu heç vaxt çap olunmayacaq");
+}
+
+console.log("Sonra davam edir");
+```
+
+**İzah:**
+`break checkBlock;` əmri `checkBlock` adlı etiketlə işarələnmiş blokdan çıxır. Ona görə `"Bu heç vaxt çap olunmayacaq"` konsola yazılmır.
+
+---
+
+## 5.5.3 `continue` operatoru
+
+`continue` operatoru dövrün (`loop`) cari iterasiyasını dayandırıb, **növbəti iterasiyaya keçmək** üçündür. Yəni, `break` kimi dövrü tam dayandırmır, sadəcə cari addımı atlayır.
+
+---
+
+### Sadə istifadə:
+
+```js
 continue;
 ```
 
-`continue` operatoru **yalnız** dövrün (`loop`) daxilində istifadə edilə bilər. Başqa yerdə istifadə olunarsa, `syntax error` verər.
-
-**Labeled `continue` (`continue labelname;`)**
-
-`continue` operatoru bir `label`lə də istifadə edilə bilər:
-
-```javascript
-continue labelname;
-```
-
-**`continue` işləyəndə:**
-
-`continue` operatoru icra edildikdə, dövrün cari `iteration`u bitirilir və növbəti `iteration` başlayır. Bu, dövrün növündən asılı olaraq bir qədər fərqli işləyir:
-
-* **`while` dövründə:** Dövrün əvvəlindəki şərt (`expression`) yenidən yoxlanılır və `true` olarsa, dövrün `body`si yuxarıdan başlayaraq icra edilir.
-* **`do/while` dövründə:** İcra dövrün altına keçir, burada dövrün şərti yenidən yoxlanılır və sonra dövr yuxarıdan yenidən başlayır.
-* **`for` dövründə:** Əvvəlcə `increment expression` (artırma ifadəsi) qiymətləndirilir, sonra test `expression` yenidən yoxlanılır ki, növbəti `iteration` olub-olmayacağı müəyyənləşsin.
-* **`for/of` və ya `for/in` dövründə:** Dövr növbəti `iterated value` və ya növbəti `property name` təyin edilərək yenidən başlayır.
-
-**Nümunə:** Bu nümunədə, `data[i]` `undefined` olarsa, cari `iteration`ın qalan hissəsi atlanır:
-
-```javascript
-for(let i = 0; i < data.length; i++) {
-  if (!data[i]) continue; // `data[i]` undefined isə, cari `iteration`ı atla
-  total += data[i]; // Yalnız `data[i]` undefined olmayanda icra olunur
-}
-```
-
-**`Labeled continue`** `nested loops` daxilində istifadə edilə bilər ki, yenidən başlanmalı olan dövr dərhal onu əhatə edən dövr olmasın.
-
-**Vacib qeyd:** `break` operatorunda olduğu kimi, `continue` sözü ilə `labelname` arasına yeni sətir (`newline`) qoymaq olmaz.
+> **Qeyd:** `continue` yalnız dövr daxilində işləyir, başqa yerdə istifadə olunarsa, `syntax error` verir.
 
 ---
 
-### 5.5.4 `return` operatoru
+### `Labeled continue`
 
-Xatırlayın ki, funksiya çağırışları (`function invocations`) `expression`lardır və bütün `expression`ların dəyəri (`value`) var. `return` operatoru bir funksiyanın daxilində istifadə olunur və bu funksiya çağırışının dəyərini müəyyən edir.
+`continue` operatorunu `label` ilə də istifadə edə bilərik:
 
-**Sintaksisi:**
+```js
+continue labelName;
+```
 
-```javascript
+Bu, iç-içə dövrlərdə istənilən xarici dövrə keçid üçün faydalıdır.
+
+---
+
+### `continue` necə işləyir dövr növünə görə?
+
+* **`for` dövrü:** `continue` cari iterasiyanı dayandırır, sonra `increment` (məsələn, `i++`) və şərt yoxlanılır, növbəti iterasiyaya keçilir.
+* **`while` dövrü:** `continue` şərti yenidən yoxlayır, əgər `true`dirsə, dövr bədəni yenidən başdan icra olunur.
+* **`do/while` dövrü:** `continue` əvvəlcə şərti yoxlayır, sonra dövr bədəni yenidən icra olunur.
+* **`for/of` və `for/in`:** `continue` növbəti elementə və ya property-ə keçir.
+
+---
+
+### Dövr növlərinə görə nümunələr
+
+---
+
+#### 1. `for` dövründə
+
+```js
+for (let i = 0; i < 5; i++) {
+  if (i === 2) continue;  // i=2 olduqda növbəti iterasiyaya keçir
+  console.log(i);         // 0,1,3,4 çap olunur, 2 atlandı
+}
+```
+
+---
+
+#### 2. `while` dövründə
+
+```js
+let i = 0;
+while (i < 5) {
+  i++;
+  if (i === 3) continue; // i=3 olduqda növbəti iterasiyaya keçir
+  console.log(i);        // 1,2,4,5 çap olunur, 3 atlandı
+}
+```
+
+---
+
+#### 3. `do/while` dövründə
+
+```js
+let i = 0;
+do {
+  i++;
+  if (i === 4) continue; // i=4 olduqda növbəti iterasiyaya keçir
+  console.log(i);        // 1,2,3,5 çap olunur, 4 atlandı
+} while (i < 5);
+```
+
+---
+
+#### 4. `for/of` dövründə
+
+```js
+let arr = ["alma", "armud", "heyva"];
+
+for (let meyve of arr) {
+  if (meyve === "armud") continue; // armud atlandı
+  console.log(meyve);              // alma, heyva çap olunur
+}
+```
+
+---
+
+#### 5. `Labeled continue` — iç-içə dövrlərdə
+
+```js
+outer: for (let i = 0; i < 3; i++) {
+  inner: for (let j = 0; j < 3; j++) {
+    if (i === 1 && j === 1) continue outer;  // `inner` yox, `outer` dövrünün növbəti iterasiyasına keçir
+    console.log(i, j);
+  }
+}
+```
+
+---
+
+### Vacib qeyd:
+
+`break` və `continue` operatorlarında `labelName` ilə `break`/`continue` arasında **yeni sətir (newline) qoymaq olmaz**, yoxsa JavaScript onu sadəcə `break;` və ya `continue;` kimi qəbul edir.
+
+---
+
+Bu `return` operatorunun izahı artıq çox aydın və yaxşı yazılıb, amma onu daha sadə, az texniki terminlərlə, müəllim dili ilə, həmçinin nümunələri sadələşdirib, əsas məqamları önə çıxarmaq olar. Üstəlik, bəzi vacib qaydaları yanına ingiliscə terminlərlə qeyd etmək istifadəçi üçün faydalı olar.
+
+---
+
+## 5.5.4 `return` operatoru
+
+Funksiyalar bir dəyər qaytara bilər. `return` operatoru funksiyanın işini bitirib, həmin dəyəri çağıran yerə göndərmək üçün istifadə olunur.
+
+---
+
+### Sintaksis:
+
+```js
 return expression;
 ```
 
-`return` operatoru yalnız funksiyanın `body`si daxilində istifadə edilə bilər. Başqa yerdə istifadə olunması `syntax error`a səbəb olar.
+* `expression` — funksiyanın qaytaracağı dəyərdir.
+* `return` yalnız **funksiya içində** işləyir, başqa yerdə yazsan səhv verir (`syntax error`).
 
-`return` operatoru icra edildikdə, onu ehtiva edən funksiya, `expression`ın dəyərini onu çağıran yerə (`caller`) qaytarır.
+---
 
-**Nümunə:**
+### Necə işləyir?
 
-```javascript
-function square(x) {
-  return x * x; // `x` dəyərinin kvadratını qaytarır
+`return`-ə çatanda funksiya dərhal dayanır və `expression`-in dəyərini çağıran koda verir.
+
+---
+
+### Nümunə:
+
+```js
+function kvadrat(x) {
+  return x * x; // x-in kvadratını qaytarır
 }
 
-square(2) // => 4 (funksiya 4 dəyərini qaytarır)
+console.log(kvadrat(3)); // 9
 ```
 
-Əgər bir funksiyada `return` operatoru olmazsa, funksiya bütün `statement`ləri ardıcıl olaraq icra edir və sonunda çağıran yerə `undefined` dəyərini qaytarır.
+---
 
-`return` operatoru çox vaxt funksiyanın son `statement`i olur, lakin bu mütləq deyil. `return statement` icra olunduğu an funksiya çağırana geri dönür, hətta funksiyanın `body`sində başqa `statement`lər qalsa belə.
+### Əgər `return` yoxdursa?
 
-`return` operatoru `expression` olmadan da istifadə edilə bilər. Bu halda, funksiya çağıran yerə `undefined` qaytarır.
+Funksiya sonunda `return` yazmasan, funksiya `undefined` dəyərini qaytarır.
 
-**Nümunə:**
+```js
 
-```javascript
-function displayObject(o) {
-  // Əgər `o` null və ya undefined olarsa, dərhal geri dön.
-  if (!o) return; // undefined qaytarır
+function salam() {
+  console.log("Salam!");
+}
 
-  // Funksiyanın qalan kodu burada yerləşir...
+let netice = salam(); 
+console.log(netice); // undefined
+```
+
+---
+
+### `return` olmadan da istifadə etmək olar
+
+Sadəcə funksiyanı dayandırmaq üçün, heç bir dəyər qaytarmadan:
+
+```js
+function yoxla(n) {
+  if (n < 0) return;  // n mənfi olsa, funksiyanı dayandır və undefined qaytar
+  console.log("Ədədi qəbul etdim:", n);
 }
 ```
 
-**Vacib qeyd:** JavaScript-in avtomatik nöqtəli vergül əlavə etmə (`automatic semicolon insertion`) xüsusiyyətinə görə, `return` `keyword`i ilə ondan sonra gələn `expression` arasında yeni sətir (`line break`) qoymaq olmaz.
+---
+
+### Vacib Qaydalar (Important Rules):
+
+* `return` və ondan sonra gələn ifadə (`expression`) arasına **yeni sətir (line break)** qoymaq olmaz!
+  Javascript bunu avtomatik nöqtəli vergül kimi qəbul edir (`automatic semicolon insertion`).
+
+**Pis nümunə (syntax error ola bilər):**
+
+```js
+return
+5 + 5;  // Burada 5 + 5 ifadəsi return-dan ayrı qalır, undefined qaytarılır.
+```
+
+**Doğru nümunə:**
+
+```js
+return 5 + 5;
+```
 
 ---
 
 ### 5.5.5 `yield` operatoru
 
-`yield` operatoru `return` operatoruna bənzəyir, lakin yalnız **generator functions** (ES6-da təqdim olunub) daxilində istifadə olunur. `yield` funksiyanın icrasını dayandırır və `generated sequence`də növbəti `value`nu verir, lakin funksiyadan tamamilə çıxmır.
+`yield` operatoru `return`a bənzəyir, amma yalnız **generator funksiyalarda** (ES6 ilə gəlib) istifadə olunur. `yield` funksiya icrasını müvəqqəti dayandırır və növbəti dəyəri (`value`) verir, amma funksiyadan tam çıxmır — yəni icra sonra yenidən davam edə bilər.
 
-**Nümunə:**
+**Sadə nümunə:**
 
-```javascript
-// Integer aralığını qaytaran bir generator function
-function* range(from, to) {
-  for(let i = from; i <= to; i++) {
-    yield i; // Hər iterationda `i` dəyərini verir
-  }
+```js
+function* sayNumbers() {
+  yield 1;
+  yield 2;
+  yield 3;
 }
+
+const generator = sayNumbers();
+
+console.log(generator.next().value); // 1
+console.log(generator.next().value); // 2
+console.log(generator.next().value); // 3
 ```
 
-**Qeyd:** `yield` operatorunu tam başa düşmək üçün **iterators** və **generators** mövzularını bilmək lazımdır. Bu mövzular **Fəsil 12**-də daha ətraflı izah olunacaq. Burada sadəcə `jump statement`ləri tamamlamaq üçün qeyd edilmişdir. (`yield` texniki olaraq bir `statement` deyil, bir `operator`dur, Fəsil 12.4.2-də izah olunacaq.)
+Burada `sayNumbers` generatorudur. Hər `yield` növbəti dəyəri verir və icranı saxlayır. `next()` çağıranda isə növbəti `yield`-ə qədər davam edir.
+
+---
+
+**Qeyd:** `yield` və generator funksiyalar daha dərin mövzudur, onlara **Fəsil 12**-də geniş baxılacaq. Burada isə `yield`-in `return`dan fərqli olaraq funksiya icrasını saxlayıb, növbəti dəyəri vermək üçün istifadə edildiyini göstərdik.
 
 ---
 
 ### 5.5.6 `throw` operatoru
 
-**Exception** (`istisna`) — proqramda qeyri-adi bir vəziyyətin və ya xətanın baş verdiyini bildirən bir siqnaldır. Bir `exception` "atmaq" (`to throw`) belə bir xəta və ya qeyri-adi vəziyyəti bildirmək deməkdir. Bir `exception` "tutmaq" (`to catch`) isə onu idarə etmək, yəni xətadan bərpa olmaq üçün lazımi addımları atmaqdır.
+**Exception** (istisna) proqramda gözlənilməz və ya səhv vəziyyəti göstərir. İstisna "atmaq" (`throw`) — bu vəziyyəti proqramda bildirmək deməkdir. "Tutmaq" (`catch`) isə atılan istisnanı qəbul edib ona görə hərəkət etməkdir.
 
-JavaScript-də `runtime` zamanı xəta baş verdikdə və ya proqram açıq şəkildə `throw` operatorundan istifadə edərək bir `exception` atdıqda `exception`lər yaranır. `Exception`lər `try/catch/finally statement`i ilə tutulur, bu, növbəti bölmədə izah ediləcək.
+JavaScript-də proqram icrası zamanı problem yaranarsa və ya biz özümüz `throw` operatoru ilə istisna atsaq, proqram dayana və ya həmin istisnanı idarə etmək lazım olur. Bu idarə etmə üsulu `try/catch` blokunda verilir (sonrakı bölmələrdə izah olunacaq).
 
 `throw` operatorunun sintaksisi belədir:
 
-```javascript
+```js
 throw expression;
 ```
 
-`expression` istənilən tipdə bir dəyər ola bilər. Siz xəta kodunu bildirən bir rəqəm və ya insan tərəfindən oxuna bilən bir xəta mesajı olan bir `string` ata bilərsiniz. JavaScript `interpreter`inin özü bir xəta atdıqda `Error class`ı və onun alt `class`ları istifadə olunur və siz də onları istifadə edə bilərsiniz. Bir `Error object`inin `name` `property`si xətanın tipini, `message` `property`si isə `constructor function`a ötürülən `string`i saxlayır.
-
-**Nümunə:** Bu nümunədə, `invalid argument` ilə çağırıldıqda `Error object` atan bir funksiya göstərilir:
-
-```javascript
-function factorial(x) {
-  // Əgər input argument invalid isə, bir exception at!
-  if (x < 0) throw new Error("x must not be negative");
-
-  // Əks halda, dəyəri hesabla və normal qaytar
-  let f;
-  for(f = 1; x > 1; f *= x, x--) /* empty */ ;
-  return f;
-}
-
-factorial(4) // => 24
-// factorial(-1) // Bu, 'Error: x must not be negative' exception atar
-```
-
-Bir `exception` atıldıqda, JavaScript `interpreter`i normal proqram icrasını dərhal dayandırır və ən yaxın `exception handler`ə tullanır. `Exception handler`lər `try/catch/finally statement`inin `catch clause`u ilə yazılır (növbəti bölmədə izah olunacaq).
-
-Əgər `exception`ın atıldığı `code block`un əlaqəli bir `catch clause`u yoxdursa, `interpreter` növbəti yuxarı `code block`u yoxlayır. Bu, bir `handler` tapılana qədər davam edir. Əgər funksiyanın özündə `try/catch/finally statement` yoxdursa, `exception` funksiyanı çağıran koda `propagate` edir (ötürülür). Bu şəkildə `exception`lər JavaScript metodlarının `lexical structure`u və `call stack` üzrə yuxarı doğru yayılır. Əgər heç bir `exception handler` tapılmazsa, `exception` bir xəta kimi qəbul edilir və istifadəçiyə bildirilir.
+Burada `expression` istənilən dəyər ola bilər — string, rəqəm, obyekt və s. Ən çox `Error` obyektləri atılır ki, onlar xətanın növü və mesajını daşıyır.
 
 ---
 
-### 5.5.7 `try/catch/finally`
+**Sadə nümunə:**
 
-`try/catch/finally` `statement`i JavaScript-in `exception handling` mexanizmidir. Bu, xətaların proqramın işini dayandırmadan idarə olunmasına kömək edir.
+```js
+function divide(a, b) {
+  if (b === 0) throw "Sıfıra bölmək olmaz!"; // İstisna atırıq
 
-* **`try` bloku:** Xəta yarana biləcək kodu ehtiva edir. Normalda, bu kod heç bir problem olmadan icra olunur.
-* **`catch` bloku:** Əgər `try` blokunda bir `exception` yaranarsa, bu blokdakı `statement`lər icra olunur. `catch` açar sözündən sonra mötərizədə bir `identifier` (məsələn, `e` və ya `ex`) gəlir. Bu `identifier` atılan `exception` dəyərini (adətən bir `Error object`i) saxlayır. Bu `identifier` yalnız `catch` blokunun daxilində görünür (`block scope`).
-* **`finally` bloku:** Bu blokdakı kod, `try` blokunda nə baş verməsindən asılı olmayaraq, **həmişə** icra olunur. Adətən `cleanup` (təmizləmə) işləri üçün istifadə olunur.
+  return a / b;
+}
 
-Həm `catch`, həm də `finally` blokları `optional`dır, lakin bir `try` bloku bunlardan ən azı biri ilə müşayiət olunmalıdır. Bütün `try`, `catch`, və `finally` blokları fiqurlu mötərizələrlə ({ }) başlayıb bitir və bu mötərizələr məcburidir.
+console.log(divide(10, 2)); // 5
 
-**Ümumi Sintaksis və Məqsəd:**
+// divide(5, 0); // Burada xəta atılır və proqram dayanar
+```
+
+Burada `divide` funksiyası sıfıra bölmə halında `throw` ilə xəta mesajı atır. Bu, proqramda səhv olduğunu göstərir və kodun növbəti sətirlərinin icrasını dayandırır.
+
+
+**Qeyd:** İstisnalar `try/catch` blokları ilə tutulmadığı halda, proqram xəta verərək dayana bilər. Ona görə istisna atarkən onun tutulmasını da planlaşdırmaq lazımdır.
+
+---
+
+## 5.5.7 `try/catch/finally`
+
+`try/catch/finally` JavaScript-də **istisnaların (exceptions)** idarə olunması üçün istifadə olunan quruluşdur. Bu quruluş proqramın gözlənilməz xətalar üzündən qəfil dayanmaması və xətaların təhlükəsiz şəkildə idarə olunması üçün vacibdir.
+
+---
+
+### Blokların funksiyaları
+
+* **`try` bloku:**
+  Bu blokda, xəta baş verə biləcək kod yazılır. Burada yazılan kod normalda problemsiz icra olunur. Amma əgər problem yaransa, həmin xəta `catch` blokuna ötürülür.
+
+* **`catch` bloku:**
+  Əgər `try` blokunda xəta yaranarsa, bu blok icra olunur. Burada yaranan xəta bir dəyişən (məsələn, `e` və ya `error`) kimi tutulur. Bu dəyişən vasitəsilə xətanın nə olduğu öyrənilir və ona uyğun tədbir görülür.
+
+* **`finally` bloku:**
+  Bu blok `try`-`catch` prosesindən asılı olmayaraq **həmişə** icra olunur. Burada əsasən açılmış resursları (fayllar, şəbəkə bağlantıları və s.) bağlamaq, yaddaşı təmizləmək və digər təmizlik işləri görülür.
+
+---
+
+### Sintaksis
 
 ```javascript
 try {
-  // Normalda problemsiz işləyən kod.
-  // Lakin bəzən (məsələn, 'throw' ilə) exception yarada bilər.
+  // Xəta yarana biləcək kod
 }
-catch(e) {
-  // Bu blok, yalnız 'try' blokunda exception yaranarsa icra olunur.
-  // 'e' yerli dəyişəni atılan 'Error object'ini və ya digər dəyəri bildirir.
-  // Exception'ı idarə edə, görməməzlikdən gələ və ya yenidən ata bilərsiniz ('rethrow').
+catch (error) {
+  // 'try' blokunda xəta yaranarsa, burada icra olunur
+  // 'error' dəyişəni xətanın detallarını saxlayır
 }
 finally {
-  // Bu blokdakı statement'lər həmişə icra olunur.
-  // 'try' bloku normal bitsə də, 'break', 'continue' və ya 'return' ilə bitsə də,
-  // ya da 'catch' tərəfindən idarə olunan və ya idarə olunmayan bir exception ilə bitsə də.
+  // Bu blok hər zaman icra olunur
 }
 ```
 
-**Real Həyat Nümunəsi:**
+---
 
-Aşağıdakı nümunədə, `factorial()` metodu istifadəçi inputunu yoxlayır. Əgər `input` `invalid` olarsa, `exception` atılır və `catch` bloku xətanı idarə edir.
+### İstisna atmaq (`throw`)
+
+`try` blokunda, özümüz də istisna ata bilərik. Bu zaman proqramın müəyyən yeri problemli olduqda, biz bir `Error` obyekti və ya istənilən başqa dəyəri `throw` əmri ilə atırıq. Bu, həmin xəta mesajını `catch` blokuna ötürür.
+
+---
+
+### Nümunə
+
+Aşağıdakı nümunədə fayl oxuma funksiyası yazılıb. Əgər funksiya səhv arqumentlə çağırılarsa, xəta atır və `catch` bloku xətanı tutub idarə edir. `finally` bloku isə hər halda işləyir.
+
+```javascript
+function readFile(filename) {
+  if (typeof filename !== 'string') {
+    throw new Error("Filename should be a string");
+  }
+  if (filename === "") {
+    throw new Error("Filename cannot be empty");
+  }
+  // Simulyasiya üçün fayl məzmunu qaytarılır
+  return "Fayl məzmunu: Lorem ipsum...";
+}
+
+try {
+  // Burada səhv arqument veririk - boş string
+  let content = readFile("");
+  console.log(content);
+} 
+catch (error) {
+  // Xəta tutulur və mesajı göstərilir
+  console.error("Xəta baş verdi: " + error.message);
+}
+finally {
+  // Həmişə işləyir, təmizlik işləri üçün
+  console.log("Fayl oxuma əməliyyatı tamamlandı.");
+}
+```
+
+**İcra nəticəsi:**
+
+```
+Xəta baş verdi: Filename cannot be empty  
+Fayl oxuma əməliyyatı tamamlandı.
+```
+
+---
+
+### `finally` bloku niyə lazımdır?
+
+* Əgər proqramınızda açılmış fayllar, verilənlər bazası bağlantıları, yaddaşda ayrılmış obyektlər varsa, onların mütləq bağlanması, azad edilməsi vacibdir.
+* `finally` bloku bunun üçün ideal yerdir, çünki o, xəta olsa da, olmasa da hər zaman işləyir.
+* Məsələn, faylı açırsınızsa, iş bitəndən sonra onun mütləq bağlı olduğuna əmin olmaq lazımdır. Bunu `finally` blokunda edə bilərsiniz.
+
+---
+
+### `try` - `finally` tək başına
+
+`catch` bloku olmadan da `try`-`finally` yazmaq mümkündür:
 
 ```javascript
 try {
-  // İstifadəçidən müsbət tam ədəd daxil etməsini istəyin
-  let n = Number(prompt("Please enter a positive integer", ""));
-
-  // Input valid hesab olunaraq, ədədin factorial'ini hesablayın
-  let f = factorial(n); // Əvvəlki bölmədəki factorial() funksiyası
-
-  // Nəticəni göstərin
-  alert(n + "! = " + f);
+  console.log("Əməliyyat başlayır");
+  // Burada xəta da baş verə bilər
 }
-catch(ex) { // Əgər istifadəçinin inputu valid deyildisə, bura gəlirik
-  alert(ex); // İstifadəçiyə xətanın nə olduğunu deyin
+finally {
+  console.log("Əməliyyat bitdi (mütləq icra olunur)");
 }
-// Bu nümunədə finally clause yoxdur.
 ```
 
-**`finally` blokunun davranışı:**
+Bu vəziyyətdə, əgər `try` blokunda xəta olsa da, `finally` işləyəcək. Amma xəta tutulmayacaq və proqram həmin xətanı yuxarıya ötürəcək.
 
-`finally` bloku, `try` blokundakı kodun necə bitməsindən asılı olmayaraq (normal bitmə, `return`, `continue`, `break` ilə çıxma, `exception` ilə) həmişə icra olunur. O, adətən resursları bağlamaq və ya digər `cleanup` əməliyyatları üçün istifadə olunur.
+---
 
-* Normal halda, `try` bloku bitdikdən sonra `finally` bloku icra olunur.
-* Əgər `try` bloku `return`, `continue`, `break` `statement`i ilə tərk edilərsə, `finally` bloku yeni təyinat yerinə tullanmadan əvvəl icra edilir.
-* Əgər `try` blokunda `exception` yaranarsa və onu idarə edən bir `catch` bloku varsa, əvvəlcə `catch` bloku, sonra isə `finally` bloku icra olunur.
-* Əgər yerli `catch` bloku yoxdursa, `interpreter` əvvəlcə `finally` blokunu icra edir, sonra ən yaxın `catch clause`a tullanır.
+### `return`, `break`, `continue` ilə `finally` blokunun işləməsi
 
-**Vacib qeyd:** Əgər `finally` blokunun özü bir `jump`a (`return`, `continue`, `break`, `throw` və ya `exception` atan bir metodun çağırılması ilə) səbəb olarsa, `interpreter` gözləyən hər hansı bir `jump`ı tərk edir və yeni `jump`ı yerinə yetirir. Məsələn, `finally clause` bir `exception` atarsa, bu `exception` atılmaqda olan hər hansı digər `exception`ı əvəz edir.
+* Əgər `try` blokunda `return`, `break` və ya `continue` varsa, əvvəlcə `finally` blokunun kodu icra olunur, sonra isə `return` və ya `break` əməliyyatı yerinə yetirilir.
+* Yəni `finally` bloku bu cür vəziyyətlərdə də qaçırılmır.
 
-`try` və `finally` `catch clause` olmadan da birlikdə istifadə edilə bilər. Bu halda, `finally` bloku sadəcə `cleanup code`dur ki, `try` blokunda nə baş verməsindən asılı olmayaraq icra olunması təmin edilir.
+Məsələn:
+
+```javascript
+function test() {
+  try {
+    console.log("try");
+    return 1;
+  }
+  finally {
+    console.log("finally");
+  }
+}
+
+console.log(test());
+```
+
+**Nəticə:**
+
+```
+try  
+finally  
+1
+```
+
+---
+
+### Vacib nüans: `finally` blokundakı `return` və ya `throw`
+
+Əgər `finally` blokunda da `return` və ya `throw` istifadə olunarsa, bu `try` və ya `catch` blokundakı `return` və ya `throw` əmrlərini **ələ keçirir** (override edir).
+
+Məsələn:
+
+```javascript
+function test() {
+  try {
+    return 1;
+  }
+  finally {
+    return 2;
+  }
+}
+
+console.log(test());  // Nəticə: 2
+```
+
+Bu halda, `try` blokundakı `return 1` gözardı edilir və `finally` blokundakı `return 2` icra olunur.
+
+---
+
+## Nəticə
+
+* `try` — potensial xəta verən kodu yazırıq.
+* `catch` — xətanı tutub emal edirik.
+* `finally` — həmişə işləyən blok, burada təmizlik işləri aparılır.
+
+Bu quruluş proqramlarımızı daha etibarlı, oxunaqlı və səhvlərə dayanıqlı edir.
 
 ---
 
@@ -1355,234 +1621,662 @@ Bu bölmə JavaScript-də qalan üç `statement`i — `with`, `debugger` və `"u
 
 ---
 
-### 5.6.1 `with`
+## 5.6.1 `with` statementi
 
-`with` `statement`i, təyin edilmiş bir `object`in `properties`lərinin, həmin `code block`u üçün `scope`da `variable`lər kimi qəbul edildiyi şəkildə kodu icra edir.
+JavaScript-də `with` statementi müəyyən bir obyektin **property**-lərini (xüsusiyyətlərini) müvəqqəti olaraq lokal dəyişənlər kimi istifadə etməyə imkan verən bir sintaksis quruluşudur.
 
-**Sintaksis:**
+---
+
+### `with` nə edir?
+
+`with` statementi, verilmiş obyektin içindəki bütün property-ləri icra olunan kod bloku üçün **lokal dəyişən** kimi qəbul edir. Beləliklə, həmin blokda hər hansı property adını yazanda, o, həmin obyektin müvafiq xüsusiyyətinə istinad edir.
+
+---
+
+### Sintaksis
 
 ```javascript
 with (object)
   statement
 ```
 
-Bu `statement`, `object`in `properties`lərini `variable` kimi istifadə edərək müvəqqəti bir `scope` yaradır və sonra həmin `scope` daxilində `statement`i icra edir.
+* `object`: Məlumatları saxlayan obyekt (məsələn, `document.forms[0]`)
+* `statement`: Obyektin property-ləri konteksində icra olunacaq kod bloku (adətən mötərizə içində bir neçə sətirdən ibarət olur)
 
-**Vacib qeyd: `with` `statement`i istifadə etməyin!**
+---
 
-* `with` `strict mode`da (`5.6.3-cü bölməyə baxın`) qadağandır.
-* `non-strict mode`da belə, `deprecated` (istifadəsi tövsiyə edilmir) hesab olunur. Mümkün olduqca istifadə etməkdən çəkinin.
-* `with` istifadə edən JavaScript kodu optimallaşdırılması çətindir və `with` `statement`i olmadan yazılmış ekvivalent koddan xeyli yavaş işləyə bilər.
-
-**Niyə istifadə olunurdu? (Və niyə indi yox?)**
-
-`with` `statement`i əvvəllər daxili-daxilinə (`deeply nested`) `object hierarchy`ləri ilə işləməyi asanlaşdırmaq üçün istifadə olunurdu. Məsələn, `HTML form` elementlərinə daxil olmaq üçün:
+### Nümunə
 
 ```javascript
-document.forms[0].address.value
-```
-
-Əgər bu cür ifadələri dəfələrlə yazmaq lazım gəlirdisə, `with` `statement`i `form object`inin `properties`lərini `variable` kimi işləməyə kömək edirdi:
-
-```javascript
-with(document.forms[0]) {
-  // Burada form elementlərinə birbaşa daxil olun:
+with (document.forms[0]) {
   name.value = "";
   address.value = "";
   email.value = "";
 }
 ```
 
-Bu, daha az yazmağa imkan verirdi. Lakin, `with` `statement`i olmadan eyni kodu daha yaxşı yazmağın asan bir yolu var:
+Bu kodda `name`, `address`, `email` birbaşa `document.forms[0]` obyektinin property-ləri kimi qəbul olunur.
+
+---
+
+### Niyə `with` istifadə olunurdu?
+
+Əvvəllər kodda çox uzun və təkrar olunan obyekt yolu yazmaq əvəzinə, bu yolları qısaltmaq üçün `with` statementindən istifadə olunurdu. Bu, kodu daha qısa və oxunaqlı etmək məqsədi güdürdü.
+
+Məsələn, belə:
 
 ```javascript
-let f = document.forms[0];
-f.name.value = "";
-f.address.value = "";
-f.email.value = "";
+document.forms[0].name.value = "";
+document.forms[0].address.value = "";
+document.forms[0].email.value = "";
 ```
 
-Bu sonuncu üsul, `with`dən daha aydın, daha sürətli və daha asan başa düşüləndir.
+yerinə yuxarıdakı `with` bloku ilə yazılırdı.
 
-**Qeyd:** Əgər `with` `statement`inin `body`si daxilində `const`, `let` və ya `var` ilə bir `variable` və ya `constant` elan etsəniz, bu, adi bir `variable` yaradır və təyin edilmiş `object` daxilində yeni bir `property` təyin etmir.
+---
+
+### Niyə `with` istifadə etməməliyik?
+
+1. **Strict Mode qadağandır:**
+   ES5 ilə gələn `strict mode` rejimində `with` istifadə etmək qadağandır. Bu da yeni, təhlükəsiz və optimallaşdırılmış JavaScript yazmaq üçün vacibdir.
+
+2. **Kodun oxunmasını çətinləşdirir:**
+   `with` bloku içində hansı dəyişənin obyekt property-si, hansının isə lokal dəyişən olduğu aydın deyil. Bu, xüsusən böyük və mürəkkəb kodlarda səhvlərə səbəb olur.
+
+3. **Performans problemi:**
+   `with` istifadə olunan kod JavaScript mühərriki tərəfindən optimallaşdırmaq çətindir. Bu da tətbiqin yavaş işləməsinə gətirib çıxara bilər.
+
+4. **Əvəzlənməsi asandır:**
+   `with` istifadə etmədən eyni işi daha aydın və sadə kodla yazmaq mümkündür. Məsələn:
+
+   ```javascript
+   let form = document.forms[0];
+   form.name.value = "";
+   form.address.value = "";
+   form.email.value = "";
+   ```
+
+   Bu üsul həm daha oxunaqlı, həm də performans baxımından daha sərfəlidir.
+
+---
+
+### Nəticə
+
+* `with` statementi əvvəllər kodu qısaltmaq üçün istifadə olunurdu, amma bu gün artıq **tövsiyə edilmir** və `strict mode`da qadağandır.
+* Modern JavaScript-də onun yerinə dəyişənlərə referans verməklə (məsələn, `let obj = ...`) işləmək məsləhətdir.
+* `with` istifadə etməkdən qaçınmaq, kodun təhlükəsizliyini, performansını və oxunaqlığını artırır.
 
 ---
 
 ### 5.6.2 `debugger` operatoru
 
-`debugger` `statement`i normalda heç nə etmir. Lakin, əgər bir `debugger program` mövcuddursa və işləyirsə, bu `statement` bir `debugging action` yerinə yetirə bilər (məcburi deyil).
+`debugger` `statement`i JavaScript-də xüsusi bir əmrlə icranı dayandırmaq üçün istifadə olunur. Əgər `debugger` mövcuddursa (məsələn, browser-də developer tools açıqdırsa), icra dayandırılır və siz həmin yerdə proqramın vəziyyətini yoxlaya, dəyişənlərin dəyərlərini, çağırış zəncirini (call stack) görə bilərsiniz.
 
-Praktikada, bu `statement` bir `breakpoint` kimi işləyir: JavaScript kodunun icrası dayanır və siz `debugger`dən `variable`lərin dəyərlərini çap etmək, `call stack`i araşdırmaq və s. üçün istifadə edə bilərsiniz.
+Bu, proqramda səhvləri tapmaq və necə işlədiyini addım-addım izləmək üçün çox faydalıdır.
 
-**Nümunə:** Fərz edək ki, `f()` funksiyanız `undefined argument` ilə çağırıldığı üçün bir `exception` alırsınız və bu çağırışın haradan gəldiyini tapa bilmirsiniz. Bu problemi `debug` etmək üçün `f()` funksiyasını belə dəyişə bilərsiniz:
+---
+
+### Sintaksis
 
 ```javascript
-function f(o) {
-  if (o === undefined) debugger; // Debugging məqsədləri üçün müvəqqəti sətir
-  // Funksiyanın qalan kodu burada yerləşir.
+debugger;
+```
+
+---
+
+### Tam nümunə:
+
+```javascript
+function checkNumber(num) {
+  // Əgər daxil olan ədəd mənfidirsə, debugger işə düşəcək və icra dayandırılacaq
+  if (num < 0) debugger;  
+
+  console.log("Ədəd:", num);
+}
+
+checkNumber(5);    // Normal halda konsola "Ədəd: 5" yazacaq
+checkNumber(-10);  // Burada debugger işə düşəcək, icra dayanacaq
+```
+
+---
+
+### İzah:
+
+1. `checkNumber` funksiyası bir ədəd qəbul edir.
+2. Əgər bu ədəd mənfi olarsa, `debugger` əmri ilə icra dayandırılır.
+3. Bu zaman, siz browser-in Developer Tools (F12 ilə açılır) konsolunda həmin anda proqramın vəziyyətini araşdıra bilərsiniz — məsələn, `num` dəyişəninin dəyərini, çağırış zəncirini və digər lokal dəyişənləri görə bilərsiniz.
+4. Bu, proqramdakı səhvləri tapmaq və onların səbəbini anlamaq üçün çox effektiv üsuldur.
+5. Əgər `debugger` komandası yoxdursa və ya Developer Tools açıq deyilsə, bu sətr heç bir təsir etmədən keçəcək.
+
+---
+
+### Əlavə qeydlər
+
+* `debugger` istifadə edərkən həmişə koddakı həmin sətri izləmək və səbəbi anlamaq üçün `Developer Tools` konsolunu açmalısınız.
+* `debugger` kodunuzu `production`da saxlamayın, yalnız inkişaf zamanı istifadə olunur.
+* `debugger` ilə proqramın axarını dayandırıb dəyişənlərin dəyərini yoxlamaq, mərhələli təhlil üçün vacibdir.
+
+---
+
+# 5.6.3 `"use strict"` (Sərt rejim)
+
+### `"use strict"` nədir?
+
+`"use strict"` — JavaScript-də **sərt rejimi (strict mode)** aktivləşdirmək üçün istifadə olunan xüsusi bir direktivdir.
+
+* Bu direktiv kodunuzu daha təhlükəsiz və səhvlərə qarşı daha dözümlü edir.
+* Köhnə səhvlərin qarşısını alır, səhv kod yazma ehtimalını azaldır.
+* Kodun əvvəlində və ya funksiya daxilində yazılır.
+* Strict mode-da bəzi köhnə davranışlar qadağan olunur və ya səhv kimi qiymətləndirilir.
+
+---
+
+### Necə yazılır?
+
+```javascript
+"use strict";
+```
+
+Yaxud funksiya daxilində:
+
+```javascript
+function test() {
+  "use strict";
+  // bu funksiya sərt rejimdə işləyəcək
 }
 ```
 
-İndi, `f()` funksiyası `argument`siz çağırıldıqda, icra dayanacaq və siz `debugger`dən `call stack`i yoxlayaraq bu səhv çağırışın haradan gəldiyini tapa bilərsiniz.
+---
 
-**Qeyd:** Bir `debugger`in mövcud olması kifayət deyil: `debugger statement` sizin üçün `debugger`i başlatmayacaq. Lakin, bir `web browser` istifadə edirsinizsə və `developer tools console` açıqdırsa, bu `statement` bir `breakpoint` yaratacaq.
+### Niyə istifadə etməliyik?
+
+1. **Səhvləri aşkar edir:** Məsələn, dəyişəni əvvəlcədən elan etmədən istifadə etsəniz, səhv verir.
+2. **Kodun təhlükəsizliyi artır:** Məsələn, bəzi təhlükəli davranışlar qadağan edilir.
+3. **Kodun performansı yaxşılaşa bilər:** Çünki optimizatorlar daha yaxşı işləyə bilər.
+4. **Gələcəkdəki ES6 və daha yeni standartlarla uyumluluq təmin edir.**
 
 ---
 
-### 5.6.3 `"use strict"`
+### Strict mode və non-strict mode arasındakı əsas fərqlər
 
-`"use strict"` `directive`i ES5-də təqdim edilmişdir. `Directives` `statement` deyil, lakin onlara çox yaxındır (`"use strict"` bu səbəbdən burada sənədləşdirilir). `"use strict"` `directive`i ilə adi `statement`lər arasında iki əsas fərq var:
-
-* Heç bir dil `keyword`i ehtiva etmir: `directive` sadəcə xüsusi bir `string literal`dan (tək və ya cüt dırnaqlarda) ibarət olan bir `expression statement`dir.
-* Yalnız bir `script`in əvvəlində və ya bir funksiyanın `body`sinin əvvəlində, hər hansı bir əsl `statement`dən əvvəl görünə bilər.
-
-`"use strict"` `directive`inin məqsədi, ondan sonra gələn kodun (`script`də və ya funksiyada) `strict code` olduğunu bildirməkdir.
-
-* Bir `script`in `top-level` (funksiya olmayan) kodu, əgər `script`də `"use strict"` `directive`i varsa, `strict code`dur.
-* Bir funksiyanın `body`si, əgər `strict code` daxilində təyin edilibsə və ya özündə `"use strict"` `directive`i varsa, `strict code`dur.
-* `eval()` metoduna ötürülən kod, əgər `eval()` `strict code`dan çağırılıbsa və ya kod `string`i `"use strict"` `directive`i ehtiva edirsə, `strict code`dur.
-* Açıq şəkildə `strict` olaraq elan edilən koddan əlavə, bir `class body`sində (`Fəsil 9`) və ya bir ES6 `module`da (`§10.3`) olan hər hansı bir kod avtomatik olaraq `strict code`dur. Bu o deməkdir ki, əgər bütün JavaScript kodunuz `module`lar kimi yazılıbsa, o avtomatik olaraq `strict`dir və sizə heç vaxt açıq `"use strict"` `directive`i istifadə etməyə ehtiyac qalmayacaq.
-
-`Strict code` **strict mode** da icra olunur. `Strict mode`, dilin bəzi əhəmiyyətli çatışmazlıqlarını aradan qaldıran, daha güclü xəta yoxlaması və artan təhlükəsizlik təmin edən dilin məhdud bir alt hissəsidir. `Strict mode` standart olmadığı üçün, dilin köhnə, çatışmaz xüsusiyyətlərini istifadə edən köhnə JavaScript kodu hələ də düzgün işləməyə davam edəcək.
-
-**Strict mode və non-strict mode arasındakı əsas fərqlər (ilk üçü xüsusilə vacibdir):**
-
-1.  `with statement` `strict mode`da icazəli deyil.
-2.  `Strict mode`da bütün `variable`lər `declare` edilməlidir: əgər `declare` edilməmiş bir `variable`, `function`, `function parameter`, `catch clause parameter` və ya `global object`in `property`sinə bir dəyər təyin etsəniz, bir `ReferenceError` atılır. (`Non-strict mode`da bu, `global variable`i `implicitly declare` edir.)
-3.  `Strict mode`da, funksiyalar (metodlar kimi deyil, funksiya kimi) çağırıldıqda `this` dəyəri `undefined` olur. (`Non-strict mode`da, funksiyalar funksiya kimi çağırıldıqda `global object` həmişə onların `this` dəyəri kimi ötürülür.) Həmçinin, `strict mode`da bir funksiya `call()` və ya `apply()` ilə çağırıldıqda (`§8.7.4`), `this` dəyəri `call()` və ya `apply()`yə ilk `argument` kimi ötürülən dəyərin özü olur. (`Non-strict mode`da `null` və `undefined` dəyərləri `global object` ilə əvəz olunur və `non-object` dəyərlər `object`lərə çevrilir.)
-4.  `Strict mode`da, `non-writable property`lərə təyinatlar və `non-extensible object`lər üzərində yeni `property` yaratma cəhdləri bir `TypeError` atır. (`Non-strict mode`da bu cəhdlər səssizcə uğursuz olur.)
-5.  `Strict mode`da, `eval()` metoduna ötürülən kod `caller`in `scope`unda `variable`lər `declare` edə və ya funksiyalar təyin edə bilməz, bu, `non-strict mode`da mümkündür. Bunun əvəzinə, `variable` və `function definition`ları `eval()` üçün yaradılan yeni bir `scope`da yaşayır. Bu `scope` `eval()` geri döndükdə ləğv edilir.
-6.  `Strict mode`da, bir funksiyadakı `Arguments object` (`§8.3.3`) funksiyaya ötürülən dəyərlərin `static copy`sini saxlayır. `Non-strict mode`da, `Arguments object` `array` elementləri və adlandırılmış `function parameter`lərin hər ikisinin eyni dəyərə istinad etdiyi "sehrli" bir davranışa malikdir.
-7.  `Strict mode`da, əgər `delete operator`dan sonra bir `unqualified identifier` (məsələn, bir `variable`, `function` və ya `function parameter`) gələrsə, bir `SyntaxError` atılır. (`Non-strict mode`da belə bir `delete expression` heç nə etmir və `false` dəyərləndirilir.)
-8.  `Strict mode`da, bir `non-configurable property`ni silməyə cəhd edildikdə bir `TypeError` atılır. (`Non-strict mode`da cəhd uğursuz olur və `delete expression` `false` dəyərləndirilir.)
-9.  `Strict mode`da, bir `object literal`in eyni adla iki və ya daha çox `property` təyin etməsi bir `syntax error`dur. (`Non-strict mode`da heç bir xəta baş vermir.)
-10. `Strict mode`da, bir `function declaration`ın eyni adla iki və ya daha çox `parameter`ə sahib olması bir `syntax error`dur. (`Non-strict mode`da heç bir xəta baş vermir.)
-11. `Strict mode`da, `octal integer literals` (sıfırla başlayan, lakin ardınca `x` gəlməyən) icazəli deyil. (`Non-strict mode`da bəzi `implementation`lar `octal literals`a icazə verir.)
-12. `Strict mode`da, `eval` və `arguments` `identifier`ləri `keyword`lər kimi qəbul edilir və dəyərlərini dəyişməyə icazə verilmir. Bu `identifier`lərə dəyər təyin edə, onları `variable` kimi `declare` edə, `function name` kimi istifadə edə, `function parameter name` kimi istifadə edə və ya bir `catch block`un `identifier`i kimi istifadə edə bilməzsiniz.
-13. `Strict mode`da, `call stack`i araşdırma qabiliyyəti məhduddur. `arguments.caller` və `arguments.callee` hər ikisi `strict mode` funksiyası daxilində bir `TypeError` atır. `Strict mode` funksiyaları həmçinin oxunduqda `TypeError` atan `caller` və `arguments` `properties`lərinə malikdir.
+| Fərq                              | Non-strict mode (Adətən)                                                           | Strict mode (Sərt rejim)                                                                        |
+| --------------------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| **1. Dəyişənlərin elan edilməsi** | İstənilən yerdə dəyişəni istifadə etmək olar (globalə düşür)                       | Dəyişəni əvvəlcədən `var`, `let`, `const` ilə elan etməlisiniz, əks halda `ReferenceError` olur |
+| **2. `this` dəyəri funksiyada**   | Funksiya daxilində `this` global obyektdir (`window` və ya `global`)               | Funksiya daxilində `this` `undefined` olur, yəni boşdur                                         |
+| **3. `with` statement**           | İstifadə oluna bilər                                                               | Tamamilə qadağandır                                                                             |
+| **4. Eyni adda iki property**     | Problem olmur                                                                      | Syntax error olur                                                                               |
+| **5. `eval()` davranışı**         | `eval` daxilində dəyişənlər və funksiyalar çağıran səviyyəyə əlavə olunur          | `eval` öz yerli `scope`unda işləyir, dəyişənlər orada qalır                                     |
+| **6. `delete` operator**          | Dəyişənləri və ya funksiyaları silmək mümkündür (amma adətən heç bir təsir yoxdur) | Sadə identifikatorları (məsələn, `delete x`) silmək olmaz, syntax error verir                   |
 
 ---
 
-### 5.7 `Declarations`
+### Sadə nümunələrlə izah
 
-`const`, `let`, `var`, `function`, `class`, `import`, və `export` `keyword`ləri texniki olaraq `statement` deyil. Onlar `declaration` adlanır.
+#### 1. Dəyişəni elan etmədən istifadə
 
-`Statements` "nəsə baş verməsinə" səbəb olur. `Declarations` isə yeni dəyərləri təyin edir və onlara adlar verir ki, biz həmin dəyərlərə istinad edə bilək. Onlar proqramın işə düşmədən əvvəl emal olunan hissələri kimidir, proqramın strukturunu müəyyən edirlər.
+```javascript
+"use strict";
+x = 10; // ReferenceError: x is not defined
+```
 
-JavaScript `declaration`ları `constant`ları, `variable`ləri, `function`ları və `class`ları təyin etmək, həmçinin `module`lar arasında dəyərləri `import` və `export` etmək üçün istifadə olunur. Növbəti hissələrdə bu `declaration`lara nümunələr veriləcək. Onların hər biri kitabın başqa yerlərində daha ətraflı izah olunacaq.
+```javascript
+// non-strict mode-da belə yazmaq olar və x avtomatik globalə əlavə olunur (bu pis təcrübədir)
+x = 10; // heç bir xəta olmur, amma pisdir!
+```
+
+#### 2. `this` dəyərinin fərqi
+
+```javascript
+// Non-strict mode
+function f() {
+  console.log(this);  // window (browser-də)
+}
+f();
+```
+
+```javascript
+// Strict mode
+"use strict";
+function f() {
+  console.log(this);  // undefined
+}
+f();
+```
+
+#### 3. `with` qadağası
+
+```javascript
+"use strict";
+with (Math) {   // SyntaxError: Strict mode code may not include a with statement
+  console.log(sin(0));
+}
+```
+
+#### 4. Eyni adda iki property
+
+```javascript
+"use strict";
+let obj = {
+  x: 1,
+  x: 2  // SyntaxError: Duplicate data property in object literal not allowed in strict mode
+};
+```
+
+#### 5. `delete` ilə dəyişəni silmək olmaz
+
+```javascript
+"use strict";
+var y = 10;
+delete y;  // SyntaxError: Delete of an unqualified identifier in strict mode.
+```
+
+---
+
+### Qısa yekun
+
+* `"use strict"` yazmaq kodu daha sərt yoxlayır.
+* Daha çox səhvləri əvvəlcədən tapır.
+* Köhnə, səhv və təhlükəli praktikaları qadağan edir.
+* Yeni kod yazanda mütləq istifadə etmək məsləhətdir.
+
+---
+
+### 5.7 `Declarations` (Təyinatlar)
+
+JavaScript-də bəzi `keyword`lər var ki, onlar texniki olaraq adi `statement` (ifadə olunan əmrlər) deyil, **`declaration`** adlanır. Məsələn:
+`const`, `let`, `var`, `function`, `class`, `import`, `export`
+
+---
+
+### `Declarations` nədir?
+
+* `Statements` — proqramda bir əməliyyatın, hərəkətin baş verməsini təmin edir.
+* `Declarations` — isə proqramda **yeni dəyərlər, funksiyalar, dəyişənlər və s. üçün adlar yaradır**, yəni struktur müəyyənləşdirir.
+
+Sadəcə `declaration` yazdıqda, biz proqramda yeni "simvol" (ad) yaradırıq və ona bir dəyər, funksiya və ya sinif (class) təyin edirik. Bu adlar daha sonra proqramda istifadə olunur.
+
+---
+
+### `Declarations` necə işləyir?
+
+* `Declarations` kodun icrasından əvvəl işlənir (hoisting mexanizmi ilə).
+* Onlar proqramın strukturunu müəyyən edir: hansı dəyişənlər, funksiyalar, siniflər mövcuddur.
+* `Declarations` həmçinin `module`larda `import` və `export` üçün istifadə olunur — yəni fayllar arasında dəyərləri paylaşmaq üçün.
+
+---
+
+### Nümunələr
+
+```javascript
+// Variable declaration
+let age = 25;
+const name = "Rəşad";
+var isActive = true;
+
+// Function declaration
+function greet() {
+  console.log("Salam!");
+}
+
+// Class declaration
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+}
+
+// Import declaration (module-lar üçün)
+import { readFile } from "fs";
+
+// Export declaration (module-lar üçün)
+export const PI = 3.14;
+```
 
 ---
 
 ### 5.7.1 `const`, `let`, və `var`
 
-`const`, `let`, və `var` `declaration`ları `§3.10`-da daha ətraflı izah olunur.
+JavaScript-də dəyişənləri elan etmək üçün üç əsas `declaration` tipi var: `const`, `let` və `var`. Onların hər birinin öz xüsusiyyətləri və istifadə qaydaları var.
 
-* ES6 və sonrakı versiyalarda:
-    * `const` **`constant`lar**ı (`dəyişməyən dəyərlər`) `declare` edir.
-    * `let` **`variable`ləri** (`dəyişə bilən dəyərlər`) `declare` edir.
-* ES6-dan əvvəl:
-    * `var` `variable`ləri `declare` etmək üçün yeganə yol idi və `constant`ları `declare` etmək üçün bir yol yox idi.
+---
 
-**Qeyd:** `var` ilə `declare` edilən `variable`lər `containing block` əvəzinə `containing function`a `scope`ludur. Bu, `bug`lara səbəb ola bilər və müasir JavaScript-də `let` əvəzinə `var` istifadə etmək üçün heç bir səbəb yoxdur.
+#### `const` — Dəyişməyən dəyərlər (Constant)
 
-**Nümunə:**
+* `const` ilə elan edilmiş dəyişənlərin dəyəri **dəyişdirilə bilməz**.
+* Yəni, bir dəfə dəyər təyin edildikdən sonra, onu yenidən təyin etmək olmaz.
+* Lakin, əgər `const` ilə bir obyekt və ya massiv elan edilərsə, onun **içindəki elementlər dəyişdirilə bilər** (yalnız dəyişənin özü yenidən təyin edilə bilməz).
 
 ```javascript
-const TAU = 2 * Math.PI; // TAU dəyəri dəyişməz qalacaq
-let radius = 3;          // radius dəyəri dəyişə bilər
-var circumference = TAU * radius; // Əvvəlki versiyalarda istifadə olunurdu, lakin indi let tövsiyə olunur
+const PI = 3.14;
+PI = 3.1415;  // Xəta! Dəyər dəyişdirilə bilməz.
+
+const obj = {a: 1};
+obj.a = 2;    // Bu doğrudur, çünki obyektin özü deyil, onun içindəki dəyər dəyişir.
 ```
+
+---
+
+#### `let` — Dəyişkən dəyərlər (Variable)
+
+* `let` ilə elan edilmiş dəyişənlər **dəyişdirilə bilər**.
+* `let` ES6 ilə gəlib və daha düzgün `scope` idarəsi təmin edir (`block scope`).
+* `let` ilə elan edilmiş dəyişən yalnız **öz blokunda** (`{ ... }`) mövcuddur.
+
+```javascript
+let count = 1;
+count = 2; // Doğrudur
+
+if (true) {
+  let insideBlock = 5;
+}
+// console.log(insideBlock); // Xəta! insideBlock yalnız if bloku içində mövcuddur.
+```
+
+---
+
+#### `var` — Köhnə tip dəyişən (Function-scoped variable)
+
+* `var` ES5 və əvvəlki versiyalarda istifadə olunurdu.
+* `var` ilə elan edilmiş dəyişənlər `function scope`-ludur, yəni `function` daxilində tanınır, amma `block` daxilində deyil.
+* Bu səbəbdən `var` ilə yazılan kodlarda bəzən gözlənilməz nəticələr yaranır (məsələn, `for` dövrəsində dəyişənin `block` xaricində də mövcud olması).
+* Müasir JavaScript-də `let` və `const` üstünlük təşkil edir və `var`dan qaçmaq tövsiyə olunur.
+
+```javascript
+if (true) {
+  var x = 10;
+}
+console.log(x); // 10, çünki var block scope deyil, function scope-dur
+```
+
+---
+
+### Ümumi fərqlər cədvəl şəklində
+
+| Xüsusiyyət         | `const`                                                               | `let`          | `var`                                          |
+| ------------------ | --------------------------------------------------------------------- | -------------- | ---------------------------------------------- |
+| Yenidən təyin olma | Xeyr                                                                  | Bəli           | Bəli                                           |
+| Scope              | Block (`{}`)                                                          | Block (`{}`)   | Function (və ya global)                        |
+| Hoisting           | Bəli, amma temporal dead zone (TDZ) var (əvvəl istifadə mümkün deyil) | Eynilə `const` | Bəli, əvvəlcədən mövcuddur və `undefined` olur |
+| Yenidən elan etmə  | Xeyr                                                                  | Xeyr           | Bəli                                           |
+
+
 ---
 ### 5.7.2 `function`
 
-`function declaration` `function`ları təyin etmək üçün istifadə olunur. `Function`lar `Fəsil 8`-də ətraflı izah edilir. (`§4.3`-də də `function expression` hissəsi kimi `function` görmüşük.)
+`function declaration` — yəni funksiya elanları — proqramda funksiyalar yaratmaq üçün istifadə olunur. Funksiya içində yazdığımız kodu bir adla yadda saxlayırıq və lazım olanda həmin adı çağırıb funksiyanı işə salırıq.
 
-Bir `function declaration` belə görünür:
+Məsələn, belə bir funksiya yarada bilərik:
 
 ```javascript
 function area(radius) {
   return Math.PI * radius * radius;
 }
+
+area(5) // 25 * 3.1434422
 ```
 
-Bir `function declaration` bir `function object` yaradır və onu göstərilən ada (`area` bu nümunədə) təyin edir. Proqramımızın başqa yerində, bu addan istifadə edərək `function`a istinad edə və içindəki kodu işlədə bilərik.
+Bu nümunədə `area` funksiyası `radius` adlı bir dəyər alır və dairənin sahəsini hesablayıb qaytarır.
 
-JavaScript kodunun hər hansı bir `block`undakı `function declaration`ları həmin kod işə düşməzdən əvvəl emal olunur və `function name`ləri bütün `block` boyu `function object`lərinə bağlanır. Biz deyirik ki, `function declaration`ları **"hoisted"** edilir, çünki sanki onlar təyin olunduqları `scope`un ən yuxarı hissəsinə köçürülmüş kimi davranırlar. Nəticədə, bir `function`u çağıran kod, `function`u `declare` edən koddandan əvvəl də proqramınızda mövcud ola bilər.
+---
 
-**Əlavə funksiya növləri:**
+**Əhəmiyyətli məqam:**
+JavaScript-də funksiyalar “hoisted” olunur, yəni sanki onlar kodun əvvəlində yaradılır. Buna görə funksiyanı kodda əvvəlcə yazmasaq da, sonra rahat çağıra bilərik:
 
-* **Generator funksiyaları:** `§12.3`-də təsvir edilən xüsusi bir `function` növüdür. `Generator declaration`ları `function keyword`ini istifadə edir, lakin ondan sonra bir ulduz (*) işarəsi gəlir.
-* **Asynchronous funksiyalar:** `§13.3`-də təsvir edilən `function`lardır. Onlar da `function keyword`ini istifadə edərək `declare` edilir, lakin əvvəlinə `async` `keyword`i əlavə olunur.
+```javascript
+console.log(square(4)); // 16
+
+function square(n) {
+  return n * n;
+}
+```
+
+Yuxarıdakı nümunədə funksiyanı çağırış yazılandan sonra yazmışıq, amma problem olmur.
+
+---
+
+**Başqa növ funksiyalar:**
+
+* **Generator funksiyaları:**
+  Bunlar xüsusi funksiyalardır və `function*` şəklində yazılır. Gələcəkdə `yield` ilə dəyərləri ardıcıl olaraq qaytara bilirlər.
+
+* **Asinxron funksiyalar (async functions):**
+  Bu funksiyalar `async function` kimi elan edilir və içində `await` istifadə etməyə imkan verir. Asinxron əməliyyatları rahat idarə etmək üçün çox faydalıdır.
 
 ---
 
 
 ### 5.7.3 `class`
 
-ES6 və sonrakı versiyalarda, `class declaration` yeni bir `class` yaradır və ona istinad edə biləcəyimiz bir ad verir. `Class`lar `Fəsil 9`-da ətraflı təsvir edilmişdir.
+ES6 və sonrakı versiyalarda, `class declaration` yeni bir `class` (sinif) yaradır və ona istinad edə biləcəyimiz bir ad verir. `Class`lar obyekt yaratmaq üçün bir şablondur (template) — yəni, eyni tipli çoxsaylı obyektlərin necə görünəcəyini və nə edə biləcəyini təyin edir. Bu mövzu `Fəsil 9`-da daha ətraflı təsvir ediləcək.
 
-Sadə bir `class declaration` belə görünə bilər:
+Sadə bir `class declaration` nümunəsi:
 
 ```javascript
 class Circle {
   constructor(radius) {
+    // 'this' burada yaradılan obyektə işarə edir
     this.r = radius;
   }
   area() {
+    // Sahəni hesablayan metod
     return Math.PI * this.r * this.r;
   }
   circumference() {
+    // Çevrə uzunluğunu hesablayan metod
     return 2 * Math.PI * this.r;
+  }
+}
+````
+
+`class`lardan obyekt yaratmaq üçün `new` operatorundan istifadə olunur:
+
+```javascript
+const c = new Circle(5);
+console.log(c.area()); // 78.53981633974483
+```
+
+**Vacib:** `class declaration`ları **hoisted deyil**. Yəni, `class`ı yaratmadan əvvəl onu istifadə etməyə çalışsanız, `ReferenceError` alacaqsınız:
+
+```javascript
+const c = new Circle(5); // ReferenceError: Cannot access 'Circle' before initialization
+
+class Circle {
+  constructor(radius) {
+    this.r = radius;
   }
 }
 ```
 
-**Vacib qeyd:** Funksiyalardan fərqli olaraq, `class declaration`ları `hoisted` deyil. Yəni, bir `class`ı `declare` etdiyiniz koddandan əvvəl onu istifadə edə bilməzsiniz.
+Başqa bir nümunə:
+
+```javascript
+class Car {
+  constructor(make, model, year) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+
+  start() {
+    console.log(`${this.make} ${this.model} işə düşdü.`);
+  }
+
+  info() {
+    return `${this.year} model ${this.make} ${this.model}`;
+  }
+}
+
+const myCar = new Car("Toyota", "Corolla", 2020);
+
+myCar.start();                // Toyota Corolla işə düşdü.
+console.log(myCar.info());    // 2020 model Toyota Corolla
+```
 
 ---
 
+**Qısa əlavə:** `class`lar həmçinin digər `class`lardan miras ala (inherit) bilər. Bu, obyekt yönümlü proqramlaşdırmanın əsas xüsusiyyətidir və `extends` açar sözü ilə edilir. Məsələn:
+
+```javascript
+class ElectricCar extends Car {
+  constructor(make, model, year, batteryLife) {
+    super(make, model, year); // Əsas classın constructorunu çağırırıq
+    this.batteryLife = batteryLife;
+  }
+
+  batteryStatus() {
+    console.log(`Batareya səviyyəsi: ${this.batteryLife}%`);
+  }
+}
+
+const tesla = new ElectricCar("Tesla", "Model S", 2023, 90);
+tesla.start();              // Tesla Model S işə düşdü.
+tesla.batteryStatus();      // Batareya səviyyəsi: 90%
+```
+
+---
 ### 5.7.4 `import` və `export`
 
-`import` və `export` `declaration`ları birlikdə istifadə olunur ki, JavaScript kodunun bir `module`unda təyin olunmuş dəyərlər başqa bir `module`da istifadə edilə bilsin.
+Müasir JavaScript proqramları böyüdükcə kodu ayrı-ayrı `file`larda (fayllarda) saxlamaq və onları `module`lar (modullar) şəklində idarə etmək zərurəti yaranır. `import` və `export` `declaration`ları (bəyannamələri) məhz bu məqsədə xidmət edir: bir JavaScript `module`unda yaradılan dəyərləri (`function`, `class` (sinif), `variable` (dəyişən) və s.) digər `module`larda istifadə etməyə imkan verir.
 
-* Bir `module` öz `global namespace`inə malik, digər `module`lardan tamamilə asılı olmayan bir JavaScript kodu `file`ıdır.
-* Bir `module`da təyin edilmiş bir dəyərin (`function` və ya `class` kimi) başqa bir `module`da istifadə edilməsinin yeganə yolu, əgər təyin edən `module` onu `export` ilə `export` edirsə və istifadə edən `module` onu `import` ilə `import` edirsə mümkündür.
+Bir **`module` (modul)** — özünün qlobal `namespace`inə (adlar fəzasına) malik, digər `module`lardan asılı olmayan müstəqil bir JavaScript `file`ıdır. Bu o deməkdir ki, bir `module` daxilində təyin edilən hər şey, standart olaraq **`private`dır (qapalıdır)** və yalnız həmin modul daxilində əlçatandır.
 
-`Module`lar `Fəsil 10`-un mövzusudur və `import` və `export` `§10.3`-də ətraflı izah olunur.
+Bir dəyərin modul xaricinə çıxarılmasının və başqa bir `module`da istifadə edilməsinin yeganə yolu var:
+1.  Dəyəri yaradan `module` onu `export` `keyword`ü (açar sözü) ilə **ixrac (export)** etməlidir.
+2.  Dəyəri istifadə edən `module` isə onu `import` `keyword`ü ilə **idxal (import)** etməlidir.
 
-**`import` `directive`ləri:**
+> ℹ️ `Module`lar haqqında daha ətraflı məlumat `Fəsil 10`-da, `import` və `export` sintaksisinin bütün incəlikləri isə `§10.3`-də izah olunacaq.
 
-`import` `directive`ləri JavaScript kodunun başqa bir `file`ından bir və ya daha çox dəyəri `import` etmək və cari `module` daxilində onlara adlar vermək üçün istifadə olunur. `import` `directive`lərinin bir neçə fərqli forması var.
+***
 
-**Bəzi nümunələr:**
+#### **`export`: Moduldan Dəyərləri Paylaşmaq**
 
-```javascript
-import Circle from './geometry/circle.js'; // `Circle`ı tam olaraq import edir
-import { PI, TAU } from './geometry/constants.js'; // `PI` və `TAU`u spesifik olaraq import edir
-import { magnitude as hypotenuse } from './vectors/utils.js'; // `magnitude`u `hypotenuse` adı ilə import edir
-```
+`export` bəyannaməsi cari `module`da təyin edilmiş bir və ya daha çox dəyərin digər `module`lar tərəfindən idxal edilə biləcəyini bildirir.
 
-**`export` `directive`ləri:**
+Dəyərləri ixrac etməyin iki əsas üsulu var:
 
-Bir JavaScript `module`u daxilindəki dəyərlər `private`dir və açıq şəkildə `export` edilmədikcə digər `module`lara `import` edilə bilməz. `export` `directive`i bunu edir: o, cari `module`da təyin edilmiş bir və ya daha çox dəyərin `exported` olduğunu və buna görə də digər `module`lar tərəfindən `import` üçün mövcud olduğunu `declare` edir.
-
-**Nümunə:**
+**1. Adlandırılmış İxrac (Named Export):**
+Müəyyən adlarla bir neçə dəyəri ixrac etmək üçün istifadə olunur.
 
 ```javascript
-// geometry/constants.js faylında
+// Fayl: geometry/constants.js
+
+// İxrac etmək istədiyimiz dəyişənləri təyin edirik
 const PI = Math.PI;
 const TAU = 2 * PI;
-export { PI, TAU }; // PI və TAU'nu digər modullar üçün export edir
+
+// Onları adları ilə birlikdə ixrac edirik
+export { PI, TAU };
 ```
 
-`export` `keyword`i bəzən digər `declaration`ların üzərində `modifier` kimi istifadə olunur və bu, bir `constant`, `variable`, `function` və ya `class`ı təyin edən və eyni zamanda `export` edən bir növ `compound declaration` ilə nəticələnir.
-
-Əgər bir `module` yalnız bir dəyəri `export` edirsə, bu adətən xüsusi `export default` forması ilə edilir:
+**2. Standart İxrac (Default Export):**
+Bir `module`un əsasən təmsil etdiyi tək bir dəyəri ixrac etmək üçün istifadə olunur. Hər `module`da yalnız **bir** `export default` ola bilər.
 
 ```javascript
-export const TAU = 2 * Math.PI; // TAU konstantını təyin edir və export edir
-export function magnitude(x,y) { return Math.sqrt(x*x + y*y); } // funksiyanı təyin edir və export edir
-export default class Circle { /* class definition omitted here */ } // Circle class'ını default olaraq export edir
+// Fayl: geometry/circle.js
+
+// Bu modulun "əsas" məqsədi olan Circle sinfini yaradırıq
+export default class Circle {
+  // ... sinfin tərkibi
+}
+```
+
+Həmçinin `export` `keyword`ünü birbaşa `declaration`ın önündə `modifier` (modifikator) kimi yazaraq təyin etmə və ixrac prosesini birləşdirmək də mümkündür:
+
+```javascript
+// TAU dəyişənini təyin edir VƏ eyni anda ixrac edir
+export const TAU = 2 * Math.PI;
+
+// magnitude funksiyasını təyin edir VƏ eyni anda ixrac edir
+export function magnitude(x, y) {
+  return Math.sqrt(x*x + y*y);
+}
+```
+
+---
+
+### **`import`: Başqa Modullardan Dəyərləri Almaq**
+
+`import` bizə imkan verir ki, JavaScript kodumuzu kiçik modullara bölək və bir modulda yazdığımız funksiyalar, siniflər və ya dəyişənləri başqa modullarda istifadə edək.
+
+**Başqa sözlə:**
+
+* Bir faylda (modulda) nə isə `export` edirik.
+* Başqa faylda isə `import` ilə onu çağırırıq, yəni "alırıq" və istifadə edirik.
+
+---
+
+### `import`-un əsas 3 növü:
+
+---
+
+#### 1. **Default (Standart) ixracın idxalı**
+
+* Əgər modulda bir dəyər `export default` ilə ixrac olunubsa, onu idxal edərkən sadəcə adı yazırıq, mötərizə olmadan.
+
+**Misal:**
+
+```javascript
+// circle.js
+export default class Circle {
+  constructor(radius) {
+    this.radius = radius;
+  }
+  area() {
+    return Math.PI * this.radius * this.radius;
+  }
+}
+```
+
+```javascript
+// app.js
+import Circle from './circle.js';  // Default ixracı idxal edirik
+
+const c = new Circle(5);
+console.log(c.area());
+```
+
+---
+
+#### 2. **Adlandırılmış (Named) ixracların idxalı**
+
+* Modulda bir neçə dəyər varsa və onlar `export` ilə ayrıca ixrac olunubsa, idxal edərkən adlarını mötərizə `{}` içində yazırıq.
+
+**Misal:**
+
+```javascript
+// constants.js
+export const PI = 3.14159;
+export const TAU = 2 * PI;
+```
+
+```javascript
+// app.js
+import { PI, TAU } from './constants.js';
+
+console.log(PI);  // 3.14159
+console.log(TAU); // 6.28318
+```
+
+---
+
+#### 3. **Adın dəyişdirilməsi (Alias) idxal zamanı**
+
+* İdxal edərkən, istədiyimiz adla istifadə etmək üçün dəyəri yeni adla gətirə bilərik.
+
+**Misal:**
+
+```javascript
+// utils.js
+export function magnitude(x, y) {
+  return Math.sqrt(x * x + y * y);
+}
+```
+
+```javascript
+// app.js
+import { magnitude as hypotenuse } from './utils.js';
+
+console.log(hypotenuse(3, 4)); // 5
 ```
 
 ---
