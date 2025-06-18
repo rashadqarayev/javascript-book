@@ -1,24 +1,16 @@
-# 📦 Fəsil 6. Obyektlər
+#  Fəsil 6. Obyektlər
 
-JavaScript-də **obyektlər (objects)** ən vacib anlayışlardan biridir. 💡 Obyektlər JavaScript-in ürəyidir, çünki onlar real dünya məlumatlarını və onların funksionallığını təsvir etmək üçün əsas quruluş daşıyıcısıdır. Əvvəlki fəsillərdə onlarla bir neçə dəfə qarşılaşmışdın. İndi isə onlara daha dərindən baxacağıq. 📚
+JavaScript-də **obyektlər (objects)** ən vacib anlayışlardan biridir. 💡 Obyektlər JavaScript-in ürəyidir, çünki onlar real dünya məlumatlarını və onların funksionallığını təsvir etmək üçün əsas quruluş daşıyıcısıdır.
 
-Bu fəsildə:
-✅ Obyektlər nədir?  
-✅ Necə yaradılır?  
-✅ Onların xüsusiyyətləri (property) necə işləyir?  
-✅ Yeni ES6 yazılışları nələrdir?
+##  6.1 Obyektlərə Giriş
 
----
+###  Obyekt nədir?
 
-## 🧱 6.1 Obyektlərə Giriş
-
-### 📌 Obyekt nədir?
-
-Obyekt — bir neçə dəyəri **bir yerdə, açar-dəyər (key-value) cütləri şəklində saxlayan** konteynerdir. 🧺 Bu dəyərlər **string, number, boolean və ya hətta başqa obyektlər və ya funksiyalar** ola bilər.
+Obyekt — bir neçə dəyəri **bir yerdə, açar-dəyər (key-value) cütləri şəklində saxlayan** konteynerdir. Bu dəyərlər **string, number, boolean və ya hətta başqa obyektlər və ya funksiyalar** ola bilər.
 
 Hər bir obyekt içində **xüsusiyyətlər (properties)** saxlayır. Hər bir xüsusiyyət öz növbəsində bir ad (**key**) və ona uyğun bir dəyərdən (**value**) ibarətdir.
 
-📝 Məsələn, bir avtomobili təsvir edən obyekt belə görünə bilər:
+Məsələn, bir avtomobili təsvir edən obyekt belə görünə bilər:
 
 ```javascript
 let car = {
@@ -31,7 +23,6 @@ let car = {
 
 Burada `brand`, `year`, `color` və `isElectric` obyektin xüsusiyyətləridir.
 
-Obyektlər mürəkkəb məlumatları təsvir etmək üçün son dərəcə çevikdir. Məsələn, bir insanı təsvir edən obyektdə həm primitiv dəyərlər, həm də başqa obyektlər və ya massivlər (arrays) ola bilər:
 
 ```javascript
 let person = {
@@ -48,73 +39,140 @@ let person = {
 };
 ```
 
-Gördüyünüz kimi, `address` xüsusiyyəti özü bir obyektdir, `hobbies` isə bir massivdir. Bu, obyektlərin nə qədər güclü və çevik olduğunu göstərir.
+Gördüyünüz kimi, `address` xüsusiyyəti özü bir obyektdir, `hobbies` isə bir massivdir.Obyekt daxilində primitiv dəyərlərdən əlavə, primitiv olmayan dəyərlər də ola bilər.
 
 ---
 
-### 🔑 Xüsusiyyətlər (Properties) necə işləyir?
+
+### Xüsusiyyətlər (Properties) necə işləyir?
+
+Təsəvvür edin ki, hər obyekt real həyatdakı bir varlıqdır. Məsələn, bir `kitab` obyekti. Bu kitabı təsvir edən hər bir məlumat onun **xüsusiyyətidir**. Hər xüsusiyyət iki hissədən ibarətdir: **adı (key)** və **dəyəri(value)**.
+
+---
+
+#### Əsas Qaydalar
 
 * Xüsusiyyətin **adı (key)** çox vaxt **string** tipində olur. Bəzən nadir hallarda, xüsusi məqsədlər üçün `Symbol` (Simvol) tipindən də istifadə oluna bilər.
 * Xüsusiyyətin **dəyəri (value)** isə istənilən JavaScript tipində (string, number, boolean, null, undefined, funksiya, başqa obyekt və s.) ola bilər.
 * Bir obyekt daxilində **eyni adlı iki xüsusiyyət ola bilməz**. Əgər eyni adlı bir xüsusiyyəti təkrar yaratsan, sonuncu dəyər əvvəlki dəyərin üzərinə yazılır (overwrite).
 
-**Qeyd:** Əgər xüsusiyyətin adı (key) keçərli bir JavaScript identifikatorudursa (yəni, rəqəmlə başlamır, boşluq və ya xüsusi simvollar yoxdursa, JavaScript-in rezerv açar sözlərindən biri deyilsə), onu dırnaq içində yazmaq məcburi deyil. Lakin dırnaqlardan istifadə etmək həmişə təhlükəsiz və aydın bir yoldur.
+---
+
+####  Praktik Nümunə: Açar Adlarının Yazılışı
+
+Gəlin bir `avtomobil` obyekti yaradaq və açarların fərqli yazılış stillərinə baxaq.
+
+**Qızıl Qayda:** Əgər açarın adı sadədirsə (hərf və rəqəmlərdən ibarətdir, amma rəqəmlə başlamır, boşluq və ya `-` kimi simvolları yoxdur), onu dırnaqsız yaza bilərsiniz. Bu, daha səliqəli görünür. Lakin ad mürəkkəbdirsə, dırnaq işarəsi (`"` və ya `'`) **mütləqdir**.
 
 ```javascript
-let student = {
-  name: "Cavid", // Dırnaqlar məcburi deyil
-  age: 22,
-  "student-id": "S12345", // Xüsusi simvol olduğu üçün dırnaqlar məcburidir
-  1: "First Year" // Rəqəmlə başlayan açarlar üçün dırnaqlar məcburidir (və ya implicit stringə çevrilir)
+// Gəlin bir avtomobil obyekti yaradaq
+let car = {
+  //  Sadə adlar - dırnaqsız yazmaq tamamilə normaldır
+  brand: "Mercedes",
+  model: "S-Class",
+  year: 2023,
+  isNew: true,
+
+  //  Mürəkkəb adlar - dırnaq işarəsi MÜTLƏQDİR!
+  "engine-type": "V8 Biturbo",   // defis (-) olduğu üçün
+  "color option": "Obsidian Black" // boşluq olduğu üçün
 };
 
-console.log(student.name);      // "Cavid"
-console.log(student["student-id"]); // "S12345"
-console.log(student["1"]);      // "First Year" (eyni zamanda student[1] kimi də işləyir)
+// İndi isə məlumatları əldə edək:
+
+// Sadə adlara nöqtə ilə müraciət edirik
+console.log("Avtomobilin markası:", car.brand); // Nəticə: Mercedes
+
+// Mürəkkəb adlara isə kvadrat mötərizə və dırnaqla müraciət edirik
+console.log("Mühərrikin növü:", car["engine-type"]); // Nəticə: V8 Biturbo
+console.log("Rəng seçimi:", car["color option"]);    // Nəticə: Obsidian Black
+
+// Mürəkkəb ada nöqtə ilə müraciət etmək səhvə səbəb olacaq!
+console.log(car.engine-type); // Bu kod error verəcək!
+```
+
+
+
+####  Dəyərin Üzərinə Yazılması (Overwrite)
+
+Tutaq ki, bir istifadəçinin statusunu qeyd edirik, amma sonra statusu dəyişir.
+
+```javascript
+let user = {
+  username: "ayan_qarayeva",
+  status: "Online", // İlk dəyər
+  loginCount: 42,
+  
+  // Tutaq ki, haradasa səhvən statusu yenidən yazdıq
+  status: "Away" // Son dəyər
+};
+
+// Gəlin görək, "status" açarının son dəyəri nədir?
+console.log(user.status); // Nəticə: "Away"
+
+// JavaScript kodu yuxarıdan aşağı oxuduğu üçün "status" açarına
+// təyin edilən ən son dəyəri yadda saxlayır və əvvəlkini unudur.
 ```
 
 ---
 
-### 🔁 Obyektlərdə Məlumat Paylaşımı: Dəyər yoxsa İstinad?
+###  Obyektlərdə Məlumat Paylaşımı: Dəyər yoxsa İstinad?
 
 JavaScript-də obyektlər **dəyərlə (by value) yox, istinadla (by reference)** ötürülür. Bu, proqramlaşdırmada çox vacib bir anlayışdır və əksər tələbələrin ilk başda çətinlik çəkdiyi mövzulardan biridir. Gəlin fərqə baxaq:
 
+---
+
 **1. Primitiv Tiplər (string, number, boolean, null, undefined, symbol, bigint) — Dəyərlə Ötürülür:**
-Primitiv bir dəyəri başqa bir dəyişkənə mənimsətdikdə, orijinal dəyərin bir **kopyası** yeni dəyişkənə verilir. Hər hansı birinin dəyişdirilməsi digərinə təsir etmir.
+Primitiv bir dəyəri başqa bir dəyişkənə mənimsətdikdə, orijinal dəyərin bir **kopyası** yeni dəyişənə verilir. Hər hansı birinin dəyişdirilməsi digərinə təsir etmir.
+
+Primitiv tipləri bir vərəq kağıza yazılmış tək bir məlumat kimi düşünün.
+
+1.  Sizin `a` adlı vərəqiniz var və üzərində **"10"** yazılıb.
+2.  Dostunuz `b` gəlir və sizdən bu məlumatı istəyir. Siz orijinal vərəqi vermirsiniz. Bunun yerinə, yeni bir boş vərəq götürüb, üzərinə **"10"** yazıb ona verirsiniz. Yəni dəyərin bir **kopyasını** yaradırsınız.
+3.  İndi hərənizin əlində üzərində "10" yazılan öz vərəqi var. Onlar bir-birindən tamamilə müstəqildir.
+4.  Dostunuz `b` öz vərəqindəki "10"-u pozub yerinə **"20"** yazır. Bu, sizin `a` vərəqinizə heç bir şəkildə təsir etmir.
+
+Sizin kod nümunəniz bu prinsipi mükəmməl şəkildə nümayiş etdirir:
 
 ```javascript
-let a = 10; // 'a' dəyişəni 10 dəyərini saxlayır
-let b = a;  // 'b' dəyişəni 'a'-nın dəyərinin (10-un) kopyasını alır
+let a = 10; // 'a' vərəqində "10" yazılıb.
+let b = a;  // 'b' üçün yeni bir vərəq yaradılır və ora da "10" köçürülür.
 
-console.log(a); // 10
-console.log(b); // 10
+console.log("Başlanğıcda a:", a); // 10
+console.log("Başlanğıcda b:", b); // 10
 
-b = 20; // 'b'-nin dəyərini dəyişirik
-console.log(a); // Hələ də 10 olaraq qalır! 'a' təsirlənmədi.
-console.log(b); // 20
+// İndi 'b' öz vərəqini dəyişir.
+b = 20; 
+
+console.log("--- Dəyişiklikdən sonra ---");
+console.log("'a' təsirlənmədi:", a); // Hələ də 10 olaraq qalır!
+console.log("'b' dəyişdi:", b);      // Artıq 20-dir.
 ```
+
 Yuxarıdakı misalda gördüyün kimi, `a` primitiv bir dəyər (ədəd) olduğu üçün, `b = a` əməliyyatı `a`-nın dəyərinin bir kopyasını `b`-yə verir. `b`-ni dəyişəndə `a` təsirlənmir.
 
+***
+
 **2. Obyektlər (Objects) — İstinadla Ötürülür:**
-Obyektləri kopyaladığımızda, dəyərin özü deyil, obyektin yaddaşdakı yeri (**istinad**) kopyalanır. Bu o deməkdir ki, iki dəyişkən eyni obyektə işarə edir. Bir dəyişkən vasitəsilə obyektdə edilən hər hansı bir dəyişiklik, digər dəyişkən vasitəsilə də görünür.
+Obyektləri kopyaladığımızda, dəyərin özü deyil, obyektin yaddaşdakı yeri (**istinad**) kopyalanır. Bu o deməkdir ki, iki dəyişən eyni obyektə işarə edir. Bir dəyişən vasitəsilə obyektdə edilən hər hansı bir dəyişiklik, digər dəyişən vasitəsilə də görünür.
 
 ```javascript
-let x = { name: "Ali" }; // 'x' dəyişəni { name: "Ali" } obyektinə işarə edir
+let x = { name: "Rashad" }; // 'x' dəyişəni { name: "Rashad" } obyektinə işarə edir
 let y = x;              // 'y' dəyişəni də 'x' ilə eyni obyektə işarə etməyə başlayır (istinad kopyalandı)
 
-console.log(x.name); // "Ali"
-console.log(y.name); // "Ali"
+console.log(x.name); // "Rashad"
+console.log(y.name); // "Rashad"
 
 y.name = "Vəli"; // 'y' vasitəsilə obyektin 'name' xüsusiyyətini dəyişirik
 
 console.log(x.name); // Nəticə: "Vəli" olacaq! Çünki 'x' də 'y' də eyni obyektə baxır.
 console.log(y.name); // Nəticə: "Vəli"
 ```
-Yəni `x` və `y` **eyni obyektə baxır**. Birində edilən dəyişiklik o birində də görünür. Bu prinsipi yaxşı başa düşmək, gələcəkdə qarşılaşacağın bir çox potensial səhvin qarşısını alacaq.
+Yəni `x` və `y` **eyni obyektə baxır**. Birində edilən dəyişiklik o birində də görünür.
 
 ---
 
-### ✨ Obyektlər Dinamikdir!
+###  Obyektlər Dinamikdir!
 
 JavaScript-də obyektlər çox dinamikdir. Bu o deməkdir ki, onlar yaradıldıqdan sonra belə, strukturları asanlıqla dəyişdirilə bilər:
 
@@ -124,26 +182,27 @@ JavaScript-də obyektlər çox dinamikdir. Bu o deməkdir ki, onlar yaradıldıq
 
 ```javascript
 let user = {
-  name: "Elvin",
-  email: "elvin@example.com"
+  name: "Ayan",
+  email: "ayan@ay.com"
 };
-console.log(user); // { name: "Elvin", email: "elvin@example.com" }
+console.log(user); // { name: "Ayan", email: "ayan@ay.com" }
 
-user.age = 30; // Yeni xüsusiyyət əlavə etdik
-console.log(user); // { name: "Elvin", email: "elvin@example.com", age: 30 }
+user.age = 22; // Yeni xüsusiyyət əlavə etdik
+console.log(user); // { name: "Ayan", email: "ayan@ay.com", age: 22 }
 
-user.email = "elvin.mirzayev@example.com"; // Email xüsusiyyətinin dəyərini dəyişdik
-console.log(user); // { name: "Elvin", email: "elvin.mirzayev@example.com", age: 30 }
+user.email = "ayan.garayev@ay.com"; // Email xüsusiyyətinin dəyərini dəyişdik
+console.log(user); // { name: "Ayan", email: "ayan.garayev@ay.com", age: 22 }
 
 delete user.age; // age xüsusiyyətini sildik
-console.log(user); // { name: "Elvin", email: "elvin.mirzayev@example.com" }
+console.log(user); // { name: "Ayan", email: "ayan.garayev@ay.com" }
 ```
 
 ---
 
 ### 💡 Obyektlərdə ən çox istifadə olunan əməliyyatlar:
 
-* 🔨 **Yaratmaq:** Boş bir obyekt (`let obj = {}`) və ya xüsusiyyətləri ilə birgə (`let person = { name: "Ayşe" }`) yarada bilərsən.
+* 🔨 **Yaratmaq:** Boş bir obyekt (`let obj = {}`) və ya xüsusiyyətləri ilə birgə (`let person = { name: "Rashad" }`) yarada bilərsən.
+
 * 🧾 **Xüsusiyyət oxumaq (Accessing Properties):** Obyektin xüsusiyyətlərinə iki əsas yolla daxil olmaq olar:
     * **Nöqtə notasiyası (Dot Notation):** `obj.name` - Bu, xüsusiyyət adının bilindiyi və keçərli bir identifikator olduğu hallarda ən çox istifadə olunan yoldur.
     * **Kvadrat mötərizə notasiyası (Bracket Notation):** `obj['name']` - Bu notasiya, xüsusiyyət adı bir dəyişkəndə saxlandığı, yaxud adında boşluq, defis və ya rəqəmlə başlayan kimi xüsusi simvollar olduğu hallarda istifadə olunur.
@@ -162,13 +221,64 @@ console.log(user); // { name: "Elvin", email: "elvin.mirzayev@example.com" }
 
 ---
 
-### 🧬 Obyektlər və İrsiyyət (Prototypal Inheritance)
+## 🧬 Obyektlər və İrsiyyət (Prototypal Inheritance)  
 
 JavaScript-də hər obyekt, başqa bir obyektin xüsusiyyətlərini və methodlarını **irsən ala bilər**. Bu mexanizmə **prototypal inheritance** deyilir. Bu, obyektlərin bir-biri ilə əlaqə quraraq ortaq funksionallıqları paylaşmasına imkan verir.
 
 Bu irsən alınan obyektə **prototype** (prototip) deyilir. Yəni, əgər sən bir obyektin xüsusiyyətinə və ya metoduna daxil olmaq istəyirsənsə, JavaScript əvvəlcə həmin obyektin özündə bu xüsusiyyəti axtarır. Əgər tapmasa, avtomatik olaraq onun **prototype-ına** baxır. Bu axtarış zəncir boyu davam edir, ta ki xüsusiyyət tapılana və ya zəncirin sonuna çatana qədər.
 
-Demək olar ki, hər bir JavaScript obyekti bir prototype-a malikdir. Bu zəncirin ən yuxarı hissəsində isə **`Object.prototype`** dayanır. Məsələn, `toString()` (obyekti stringə çevirir) və ya `hasOwnProperty()` (obyektin özündə bir xüsusiyyətin olub-olmadığını yoxlayır) kimi bir çox obyekt methodları məhz `Object.prototype`-dan irsən gəlir.
+Demək olar ki, hər bir JavaScript obyekti bir prototype-a malikdir. Bu zəncirin ən yuxarı hissəsində isə **`Object.prototype`** dayanır. Məsələn, `toString()` (obyekti stringə çevirir) və ya `hasOwnProperty()` (obyektin özündə bir xüsusiyyətin olub-olmadığını yoxlayır) kimi bir çox obyekt methodları məhz `Object.prototype`-dan irsən gəlir
+
+---
+
+### 🔗 Bu necə işləyir?
+
+Təsəvvür et:
+
+* Sənin bir **ata** obyektin var.
+* Sən də onun **övladı**san.
+* Əgər sənin özündə bir xüsusiyyət yoxdursa, JavaScript gedib **atanın üstünə baxır**.
+* Əgər atanızda da yoxdursa, onun atasına, və s. bu cür **zəncir** gedir.
+* Bu zəncirə **prototype chain** deyilir.
+
+---
+
+
+## 💻 Frontend Developer və Intern (Prototypal Inheritance)
+
+Təsəvvür et bir şirkətdə:
+
+* 👨‍💻 **FrontendDeveloper** – əsas veb funksiyaları bilir: məsələn, səhifə düzəltmək.
+* 🧑‍💻 **Intern** – bu developer-dən **miras alır**, amma özünün də bacarığı var: məsələn, düymə dizayn etmək.
+
+```javascript
+const FrontendDeveloper = {
+  sehifeYarat: function () {
+    console.log("Mən responsiv veb səhifə yaradıram! 📱💻");
+  }
+};
+
+// Intern frontend developerdən irs alır
+const Intern = Object.create(FrontendDeveloper);
+
+// Özünəməxsus bacarığı
+Intern.unitTestYaz = function () {
+  console.log("Mən unit test yaziram!");
+};
+
+// Öz bacarığını işlədir
+Intern.unitTestYaz();     // Mən unit test yaziram!
+
+// İrsən aldığı bacarığı işlədir
+Intern.sehifeYarat();       // Mən responsiv veb səhifə yaradıram! 📱💻
+```
+
+---
+
+### 🧠 İzah :
+
+* "`Object.create()` bir obyektin başqa bir obyektlə əlaqəsini qurur. Bu əlaqə vasitəsilə biri digərindən metod və xüsusiyyət \*\*götürə bilər.\`"
+* "`Prototype zənciri` JavaScript-in əsas **irsiyyət modelidir**. Sinif (class) anlayışından fərqli olaraq \*\*obyektlərdən obyektlərə keçid var.\`"
 
 ---
 
@@ -184,7 +294,7 @@ let baseObject = {
   b: 2
 };
 
-let myObject = Object.create(baseObject); // myObject-in prototypi baseObject-dir
+let myObject = Object.create(baseObject); // myObject-in prototipi baseObject-dir
 myObject.c = 3; // 'c' myObject-in öz xüsusiyyətidir
 
 console.log(myObject.a); // 1 (baseObject-dən irsən gəldi)
@@ -193,25 +303,22 @@ console.log(myObject.c); // 3 (myObject-in öz xüsusiyyətidir)
 console.log(myObject.hasOwnProperty('a')); // false (çünki 'a' prototipdən gəlir)
 console.log(myObject.hasOwnProperty('c')); // true (çünki 'c' myObject-in öz xüsusiyyətidir)
 ```
+
 ---
 
-
-# 🛠️ 6.2 Obyekt Yaratmaq (Creating Objects)
+#  6.2 Obyekt Yaratmaq (Creating Objects)
 
 JavaScript-də **object (obyekt)** yaratmağın bir neçə yolu var:
-
-✅ **Object literal** ilə  
-✅ `new` açar sözü ilə  
-✅ `Object.create()` funksiyası ilə
+-  **Object literal** ilə  
+- `new` açar sözü ilə  
+-  `Object.create()` funksiyası ilə
 
 ---
-## 🧾 6.2.1 Object Literals (Obyekt Literalı)
+##  6.2.1 Object Literals (Obyekt Literalı)
 
-### 🧩 Nədir?
+**Obyekt literalı (Object Literal)** JavaScript-də obyekt yaratmağın **ən sadə, ən qısa və ən çox istifadə olunan** yoludur. Bu üsulda, obyekt birbaşa kodun içində, **curly braces** (fiqurlu mötərizələr) `{}` daxilində, **`açar (key): dəyər (value)`** cütlükləri şəklində təyin olunur. 
 
-**Obyekt literalı (Object Literal)** JavaScript-də obyekt yaratmağın **ən sadə, ən qısa və ən çox istifadə olunan** yoludur. Bu üsulda, obyekt birbaşa kodun içində, **curly braces** (fiqurlu mötərizələr) `{}` daxilində, **`açar (key): dəyər (value)`** cütlükləri şəklində təyin olunur. 🧱
-
-### 🧪 Sintaksis necədir?
+###  Sintaksis:
 
 ```javascript
 let objectName = {
@@ -221,7 +328,7 @@ let objectName = {
 };
 ```
 
-### 🧾 Sadə Misallar:
+###  Sadə Misallar:
 
 ```javascript
 let empty = {}; // 🔹 Tamamilə boş bir obyekt yaradır
@@ -233,7 +340,8 @@ let point = {
 
 let p2 = {
   x: point.x,
-  y: point.y + 1 // Mövcud 'point' obyektinin dəyərlərindən istifadə edərək yeni dəyər hesablayır
+  y: point.y + 1 
+  // Mövcud 'point' obyektinin dəyərlərindən istifadə edərək yeni dəyər hesablayır
 }; // 🔹 Digər obyektin xüsusiyyətlərinə əsaslanaraq yeni obyekt yaradır
 ```
 
@@ -245,32 +353,34 @@ Obyekt literalları içərisində başqa obyektlər, massivlər və ya müxtəli
 
 ```javascript
 let book = {
-  "main title": "JavaScript",          // 🔸 Adında boşluq olan xüsusiyyət – mütləq dırnaq içində yazılmalıdır
-  "sub-title": "The Definitive Guide", // 🔸 Adında defis olan xüsusiyyət – string kimi yazılmalıdır
-  for: "all audiences",                // ⚠️ `for` JavaScript-in rezerv açar sözüdür. Lakin burada property adı kimi istifadə olunduğu üçün, bu halda problem yaratmır.
-  author: {                            // 🔸 Daxilində başqa bir obyekt saxlayan xüsusiyyət
+  "main title": "JavaScript",          
+  // Adında boşluq olan xüsusiyyət – mütləq dırnaq içində yazılmalıdır
+  "sub-title": "The Definitive Guide", 
+  // Adında defis olan xüsusiyyət – string kimi yazılmalıdır
+  for: "all audiences",                
+  // ⚠️ `for` JavaScript-in rezerv açar sözüdür. Lakin burada property adı kimi istifadə olunduğu üçün, bu halda problem yaratmır.
+  author: {                           
+  //  Daxilində başqa bir obyekt saxlayan xüsusiyyət
     firstname: "David",
     surname: "Flanagan"
   },
-  pages: 1200,                         // 🔸 Ədədi dəyər
-  isAvailable: true                    // 🔸 Boolean dəyər
+  pages: 1200,                         // Ədədi dəyər
+  isAvailable: true                    // Boolean dəyər
 };
 ```
 
 ### 💡 Qeydlər:
 
-* **Xüsusiyyət adı (property key)** JavaScript **identifikatoru** (məs: `name`, `x`) ola bilər və ya **string literal** (`"main title"`, `"sub-title"`). Əgər xüsusiyyət adı JavaScript identifikatoru olmaya biləcək simvollar (məsələn, boşluq, defis, rəqəmlə başlama) ehtiva edirsə, onu mütləq dırnaq içində string kimi yazmalısan.
+* **Xüsusiyyət adı (property key)** JavaScript **identifikatoru** (məs: `name`, `x`) ola bilər və ya **string literal** (`"main title"`, `"sub-title"`). Əgər xüsusiyyət adı JavaScript identifikatoru olmaya biləcək simvollar (məsələn, boşluq, defis, rəqəmlə başlama) -dan ibarətdirsə, onu mütləq dırnaq içində string kimi yazmalısan.
 * **Xüsusiyyət dəyəri (property value)** isə istənilən **JavaScript ifadəsi** ola bilər — bu, sadə bir dəyər, başqa bir dəyişkən, obyekt, massiv və ya hətta bir funksiya ola bilər.
 * Obyektin **son xüsusiyyətindən sonra vergül (trailing comma)** qoymaq **ən yaxşı təcrübədir (best practice)**:
 
-    ```javascript
-    let user = {
-      name: "Aysel",
-      age: 25, // ✅ Bu vergül sintaktik cəhətdən düzgündür və tövsiyə olunur
-    };
-    ```
-
-    Bu üsul, gələcəkdə obyektə yeni xüsusiyyətlər əlavə etdikdə **sintaksis səhvlərinin** (xüsusilə `git` kimi versiya nəzarət sistemlərində `diff` fərqlərini izləyərkən) qarşısını alır və kodun daha təmiz görünməsini təmin edir.
+```javascript
+let user = {
+  name: "Ayan",
+  age: 25, // ✅ Bu vergül sintaktik cəhətdən düzgündür və tövsiyə olunur
+};
+```
 
 ---
 
@@ -278,32 +388,27 @@ let book = {
 
 **Object literal** bir **ifadə (expression)** olduğu üçün, **hər çağırıldıqda (yəni, hər dəfə icra olunduqda) yeni və fərqli bir obyekt** yaradır. Bu, yaddaşda tamamilə ayrı bir yer tutan yeni bir obyekt instansı deməkdir.
 
+`Date.now()` sənə **hal-hazırkı anın zaman damğasını (timestamp)** qaytarır — bu da **1970-01-01 00:00:00 UTC** tarixindən bəri keçən **millisaniyə sayıdır**.
+
 ```javascript
 function createUser(name) {
   return {
     username: name,
-    createdAt: Date.now() // Funksiyanın hər çağırılışında fərqli zaman damğası
+    createdAt: Date.now() // Funksiyanın hər çağırılışında fərqli zaman olur
   };
 }
 
-let u1 = createUser("Ali");
+let u1 = createUser("Rashad");
 // Bir neçə milli saniyə gözləyək (və ya başqa kod icra olunsun)
 setTimeout(() => {
-  let u2 = createUser("Aytac");
+  let u2 = createUser("Ayan");
   console.log(u1 !== u2); // true – u1 və u2 yaddaşda fərqli obyektlərdir
   console.log(u1.createdAt); // Məsələn: 1718029200000
   console.log(u2.createdAt); // Məsələn: 1718029200050 (bir qədər sonra yaranıb)
 }, 50);
 ```
 
-Burada `createUser()` funksiyası çağırıldıqca **fərqli obyektlər** yaranır və onların `createdAt` dəyərləri də təbii olaraq fərqli olur, çünki `Date.now()` çağırıldığı anın zaman damğasını qaytarır. ⏱️
-
----
-
-### 🔮 Əlavə Yaradılma Üsulları
-
-Yuxarıdakı nümunələr **JavaScript-in ilkin versiyalarından** etibarən dəstəklənən obyekt yaratma üsullarını göstərir.
-Amma **ES6 (ECMAScript 2015) və sonrası** versiyalarda `object literal` yazılışını daha **güclü** və funksional edən **yeni xüsusiyyətlər** (`shorthand property names`, `computed property names`, `method properties`) də əlavə olunub. Onlara **§6.10** bölməsində daha ətraflı baxacağıq. 🧙‍♂️
+Burada `createUser()` funksiyası çağırıldıqca **fərqli obyektlər** yaranır və onların `createdAt` dəyərləri də təbii olaraq fərqli olur, çünki `Date.now()` çağırıldığı anın zaman (timestamp) qaytarır. ⏱️
 
 ---
 
