@@ -545,13 +545,15 @@ JavaScript-də bir obyektin xüsusiyyətinə və ya metoduna daxil olmaq istədi
 Misal:
 
 ```javascript
-let d = new Date(); // 'd' obyektinin prototip zənciri: d → Date.prototype → Object.prototype
+let d = new Date(); 
+// 'd' obyektinin prototip zənciri: d → Date.prototype → Object.prototype
 
 // d.toString() metodunu çağırırıq
 // 1. 'd' obyektinin özündə 'toString()' varmı? Xeyr.
 // 2. 'd'-nin prototipinə ('Date.prototype'-ə) baxır. 'Date.prototype'-də 'toString()' metodu var!
 // 3. Tapdı və icra etdi.
-console.log(d.toString()); // Nəticə: "Wed Jun 11 2025 15:05:01 GMT+0400 (Azerbaijan Standard Time)" (tarixə uyğun)
+console.log(d.toString()); 
+// Nəticə: "Wed Jun 11 2025 15:05:01 GMT+0400 (Azerbaijan Standard Time)" (tarixə uyğun)
 
 // d.hasOwnProperty('something') metodunu çağırırıq
 // 1. 'd' obyektinin özündə 'hasOwnProperty()' varmı? Xeyr.
@@ -778,10 +780,6 @@ console.log(book.author.firstname); // "David"
 
 ---
 
-Növbəti bölmədə **JavaScript-də xüsusiyyətlərin (properties) necə axtarıldığı (Querying) və necə təyin olunduğu (Setting)** mexanizmləri barədə daha dərin izah verəcəyik. Bu mexanizmlər, xüsusilə də prototip zənciri ilə necə əlaqəli olduğunu başa düşməyə kömək edəcək.
-
----
-
 # 6.3.1 Obyektlər Assosiativ Massivlər Kimi (Objects As Associative Arrays)
 
 Əvvəlki bölmədə izah etdiyimiz kimi, aşağıdakı iki JavaScript ifadəsi əksər hallarda eyni dəyəri qaytarır:
@@ -814,15 +812,16 @@ Dot operatoru (`.`) ilə istifadə olunan property adı **identifier** kimi yaz�
 let myProperty = "name";
 let person = { name: "Aysel", age: 25 };
 
-// console.log(person.myProperty); // undefined olacaq! Çünki "person" obyektində "myProperty" adlı bir xüsusiyyət yoxdur.
-                                 // JavaScript `myProperty` sözünü bir identifikator kimi qəbul edir, dəyişkən kimi yox.
+// console.log(person.myProperty); 
+// undefined olacaq! Çünki "person" obyektində "myProperty" adlı bir xüsusiyyət yoxdur.
+// JavaScript `myProperty` sözünü bir identifikator kimi qəbul edir, dəyişkən kimi yox.
 ```
 
 ---
 
 ### 🔹 Square bracket operator (`[]`) – Dinamik (Dynamic) Xüsusiyyət Adları
 
-Square bracket operatoru (`[]`) ilə property adı bir **string ifadəsi** kimi verilir. Bu o deməkdir ki, proqram icra olunarkən (runtime) bu string dəyəri **dinamik şəkildə yaradıla və ya dəyişdirilə bilər**. Bu, data-driven proqramlaşdırma üçün inanılmaz dərəcədə güclü bir xüsusiyyətdir.
+Square bracket operatoru (`[]`) ilə property adı bir **string ifadəsi** kimi verilir. Bu o deməkdir ki, proqram icra olunarkən (runtime) bu string dəyəri **dinamik şəkildə yaradıla və ya dəyişdirilə bilər**.
 
 Məsələn:
 
@@ -933,7 +932,6 @@ Sadə obyektlər assosiativ massiv kimi işləməyinə baxmayaraq, **ES6 (ECMASc
 * **Performans:** Böyük həcmli data üçün `Map` obyektlər, xüsusilə tez-tez əlavə etmə/silmə əməliyyatları edildikdə, sadə obyektlərə nisbətən daha yaxşı performans göstərə bilər.
 * **`size` xüsusiyyəti:** Birbaşa kolleksiyadakı elementlərin sayını verir.
 
-Gələcəkdə mürəkkəb açar-dəyər kolleksiyaları ilə işləyərkən `Map` class-ından istifadə etməyi düşünməyin tövsiyə olunur.
 
 ---
 
@@ -952,66 +950,37 @@ Bildiyimiz kimi, JavaScript-də demək olar ki, hər obyektin bir **prototipi (p
 3.  **Zəncir boyu davam edir:** Əgər prototipdə də tapılmazsa, prototipin `[[Prototype]]`-inə (zəncirdəki növbəti obyektə) baxılır və bu proses **`null`-a çatana qədər** davam edir.
 4.  **`undefined` qaytarılır:** Əgər zəncirin sonuna qədər axtarılan xüsusiyyət tapılmazsa, nəticə olaraq `undefined` dəyəri qaytarılır.
 
-Misal:
 
 ```javascript
-let o = {};           // 'o' → Object.prototype (Object.prototype-in prototipi null-dır)
-o.x = 1;              // 'o'-nun öz xüsusiyyəti (own property): x = 1
+let o = {};           
+// 'o' → Object.prototype (Object.prototype-in prototipi null-dır)
+o.x = 1;              
+// 'o'-nun öz xüsusiyyəti (own property): x = 1
 
-let p = Object.create(o);  // 'p'-nin prototipi 'o' obyektidir (p → o → Object.prototype)
-p.y = 2;              // 'p'-nin öz xüsusiyyəti: y = 2
+let p = Object.create(o); 
+// 'p'-nin prototipi 'o' obyektidir (p → o → Object.prototype)
+p.y = 2;              
+// 'p'-nin öz xüsusiyyəti: y = 2
 
-let q = Object.create(p);  // 'q'-nun prototipi 'p' obyektidir (q → p → o → Object.prototype)
-q.z = 3;              // 'q'-nun öz xüsusiyyəti: z = 3
+let q = Object.create(p);  
+// 'q'-nun prototipi 'p' obyektidir (q → p → o → Object.prototype)
+q.z = 3;              
+// 'q'-nun öz xüsusiyyəti: z = 3
 
-console.log(q.x); // Nəticə: 1. Q.x-i axtararkən: q-da yoxdur → p-də yoxdur → o-da var (x=1) → tapdı!
-console.log(q.y); // Nəticə: 2. Q.y-i axtararkən: q-da yoxdur → p-də var (y=2) → tapdı!
-console.log(q.z); // Nəticə: 3. Q.z-i axtararkən: q-da var (z=3) → tapdı!
+console.log(q.x); 
+// Nəticə: 1. Q.x-i axtararkən: q-da yoxdur → p-də yoxdur → o-da var (x=1) → tapdı!
+console.log(q.y); 
+// Nəticə: 2. Q.y-i axtararkən: q-da yoxdur → p-də var (y=2) → tapdı!
+console.log(q.z); 
+// Nəticə: 3. Q.z-i axtararkən: q-da var (z=3) → tapdı!
 
-let f = q.toString(); // Nəticə: "[object Object]". toString() metodunu axtararkən: q-da yoxdur → p-də yoxdur → o-da yoxdur → Object.prototype-də var → tapdı!
+let f = q.toString(); 
+// Nəticə: "[object Object]". toString() metodunu axtararkən: q-da yoxdur → p-də yoxdur → o-da yoxdur → Object.prototype-də var → tapdı!
 
 console.log(f);
-console.log(q.x + q.y); // Nəticə: 3 (miras alınan x və y dəyərləri istifadə olundu)
+console.log(q.x + q.y); 
+// Nəticə: 3 (miras alınan x və y dəyərləri istifadə olundu)
 ```
-Bu mexanizm, obyektlərin ortaq funksionallıqları təkrar yazmadan paylaşmasına imkan verir və JavaScript-də kodun yenidən istifadəsinin əsasını təşkil edir.
-
----
-
-### ✍️ Xüsusiyyət Dəyərinin Təyin Edilməsi (Setting Properties) – Shadowing (Kölgələmə)
-
-Bir obyektə (məsələn, `o.x = value`) dəyər təyin etdiyin zaman axtarış mexanizmi oxumaqdan bir qədər fərqlidir. JavaScript bu prosesi aşağıdakı şəkildə idarə edir:
-
-1.  **Obyektin özündə yoxlayır:** JavaScript əvvəlcə obyektdə (`o`) həmin ada malik (`x`) bir xüsusiyyətin olub-olmadığını yoxlayır.
-2.  **Mövcudsa, dəyəri dəyişir:** Əgər `x` adlı xüsusiyyət obyektdə artıq mövcuddursa (own property-dirsə), onun dəyəri sadəcə yenisi ilə əvəz olunur.
-3.  **Yoxdursa, yeni yaradır:** Əgər `x` adlı xüsusiyyət obyektdə yoxdursa, JavaScript yeni bir `x` xüsusiyyəti yaradır və bu, həmin obyektin **özünəməxsus xüsusiyyəti (own property)** olur.
-4.  **Miras alınan xüsusiyyətlərin "kölgələnməsi" (Shadowing):** Əgər obyektdə yaradılan yeni xüsusiyyətin prototip zəncirində eyni adlı miras alınmış bir xüsusiyyət varsa, yeni yaradılan own property miras alınan xüsusiyyəti "kölgələyir" (shadows). Bu o deməkdir ki, həmin obyekt vasitəsilə həmin xüsusiyyətə daxil olduqda, özünəməxsus property-nin dəyəri qaytarılır, miras alınan dəyər isə gizli qalır və birbaşa obyekt vasitəsilə əlçatan olmur. Lakin, prototipdəki orijinal dəyər dəyişməz qalır.
-
-```javascript
-let unitcircle = { r: 1 };   // Prototip obyekti: çevrənin radiusu 1-dir.
-
-let c = Object.create(unitcircle); // 'c' obyekti 'unitcircle'-dən miras alır.
-                                   // c-nin prototipi unitcircle-dir.
-                                   // c.r-i oxuyanda 1 qaytarılacaq.
-
-c.x = 1;                  // 'c'-nin özünəməxsus xüsusiyyəti: x = 1 yaradılır.
-c.y = 1;                  // 'c'-nin özünəməxsus xüsusiyyəti: y = 1 yaradılır.
-c.r = 2;                  // 'c'-nin özünəməxsus xüsusiyyəti: r = 2 yaradılır.
-                          // Bu, 'unitcircle.r' (dəyəri 1 olan) xüsusiyyətini 'c' üçün "kölgələyir".
-
-console.log(unitcircle.r); // Nəticə: 1. Orijinal prototip obyekti dəyişməz qaldı.
-console.log(c.r);          // Nəticə: 2. 'c'-nin özünəməxsus 'r' xüsusiyyəti oxundu, prototipdəki gizləndi.
-
-console.log(c.hasOwnProperty('r'));        // true (çünki c.r indi c-nin öz xüsusiyyətidir)
-console.log(unitcircle.hasOwnProperty('r')); // true (unitcircle.r də öz xüsusiyyətidir)
-```
-
----
-
-### ⚠️ İstisna: Accessor Properties (Getter/Setter) və Setter-lər
-
-Yuxarıda izah olunan "shadowing" qaydası yalnız **data properties** (dəyər saxlayan adi xüsusiyyətlər) üçün keçərlidir. Əgər miras alınan property **accessor property**-dirsə (yəni, `getter` və ya `setter` funksiyasına malikdirsə) və ona bağlı **setter** metodu varsa, dəyər təyin edərkən yeni bir own property yaranmır. Bunun əvəzinə, miras alınan accessor property-nin **setter funksiyası çağırılır**.
-
-Setter funksiyası çağırılanda, `this` açar sözü həmişə **ilk dəyəri təyin etməyə cəhd edən orijinal obyektə** (yəni, bizim nümunədə `c` obyektinə) işarə edir, prototip obyektinə yox. Bu, miras alınan accessor property-lər üzərində işləyərkən diqqətli olmağı tələb edən bir nüansdır. Bu mövzuya daha sonra, `Object.defineProperty()` və ya `class` mövzularında daha dərindən toxunacağıq.
 
 ---
 
@@ -1026,24 +995,28 @@ JavaScript-də obyekt xüsusiyyətlərinə daxil olmaq və onları təyin etmək
 * Bir obyektin **özünə və ya prototip zəncirinə** aid olmayan bir xüsusiyyəti soruşmaq **sintaktik səhv hesab edilmir** — nəticə sadəcə `undefined` dəyəri olur.
 
   ```javascript
-  let book = { title: "JavaScript", author: "Anonim" };
-  console.log(book.subtitle); // Nəticə: undefined, çünki "subtitle" xüsusiyyəti mövcud deyil.
-  console.log(book.year);     // Nəticə: undefined
+  let book = { title: "JavaScript", author: "Rashad" };
+  console.log(book.subtitle); 
+  // Nəticə: undefined, çünki "subtitle" xüsusiyyəti mövcud deyil.
+  console.log(book.year);     
+  // Nəticə: undefined
+  console.log(book.author)
+  // Rashad
   ```
 
-* **Amma diqqət!** `null` və ya `undefined` dəyərlərin heç bir xüsusiyyəti ola bilməz (primitiv dəyərlərdir). Ona görə də, bu dəyərlərdən birinin xüsusiyyətinə daxil olmağa cəhd etsən, JavaScript **TypeError** xətası atır. Bu, ən çox rast gəlinən JavaScript xətalarından biridir.
+* `null` və ya `undefined` dəyərlərin heç bir xüsusiyyəti ola bilməz (primitiv dəyərlərdir). Ona görə də, bu dəyərlərdən birinin xüsusiyyətinə daxil olmağa cəhd etsən, JavaScript **TypeError** xətası atır. Bu, ən çox rast gəlinən JavaScript xətalarından biridir.
 
   ```javascript
-  // let len = book.subtitle.length; // book.subtitle 'undefined' olduğu üçün:
+  let len = book.subtitle.length; 
+  // book.subtitle 'undefined' olduğu üçün:
   // TypeError: Cannot read properties of undefined (reading 'length')
-  // (Yəni, 'undefined' dəyərinin 'length' xüsusiyyətini oxumaq mümkün deyil!)
   ```
 
 ---
 
 ### 🛡️ `null` və `undefined`-dən Qorunmaq (Safe Navigation)
 
-Dərin qatlanmış obyektlərdə xüsusiyyətlərə daxil olarkən `null` və ya `undefined` ilə qarşılaşma ehtimalını nəzərə almaq və buna qarşı müdafiə mexanizmləri qurmaq vacibdir, yoxsa `TypeError` ilə tez-tez üzləşəcəksən.
+Obyektlərdə xüsusiyyətlərə daxil olarkən `null` və ya `undefined` ilə qarşılaşma ehtimalını nəzərə almaq və buna qarşı müdafiə mexanizmləri qurmaq vacibdir, yoxsa `TypeError` ilə tez-tez rastlaşacayıq.
 
 Bu cür halların öhdəsindən gəlmək üçün ən çox istifadə olunan üsullar:
 
@@ -1059,7 +1032,7 @@ Bu cür halların öhdəsindən gəlmək üçün ən çox istifadə olunan üsul
     console.log(surname); // undefined (əgər book.author yoxdursa)
     ```
 
-* **Qısa və İdiomatik Üsul (`&&` logical AND operatoru ilə):** Bu üsul JavaScript-də çox məşhurdur və "short-circuiting" prinsipindən istifadə edir.
+* **Qısa  Üsul (`&&` logical AND operatoru ilə):** Bu üsul JavaScript-də çox məşhurdur və "short-circuiting" prinsipindən istifadə edir.
 
     ```javascript
     // book, book.author, book.author.surname ardıcıllığını yoxlayır.
@@ -1085,13 +1058,15 @@ let book = {
   }
 };
 
-let authorSurname = book?.author?.surname; // book?.author?.surname - author və ya surname yoxdursa undefined qaytar
+let authorSurname = book?.author?.surname; 
+// book?.author?.surname - author və ya surname yoxdursa undefined qaytar
 console.log(authorSurname); // Nəticə: undefined
 
 // Massivlər və funksiyalarla da işləyir:
-let users = [{ name: "Ayşe" }, { name: "Fatma" }];
-let firstUserName = users?.[0]?.name; // Massivin 0-cı elementi və onun adı
-console.log(firstUserName); // "Ayşe"
+let users = [{ name: "Rashad" }, { name: "Ayan" }];
+let firstUserName = users?.[0]?.name; 
+// Massivin 0-cı elementi və onun adı
+console.log(firstUserName); // "Rashad"
 
 let greet = {
   sayHello: () => "Hello!"
@@ -1104,8 +1079,6 @@ let noMessage = noGreet?.sayHello?.(); // noGreet yoxdursa çağırılmaz
 console.log(noMessage); // undefined
 ```
 
-Bu operator yuxarıdakı `&&`-lə eyni işi görür, amma daha aydın, daha qısa və xüsusilə dərin qatlanmış obyektlərdə koda oxunaqlıq qatır. Əgər `?.` operatorundan əvvəlki hissə `null` və ya `undefined` olarsa, ifadənin qalan hissəsi icra olunmur və dərhal `undefined` qaytarılır.
-
 ---
 
 ### ❌ Xüsusiyyət Təyin Edərkən Yaranan Xətalar (Setting Properties Errors)
@@ -1116,7 +1089,8 @@ Property təyin etməyə çalışarkən də bəzi xətalarla qarşılaşa bilər
 
     ```javascript
     let obj = null;
-    // obj.x = 10; // TypeError: Cannot set properties of null (setting 'x')
+    obj.x = 10; 
+    // TypeError: Cannot set properties of null (setting 'x')
     ```
 
 * **Read-only (yalnız oxuna bilən) xüsusiyyətlər:** Obyektin bəzi xüsusiyyətləri (`writable` atributu `false` olaraq təyin edildiyi üçün) dəyişdirilə bilməz. Belə bir xüsusiyyətə dəyər təyin etməyə çalışsan, **strict mode**-da **TypeError** atılır. Non-strict mode-da isə dəyişiklik sadəcə **uğursuz olur** (silent failure) və xəta atılmır.
@@ -1124,48 +1098,167 @@ Property təyin etməyə çalışarkən də bəzi xətalarla qarşılaşa bilər
     ```javascript
     let constantObject = {};
     Object.defineProperty(constantObject, 'PI', { value: 3.14, writable: false });
-    // constantObject.PI = 3.14159; // Strict mode-da TypeError, Non-strict mode-da dəyişmir (silent failure)
+    // constantObject.PI = 3.14159; 
+    // Strict mode-da TypeError, Non-strict mode-da dəyişmir (silent failure)
     ```
 
-* **Non-extensible (genişlənməyən) obyektlər:** Bəzi obyektlərə (`Object.preventExtensions()`, `Object.seal()`, `Object.freeze()` kimi metodlar vasitəsilə) yeni xüsusiyyət əlavə etmək qadağan edilə bilər. Belə bir obyektə yeni property əlavə etməyə çalışsan, **strict mode**-da **TypeError** atılır. Non-strict mode-da isə yenə də dəyişiklik **uğursuz olur** (silent failure).
+## Non-extensible (genişlənməyən) obyektlər:
 
-    ```javascript
-    let sealedObject = {};
-    Object.seal(sealedObject); // Obyektə yeni xüsusiyyətlər əlavə etməyi qadağan edir və mövcudları silməyə icazə vermir.
-    // sealedObject.newProp = "value"; // Strict mode-da TypeError, Non-strict mode-da dəyişmir (silent failure)
-    ```
-
-* **Strict Mode-un Rolu:** `use strict` direktivi JavaScript kodunun daha sərt qaydalarla icra olunmasını təmin edir. Bu rejimdə, yuxarıda qeyd olunan "uğursuz amma sakitcə keçən" (silent failure) əməliyyatlar artıq **TypeError** kimi açıq şəkildə xəta atılmasına səbəb olur. Bu, xətaları erkən aşkarlamağa və daha etibarlı kod yazmağa kömək edir.
+JavaScript-də bəzi obyektlərə yeni xüsusiyyətlər əlavə etmək qadağan edilə bilər. Bu, obyektin strukturunu qorumaq və gözlənilməz dəyişikliklərin qarşısını almaq üçün faydalıdır. JavaScript bizə obyektlərin genişlənmə qabiliyyətini idarə etmək üçün üç əsas metod təklif edir: `Object.preventExtensions()`, `Object.seal()`, və `Object.freeze()`
 
 ---
 
-### ⚙️ Xüsusiyyət Təyinin Uğursuz Olma Şərtləri – Dərinləşdirmə
+#### `Object.preventExtensions()`
 
-Bir obyektin (`o`) `p` adlı xüsusiyyətini təyin etməyə cəhd edərkən (məsələn, `o.p = value`), bu əməliyyat aşağıdakı hallarda **uğursuz** ola bilər:
+Bu metod obyektə yeni xüsusiyyətlər əlavə edilməsinin qarşısını alır. Lakin, mövcud xüsusiyyətləri dəyişdirmək və ya silmək hələ də mümkündür.
 
-1.  `o`-nun **özündə olan `p` xüsusiyyəti `read-only` (yalnız oxuna bilən)** olarsa (`writable: false`). Bu halda dəyərini dəyişmək mümkün deyil.
-2.  `o`-nun prototip zəncirindən **miras aldığı (`inherited`) `p` xüsusiyyəti `read-only` olarsa**, VƏ onu `o`-nun özündə yeni bir `p` xüsusiyyəti ilə **gizlətmək (shadowing) qadağan olunarsa** (bəzən bu, miras alınan accessor properties üçün olur).
-3.  `o`-nun özündə `p` xüsusiyyəti yoxdursa, mirasdan `p` xüsusiyyəti varsa, amma miras alınan xüsusiyyətə bağlı **`setter` metodu yoxdursa** VƏ `o`-nun **`extensible` atributu `false`** olarsa (yəni `o`-ya yeni xüsusiyyət əlavə etmək qadağandır). Bu halda, JavaScript nə mirasdakı dəyəri dəyişə bilir (setter yoxdur), nə də obyektin özünə yeni xüsusiyyət əlavə edə bilir (extensible false).
+  * **Yeni xüsusiyyətlər əlavə etmək:** Qadağandır.
+  * **Mövcud xüsusiyyətləri dəyişdirmək:** İcazəlidir.
+  * **Mövcud xüsusiyyətləri silmək:** İcazəlidir.
+
+**Nümunə:**
+
+```javascript
+let myObject = { a: 1 };
+
+Object.preventExtensions(myObject); 
+// myObject-a yeni xüsusiyyət əlavə etməyi qadağan edir
+
+console.log(Object.isExtensible(myObject)); 
+// Output: false (genişlənməyən)
+
+myObject.b = 2; // Yeni xüsusiyyət əlavə etməyə cəhd
+console.log(myObject); // Output: { a: 1 } (b əlavə olunmadı)
+
+myObject.a = 10; // Mövcud xüsusiyyəti dəyişdirmək
+console.log(myObject); // Output: { a: 10 } (dəyişiklik uğurlu oldu)
+
+delete myObject.a; // Mövcud xüsusiyyəti silmək
+console.log(myObject); // Output: {} (silinmə uğurlu oldu)
+
+// Strict mode-da yeni xüsusiyyət əlavə etməyə cəhd TypeError atar:
+// "use strict";
+let strictObj = {};
+Object.preventExtensions(strictObj);
+strictObj.newProp = "value"; 
+// TypeError: Cannot add property newProp, object is not extensible
+```
+
+-----
+
+#### `Object.seal()`
+
+`Object.seal()` metodu `Object.preventExtensions()` funksionallığını özündə birləşdirir və əlavə olaraq obyektin mövcud xüsusiyyətlərinin silinməsinin qarşısını alır. Lakin, mövcud xüsusiyyətlərin dəyərlərini dəyişdirmək hələ də mümkündür (əgər onlar `writable` deyillərsə).
+
+  * **Yeni xüsusiyyətlər əlavə etmək:** Qadağandır.
+  * **Mövcud xüsusiyyətləri dəyişdirmək:** İcazəlidir (xüsusiyyət `writable` olduğu müddətcə).
+  * **Mövcud xüsusiyyətləri silmək:** Qadağandır.
+
+**Nümunə:**
+
+```javascript
+let sealedObject = { name: "JavaScript", version: "ES6" };
+
+Object.seal(sealedObject); 
+// Obyektə yeni xüsusiyyətlər əlavə etməyi qadağan edir və mövcudları silməyə icazə vermir.
+
+console.log(Object.isExtensible(sealedObject)); // Output: false
+console.log(Object.isSealed(sealedObject));   // Output: true
+
+sealedObject.author = "Rashad Garayev"; 
+// Yeni xüsusiyyət əlavə etməyə cəhd
+console.log(sealedObject); 
+// Output: { name: "JavaScript", version: "ES6" } (author əlavə olunmadı)
+
+sealedObject.version = "ES2024"; 
+// Mövcud xüsusiyyəti dəyişdirmək
+console.log(sealedObject); 
+// Output: { name: "JavaScript", version: "ES2024" } (dəyişiklik uğurlu oldu)
+
+delete sealedObject.name; 
+// Mövcud xüsusiyyəti silməyə cəhd
+console.log(sealedObject); 
+// Output: { name: "JavaScript", version: "ES2024" } (silinmə uğursuz oldu)
+
+// Strict mode-da yeni xüsusiyyət əlavə etməyə cəhd TypeError atar:
+"use strict";
+let strictSealedObj = {};
+Object.seal(strictSealedObj);
+strictSealedObj.newProp = "value"; // TypeError
+```
+
+-----
+
+#### `Object.freeze()`
+
+`Object.freeze()` ən sərt metodur. Obyekti `seal` edir və əlavə olaraq bütün mövcud xüsusiyyətləri dondurur, yəni onların dəyərlərini dəyişdirmək və ya atributlarını konfiqurasiya etmək qadağan olur. Dondurulmuş obyektlər tamamilə dəyişməzdir (shallow freeze).
+
+  * **Yeni xüsusiyyətlər əlavə etmək:** Qadağandır.
+  * **Mövcud xüsusiyyətləri dəyişdirmək:** Qadağandır.
+  * **Mövcud xüsusiyyətləri silmək:** Qadağandır.
+
+**Nümunə:**
+
+```javascript
+let frozenObject = { constant: 100, message: "Hello" };
+
+Object.freeze(frozenObject); // Obyekti tamamilə dondurur
+
+console.log(Object.isExtensible(frozenObject)); // Output: false
+console.log(Object.isSealed(frozenObject));   // Output: true
+console.log(Object.isFrozen(frozenObject));   // Output: true
+
+frozenObject.newProp = "error"; 
+// Yeni xüsusiyyət əlavə etməyə cəhd
+console.log(frozenObject); 
+// Output: { constant: 100, message: "Hello" }
+
+frozenObject.constant = 200; 
+// Mövcud xüsusiyyəti dəyişdirməyə cəhd
+console.log(frozenObject); 
+// Output: { constant: 100, message: "Hello" }
+
+delete frozenObject.message; 
+// Mövcud xüsusiyyəti silməyə cəhd
+console.log(frozenObject); 
+// Output: { constant: 100, message: "Hello" }
+
+// Strict mode-da yuxarıdakı dəyişiklik cəhdləri (yeni əlavə etmək, mövcudu dəyişmək/silmək) TypeError atar:
+"use strict";
+let strictFrozenObj = { x: 1 };
+Object.freeze(strictFrozenObj);
+strictFrozenObj.x = 2; // TypeError: Cannot assign to read only property 'x'
+strictFrozenObj.y = 3; // TypeError: Cannot add property y, object is not extensible
+```
+
+
+**Qeyd:** Yuxarıdakı bütün hallarda, `strict mode`-da yuxarıda qeyd olunan qadağalara əməl edilmədikdə **`TypeError`** atılır. `Non-strict mode`-da isə bu cəhdlər sadəcə **uğursuz olur** (silent failure), yəni heç bir səhv mesajı verilmədən dəyişiklik baş vermir. Bu səbəbdən, kodunuzda gözlənilməz davranışların qarşısını almaq üçün həmişə **`strict mode`** istifadə etmək tövsiyə olunur.
 
 ---
 
-# 6.4 Xüsusiyyətləri Silmək (Deleting Properties) 🗑️
+
+# 6.4 Xüsusiyyətləri Silmək (Deleting Properties) 
 
 Obyektin xüsusiyyətlərini silmək üçün **`delete` operatorundan** istifadə olunur. Burada vacib məqam budur ki, `delete` operatoru xüsusiyyətin **dəyərinə deyil, xüsusiyyətin özünə** (yəni, açar-dəyər cütünə) təsir edir və onu obyektdən tamamilə qaldırır.
 
 ```javascript
 let book = {
   title: "JavaScript",
-  author: "John Doe",
-  year: 2023
+  author: "Rashad Garayev",
+  year: 2025
 };
 
-console.log(book);         // { title: "JavaScript", author: "John Doe", year: 2023 }
-delete book.author;        // book obyektinin "author" xüsusiyyəti silinir
-console.log(book);         // { title: "JavaScript", year: 2023 }
+console.log(book);         
+// { title: "JavaScript", author: "Rashad Garayev", year: 2025 }
+delete book.author;        
+// book obyektinin "author" xüsusiyyəti silinir
+console.log(book);         
+// { title: "JavaScript", year: 2025 }
 
-delete book["year"];       // "year" xüsusiyyəti də silinir (bracket notation ilə də işləyir)
-console.log(book);         // { title: "JavaScript" }
+delete book["year"];       
+// "year" xüsusiyyəti də silinir (bracket notation ilə də işləyir)
+console.log(book);         
+// { title: "JavaScript" }
 ```
 
 ---
@@ -1185,7 +1278,7 @@ console.log(myObj.x); // 1 (irsən gəlir)
 console.log(myObj.y); // 2 (own property)
 
 delete myObj.x; // false və ya true qaytara bilər, lakin myObj.x dəyəri dəyişməz qalır
-                // Xüsusiyyət silinmədi, çünki o, myObj-nin öz xüsusiyyəti deyil, prototipdədir.
+// Xüsusiyyət silinmədi, çünki o, myObj-nin öz xüsusiyyəti deyil, prototipdədir.
 console.log(myObj.x); // Hələ də 1
 
 delete myObj.y; // true (own property silindi)
@@ -1209,12 +1302,14 @@ let o = { x: 1, y: 2 };
 console.log(delete o.x);      // Nəticə: true (o.x silindi)
 console.log(o);               // { y: 2 }
 
-console.log(delete o.x);      // Nəticə: true (o.x artıq yoxdur, amma yenə də true qaytarır)
+console.log(delete o.x);      
+// Nəticə: true (o.x artıq yoxdur, amma yenə də true qaytarır)
 
-console.log(delete o.toString); // Nəticə: true (toString irsi xüsusiyyətdir, silmir, amma true qaytarır.
-                                // Bu, əməliyyatın sintaktik cəhətdən keçərli olduğunu göstərir, lakin obyektə təsir etmir.)
+console.log(delete o.toString); 
+// Nəticə: true (toString irsi xüsusiyyətdir, silmir, amma true qaytarır.
 
-console.log(delete 1);        // Nəticə: true (mənasız olsa da, sintaktik cəhətdən keçərlidir)
+console.log(delete 1);        
+// Nəticə: true (mənasız olsa da, sintaktik cəhətdən keçərlidir)
 ```
 
 ---
@@ -1230,18 +1325,23 @@ console.log(delete 1);        // Nəticə: true (mənasız olsa da, sintaktik c�
 
 ```javascript
 // Strict mode-da:
-// "use strict";
-// delete Object.prototype; // TypeError: Cannot delete property 'prototype' of function Object()
-// var x = 1;
-// delete x; // SyntaxError: Delete of an unqualified identifier in strict mode.
-            // Bu səhv 'delete globalThis.x;' yazmağın vacibliyinə işarə edir.
+"use strict";
+delete Object.prototype; 
+// TypeError: Cannot delete property 'prototype' of function Object()
+var x = 1;
+delete x; 
+// SyntaxError: Delete of an unqualified identifier in strict mode.
+// Bu səhv 'delete globalThis.x;' yazmağın vacibliyinə işarə edir.
 
 // Non-strict mode-da:
-console.log(delete Object.prototype);    // false
+console.log(delete Object.prototype);    
+// false
 var x = 1;
-console.log(delete x); // false (browserdə və ya Node.js-də qlobal skopda `var` ilə elan olunduğu üçün)
+console.log(delete x); 
+// false (browserdə və ya Node.js-də qlobal skopda `var` ilə elan olunduğu üçün)
 function f() {}
-console.log(delete f); // false (qlobal skopda funksiya deklarasiyası olduğu üçün)
+console.log(delete f); 
+// false (qlobal skopda funksiya deklarasiyası olduğu üçün)
 ```
 
 ---
@@ -1256,17 +1356,20 @@ Lakin **Strict mode**-da, ixtisaslaşdırılmamış identifikatorların (`unqual
 "use strict";
 
 var myGlobalVar = "Hello";
-// delete myGlobalVar; // SyntaxError: Delete of an unqualified identifier in strict mode.
+delete myGlobalVar; 
+// SyntaxError: Delete of an unqualified identifier in strict mode.
 
-delete globalThis.myGlobalVar; // ✅ Strict mode-da düzgün yazılışdır.
+delete globalThis.myGlobalVar; 
+// ✅ Strict mode-da düzgün yazılışdır.
 console.log(myGlobalVar); // undefined
 
 // const və let ilə elan edilmiş qlobal dəyişənlər heç vaxt silinə bilməz.
-// delete globalThis.myConst; // Həmişə false və ya TypeError (qlobal obyektdə property kimi yoxdur).
+delete globalThis.myConst; 
+// Həmişə false və ya TypeError (qlobal obyektdə property kimi yoxdur).
 ```
 
 ---
-# 6.5 Xüsusiyyətləri Yoxlamaq (Testing Properties) 🧪✅
+# 6.5 Xüsusiyyətləri Yoxlamaq (Testing Properties)
 
 Obyektin müəyyən bir **xüsusiyyətə (property)** malik olub-olmadığını yoxlamaq çox vacibdir. Bu, kodumuzun daha etibarlı işləməsinə kömək edir. Bunun üçün bir neçə üsul var.
 
@@ -1301,37 +1404,86 @@ let o = { x: 1 };
 
 o.hasOwnProperty("x");        // => true  ('x' 'o'-nun öz xüsusiyyətidir)
 o.hasOwnProperty("y");        // => false ('y' 'o'-da yoxdur)
-o.hasOwnProperty("toString"); // => false ('toString' miras alınıb, 'o'-nun öz xüsusiyyəti deyil)
+o.hasOwnProperty("toString"); 
+// => false ('toString' miras alınıb, 'o'-nun öz xüsusiyyəti deyil)
 ```
 Bu metod `for/in` dövrü ilə birlikdə yalnız obyektin öz xüsusiyyətlərini gəzmək üçün çox faydalıdır:
 
 ```javascript
-for (let p in o) {
-  if (o.hasOwnProperty(p)) {
-    console.log(p); // Output: "x" (yalnız 'o'-nun öz xüsusiyyətlərini göstərir)
+const user = {
+  name: "Rəşad",
+  age: 25
+};
+
+// Prototipə əlavə olunur
+Object.prototype.extra = "Bu mirasdır";
+
+for (let key in user) {
+  if (user.hasOwnProperty(key)) {
+    console.log(`${key} → ${user[key]}`);
   }
 }
+/* 
+name → Rəşad
+age → 25
+*/
+```
+
+Əgər `hasOwnProperty()` istifadə etməsəydik, bu da çıxacaqdı:
+
+```
+extra → Bu mirasdır
 ```
 
 ---
 
 ### 3️⃣ `propertyIsEnumerable()` metodu 📝
 
-Bu metod yoxlayır ki, xüsusiyyət:
-1.  Obyektin **özünə aiddirmi (own property)**?
-2.  Onun **`enumerable` atributu `true`**-durmu? (`enumerable` - "sayıla bilən" və ya "gəzilə bilən" deməkdir)
+Bu metod yoxlayır ki, bir xüsusiyyət:
 
-* **Sintaksis:** `obyekt.propertyIsEnumerable("xüsusiyyət_adı")`
-* **Nəticə:** Hər iki şərt ödənilirsə `true`, əks halda `false` qaytarır.
+1. Obyektin **özünə aiddirmi** (yəni miras alınıb yoxsa yox)?
+2. Və **gəzilə biləndirmi** (`enumerable: true`)?
+
+**Sadə dillə:** Əgər xüsusiyyət **öz obyektindədirsə** və **gizlənməyibsə**, bu metod `true` qaytarır.
+
+---
+
+### Sintaksis:
 
 ```javascript
-let o = { x: 1 };
-o.propertyIsEnumerable("x");        // => true (öz enumerable xüsusiyyətidir)
+obyekt.propertyIsEnumerable("xüsusiyyət_adı")
+```
 
-o.propertyIsEnumerable("toString"); // => false (miras alınıb və enumerable deyil)
+---
 
-// Massivin 'length' xüsusiyyəti öz xüsusiyyətidir, amma enumerable deyil:
-[1, 2].propertyIsEnumerable("length"); // => false
+### Praktik və Aydın Nümunə:
+
+Təsəvvür et ki, çantan var. İçində 2 görünən, 1 gizli əşya var:
+
+```javascript
+const bag = {
+  pen: "🖊️",
+  notebook: "📓"
+};
+
+// Gizli məktub əlavə edirik
+Object.defineProperty(bag, "secretLetter", {
+  value: "📜",
+  enumerable: false // gizli et!
+});
+```
+
+İndi yoxlayaq hansı görünür:
+
+```javascript
+console.log(Object.keys(bag)); 
+// 👉 ["pen", "notebook"] → `secretLetter` görünmür!
+
+console.log(bag.propertyIsEnumerable("pen")); 
+// ✅ true → çantada görünür
+
+console.log(bag.propertyIsEnumerable("secretLetter")); 
+// ❌ false → çantada gizlənib, görünmür
 ```
 
 ---
@@ -1344,11 +1496,15 @@ Bu üsul, xüsusiyyətin dəyərinin `undefined` olub-olmadığını yoxlayır. 
 * **Nəticə:** Dəyəri `undefined`-dan fərqlidirsə `true`, `undefined` və ya xüsusiyyət yoxdursa `false` qaytarır.
 
 ```javascript
-let o = { x: undefined, y: 2 }; // 'x' property'si var, amma dəyəri undefined
+let o = { x: undefined, y: 2 }; 
+// 'x' property'si var, amma dəyəri undefined
 
-o.x !== undefined;       // => false (xüsusiyyət var, amma dəyəri undefined-dır)
-o.y !== undefined;       // => true  (xüsusiyyət var və dəyəri undefined deyil)
-o.z !== undefined;       // => false (xüsusiyyət mövcud deyil)
+o.x !== undefined;       
+// => false (xüsusiyyət var, amma dəyəri undefined-dır)
+o.y !== undefined;       
+// => true  (xüsusiyyət var və dəyəri undefined deyil)
+o.z !== undefined;       
+s// => false (xüsusiyyət mövcud deyil)
 
 // Müqayisə üçün 'in' operatoru ilə:
 "x" in o;                // => true  ('x' xüsusiyyəti mövcuddur)
@@ -1369,11 +1525,24 @@ Bu metodlar obyektin **özünəməxsus xüsusiyyətlərinin adlarını** (yaxud 
     ```
 * **`Object.getOwnPropertyNames(o)`**: Obyektin **özünə aid olan** (enumerable olub-olmadığından asılı olmayaraq) xüsusiyyətlərinin adlarını qaytarır.
     ```javascript
-    let o = { x: 1 };
-    Object.defineProperty(o, "y", { value: 2, enumerable: false }); // 'y' enumerable deyil
-    Object.keys(o);                // => ["x"]
-    Object.getOwnPropertyNames(o); // => ["x", "y"]
+    const user = { name: "Rəşad" };
+
+    // Yeni xüsusiyyət əlavə edirik: 'password'
+    Object.defineProperty(user, "password", {
+    value: "123456",
+    enumerable: false // gizli saxla!
+    });
+
+    console.log(Object.keys(user));
+    //  ["name"] → 'password' gizlidir, görünmür
+
+    console.log(Object.getOwnPropertyNames(user));
+    //  ["name", "password"] → hər ikisi öz xüsusiyyətidir, görünür
+
+    console.log(user.propertyIsEnumerable("password"));
+    //  false → gizlidir, for...in və Object.keys ilə gəlməyəcək
     ```
+    
 * **`Object.getOwnPropertySymbols(o)`**: Obyektin **özünə aid olan Symbol** xüsusiyyətlərini qaytarır.
     ```javascript
     const mySymbol = Symbol("id");
@@ -1393,11 +1562,10 @@ Object.keys(o).includes("email"); // => false
 
 * **`in` operatoru** xüsusiyyətin mövcudluğunu dəyərindən asılı olmayaraq yoxlamaq üçün ən doğru seçimdir (öz və ya miras alınmış).
 * **`hasOwnProperty()`** yalnız obyektin öz xüsusiyyətlərini nəzərə almaq lazım gəldikdə vacibdir.
-* Sadə `!== undefined` yoxlama isə qısa kod yazmaq üçün əlverişlidir, amma xüsusiyyətin dəyəri `undefined` ola biləcəyi üçün **həmişə dəqiq nəticə vermir**.
 
 ---
 
-# 6.6 Xüsusiyyətləri Siyahıya Almaq (Enumerating Properties) 🔄📜
+# 6.6 Xüsusiyyətləri Siyahıya Almaq (Enumerating Properties)
 
 JavaScript-də bəzən obyektin **tək bir xüsusiyyətini yox, bütün xüsusiyyətlərini (properties)** siyahı şəklində almaq və ya onlar üzərində dövr etmək (iterate) lazım olur. Bunun üçün müxtəlif üsullar mövcuddur.
 
@@ -1417,7 +1585,8 @@ let o = { a: 1, b: 2, c: 3 };
 console.log(o.propertyIsEnumerable("toString")); // => false
 
 for (let p in o) {
-  console.log(p); // Output: a, b, c (toString kimi miras alınan non-enumerable-lər göstərilməz)
+  console.log(p); 
+  // Output: a, b, c (toString kimi miras alınan non-enumerable-lər göstərilməz)
 }
 ```
 
@@ -1425,7 +1594,7 @@ for (let p in o) {
 
 ### 2️⃣ `for/in` ilə miras alınan xüsusiyyətlərdən qorunmaq 🛡️
 
-`for/in` dövrü həm obyektin öz xüsusiyyətlərini, həm də miras aldığı (ənumerable olan) xüsusiyyətləri siyahıya alır. Bəzən bizə yalnız obyektin **öz xüsusiyyətləri** lazım olur. Bu halda `hasOwnProperty()` metodundan istifadə edirik:
+`for/in` dövrü həm obyektin öz xüsusiyyətlərini, həm də miras aldığı xüsusiyyətləri siyahıya alır. Bəzən bizə yalnız obyektin **öz xüsusiyyətləri** lazım olur. Bu halda `hasOwnProperty()` metodundan istifadə edirik:
 
 ```javascript
 let proto = { p: 1 };
@@ -1438,130 +1607,264 @@ for (let prop in o) {
   console.log(prop); // Output: x, y (p göstərilməz)
 }
 ```
-Əlavə olaraq, yalnız **data xüsusiyyətlərini** (metodları yox) gəzmək istəyirsənsə:
+
+---
+
+### 3️⃣ Alternativ Yanaşma: `Object.keys()` + `for/of` 🎯
+
+`for...in` dövrünün **təhlükəsiz alternativi**, obyektin öz xüsusiyyətlərini əvvəlcə massiv kimi almaq, sonra üzərindən `for...of` ilə keçməkdir.
+
+---
+
+###  1. `Object.keys(obj)` → `enumerable` öz property-ləri (string)
 
 ```javascript
-for (let prop in o) {
-  if (typeof o[prop] === "function") continue;  // Funksiyaları ötür
-  console.log(prop);
+const user = { name: "Ayan", age: 22 };
+
+for (let key of Object.keys(user)) {
+  console.log(`${key}: ${user[key]}`);
 }
+// ✅ name: Ayan
+// ✅ age: 22
 ```
 
 ---
 
-### 3️⃣ Alternativ: `Object.keys()` və `for/of` dövrü 🎯
-
-`for/in` dövrünə alternativ olaraq, obyektin xüsusiyyətlərinin adlarını bir **massiv şəklində almaq** və sonra bu massiv üzərində `for/of` dövrü ilə keçmək daha rahat və dəqiq ola bilər. Bu metodlar yalnız **obyektin öz xüsusiyyətlərini** qaytarır (miras alınanları yox).
-
-Aşağıdakı metodlar bu məqsədlə istifadə olunur:
-
-| Metod                            | Nə edir?                                                                                              |
-| :------------------------------- | :---------------------------------------------------------------------------------------------------- |
-| `Object.keys(obj)`               | Obyektin **`enumerable` olan öz xüsusiyyətlərinin** adlarını (string kimi) massivdə qaytarır.        |
-| `Object.getOwnPropertyNames(obj)`| Obyektin **bütün öz xüsusiyyətlərinin** (enumerable və non-enumerable string adları) massivini qaytarır.|
-| `Object.getOwnPropertySymbols(obj)`| Obyektin **bütün öz `Symbol`** xüsusiyyətlərini massivdə qaytarır.                                   |
-| `Reflect.ownKeys(obj)`           | Obyektin **bütün öz xüsusiyyətlərinin** (həm string, həm də Symbol adları, enumerable/non-enumerable fərqi yoxdur) massivini qaytarır. Ən geniş siyahıdır. |
-
----
-
-### 4️⃣ Misal: `Object.keys()` və `for/of` istifadəsi
+###  2. `Object.getOwnPropertyNames(obj)` → **bütün string adlar** (görünən + gizli)
 
 ```javascript
-let o = { a: 1, b: 2, c: 3 };
+const user = {};
+Object.defineProperty(user, "hidden", {
+  value: "gizli",
+  enumerable: false
+});
 
-for (let key of Object.keys(o)) { // Object.keys(o) => ["a", "b", "c"] massivini qaytarır
-  console.log(key); // Output: a, b, c
-}
-
-// Xüsusiyyətin dəyərinə daxil olmaq:
-for (let key of Object.keys(o)) {
-  console.log(`${key}: ${o[key]}`); // Output: a: 1, b: 2, c: 3
-}
+console.log(Object.getOwnPropertyNames(user));
+// ✅ ["hidden"]
 ```
-Bu üsul `for/in` ilə müqayisədə daha çox istifadə olunur, çünki o, yalnız obyektin öz xüsusiyyətlərini verir və daha proqnozlaşdırıla bilən bir ardıcıllıq təmin edir.
 
 ---
 
-### 6.6.1 Xüsusiyyətlərin Siyahıya Alınma Qaydası (Property Enumeration Order) 📋➡️
+### 3. `Object.getOwnPropertySymbols(obj)` → `Symbol` property-ləri
 
-ES6 (ECMAScript 2015) standartı **obyektin xüsusiyyətlərinin siyahıya alınma qaydasını** (məsələn, `Object.keys()` kimi metodlarda) dəqiq şəkildə təyin edib. Bu sıralama ardıcıllığı aşağıdakı kimidir:
+```javascript
+const id = Symbol("id");
+const user = { [id]: 42 };
 
-1.  **Rəqəm kimi görünən string adları olan xüsusiyyətlər:** Əvvəlcə, xüsusiyyət adları mənfi olmayan tam ədədlər kimi qəbul edilə bilən stringlər (məsələn, `"0"`, `"1"`, `"10"`) ən kiçikdən ən böyüyə doğru sıralanır. Bunlar adətən massiv indeksləri kimi düşünülə bilər.
-2.  **Digər string adları olan xüsusiyyətlər:** Daha sonra yerdə qalan bütün string adlı xüsusiyyətlər (məsələn, `"name"`, `"-5"`, `"3.14"`) **obyektə əlavə olunma sırasına** görə siyahıya alınır.
-3.  **`Symbol` adları olan xüsusiyyətlər:** Sonda isə **`Symbol` tipli açar adı olan xüsusiyyətlər** obyektə əlavə olunma sırasına görə göstərilir.
-
----
-
-### `for/in` dövründə sıralanma qaydası
-
-* `for/in` dövründə xüsusiyyətlərin sıralanma qaydası **ES6 standartında tam dəqiq göstərilməyib**, yəni brauzerdən-brauzerə və ya mühitdən-mühitə fərqliliklər ola bilər. Lakin praktikada əksər müasir mühitlərdə yuxarıdakı qaydaya bənzər şəkildə sıralanır.
-* `for/in` həmçinin **prototip zənciri (proto chain)** boyunca yuxarı qalxaraq miras alınan `enumerable` xüsusiyyətləri də siyahıya əlavə edir.
-* Əgər zəncir boyu eyni adda olan bir xüsusiyyət artıq siyahıya alınmışsa, o, təkrar siyahıya daxil edilmir, hətta prototipdəki xüsusiyyət `non-enumerable` olsa belə (bu, xüsusiyyətin "kölgələnməsi" səbəbindən olur).
+console.log(Object.getOwnPropertySymbols(user));
+// ✅ [ Symbol(id) ]
+```
 
 ---
 
-### Qısa Nəticə ✨
+###  4. `Reflect.ownKeys(obj)` → **hər şeyi qaytarır** (string + symbol, gizli və görünən)
 
-* Obyektin bütün xüsusiyyətlərini siyahıya almaq və üzərində dövr etmək üçün **`Object.keys()`** (ən çox istifadə olunan), **`Object.getOwnPropertyNames()`**, **`Object.getOwnPropertySymbols()`**, və **`Reflect.ownKeys()`** kimi metodlar çox faydalıdır.
-* **`for/in` dövrü** həm öz, həm də miras alınan `enumerable` xüsusiyyətləri sadalayır, bu səbəbdən yalnız öz xüsusiyyətlərini istəyəndə **`hasOwnProperty()`** ilə əlavə yoxlamalar lazım ola bilər.
-* Xüsusiyyətlərin **siyahıya alınma qaydası** ES6 standartına əsasən müəyyən olunub, əsasən rəqəm tipli string indekslər əvvəl gəlir, sonra digər stringlər, sonda isə Symbollar.
+```javascript
+const id = Symbol("id");
+const user = { name: "Leyla", [id]: 99 };
+
+Object.defineProperty(user, "secret", {
+  value: "🙊",
+  enumerable: false
+});
+
+console.log(Reflect.ownKeys(user));
+// ✅ ["name", "secret", Symbol(id)]
+```
 
 ---
 
-# 6.7 Obyektləri Genişləndirmək (Extending Objects) 🧩✨
+##  6.6.1 Xüsusiyyətlərin Siyahıya Alınma Qaydası (Enumeration Order)
+
+### 📋 JavaScript-də obyektin property-ləri necə sıralanır?
+
+ES6 standartına görə 3 mərhələli sıralama var:
+
+---
+
+### ✅ 1. **Rəqəm kimi görünən stringlər** → Kiçikdən böyüyə
+
+```javascript
+const obj1 = {
+  "2": "iki",
+  "10": "on",
+  "1": "bir",
+};
+
+console.log(Object.keys(obj1)); 
+// ✅ ["1", "2", "10"]
+```
+
+> Rəqəm kimi görünən stringlər (`"1"`, `"2"`, `"10"`) əvvəlcə **rəqəm kimi** sıralanır.
+
+---
+
+### ✅ 2. **Adi string adlar** → Əlavə olunma sırasına görə
+
+```javascript
+const obj2 = {
+  banana: "🍌",
+  apple: "🍎",
+  cherry: "🍒"
+};
+
+console.log(Object.keys(obj2)); 
+// ✅ ["banana", "apple", "cherry"]
+```
+
+> Rəqəm olmayan string adlar **əlavə olunma sırasına** görə gedir.
+
+---
+
+### ✅ 3. **Symbol xüsusiyyətlər** → Əlavə olunma sırasına görə, ən sonda
+
+```javascript
+const sym1 = Symbol("a");
+const sym2 = Symbol("b");
+
+const obj3 = {
+  x: 1,
+  [sym1]: "💡",
+  y: 2,
+  [sym2]: "🔐"
+};
+
+console.log(Reflect.ownKeys(obj3)); 
+// ✅ ["x", "y", Symbol(a), Symbol(b)]
+```
+
+> `Symbol` adları **ən sonda** gəlir — həm `Object.getOwnPropertySymbols()` ilə, həm də `Reflect.ownKeys()` ilə görünür.
+
+---
+
+### ⚠️ `for...in` Dövründə Qaydalar
+
+```javascript
+const base = { inherited: "🧬" };
+const obj = Object.create(base);
+obj["3"] = "üç";
+obj["1"] = "bir";
+obj["z"] = "z hərfi";
+
+for (let key in obj) {
+  console.log(key);
+}
+// "1", "3", "z", "inherited"
+```
+
+---
+
+# 6.7 Obyektləri Genişləndirmək (Extending Objects)
 
 JavaScript-də tez-tez bir obyektin xüsusiyyətlərini (properties) başqa bir obyektə **kopyalamaq** lazım gəlir. Bu, obyektləri birləşdirmək və ya default dəyərləri təyin etmək üçün istifadə olunur.
 
 ---
 
-### 1️⃣ `Object.assign()` — Standart Genişləndirmə Funksiyası ⚙️
+### 1️⃣ `Object.assign()` → Obyektləri birləşdirmək üçün ⚙️
 
-**ES6 (ECMAScript 2015)** ilə gələn `Object.assign()` funksiyası obyektlərin xüsusiyyətlərini kopyalamaq üçün ən çox istifadə olunan standart metoddur.
+`Object.assign()` ES6 ilə gəldi və bir neçə obyektin **xüsusiyyətlərini birləşdirmək/kopyalamaq** üçün istifadə olunur.
 
-* **Necə işləyir?**
-    * İlk arqument **`target` (hədəf) obyekti** olur. Xüsusiyyətlər bu obyektə kopyalanır və funksiya sonda bu obyektin özünü qaytarır.
-    * Sonrakı arqumentlər **`source` (mənbə) obyektləri** olur. Onlar dəyişdirilmir.
-    * Hər `source` obyektin **`enumerable` (sayıla bilən) öz xüsusiyyətləri** (həmçinin `Symbol` açarları) `target` obyektə kopyalanır.
-    * `source` obyektlər arqument sırasına görə işlənir. Yəni, əgər sonrakı `source` obyektlərdə əvvəlkilərlə eyni adlı xüsusiyyət varsa, **sonrakı dəyər əvvəlkinin üzərinə yazır** (overwrite edir).
+---
+
+### 📌 Sintaksis:
 
 ```javascript
-let target = { x: 1 };
-let source1 = { y: 2, z: 3 };
-let source2 = { z: 4, a: 5 };
+Object.assign(target, ...sources)
+```
+
+* `target`: Nəticə bu obyektə yazılır (birbaşa dəyişir).
+* `sources`: Kopyalanacaq obyektlər. Əvvəlkiləri sonrakılar "əvəz edə" bilər.
+
+---
+
+### 🔍 Nümunə:
+
+```javascript
+const target = { x: 1 };
+const source1 = { y: 2, z: 3 };
+const source2 = { z: 4, a: 5 };
 
 Object.assign(target, source1, source2);
-console.log(target); // => { x: 1, y: 2, z: 4, a: 5 }
-// Qeyd: source2-dəki 'z: 4' source1-dəki 'z: 3'-ün üzərinə yazdı.
+console.log(target); 
+// ✅ { x: 1, y: 2, z: 4, a: 5 }
 ```
 
 ---
 
-### 2️⃣ Getter və Setter-lərlə əlaqə 🔄
+### 🧠 Nə baş verdi?
 
-`Object.assign()` xüsusiyyətləri kopyalayarkən, onları adi dəyərlər (data properties) kimi oxuyur və yazır. Əgər `source` obyektdə **`getter` və ya `setter`** (accessor property) varsa, `Object.assign()` onları **funksiya kimi kopyalamır**. Sadəcə `getter` funksiyasını çağırır, qaytardığı dəyəri alır və `target` obyektə adi bir dəyər kimi yazır.
+* `source1` → `y` və `z` əlavə olundu.
+* `source2` → `z`-ni yenidən **əvəz etdi**, `a` əlavə olundu.
+* `target` dəyişdirildi və nəticə **özünə** yazıldı.
 
 ---
 
-### 3️⃣ Default Dəyərlər və Üzərinə Yazma (Defaults & Overrides) 🎯
+### ⚠️ Diqqət:
 
-Tutaq ki, `defaults` adlı bir obyektdə müəyyən default xüsusiyyətlər var və sən onları `o` adlı başqa bir obyektə tətbiq etmək istəyirsən. Əgər `Object.assign(o, defaults)` yazsan, bu, **`o` obyektinin mövcud xüsusiyyətlərini `defaults`-dakı dəyərlərlə üstələyəcək (overwrite edəcək)**, bu da adətən istənilən davranış deyil.
-
-Default dəyərləri düzgün tətbiq etmək (yəni, yalnız `o`-da olmayanları əlavə etmək) üçün `Object.assign()`-i belə istifadə etməlisən:
+* Dərin kopyalama (deep copy) **etmir**. Yalnız **səthi (shallow)** kopyalayır.
 
 ```javascript
-let defaults = { color: "red", size: "medium" };
-let userSettings = { size: "large", font: "Arial" }; // Kullanıcının öz ayarları
+const obj1 = { nested: { val: 1 } };
+const obj2 = Object.assign({}, obj1);
 
-// Düzgün yol: Boş obyektə defaults kopyalanır, sonra userSettings üstün yazılır
-// Bu şəkildə userSettings-dəki dəyərlər defaults-dakıları "üstələyir", yəni prioritet daşıyır.
-let finalSettings = Object.assign({}, defaults, userSettings);
-console.log(finalSettings); // => { color: "red", size: "large", font: "Arial" }
+obj2.nested.val = 99;
+console.log(obj1.nested.val); 
+// ❗️ 99 → hər ikisi eyni "nested" obyektə baxır!
 ```
-Bu yolla əvvəl `defaults` bir boş obyektə kopyalanır, sonra `userSettings`-in xüsusiyyətləri həmin obyektə kopyalanır. `userSettings`-dəki dəyərlər `defaults`-dakı eyni adlı dəyərləri üstələyir.
+
 
 ---
 
-### 4️⃣ Spread Operatoru (`...`) ilə Oxşar Əməliyyat ✨
+### 2️⃣ Default Dəyərlər və Üstələmə (Overrides) 🎯
+
+Bəzən istifadəçidən gələn ayarlar var (`userSettings`), bəzən isə proqramın öz təyin etdiyi **default dəyərlər** (`defaults`). Biz istəyirik ki:
+
+✅ `userSettings` varsa → onu götürsün
+✅ Yoxdursa → `defaults`-dan istifadə olunsun
+
+---
+
+### ❌ Səhv Yanaşma:
+
+```javascript
+Object.assign(userSettings, defaults); 
+// defaults → userSettings-in üstündən yazır!
+```
+
+---
+
+### ✅ Düzgün Yanaşma:
+
+```javascript
+const defaults = { color: "red", size: "medium" };
+const userSettings = { size: "large", font: "Arial" };
+
+// Əvvəl defaults → boş obyektə kopyalanır,
+// sonra userSettings → onun üstünə yazılır
+const final = Object.assign({}, defaults, userSettings);
+
+console.log(final); 
+// ✅ { color: "red", size: "large", font: "Arial" }
+```
+
+---
+
+### İzah:
+
+```text
+{}                        // Boş obyekt (müdaxilə etməmək üçün)
+↓
++ defaults               // { color: "red", size: "medium" }
+↓
++ userSettings           // { size: "large", font: "Arial" }
+↓
+= final result           // { color: "red", size: "large", font: "Arial" }
+```
+
+---
+
+
+### 4️⃣ Spread Operatoru (`...`) ilə Oxşar Əməliyyat 
 
 **ES6 (ES2015)** ilə gələn **spread operatoru (`...`)** obyektləri birləşdirmək üçün daha qısa və oxunaqlı bir sintaksis təklif edir. Bu, `Object.assign()` ilə eyni şəkildə işləyir:
 
@@ -1571,55 +1874,71 @@ let userSettings = { size: "large", font: "Arial" };
 
 // Spread operatoru ilə:
 let finalSettings = { ...defaults, ...userSettings };
-console.log(finalSettings); // => { color: "red", size: "large", font: "Arial" }
+console.log(finalSettings); 
+// => { color: "red", size: "large", font: "Arial" }
 ```
-Bu sintaksis daha çox üstünlük verilir, çünki daha aydın və lakonikdir.
 
 ---
 
-### 5️⃣ Özümüzün `merge()` Funksiyamız — Yalnız Olmayanları Əlavə Etmək ✅
+### 5️⃣ Öz `merge()` Funksiyamız – Yalnız Olmayanları Əlavə Et 🛠️
 
-`Object.assign()` (və spread operatoru) mövcud xüsusiyyətləri üstələyir. Lakin bəzən biz yalnız **`target` obyektdə hələ mövcud olmayan** xüsusiyyətləri `source` obyektlərdən əlavə etmək istəyirik. Yəni, `target`-dəki mövcud dəyərlər qorunsun.
+**Məqsəd:** `Object.assign()` kimi *üstələməsin*. Əksinə, **target-də olmayanları əlavə etsin**, olanlara **toxunmasın**.
 
-Bunun üçün özümüzə aid bir `merge()` funksiyası yaza bilərik:
+---
+
+### 🧠 Niyə Lazımdır?
 
 ```javascript
-function merge(target, ...sources) { // '...sources' birdən çox source obyekt qəbul edir
-  for (let source of sources) {
-    for (let key of Object.keys(source)) { // Hər source obyektin öz enumerable açarlarını gəz
-      if (!(key in target)) {  // Yalnız target obyektdə bu açar yoxdursa əlavə et
+Object.assign(target, source);
+// source target-dəki dəyərləri üstələyir (overwrite)
+```
+
+Amma bəzən:
+
+* İstəyirik `target` dəyişməsin.
+* Yalnız `source`-dakı **yeni açarlar** əlavə olunsun.
+
+---
+
+### ✅ Öz `merge()` funksiyamız:
+
+```javascript
+function merge(target, ...sources) {
+  for (const source of sources) {
+    for (const key of Object.keys(source)) {
+      if (!(key in target)) {
         target[key] = source[key];
       }
     }
   }
-  return target; // Dəyişdirilmiş target obyekti qaytar
+  return target;
 }
-```
-
-**Misal:**
-
-```javascript
-let obj1 = { x: 1 };
-let obj2 = { x: 2, y: 2 };
-let obj3 = { y: 3, z: 4 };
-
-console.log(Object.assign({}, obj1, obj2, obj3));
-// => { x: 2, y: 3, z: 4 } (Object.assign hər şeyi üstələyir)
-
-console.log(merge(obj1, obj2, obj3));
-// => { x: 1, y: 2, z: 4 } (merge yalnız mövcud olmayanı əlavə edir, 'x:1' və 'y:2' qaldı)
-// Qeyd: obj1 özü də dəyişir, çünki 'target' odur.
 ```
 
 ---
 
-### 6️⃣ Digər Faydalı Yardımçı Funksiyalar (Utilities) 🛠️
+### 🎯 Nümunə:
 
-Eyni məntiqlə, obyektlərlə işləmək üçün başqa funksiyalar da yaza bilərik:
+```javascript
+let defaults = { theme: "light", fontSize: 14 };
+let user1 = { fontSize: 18 }; // yalnız font dəyişib
+let user2 = { layout: "grid" }; // əlavə ayar
 
-* **`restrict(target, allowedKeys)`**: `target` obyektinin yalnız `allowedKeys` massivində olan xüsusiyyətlərini saxlayar, digərlərini silər.
-* **`subtract(target, keysToRemove)`**: `target` obyektindən `keysToRemove` massivində olan xüsusiyyətləri silər.
-* Bu cür funksiyalar kodun daha təmiz və təkrar olunmadan yazılmasına kömək edir.
+merge(user1, defaults, user2);
+
+console.log(user1);
+// ✅ { fontSize: 18, theme: "light", layout: "grid" }
+// Qeyd: 'fontSize' dəyişməyib, çünki artıq var idi
+```
+
+---
+
+###  Fərq nədir?
+
+| Funksiya            | Davranış                                                |
+| ------------------- | ------------------------------------------------------- |
+| `Object.assign()`   | Hər şeyi üstələyir (mövcud açarlar da dəyişir)          |
+| `merge()` | Mövcud olanları saxlayır, yalnız olmayanları əlavə edir |
 
 ---
 
@@ -1628,13 +1947,11 @@ Eyni məntiqlə, obyektlərlə işləmək üçün başqa funksiyalar da yaza bil
 * Obyektdən obyektə xüsusiyyətləri kopyalamaq üçün **`Object.assign()`** ən standart yoldur.
 * **Spread operatoru (`...`)** daha müasir və oxunaqlı bir alternativ təqdim edir.
 * Əgər mövcud dəyərləri qoruyaraq yalnız əskik xüsusiyyətləri əlavə etmək istəyirsənsə, öz **`merge()`** funksiyasını yaza bilərsən.
-* Bu texnikalar JavaScript-də obyektlərlə işləyərkən çox faydalıdır.
-
 ---
 
 # 6.8 Obyektləri Serializasiya Etmək (Serializing Objects) 📦➡️📝
 
-### Serializasiya Nədir? 🤔
+### Serializasiya Nədir?
 
 **Serializasiya** obyektin (və ya başqa bir məlumatın) strukturunu və dəyərlərini, onu **mətndən ibarət bir formaya (string)** çevirmək prosesidir. Bunun məqsədi məlumatı saxlamaq (faylda, verilənlər bazasında) və ya şəbəkə üzərindən başqa bir sistemə göndərməkdir. Sonra bu string yenidən orijinal obyektə çevrilə bilər.
 
@@ -1652,17 +1969,17 @@ JavaScript-də bu məqsədlə iki əsas funksiya istifadə olunur:
 **Misal:**
 
 ```javascript
-let o = { x: 1, y: { z: [false, null, "Salam"] } }; // Orijinal JavaScript obyekti
+let user = { name: "Ayan", age: 25 };
 
-// Obyekti JSON stringə çeviririk:
-let s = JSON.stringify(o);
-console.log(s);
-// Nəticə: '{"x":1,"y":{"z":[false,null,"Salam"]}}' (JSON string)
+// 1️⃣ Obyekti JSON stringə çevir:
+let jsonString = JSON.stringify(user);
+console.log(jsonString);
+// 👉 Nəticə: '{"name":"Ayan","age":25}'
 
-// JSON stringi yenidən JavaScript obyektinə çeviririk:
-let p = JSON.parse(s);
-console.log(p);
-// Nəticə: { x: 1, y: { z: [false, null, "Salam"] } } (Orijinal obyektə oxşar)
+ // 2️⃣ JSON stringi yenidən obyektə çevir:
+let parsedUser = JSON.parse(jsonString);
+console.log(parsedUser);
+// 👉 Nəticə: { name: "Ayan", age: 25 }
 ```
 
 ---
@@ -1694,20 +2011,92 @@ JSON formatı yalnız müəyyən tipli dəyərləri dəstəkləyir:
 
     Bu tipli dəyərlərə malik xüsusiyyətlər `JSON.stringify()` tərəfindən **sadəcə stringdən çıxarılır** (silinir) və JSON stringinə daxil edilmir.
 
+```javascript
+JSON.stringify({ a: 5, b: undefined });
+// 👉 Nəticə: '{"a":5}'  — `b` silinir
+
+JSON.stringify({ a: NaN });
+// 👉 Nəticə: '{"a":null}'
+
+JSON.stringify({ a: () => 42 });
+// 👉 Nəticə: '{}' — funksiyalar çıxarılır
+
+JSON.stringify({ d: new Date() });
+// 👉 Nəticə: '{"d":"2025-06-28T10:00:00.000Z"}'
+
+JSON.stringify({ sym: Symbol("id") });
+// 👉 Nəticə: '{}' — Symbol silinir
+```        
+
 ---
 
-### İkinci Arqument — Serializasiyanı Fərdiləşdirmə 🎛️
 
-`JSON.stringify()` və `JSON.parse()` funksiyalarının hər ikisinin **optional (ixtiyari) ikinci arqumenti** var. Bu arqumentlər serializasiya və ya parsing prosesini **fərdiləşdirməyə** imkan verir:
+###  İkinci Arqument — Serializasiyanı və Parsing-i Fərdiləşdirmək
 
-* **`JSON.stringify(value, replacer, space)`**:
-    * `replacer`: Bu, bir massiv (hansı xüsusiyyətlərin daxil ediləcəyini göstərir) və ya bir funksiya (dəyərləri dəyişdirmək üçün) ola bilər.
-    * `space`: JSON stringini oxunaqlı etmək üçün boşluq və ya tab əlavə edir.
+Hem `JSON.stringify()` hem də `JSON.parse()` funksiyaları üçün ikinci arqument fərdiləşdirmə üçündür:
 
-* **`JSON.parse(text, reviver)`**:
-    * `reviver`: JSON stringi obyektə çevrilərkən hər açar/dəyər cütünü emal etmək üçün bir funksiya. Məsələn, yuxarıda qeyd olunan tarix stringlərini `Date` obyektinə çevirmək üçün istifadə oluna bilər.
+---
 
-Bu fərdiləşdirmə imkanları ilə JSON-u öz ehtiyaclarına uyğunlaşdıra bilərsən.
+### ✅ `JSON.stringify(value, replacer, space)`
+
+#### 1. `replacer` — Hansı sahələrin saxlanacağını və necə görünəcəyini təyin edir.
+
+🔹 **Massiv kimi (`string[]`)**: Yalnız bu sahələr daxil edilir:
+
+```javascript
+let obj = { a: 1, b: 2, c: 3 };
+let json = JSON.stringify(obj, ["a", "c"]);
+console.log(json); // 👉 '{"a":1,"c":3}'
+```
+
+🔹 **Funksiya kimi**: Hər sahənin dəyərini dəyişmək mümkündür:
+
+```javascript
+let obj = { a: 1, b: 2 };
+let json = JSON.stringify(obj, (key, value) => {
+  return typeof value === "number" ? value * 10 : value;
+});
+console.log(json); // 👉 '{"a":10,"b":20}'
+```
+
+#### 2. `space` — JSON stringini gözəlləşdirir (indentasiya)
+
+```javascript
+let obj = { a: 1, b: { c: 2 } };
+let json = JSON.stringify(obj, null, 2); // 2 boşluqla indent
+console.log(json);
+/*
+{
+  "a": 1,
+  "b": {
+    "c": 2
+  }
+}
+*/
+```
+
+---
+
+### ✅ `JSON.parse(text, reviver)`
+
+#### `reviver` — JSON parse edilərkən sahələrin dəyərini dəyişmək imkanı verir.
+
+Tutaq ki, `number` tipində olan dəyərləri **ikiqat artırmaq** istəyirik:
+
+```javascript
+let json = '{"a": 1, "b": 2, "c": "salam"}';
+
+let obj = JSON.parse(json, (key, value) => {
+  if (typeof value === "number") {
+    return value * 2; // bütün rəqəmləri 2 ilə vur
+  }
+  return value;
+});
+
+console.log(obj); // 👉 { a: 2, b: 4, c: "salam" }
+
+```
+
 
 ---
 
@@ -1740,18 +2129,9 @@ Bütün JavaScript obyektləri (yəni, `Object.prototype`-dən gələn prototip 
 
 ---
 
-### Gələcəkdə Daha Çox Öyrənəcəyik! 🚀
-
-Bu metodların necə işlədiyini, nümunələrini və daha dərin istifadələrini sonrakı bölümlərdə ətraflı izah edəcəyik. Xüsusilə də:
-
-* Bu metodların spesifik obyektlərdə (məsələn, `Date` və `Number` obyektləri) necə **yenidən təyin edildiyi (override)** öyrəniləcək.
-* 9-cu fəsildə isə bu metodları **siniflər (classes)** üçün necə ümumi şəkildə təyin etmək mümkün olduğu göstəriləcək.
-
----
-
 ## 6.9.1 `toString()` Metodu 🧾➡️🖋️
 
-### `toString()` Nədir? 🤔
+### `toString()` Nədir? 
 
 `toString()` metodu JavaScript obyektlərinin ən əsas universal metodlarından biridir. O, **heç bir arqument qəbul etmir** və çağırıldığı obyektin **string (mətn) təmsilçiliyini** qaytarır. JavaScript çox vaxt obyektləri stringə çevirmək lazım gələndə bu metodu avtomatik olaraq çağırır.
 
@@ -1762,21 +2142,22 @@ Bu metodların necə işlədiyini, nümunələrini və daha dərin istifadələr
 
 ---
 
-### Default `toString()` Necədir? 😐
+### Default `toString()` Necədir?
 
 `Object.prototype`-dəki default `toString()` versiyası çox məlumat verici deyil. O, adətən obyektin "klass" adını bildirən bir string qaytarır:
 
 ```javascript
 let o = { x: 1, y: 1 };
 let s = o.toString();
-console.log(s); // Nəticə: "[object Object]"
+console.log(s); 
+// Nəticə: "[object Object]"
 // Array üçün: [1,2,3].toString() => "1,2,3"
 // Function üçün: (function(){}).toString() => "function(){}"
 ```
 
 ---
 
-### Öz `toString()` Metodunu Yaratmaq (Override Etmək) 🌟
+### Öz `toString()` Metodunu Yaratmaq (Override Etmək)
 
 Çox vaxt default `toString()` metodu bizim üçün kifayət qədər faydalı olmur. Daha mənalı və oxunaqlı bir string təmsilçiliyi əldə etmək üçün **`toString()` metodunu obyektin özündə yenidən yaza (override edə) bilərik**.
 
@@ -1786,154 +2167,214 @@ console.log(s); // Nəticə: "[object Object]"
 let point = {
   x: 1,
   y: 2,
-  toString: function() { // toString metodunu override edirik
-    return `(${this.x}, ${this.y})`; // Bu obyektin x və y dəyərlərini istifadə edirik
+  // toString metodunu override edirik
+  toString: function() { 
+    return `(${this.x}, ${this.y})`; 
+    // Bu obyektin x və y dəyərlərini istifadə edirik
   }
 };
 
-console.log(String(point)); // => "(1, 2)" (String() funksiyası point.toString() metodunu çağırır)
-console.log("Nöqtə: " + point); // => "Nöqtə: (1, 2)" (String birləşməsi toString() metodunu çağırır)
+console.log(String(point)); 
+// "(1, 2)" 
+// (String() funksiyası point.toString() metodunu çağırır)
+console.log("Nöqtə: " + point); 
+// => "Nöqtə: (1, 2)" 
+// (String birləşməsi toString() metodunu çağırır)
 ```
 
 ---
 
-## 6.9.2 `toLocaleString()` Metodu 🌍🖋️
+### 6.9.2 `toLocaleString()` Metodu — Lokal Formatda String Çevirmə 🌍
 
-### `toLocaleString()` Nədir? 🤔
+#### `toLocaleString()` nədir?
 
-`toLocaleString()` metodu da `Object.prototype`-dən miras alınan universal bir metoddur. O, obyekti **lokallaşdırılmış (yəni, yerli dil və region qaydalarına uyğun) stringə** çevirmək üçün nəzərdə tutulub.
+`toLocaleString()` metodu JavaScript obyektlərinin dəyərlərini, istifadəçinin yerli (lokal) dil və region parametrlərinə uyğun olaraq, **oxunaqlı formatda stringə** çevirmək üçün istifadə olunur.
 
-* Default `toLocaleString()` versiyası sadəcə `toString()` metodunu çağırır, yəni özü heç bir lokallaşdırma aparmır.
-
----
-
-### Fərqli Klasslarda Xüsusi Versiyalar (Overridden) 📊
-
-Bəzi daxili JavaScript sinifləri (klassları) `toLocaleString()` metodunu özləri üçün yenidən təyin edirlər ki, dəyərləri yerli qaydalara uyğun formatlasınlar:
-
-* **`Date` obyektləri**: Tarix və vaxtı istifadəçinin yerli saat qurşağı, dil və format qaydalarına uyğun göstərir.
-* **`Number` obyektləri**: Ədədləri minlik ayırıcıları, onluq ayırıcıları və valyuta simvolları kimi yerli formatlara uyğun göstərir.
-* **`Array` obyektləri**: Massivin hər bir elementinin `toLocaleString()` metodunu çağırır və sonra onları birləşdirir (baxmayaraq ki, `toString()`-dan fərqli olaraq, burada elementlərin öz `toLocaleString()` metodları işləyir).
+Bu metod `Object.prototype`-dən miras alınır, yəni demək olar ki, bütün obyektlərdə mövcuddur. Lakin əksər daxili obyektlər bu metodu özünəməxsus şəkildə yenidən təyin edirlər ki, nəticə istifadəçiyə uyğun, lokalizasiya edilmiş formada olsun.
 
 ---
 
-### Öz `toLocaleString()` Nümunən:
+#### `toLocaleString()`-in əsas xüsusiyyətləri:
 
-`toString()` metodunu override etdiyimiz kimi, `toLocaleString()` metodunu da öz obyektlərimiz üçün yenidən yaza bilərik. Bu zaman obyektin daxilindəki ədədləri və ya tarixləri yerli formatlara uyğun çevirmək üçün daxili `toLocaleString()` metodlarından istifadə edə bilərik.
+* **Default davranış:** `toLocaleString()` standart `toString()` metodunu çağırır, yəni heç bir lokalizasiya etməz.
+* **`Date` obyektlərində:** Tarixi və vaxtı istifadəçinin saat qurşağına, dilinə və yerli tarix formatına uyğun göstərir.
+* **`Number` obyektlərində:** Rəqəmləri minlik ayırıcıları, onluq nöqtəsi və valyuta işarələri kimi yerli standartlara uyğun göstərir.
+* **`Array` obyektlərində:** Hər element üçün `toLocaleString()` çağırır və nəticələri vergüllə birləşdirir.
+
+---
+
+#### Nümunələr
 
 ```javascript
+// Number obyektində
+let number = 1234567.89;
+console.log(number.toLocaleString()); 
+// "1,234,567.89" (ingilis formatında)
+// Azərbaycan dilində və lokalda isə fərqli ola bilər.
+
+// Tarix obyektində
+let date = new Date('2024-06-28T14:30:00Z');
+console.log(date.toLocaleString('az-AZ')); 
+// "28.06.2024 18:30:00" (Azərbaycan lokalına uyğun)
+
+// Array obyektində
+let arr = [1000, 2000, 3000];
+console.log(arr.toLocaleString()); 
+// "1,000,2,000,3,000" (hər ədəd öz lokal formatında)
+
+// Öz obyektimizdə
 let point = {
   x: 1000,
   y: 2000,
   toString: function() {
     return `(${this.x}, ${this.y})`; // Sadə string təmsilçiliyi
   },
-  toLocaleString: function() { // toLocaleString metodunu override edirik
-    // Burada rəqəmlərin öz toLocaleString() metodunu çağırırıq:
+  toLocaleString: function() { 
+    // Rəqəmlərin lokal formatda göstərilməsi
     return `(${this.x.toLocaleString()}, ${this.y.toLocaleString()})`;
   }
 };
 
-console.log(point.toString());        // => "(1000, 2000)"
-console.log(point.toLocaleString());  // => "(1,000, 2,000)" (minlik ayrıcıları ilə, yerli formata görə)
+console.log(point.toString());       // => "(1000, 2000)"
+console.log(point.toLocaleString()); // => "(1,000, 2,000)" (lokal formatda)
 ```
 
 ---
 
-### Əlavə: Beynəlxalqlaşdırma API-ləri (Internationalization API) 🌐
+#### İstifadə məqsədi
 
-JavaScript-də **Internationalization (Beynəlxalqlaşma)** API-ləri (§11.7) mövcuddur. Bu API-lər `toLocaleString()` metodunu yaratmaq və ya dəyərləri müxtəlif dillərə və regionlara uyğun formatlamaq üçün çox faydalıdır. Məsələn, `Intl.DateTimeFormat` və `Intl.NumberFormat` kimi obyektlər ilə tarix, vaxt və nömrələri dəqiq şəkildə beynəlxalq standartlara uyğun formatlaya bilərsən.
-
----
-
-## 6.9.3 `valueOf()` Metodu 🔢
-
-### `valueOf()` Nədir? 🤔
-
-`valueOf()` metodu JavaScript-də obyektin **primitiv dəyərə** (əsasən rəqəmə) çevrilməsi lazım gələndə avtomatik olaraq çağırılır. Bu, obyektin rəqəmsal bir kontekstdə istifadə olunduğu zaman baş verir.
+`toLocaleString()` metodu xüsusilə **istifadəçi interfeysində (UI)** istifadəçinin dilinə və region parametrlərinə uyğun göstərmək üçün faydalıdır. Məsələn, pul məbləğləri, tarix və vaxt formatları ölkəyə görə fərqli olduğundan, bu metod rahatlıqla həmin fərqləri idarə etməyə imkan verir.
 
 ---
 
-### Default Davranış 🔄
-
-Əsas (default) `valueOf()` metodu obyektin özünü qaytarır və adətən heç bir xüsusi çevirmə etmir. Amma bəzi daxili siniflər (məsələn, `Date`) bu metodu özləri üçün yenidən təyin ediblər.
-
----
-
-### `Date` Sinfində `valueOf()` 📅
-
-`Date` obyektlərinin `valueOf()` metodu tarixi **millisaniyələrlə ölçülmüş bir rəqəmə** (Unix timestamp kimi) çevirir. Bu xüsusiyyət tarixləri `+`, `-`, `<`, `>` kimi operatorlarla asanlıqla müqayisə etməyə imkan verir.
-
----
-
-### Öz `valueOf()` Nümunəsi — Məsafəni Hesablayan Nöqtə 📍
-
-Biz də öz obyektlərimiz üçün `valueOf()` metodunu yenidən yaza (override edə) bilərik. Məsələn, bir `point` (nöqtə) obyektinin `(0,0)` nöqtəsindən olan məsafəsini rəqəm olaraq qaytarmaq üçün:
+**Qeyd:**
+`toLocaleString()` metodu opsional olaraq **lokallaşdırma parametrlərini** də ala bilər (məsələn, dil kodu, format opsiyaları), bu isə əlavə tənzimləmələrə imkan yaradır.
 
 ```javascript
-let point = {
-  x: 3,
-  y: 4,
-  valueOf: function() {
-    // Math.hypot(x, y) (0,0) nöqtəsindən (x,y) nöqtəsinə olan məsafəni hesablayır.
-    return Math.hypot(this.x, this.y); // (3,4) üçün nəticə: 5
+console.log(number.toLocaleString('de-DE', { style: 'currency', currency: 'EUR' }));
+// "1.234.567,89 €" (Almaniya lokalında valyuta formatı)
+```
+
+---
+
+### 6.9.3 `valueOf()` Metodu — Obyektin Primitiv Dəyərə Çevrilməsi 🔢
+
+---
+
+#### `valueOf()` nədir?
+
+`valueOf()` metodu obyekt JavaScript-də rəqəmsal və ya başqa primitiv kontekstdə istifadə olunanda avtomatik çağırılır və obyektin primitiv (əsasən rəqəm) dəyərini qaytarır.
+
+---
+
+#### Default davranış
+
+* Əksər obyektlərin `valueOf()` metodu sadəcə **obyektin özünü qaytarır**, yəni xüsusi çevirmə etmir.
+* Lakin bəzi daxili siniflər (məsələn, `Date`) `valueOf()` metodunu özlərinə uyğun yenidən təyin ediblər.
+
+---
+
+#### `Date` obyektlərində `valueOf()`
+
+`Date` obyektində `valueOf()` tarixi **millisaniyə (Unix timestamp)** şəklində ədədi dəyərə çevirir.
+
+```javascript
+let d = new Date("2024-06-28T00:00:00Z");
+console.log(d.valueOf()); // Məsələn: 1719628800000 (Unix timestamp millisaniyədə)
+```
+
+Bu sayədə tarixləri asanlıqla müqayisə etmək mümkündür:
+
+```javascript
+let d1 = new Date("2024-06-28");
+let d2 = new Date("2023-01-01");
+
+console.log(d1 > d2); // true, çünki d1-in millisaniyə dəyəri böyükdür
+```
+
+---
+
+#### Öz `valueOf()` nümunəsi: Məsafəni hesablamaq üçün nöqtə (point)
+
+```javascript
+let account = {
+  owner: "Rəşad",
+  balance: 1200,
+  valueOf() {
+    // Account obyektini rəqəmsal kontekstdə balans kimi qəbul edirik
+    return this.balance;
   }
 };
 
-console.log(point > 4);       // => true  (5 > 4 olduğu üçün)
-console.log(point > 5);       // => false (5 > 5 deyil)
-console.log(point < 6);       // => true  (5 < 6 olduğu üçün)
-console.log(Number(point));   // => 5 (Number() funksiyası point.valueOf() metodunu çağırır)
+console.log(account + 300);   // 1500  (1200 + 300)
+console.log(account > 1000);  // true  (1200 > 1000)
+console.log(Number(account)); // 1200 (Number() çağıranda valueOf işləyir)
 ```
+
+---
+
+#### Nəticə
+
+* `valueOf()` obyektin primitiv dəyərə çevrilməsini idarə edir.
+* Rəqəmsal və müqayisə əməliyyatlarında obyektin necə davranacağını müəyyən etmək üçün faydalıdır.
 
 ---
 
 ## 6.9.4 `toJSON()` Metodu 🗃️➡️📝
 
-### `toJSON()` Nədir? 🤔
+### `toJSON()` nədir?
 
-`Object.prototype`-də standart bir `toJSON()` metodu yoxdur. Lakin **`JSON.stringify()`** funksiyası obyektləri JSON stringinə çevirərkən xüsusi olaraq obyektin **`toJSON()` metodunu axtarır**.
+`JSON.stringify()` funksiyası obyektləri JSON formatına çevirəndə, əgər həmin obyektin **özünə aid `toJSON()` metodu** varsa, o metod çağırılır və nəticəsi JSON-a çevrilir.
 
-* Əgər obyektin özünə aid bir `toJSON()` metodu varsa, `JSON.stringify()` obyekti serializasiya etmək əvəzinə, həmin `toJSON()` metodunun **qaytardığı nəticəni** serializasiya edir.
-
----
-
-### `Date` Sinfi Nümunəsi 📅
-
-`Date` sinfi öz `toJSON()` metodunu təyin edib. Bu metod `Date` obyektini standart **ISO formatlı stringə** çevirir. Bu o deməkdir ki, `JSON.stringify()` bir `Date` obyektini gördükdə, onu birbaşa stringə çevirmək üçün bu `toJSON()` metodundan istifadə edir.
+Yəni, `toJSON()` metodu **obyektin JSON üçün "özəl təmsilçisi"** rolunu oynayır.
 
 ---
 
-### Öz `toJSON()` Nümunəsi — `point` Obyekti 💡
+### Nümunə: `Date` obyektində `toJSON()`
 
-`toJSON()` metodunu override edərək obyektimizin JSON-a necə çevriləcəyinə nəzarət edə bilərik. Məsələn, `point` obyektimizi `(x, y)` formatında bir string olaraq serializasiya etmək üçün:
+```javascript
+let d = new Date("2024-06-28T12:00:00Z");
+
+console.log(JSON.stringify(d));
+// Nəticə: "\"2024-06-28T12:00:00.000Z\""
+// Date obyektinin `toJSON()` metodu onu ISO stringə çevirir
+```
+
+---
+
+### Öz `toJSON()` metodu nümunəsi: `point` obyekti
 
 ```javascript
 let point = {
-  x: 1,
-  y: 2,
-  toString: function() {
-    return `(${this.x}, ${this.y})`; // Point obyektinin string təmsilçiliyi
+  x: 3,
+  y: 7,
+  toString() {
+    return `(${this.x}, ${this.y})`;
   },
-  toJSON: function() {
-    // JSON.stringify() çağırılanda bu metod işə düşür
-    return this.toString(); // Və point obyektini toString() nəticəsinə çevirir
+  toJSON() {
+    // JSON.stringify çağırılanda burası işləyir
+    return this.toString();  // Obyekti JSON üçün "(3, 7)" kimi təmsil edirik
   }
 };
 
-// Massiv içində point obyektini serializasiya edirik:
-console.log(JSON.stringify([point])); // => '["(1, 2)"]'
-// Nəticə: JSON.stringify() `point`-in `toJSON()` metodunu çağırır və nəticə kimi `"(1, 2)"` stringini serializasiya edir.
+console.log(JSON.stringify(point)); // => "\"(3, 7)\""
+
+console.log(JSON.stringify([point])); // => '["(3, 7)"]'
+// Massiv içində də `point`-in `toJSON()` metodu çağırılır
 ```
-Bu, obyektlərin JSON formatında necə təmsil olunacağını fərdiləşdirmək üçün çox faydalı bir yoldur.
+
+---
+
+### Nəticə
+
+* `toJSON()` metodu JSON formatına çevrilmə zamanı obyektin özünü necə göstərəcəyini idarə edir.
+* Bu metodu yazmaqla JSON nəticəsini istədiyimiz formada düzəldə bilərik.
 
 ---
 
 ## 6.10 Genişlənmiş Obyekt Literal Sintaksisi (Extended Object Literal Syntax) 🧩✨
 
 ES6 (ECMAScript 2015) və sonrakı JavaScript versiyaları **obyekt literalını (object literal)** yazmaq üçün bir neçə yeni və faydalı üsul gətirib. Bu yeniliklər kodumuzu daha qısa, oxunaqlı və dinamik edir.
-
----
 
 ## 6.10.1 Qısa Yazılış Xüsusiyyəti (Shorthand Properties) ⚡
 
@@ -1957,39 +2398,61 @@ let x = 1, y = 2;
 let o = { x, y }; // Əgər adlar eynidirsə, sadəcə dəyişənin adını yazmaq kifayətdir
 console.log(o.x + o.y); // => 3
 ```
-Bu sintaksis kodu daha qısa və oxunaqlı edir.
-
 ---
 
 ## 6.10.2 Hesablanmış (Dinamik) Xüsusiyyət Adları (Computed Property Names) 🧮
 
-Bəzən obyektin bir xüsusiyyətinin adı sabit olmur, bir dəyişkəndə saxlanılır və ya bir funksiyanın nəticəsi olur. Artıq obyekt literalının içində birbaşa bu cür dinamik adları təyin etmək mümkündür.
+### Nədir?
 
-**Əvvəl (obyekti yaratdıqdan sonra əlavə etmək):**
+Bəzən obyektin xüsusiyyətinin adı əvvəlcədən məlum olmur, dinamik olaraq bir dəyişəndən və ya funksiyanın nəticəsindən alınır. ES6 ilə bu, obyekt literalını yaratarkən birbaşa mümkün oldu.
+
+---
+
+### Əvvəlki üsul (obyekti yaratdıqdan sonra əlavə etmək):
 
 ```javascript
-const PROPERTY_NAME = "p1";
-function computePropertyName() { return "p" + 2; }
+const key1 = "name";
+function getKey2() { return "age"; }
 
-let o = {};
-o[PROPERTY_NAME] = 1;         // Obyekti yaratdıqdan sonra əlavə edirik
-o[computePropertyName()] = 2; // Obyekti yaratdıqdan sonra əlavə edirik
-console.log(o.p1 + o.p2); // => 3
+let obj = {};
+obj[key1] = "Rashad";       // Sonradan əlavə edilir
+obj[getKey2()] = 25;        // Sonradan əlavə edilir
+
+console.log(obj.name);      // "Rashad"
+console.log(obj.age);       // 25
 ```
 
-**İndi (ES6 ilə obyekt literalının içində):**
+---
+
+### İndi ES6 ilə (obyekt literalında birbaşa):
 
 ```javascript
-const PROPERTY_NAME = "p1";
-function computePropertyName() { return "p" + 2; }
+const key1 = "name";
+function getKey2() { return "age"; }
 
-let p = {
-  [PROPERTY_NAME]: 1,          // PROPERTY_NAME dəyişəninin dəyəri "p1" property adı olur
-  [computePropertyName()]: 2   // computePropertyName() funksiyasının nəticəsi "p2" property adı olur
+let obj = {
+  [key1]: "Rashad",        // Dinamik açar: "name"
+  [getKey2()]: 25          // Dinamik açar: "age"
 };
-console.log(p.p1 + p.p2); // => 3
+
+console.log(obj.name);     // "Rashad"
+console.log(obj.age);      // 25
 ```
-Kvadrat mötərizələr `[ ... ]` içində istənilən JavaScript ifadəsi yazıla bilər. Bu ifadə icra olunur və nəticəsi xüsusiyyətin adı kimi istifadə olunur.
+
+---
+
+### Vacib!
+
+Kvadrat mötərizələr `[ ... ]` içində istənilən ifadə yaza bilərsən — dəyişən, funksiyanın nəticəsi və ya hətta hesablama:
+
+```javascript
+let i = 1;
+let obj = {
+  ["prop_" + i]: "value"  // Açarı "prop_1" olur
+};
+
+console.log(obj.prop_1);  // "value"
+```
 
 ---
 
@@ -1998,9 +2461,11 @@ Kvadrat mötərizələr `[ ... ]` içində istənilən JavaScript ifadəsi yazı
 ES6 ilə obyekt xüsusiyyətlərinin adları artıq yalnız string (mətn) deyil, həm də **`Symbol`** ola bilər. Symbol-lar JavaScript-də unikal və "şəffaf olmayan" (opaque) dəyərlərdir.
 
 ```javascript
-const extension = Symbol("my extension symbol"); // Unikal bir Symbol yaradırıq
+const extension = Symbol("my extension symbol"); 
+// Unikal bir Symbol yaradırıq
 let o = {
-  [extension]: { /* genişlənmə məlumatları burada saxlanır */ } // Symbol-u property adı kimi istifadə edirik
+  [extension]: { /* genişlənmə məlumatları burada saxlanır */ } 
+  // Symbol-u property adı kimi istifadə edirik
 };
 
 o[extension].x = 0; // Bu Symbol ilə obyektə məlumat əlavə edirik
@@ -2013,7 +2478,7 @@ console.log(o[extension].x); // => 0
 
 ---
 
-## 6.10.4 Spread Operator (`...`) — Obyektə Xüsusiyyətlərin Yayılması (Kopyalanması) 📤
+## 6.10.4 Spread Operator (`...`) — Obyektə Xüsusiyyətlərin Yayılması (Kopyalanması)
 
 ES2018-dən başlayaraq, **spread operatoru (`...`)** mövcud bir obyektin bütün özünə məxsus xüsusiyyətlərini yeni bir obyektin içinə asanlıqla kopyalamaq üçün istifadə olunur.
 
@@ -2021,7 +2486,8 @@ ES2018-dən başlayaraq, **spread operatoru (`...`)** mövcud bir obyektin büt�
 let position = { x: 0, y: 0 };
 let dimensions = { width: 100, height: 75 };
 
-let rect = { ...position, ...dimensions }; // position və dimensions-ın xüsusiyyətlərini rect-ə kopyalayır
+let rect = { ...position, ...dimensions }; 
+// position və dimensions-ın xüsusiyyətlərini rect-ə kopyalayır
 
 console.log(rect); // => { x: 0, y: 0, width: 100, height: 75 }
 console.log(rect.x + rect.y + rect.width + rect.height); // => 175
@@ -2036,7 +2502,8 @@ console.log(rect.x + rect.y + rect.width + rect.height); // => 175
 let o = Object.create({ x: 1 }); // 'x' miras alınan property-dir
 let p = { ...o };               // 'o'-dan 'x' kopyalanmır
 
-console.log(p.x); // => undefined, çünki 'x' 'p'-nin özünə məxsus xüsusiyyəti olmadı
+console.log(p.x); 
+// => undefined, çünki 'x' 'p'-nin özünə məxsus xüsusiyyəti olmadı
 ```
 
 **Vacib Qeyd:**
@@ -2045,10 +2512,12 @@ console.log(p.x); // => undefined, çünki 'x' 'p'-nin özünə məxsus xüsusiy
 
 ```javascript
 let o = { x: 1 };
-let p = { x: 0, ...o }; // 'o'-dakı 'x:1' 'x:0'-ın üzərinə yazır
+let p = { x: 0, ...o }; 
+// 'o'-dakı 'x:1' 'x:0'-ın üzərinə yazır
 console.log(p.x); // => 1
 
-let q = { ...o, x: 2 }; // 'o'-dakı 'x:1'-dən sonra 'x:2' yazıldığı üçün bu üstün gəlir
+let q = { ...o, x: 2 }; 
+// 'o'-dakı 'x:1'-dən sonra 'x:2' yazıldığı üçün bu üstün gəlir
 console.log(q.x); // => 2
 ```
 
@@ -2056,7 +2525,7 @@ console.log(q.x); // => 2
 
 ---
 
-## 6.10.5 Qısa Yazılışla Metod Yaratmaq (Shorthand Methods) 🏎️
+## 6.10.5 Qısa Yazılışla Metod Yaratmaq (Shorthand Methods)
 
 ES6-da obyekt metodlarını təyin etmək üçün daha qısa və aydın bir sintaksis gətirildi.
 
@@ -2087,27 +2556,6 @@ console.log(square.area()); // => 100
 * Bu yeni sintaksis **`function` açar sözünü və iki nöqtəni (`:`)** yazmaq ehtiyacını aradan qaldırır.
 * Bu, obyektin daxilindəki elementin bir **metod** olduğunu daha aydın göstərir.
 
-Metod adları adi identifikator (dəyişən adı kimi), string, hesablanmış property adı (computed property) və hətta `Symbol` ola bilər:
-
-```javascript
-const METHOD_NAME = "m";
-const mySymbolMethod = Symbol("myMethod"); // Unikal Symbol metodu adı
-
-let weirdMethods = {
-  "method With Spaces"(x) { return x + 1; }, // Boşluqlu string adı
-  [METHOD_NAME](x) { return x + 2; },         // Hesablanmış property adı
-  [mySymbolMethod](x) { return x + 3; }       // Symbol metodu adı
-};
-
-console.log(weirdMethods["method With Spaces"](1)); // => 2
-console.log(weirdMethods.m(1));                     // => 3
-console.log(weirdMethods[mySymbolMethod](1));       // => 4
-```
-
-* `Symbol` adları olan metodlar da adi metodlar kimi çağırıla bilər.
-* Məsələn, `Symbol.iterator` metodu obyektləri iterasiya (üzərində dövr etmə) üçün istifadə olunur.
-
-
 ---
 
 ## 6.10.6 Xüsusiyyətlərin Oxuyucuları və Yazıcıları (Property Getters and Setters) 📝
@@ -2132,19 +2580,23 @@ let mehsul = {
   // Bu isə accessor property-dir (getter və setter-i var):
   get vergiliQiymet() {
     // vergiliQiymet oxunanda bu işləyir
-    return this.qiymet * 1.18; // Qiymətə 18% ƏDV əlavə edirik
+    return this.qiymet * 1.18; 
+    // Qiymətə 18% ƏDV əlavə edirik
   },
 
   set vergiliQiymet(yeniQiymet) {
     // vergiliQiymet-ə dəyər veriləndə bu işləyir
-    this.qiymet = yeniQiymet / 1.18; // Vergisiz qiyməti hesablayıb saxlayırıq
+    this.qiymet = yeniQiymet / 1.18; 
+    // Vergisiz qiyməti hesablayıb saxlayırıq
   }
 };
 
 console.log(mehsul.qiymet);          // => 10
-console.log(mehsul.vergiliQiymet);   // vergiliQiymet oxunur, getter işləyir => 11.8 (10 * 1.18)
+console.log(mehsul.vergiliQiymet);   
+// vergiliQiymet oxunur, getter işləyir => 11.8 (10 * 1.18)
 
-mehsul.vergiliQiymet = 23.6;         // vergiliQiymet-ə dəyər verilir, setter işləyir
+mehsul.vergiliQiymet = 23.6;         
+// vergiliQiymet-ə dəyər verilir, setter işləyir
 console.log(mehsul.qiymet);          // => 20 (23.6 / 1.18)
 console.log(mehsul.vergiliQiymet);   // => 23.6
 ```
@@ -2185,31 +2637,3 @@ console.log(user.tamAd);   // => "Ayxan Muradov"
 Burada `tamAd` adlı bir data property yoxdur, amma biz ona adi bir property kimi daxil ola və ya dəyər təyin edə bilirik. Bu, kodumuzu daha səliqəli və məntiqi edir.
 
 ---
-
-### Nümunə: Yaşın Avtomatik Hesablanması 🎂
-
-Doğum tarixini saxlayıb, yaşını avtomatik hesablamaq istəyirik:
-
-```javascript
-let person = {
-  dogumIli: 1990,
-
-  get yas() {
-    let currentYear = new Date().getFullYear(); // Cari ili alırıq
-    return currentYear - this.dogumIli; // Yaşı hesablayırıq
-  },
-
-  set yas(yeniYas) {
-    // Yaşı təyin etməyə çalışdıqda xəta veririk, çünki yaş avtomatik hesablanmalıdır.
-    // Veya doğum ilini dəyişə bilərik.
-    let currentYear = new Date().getFullYear();
-    this.dogumIli = currentYear - yeniYas; // Yaşa görə doğum ilini dəyişir
-  }
-};
-
-console.log(person.yas); // Məsələn, 2025-ci ildə => 35 (getter işləyir)
-
-person.yas = 25; // Setter işləyir, doğum ilini dəyişir
-console.log(person.dogumIli); // => 2000
-```
-Bu nümunədə `yas` bir `getter` və `setter` vasitəsilə idarə olunur, beləliklə obyektin daxili məntiqini qoruyur.
