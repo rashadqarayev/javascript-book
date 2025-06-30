@@ -4,7 +4,7 @@ JavaScript-də **massivlər (arrays)** dəyərlərin **sıralanmış kolleksiyas
 
 ---
 
-### Massiv Nədir? 🧩
+### Massiv Nədir?
 
 * **Sıralanmış Dəyərlər:** Massivdəki hər bir dəyər bir "element" adlanır.
 * **İndeks (Sıra Nömrəsi):** Hər elementin massivdə bir rəqəmsal mövqeyi var, buna "indeks" deyilir.
@@ -13,7 +13,7 @@ JavaScript-də **massivlər (arrays)** dəyərlərin **sıralanmış kolleksiyas
 
 ---
 
-### JavaScript Massivlərinin Xüsusiyyətləri ✨
+### JavaScript Massivlərinin Xüsusiyyətləri
 
 1.  **Tip Yoxdur (Untyped):**
     * Bir massivin elementləri istənilən tipdə ola bilər (məsələn, həm ədəd, həm mətn, həm də obyekt).
@@ -34,7 +34,7 @@ JavaScript-də **massivlər (arrays)** dəyərlərin **sıralanmış kolleksiyas
 
 ---
 
-### Massivlər və Obyektlər — Əlaqə 🤝
+### Massivlər və Obyektlər — Əlaqə
 
 * JavaScript massivləri əslində JavaScript obyektlərinin **xüsusi bir formasıdır**.
 * Massiv indeksləri (0, 1, 2...) sadəcə tam ədədlərdən ibarət xüsusiyyət adları kimidir.
@@ -42,50 +42,59 @@ JavaScript-də **massivlər (arrays)** dəyərlərin **sıralanmış kolleksiyas
 
 ---
 
-# 7.1 Massivləri Yaratmaq (Creating Arrays) 🛠️
+# 7.1 Massivləri Yaratmaq (Creating Arrays)
 
 JavaScript-də massivləri yaratmaq üçün bir neçə üsul var. İndi onlara ardıcıllıqla baxaq:
 
 * Massiv Literalları (Array Literals)
-* `...` Spread Operatoru (Yayma Operatoru)
+* `...` Spread Operatoru
 * `Array()` Konstruktoru
 * `Array.of()` və `Array.from()` Fabrik Metodları
 
 ---
 
-## 7.1.1 Massiv Literalları (Array Literals) 📝
+## 7.1.1 Massiv Literalları (Array Literals)
 
 Massiv yaratmağın ən sadə yolu **massiv literallarından** istifadə etməkdir. Bu, sadəcə kvadrat mötərizələr `[]` daxilində vergüllə ayrılmış elementlər siyahısıdır.
 
 **Misallar:**
 
 ```javascript
-let bosMassiv = [];             // Heç bir elementi olmayan massiv
-let ededler = [2, 3, 5, 7, 11]; // 5 ədəd elementi olan massiv
-let qarisik = [1.1, true, "salam", ]; // Fərqli tipli 3 element. Sonda əlavə vergül ola bilər.
+let names = ["Alice", "Bob", "Charlie"];       
+// String dəyərlərdən ibarət massiv
+let temperatures = [21.5, 19.8, 25.0];         
+// Ədədlərdən ibarət massiv
+let flags = [true, false, true, false];        
+// Boolean dəyərlərdən ibarət massiv
+
 ```
 
 * Massiv literalındakı dəyərlər sabit olmaq məcburiyyətində deyil, istənilən **ifadə** (expression) ola bilər:
 
     ```javascript
-    let esas = 100;
-    let cedvel = [esas, esas + 1, esas + 2]; // => [100, 101, 102]
+    let base = 10;
+
+    let computed = [base,base + 5,base * 2];
+    console.log(computed); // [10, 15, 20]
     ```
 
-* Massiv literalları başqa **obyekt literallarını** və ya **massiv literallarını** da ehtiva edə bilər:
+* Massiv içində **massivlər** və **obyektlər**:
 
     ```javascript
-    let data = [[1, {ad: "Ali"}], [2, {ad: "Veli"}]]; // Massiv daxilində massiv və obyektlər
+    let data = [[1, {ad: "Ali"}], [2, {ad: "Veli"}]]; 
+    // Massiv daxilində massiv və obyektlər
     ```
 
 * **Seyrək Massivlər (Sparse Arrays):** Əgər massiv literalında iki vergül arasında dəyər yoxdursa, bu, həmin indeksdə elementin olmadığını göstərir və massiv seyrək olur. Belə elementləri soruşanda `undefined` qaytarılır.
 
     ```javascript
-    let say = [1,,3];   // İndeks 0 (dəyər 1) və 2 (dəyər 3) var. İndeks 1-də element yoxdur.
+    let say = [1,,3];  
+     // İndeks 0 (dəyər 1) və 2 (dəyər 3) var. İndeks 1-də element yoxdur.
     console.log(say.length); // => 3 (Uzunluq boşluqları da sayır)
     console.log(say[1]);     // => undefined
 
-    let bosluqlar = [,,]; // Heç bir elementi olmayan, amma uzunluğu 2 olan massiv
+    let bosluqlar = [,,]; 
+    // Heç bir elementi olmayan, amma uzunluğu 2 olan massiv
     console.log(bosluqlar.length); // => 2
     console.log(bosluqlar[0]);     // => undefined
     ```
@@ -93,23 +102,26 @@ let qarisik = [1.1, true, "salam", ]; // Fərqli tipli 3 element. Sonda əlavə 
 
 ---
 
-## 7.1.2 Spread Operator (`...`) — Yayma Operatoru 📤
+## 7.1.2 Spread Operator (`...`)
 
 ES6 (ECMAScript 2015) və sonrakı versiyalarda, bir massivi (və ya digər **iterasiya edilə bilən obyektləri**) başqa bir massiv literalının daxilinə daxil etmək üçün **"spread operatoru" (`...`)** istifadə olunur.
 
 ```javascript
 let a = [1, 2, 3];
-let b = [0, ...a, 4]; // 'a' massivinin elementləri 'b' massivinin içinə yayılır
+let b = [0, ...a, 4]; 
+// 'a' massivinin elementləri 'b' massivinin içinə yayılır
 console.log(b);       // => [0, 1, 2, 3, 4]
 ```
 `...a` hissəsi sanki `1, 2, 3` kimi ədədlərin birbaşa oraya yazılması kimidir.
 
-* **Massivin Kopyalanması (Shallow Copy):** Spread operatoru massivləri (sığ bir şəkildə) kopyalamaq üçün çox rahat bir yoldur:
+* **Massivin Kopyalanması (Shallow Copy):** Spread operatoru massivləri kopyalamaq üçün çox rahat bir yoldur:
 
     ```javascript
     let orijinal = [1, 2, 3];
-    let kopya = [...orijinal]; // orijinal massivinin kopyasını yaradır
-    kopya[0] = 0;             // Kopyanı dəyişdirmək orijinalı dəyişdirmir
+    let kopya = [...orijinal]; 
+    // orijinal massivinin kopyasını yaradır
+    kopya[0] = 0;             
+    // Kopyanı dəyişdirmək orijinalı dəyişdirmir
 
     console.log(orijinal[0]); // => 1
     console.log(kopya);       // => [0, 2, 3]
@@ -121,20 +133,24 @@ console.log(b);       // => [0, 1, 2, 3, 4]
 
         ```javascript
         let reqemler = [..."0123456789"];
-        console.log(reqemler); // => ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        console.log(reqemler); 
+        // => ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
         ```
 
     * **`Set` Obyektləri:** `Set` obyektləri təkrarlanan elementləri saxlamayan kolleksiyalardır. `Set` obyektləri də iterasiya edilə biləndir. Massivdən təkrarlanan elementləri çıxarmaq üçün massivi `Set`-ə çevirib, sonra `Set`-i spread operatoru ilə yenidən massivə çevirmək asan yoldur:
 
         ```javascript
-        let herfler = [..."hello world"]; // => ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
-        let tekrarsizHerfler = [...new Set(herfler)]; // Təkrarlananları çıxarır
-        console.log(tekrarsizHerfler); // => ["h", "e", "l", "o", " ", "w", "r", "d"]
+        let herfler = [..."hello world"]; 
+        // => ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d"]
+        let tekrarsizHerfler = [...new Set(herfler)]; 
+        // Təkrarlananları çıxarır
+        console.log(tekrarsizHerfler); 
+        // => ["h", "e", "l", "o", " ", "w", "r", "d"]
         ```
 
 ---
 
-## 7.1.3 `Array()` Konstruktoru 🏗️
+## 7.1.3 `Array()` Konstruktoru
 
 Massiv yaratmağın başqa bir yolu `Array()` konstruktorundan istifadə etməkdir. Bu konstruktoru üç fərqli şəkildə çağırmaq olar:
 
@@ -169,21 +185,22 @@ Massiv yaratmağın başqa bir yolu `Array()` konstruktorundan istifadə etməkd
 
 ---
 
-## 7.1.4 `Array.of()` Metodu 🆕
+## 7.1.4 `Array.of()` Metodu
 
-`Array()` konstruktorunun tək rəqəmsal arqumentlə çağırılanda uzunluq təyin etməsi, amma birdən çox rəqəmsal arqumentlə çağırılanda elementlər kimi davranması bir çaşqınlıq yarada bilirdi. Məsələn, **tək rəqəmsal elementli bir massiv** yaratmaq `Array()` konstruktoru ilə birbaşa mümkün deyildi (yəni `new Array(10)` `[10]` yox, `[ <10 empty items> ]` yaradırdı).
+`Array()` konstruktorunun tək rəqəmsal arqumentlə çağırılanda uzunluq təyin etməsi, amma birdən çox rəqəmsal arqumentlə çağırılanda elementlər kimi davranması bir çaşqınlıq yarada bilirdi.
 
 **ES6** bu problemi **`Array.of()`** funksiyası ilə həll etdi. Bu, bir "fabrik metodu"dur (factory method). O, arqumentlərinin sayından asılı olmayaraq, həmin arqument dəyərlərini yeni massivin elementləri kimi istifadə edərək bir massiv yaradır və qaytarır:
 
 ```javascript
 Array.of();       // => [] (Boş massiv)
-Array.of(10);     // => [10] (Tək rəqəmsal elementli massiv yaratmaq mümkündür!)
+Array.of(10);    
+// => [10] (Tək rəqəmsal elementli massiv yaratmaq mümkündür!)
 Array.of(1, 2, 3); // => [1, 2, 3]
 ```
 
 ---
 
-## 7.1.5 `Array.from()` Metodu 🔄
+## 7.1.5 `Array.from()` Metodu
 
 `Array.from()` ES6-da təqdim olunan başqa bir massiv fabrik metodudur. Bu metod ilk arqument kimi **iterasiya edilə bilən obyekt** (məsələn, massiv, string, Set) və ya **massivəbənzər obyekt** gözləyir. O, bu obyektin elementlərini ehtiva edən yeni bir massiv qaytarır.
 
@@ -192,21 +209,13 @@ Array.of(1, 2, 3); // => [1, 2, 3]
 
     ```javascript
     let orijinal = [1, 2, 3];
-    let kopya = Array.from(orijinal); // orijinal massivinin kopyasını yaradır
+    let kopya = Array.from(orijinal); 
+    // orijinal massivinin kopyasını yaradır
     console.log(kopya); // => [1, 2, 3]
 
     let herfler = Array.from("Salam"); // Stringdən massiv yaratmaq
     console.log(herfler); // => ["S", "a", "l", "a", "m"]
     ```
-
-* **Massivəbənzər Obyektlərdən Həqiqi Massiv Yaratmaq:**
-    `Array.from()` xüsusilə **"massivəbənzər obyektləri" (array-like objects)** həqiqi JavaScript massivlərinə çevirmək üçün vacibdir. Massivəbənzər obyektlər massiv olmayan obyektlərdir ki, onların **rəqəmsal `length` xüsusiyyəti** və adları tam ədədlər olan dəyərlər saxlayan xüsusiyyətləri var.
-    * Məsələn, brauzerdə bəzi DOM metodlarının qaytardığı dəyərlər (HTML elementlərinin kolleksiyası kimi) massivəbənzər olur. Onlarla massiv metodları ilə işləmək üçün əvvəlcə həqiqi massivə çevirmək daha rahatdır:
-
-        ```javascript
-        // Fərz edək ki, "arrayLikeObject" bir massivəbənzər obyektdir
-        let heqiqiMassiv = Array.from(arrayLikeObject);
-        ```
 
 * **İkinci Arqument (Map Funksiyası):**
     `Array.from()` həmçinin ixtiyari olaraq **ikinci bir arqument** qəbul edir: bir funksiya. Əgər bu funksiyanı ikinci arqument kimi versəniz, yeni massiv qurularkən mənbə obyektindən gələn hər bir element bu funksiyaya ötürüləcək və funksiyanın qaytardığı dəyər massivə orijinal dəyər əvəzinə əlavə olunacaq.
@@ -217,15 +226,17 @@ Array.of(1, 2, 3); // => [1, 2, 3]
     console.log(reqemler); // => [1, 2, 3]
 
     let tekEdedlerKvadrat = Array.from([1, 2, 3, 4, 5], (num) => {
-        if (num % 2 !== 0) return num * num; // Tək ədədlərin kvadratını qaytarır
-        return num; // Cüt ədədləri olduğu kimi saxlayır
+        if (num % 2 !== 0) return num * num; 
+        // Tək ədədlərin kvadratını qaytarır
+        return num; 
+        // Cüt ədədləri olduğu kimi saxlayır
     });
     console.log(tekEdedlerKvadrat); // => [1, 2, 9, 4, 25]
     ```
 
 ---
 
-# 7.2 Massiv Elementlərini Oxumaq və Yazmaq 📖✍️
+# 7.2 Massiv Elementlərini Oxumaq və Yazmaq 
 
 Massivin elementlərinə daxil olmaq və ya onların dəyərini dəyişdirmək üçün **kvadrat mötərizə operatoru (`[]`)** istifadə olunur.
 
@@ -235,7 +246,8 @@ Massivin elementlərinə daxil olmaq və ya onların dəyərini dəyişdirmək �
 **Misallar:**
 
 ```javascript
-let a = ["dünya"]; // Bir elementli massiv ilə başlayırıq: a[0] = "dünya"
+let a = ["dünya"]; 
+// Bir elementli massiv ilə başlayırıq: a[0] = "dünya"
 
 let deyer = a[0];     // Massivin 0-cı elementini oxuyuruq
 console.log(deyer);   // => "dünya"
@@ -249,19 +261,11 @@ console.log(a);       // => ["dünya", 3.14, "üç"]
 
 a[i + 1] = "salam";   // Massivin 3-cü elementinə dəyər yazırıq (i+1 = 3)
 console.log(a);       // => ["dünya", 3.14, "üç", "salam"]
-
-a[a[i]] = a[0];       // Mürəkkəb əməliyyat:
-                      // Öncə a[i] oxunur (yəni a[2] = "üç")
-                      // Sonra a["üç"] kimi dəyər təyin olunur.
-                      // Bu, rəqəmsal olmayan indeks olduğuna görə, massiv xüsusiyyəti kimi yaranır.
-                      // a[0] = "dünya" olduğuna görə a["üç"] = "dünya" olur.
-                      // Massivlər obyekt olduğu üçün belə də xüsusiyyət əlavə etmək olar.
-console.log(a);       // => ["dünya", 3.14, "üç", "salam", "üç": "dünya"] - burada "üç" string kimi property adıdır.
 ```
 
 ---
 
-### Massivlər və `length` Xüsusiyyəti (Avtomatik Yenilənmə) 📏
+### Massivlər və `length` Xüsusiyyəti (Avtomatik Yenilənmə) 
 
 Massivlərin ən vacib xüsusiyyəti odur ki, siz `0` ilə `2^32 - 2` arasında **müsbət tam ədəd** olan xüsusiyyət adlarından (yəni, indekslərdən) istifadə etdiyiniz zaman, JavaScript massivin **`length` (uzunluq)** xüsusiyyətini avtomatik olaraq idarə edir.
 
@@ -278,63 +282,71 @@ console.log(a.length); // => 4
 
 ---
 
-### Massiv İndeksləri vs. Obyekt Xüsusiyyət Adları 🤔
+## Massiv İndeksləri və Xüsusiyyət Adları
 
-Yadda saxlayın ki, massivlər əslində obyektlərin xüsusi bir növüdür. Massiv elementlərinə daxil olmaq üçün istifadə olunan kvadrat mötərizələr, obyekt xüsusiyyətlərinə daxil olmaq üçün istifadə olunan kvadrat mötərizələr kimi işləyir.
+JavaScript-də massivlər əslində **obyektdir**. Elementlərə indekslə daxil oluruq, amma bu indekslər **əslində string açarlardır**.
 
-* JavaScript sizin təyin etdiyiniz rəqəmsal massiv indeksini avtomatik olaraq **stringə** çevirir. Məsələn, indeks `1` "1" stringinə çevrilir, sonra bu string xüsusiyyət adı kimi istifadə olunur.
-* Bu, yalnız massivlərə aid bir xüsusiyyət deyil; adi obyektlərdə də bu cür indeksləmə edə bilərsiniz:
+### 1. Massiv indeksləri necə işləyir?
 
-    ```javascript
-    let o = {};      // Boş bir obyekt yaradırıq
-    o[1] = "bir";    // Ona tam ədədlə indeksləmə edirik
-    console.log(o);  // => { '1': 'bir' }
-    console.log(o["1"]); // => "bir" (Rəqəmsal və string xüsusiyyət adları eynidir!)
-    ```
-
-Aydın olmaq üçün, massiv indeksini obyekt xüsusiyyət adından fərqləndirmək faydalıdır:
-* **Bütün indekslər xüsusiyyət adlarıdır.**
-* Lakin, yalnız `0` ilə `2^32 - 2` arasında olan **tam ədədlər** (bu aralıqda olan stringlər də) **indeks** hesab olunur.
-* Bütün massivlər obyektlərdir və siz onlara istənilən adla xüsusiyyətlər əlavə edə bilərsiniz. Amma əgər istifadə etdiyiniz xüsusiyyət adı massiv indeksi qaydalarına uyğundursa, massiv **`length` xüsusiyyətini avtomatik yeniləmək** kimi xüsusi bir davranış sərgiləyir.
-
----
-
-### Mənfi İndekslər və Tam Olmayan İndekslər ⚠️
-
-* Massivi mənfi ədədlərlə və ya tam olmayan ədədlərlə indeksləyə bilərsiniz. Bu zaman rəqəm stringə çevrilir və bu string xüsusiyyət adı kimi istifadə olunur.
-* Belə hallar **massiv indeksi** kimi yox, adi **obyekt xüsusiyyəti** kimi qəbul edilir və massivin `length` xüsusiyyətini dəyişdirmir.
-* Əgər massivi tam ədədə çevrilə bilən bir stringlə indeksləsəniz (məsələn, "1000"), bu da massiv indeksi kimi davranacaq.
-* Eyni şey, tam ədəd olan onluq ədədlər üçün də doğrudur (məsələn, `1.000` əslində `1` deməkdir):
-
-    ```javascript
-    let a = [1, 2, 3];
-
-    a[-1.23] = true;  // Bu, "-1.23" adlı bir xüsusiyyət yaradır. Massivin length-i dəyişmir.
-    console.log(a);     // => [1, 2, 3, '-1.23': true]
-    console.log(a.length); // => 3
-
-    a["1000"] = 0;    // Bu, massivin 1001-ci elementi kimi qəbul edilir (indeks 1000). Length 1001 olur.
-    console.log(a.length); // => 1001
-
-    a[1.000] = "yeni"; // Bu, indeks 1-dir. a[1] = "yeni" ilə eynidir.
-    console.log(a);     // => [1, "yeni", 3, '-1.23': true, '1000': 0]
-    ```
-
----
-
-### "Out of Bounds" Xətası Yoxdur ✅
-
-Massiv indekslərinin sadəcə xüsusi bir növ obyekt xüsusiyyət adı olması o deməkdir ki, JavaScript massivlərində "sərhəddən kənar" (out of bounds) xətası yoxdur.
-Hər hansı bir obyektin mövcud olmayan xüsusiyyətini soruşduğunuzda, xəta almırsınız; sadəcə `undefined` dəyəri alırsınız. Bu, obyektlər üçün olduğu kimi massivlər üçün də doğrudur:
+Massivdə `a[1] = "salam"` kimi yazsanız, əslində bu belə işləyir:
 
 ```javascript
-let a = [true, false]; // Bu massivin 0 və 1 indekslərində elementləri var
-
-console.log(a[2]);   // => undefined; bu indeksdə element yoxdur
-console.log(a[-1]);  // => undefined; bu adda xüsusiyyət yoxdur (massiv indeksi deyil)
-console.log(a[100]); // => undefined; bu indeksdə element yoxdur
+a["1"] = "salam";
 ```
-Yəni, bir massivin mövcud olmayan bir indeksinə daxil olmaq xəta vermir, sadəcə `undefined` dəyərini qaytarır.
+
+Yəni **rəqəm avtomatik stringə çevrilir**. Amma **massivin `length` xüsusiyyəti yalnız düzgün indekslərə** reaksiya verir.
+
+### Düzgün indeks nədir?
+
+* Tam ədəd olmalıdır (məs. `0`, `1`, `42`)
+* `0 ≤ indeks < 2^32 - 1`
+* Əgər bu şərtlərə uyğundursa, `length` avtomatik artır
+
+---
+
+### 2. Misallar
+
+```javascript
+let arr = [];
+
+arr[0] = "first";      // real indeks → arr.length = 1
+arr["1"] = "second";   // real indeks → arr.length = 2
+arr[-1] = "minus";     // property → arr.length dəyişmir
+arr["foo"] = "bar";    // property → arr.length dəyişmir
+arr[100] = "big";      // real indeks → arr.length = 101
+arr[2.5] = "half";     // property → arr.length dəyişmir
+```
+
+###  Yoxlayaq:
+
+```javascript
+console.log(arr.length);   // 101
+console.log(arr[-1]);      // "minus"
+console.log(arr["foo"]);   // "bar"
+console.log(arr[2.5]);     // "half"
+```
+
+---
+
+
+### "Out of Bounds" (Sərhəddən Kənar) Xətası Yoxdur
+
+JavaScript-də massivlərdə **sərhəddən kənar indeksə daxil olduqda xəta atmır**. Sadəcə `undefined` qaytarılır.
+
+### Səbəb:
+
+Massivlər əslində obyekt olduğuna görə, **olmayan indekslərə** baxmaq **obyektdə olmayan xüsusiyyətə baxmaq** kimidir.
+
+
+```javascript
+let arr = [true, false];
+
+console.log(arr[0]);   // true
+console.log(arr[1]);   // false
+console.log(arr[2]);   // undefined (element yoxdur)
+console.log(arr[100]); // undefined (element yoxdur)
+console.log(arr[-1]);  // undefined (kənar xüsusiyyət, indeks deyil)
+```
 
 ---
 
@@ -348,39 +360,41 @@ Yəni, bir massivin mövcud olmayan bir indeksinə daxil olmaq xəta vermir, sad
     * `Array()` konstruktoru ilə:
 
         ```javascript
-        let a = new Array(5); // Heç bir element yoxdur, amma a.length 5-dir.
+        let a = new Array(5); 
+        // Heç bir element yoxdur, amma a.length 5-dir.
         console.log(a);         // => [ <5 empty items> ]
         console.log(a.length);  // => 5
         ```
     * Mövcud massivin cari uzunluğundan daha böyük bir indeksə dəyər təyin etməklə:
 
         ```javascript
-        let a = [];         // Boş massiv, uzunluğu 0.
-        a[1000] = 0;        // Bir element əlavə edir, amma massivin uzunluğunu 1001-ə qədər artırır.
+        let a = [];         
+        // Boş massiv, uzunluğu 0.
+        a[1000] = 0;        
+        // Bir element əlavə edir, amma massivin uzunluğunu 1001-ə qədər artırır.
         console.log(a);     // => [ <1000 empty items>, 0 ]
         console.log(a.length); // => 1001
         ```
-    * Gələcəkdə öyrənəcəyimiz `delete` operatoru ilə də massivi seyrək etmək olar.
-
-* **Performans:** Çox seyrək olan massivlər adətən daha yavaş, lakin yaddaşa daha qənaətcil şəkildə həyata keçirilir. Belə massivlərdə element axtarmaq adi obyekt xüsusiyyətlərini axtarmaq qədər vaxt apara bilər.
-
 * **Massiv Literallarında Seyrəklik:**
     Massiv literalında vergüllər arasında dəyər buraxdığınız zaman (məsələn, `[1,,3]` kimi), yaranan massiv seyrək olur və buraxılan elementlər sadəcə mövcud olmur:
 
     ```javascript
-    let a1 = [,];         // Bu massivdə element yoxdur, uzunluğu 1-dir.
-    console.log(0 in a1); // => false (a1-də 0 indeksli element yoxdur)
+  let a = [1, , 3];
+  console.log(1 in a); // false — 1-ci indeksdə element yoxdur
+  console.log(a[1]);   // undefined — çünki element mövcud deyil
+  ```
 
-    let a2 = [undefined]; // Bu massivdə undefined dəyərli bir element var.
-    console.log(0 in a2); // => true (a2-də 0 indeksli element var və dəyəri undefined-dir)
+   Amma bu isə fərqlidir:
+
+    ```javascript
+     let a = [1, undefined, 3];
+     console.log(1 in a); 
+     // true — element var, sadəcə dəyəri undefined-dir
     ```
-    Yəni, `[,,]` ilə `[undefined, undefined]` fərqlidir. Birincidə elementlər yoxdur, ikincidə isə `undefined` dəyəri olan elementlər var.
-
-* **Nəticə:** Seyrək massivləri başa düşmək JavaScript massivlərinin əsl təbiətini anlamaq üçün vacibdir. Ancaq praktikada əksər JavaScript massivləri seyrək olmur. Əgər seyrək massivlərlə işləməli olsanız, kodunuz yəqin ki, onları `undefined` elementləri olan qeyri-seyrək massivlər kimi qəbul edəcək.
 
 ---
 
-# 7.4 Massivin Uzunluğu (Array Length) 📏
+# 7.4 Massivin Uzunluğu (Array Length)
 
 Hər massivin bir **`length` (uzunluq)** xüsusiyyəti var və məhz bu xüsusiyyət massivləri adi JavaScript obyektlərindən fərqləndirir.
 
@@ -413,23 +427,21 @@ Hər massivin bir **`length` (uzunluq)** xüsusiyyəti var və məhz bu xüsusiy
 
         ```javascript
         let a = [1, 2, 3, 4, 5]; // Başlanğıcda 5 elementli massiv.
-        a.length = 3;           // length-i 3-ə qoyduq. İndeksi 3 və 4 olan elementlər silindi.
+        a.length = 3;           
+        // length-i 3-ə qoyduq. İndeksi 3 və 4 olan elementlər silindi.
         console.log(a);         // => [1, 2, 3]
 
         a.length = 0;           // length-i 0-a qoyduq. Bütün elementlər silindi.
         console.log(a);         // => [] (Boş massiv)
 
         a.length = 5;           // length-i 5-ə qoyduq.
-        console.log(a);         // => [ <5 empty items> ] (Uzunluq 5-dir, amma element yoxdur,
-                                //     sanki 'new Array(5)' ilə yaradılıb)
+        console.log(a);         
+        // => [ <5 empty items> ] (Uzunluq 5-dir, amma element yoxdur,
+        // sanki 'new Array(5)' ilə yaradılıb)
         ```
-
-* **`length` Dəyərini Artırmaq:**
-    Massivin `length` xüsusiyyətinin dəyərini cari dəyərindən daha böyük bir dəyərə təyin edə bilərsiniz. Bunu etmək massivə yeni elementlər əlavə etmir; sadəcə massivin sonunda seyrək bir sahə (boşluq) yaradır.
-
 ---
 
-# 7.5 Massiv Elementlərini Əlavə Etmək və Silmək ➕➖
+# 7.5 Massiv Elementlərini Əlavə Etmək və Silmək
 
 Massivlərə element əlavə etmək və ya silmək üçün bir neçə üsul var.
 
@@ -439,275 +451,327 @@ Massivlərə element əlavə etmək və ya silmək üçün bir neçə üsul var.
     Massivə element əlavə etməyin ən sadə yolu sadəcə mövcud uzunluğundan daha böyük bir indeksə dəyər təyin etməkdir:
 
     ```javascript
-    let a = [];          // Boş massiv ilə başlayırıq
-    a[0] = "sıfır";      // 0-cı indeksə dəyər əlavə edirik
-    a[1] = "bir";        // 1-ci indeksə dəyər əlavə edirik
-    console.log(a);      // => ["sıfır", "bir"]
+    let fruits = [];           // Yeni boş massiv yaradırıq
+    fruits[2] = "banana";      
+    // 2-ci indeksə dəyər əlavə edirik (0 və 1 boş qalır)
+    fruits[0] = "apple";       // 0-cı indeksə dəyər əlavə edirik
+    fruits[1] = "orange";      // 1-ci indeksə dəyər əlavə edirik
+    console.log(fruits);       // => ["apple", "orange", "banana"]
     ```
 
 2.  **`push()` Metodu ilə (Sona Əlavə Etmək):**
     `push()` metodu massivin sonuna bir və ya daha çox dəyər əlavə edir. Bu metod massivin yeni uzunluğunu qaytarır.
 
     ```javascript
-    let a = [];
-    a.push("sıfır");         // Sona "sıfır" əlavə edir. a = ["sıfır"]
-    console.log(a);          // => ["sıfır"]
-
-    a.push("bir", "iki");    // Sona "bir" və "iki" əlavə edir. a = ["sıfır", "bir", "iki"]
-    console.log(a);          // => ["sıfır", "bir", "iki"]
+    let a = [];                       // Yeni boş massiv yaradırıq
+    a.push("zero");                  
+    // Massivin sonuna "zero" əlavə olunur
+    console.log(a);                  // => ["zero"]
+    a.push("one", "two");            
+    // İki yeni element əlavə olunur: "one" və "two"
+    console.log(a);                  // => ["zero", "one", "two"]
     ```
-    `push()` ilə bir dəyər əlavə etmək, `a[a.length] = dəyər` yazmaqla eynidir.
-
 3.  **`unshift()` Metodu ilə (Əvvələ Əlavə Etmək):**
     `unshift()` metodu massivin əvvəlinə bir dəyər əlavə edir, mövcud elementləri isə daha yüksək indekslərə sürüşdürür. Bu metod haqqında daha ətraflı §7.8-də danışacağıq.
-
-### Element Silmək (Deleting Elements)
-
-1.  **`delete` Operatoru ilə:**
-    Siz obyekt xüsusiyyətlərini sildiyiniz kimi, `delete` operatoru ilə massiv elementlərini də silə bilərsiniz:
-
     ```javascript
-    let a = [1, 2, 3];
-    delete a[2]; // İndeks 2-dəki elementi silir
-    console.log(a);      // => [1, 2, <1 empty item>] (element 3 silindi, yerində boşluq var)
-    console.log(2 in a); // => false: 2 indeksində artıq element təyin olunmayıb
-    console.log(a.length); // => 3: 'delete' massivin uzunluğunu dəyişmir!
-    ```
-    Bir massiv elementini `delete` ilə silmək, həmin elementə `undefined` təyin etməkdən fərqlidir. `delete` istifadə edildikdə, massiv **seyrək** olur, yəni silinən yer boş qalır və ondan sonrakı elementlər aşağı sürüşmür.
-
-2.  **`pop()` Metodu ilə (Sondan Silmək):**
-    `pop()` metodu massivin son elementini silir və onu qaytarır. Bu, massivin uzunluğunu 1 vahid azaldır. Bu barədə daha ətraflı §7.8-də danışacağıq.
-
-3.  **`shift()` Metodu ilə (Əvvəldən Silmək):**
-    `shift()` metodu massivin ilk elementini silir və onu qaytarır. Bu da massivin uzunluğunu 1 vahid azaldır və bütün digər elementləri bir indeks aşağı sürüşdürür. Bu barədə daha ətraflı §7.8-də danışacağıq.
-
-4.  **`length` Xüsusiyyətini Dəyişdirməklə:**
-    Massivin sonunda elementləri silməyin başqa bir yolu, `length` xüsusiyyətinin dəyərini istədiyiniz yeni uzunluğa təyin etməkdir (buna §7.4-də toxunmuşduq).
-
-    ```javascript
-    let b = [1, 2, 3, 4, 5];
-    b.length = 2; // Massivin uzunluğunu 2-yə qoyur, 3, 4, 5 silinir.
-    console.log(b); // => [1, 2]
+    let arr = [2, 3];
+    arr.unshift(1);  
+    console.log(arr); // => [1, 2, 3]
     ```
 
-5.  **`splice()` Metodu ilə (Ümumi Məqsədli Silmə/Əlavə Etmə):**
-    `splice()` metodu massiv elementlərini yerləşdirmək, silmək və ya əvəz etmək üçün ümumi təyinatlı metoddur. O, `length` xüsusiyyətini dəyişdirir və lazım gəldikdə massiv elementlərini yüksək və ya aşağı indekslərə sürüşdürür. Ətraflı məlumat üçün §7.8-ə baxın.
+## Element Silmək (Deleting Elements)
+
+### 1. `delete` Operatoru ilə
+
+`delete` operatoru massivdə elementin özünü silir, amma massivdə boşluq (hole) yaranır və uzunluq dəyişmir.
+
+```javascript
+let a = [1, 2, 3];
+delete a[2];                // 2-ci indeksdəki elementi silir
+console.log(a);            // => [1, 2, <1 empty item>]
+console.log(2 in a);       // => false (element yoxdur)
+console.log(a.length);     // => 3 (uzunluq dəyişmir)
+```
 
 ---
 
-# 7.6 Massivlərdə Dövr Etmək (Iterating Arrays) 🔄
+### 2. `pop()` Metodu ilə (Sondan Silmək)
 
-Massivin hər bir elementi üzərində dövr etmək üçün bir neçə üsul var.
-
-### 1. `for/of` Dövrü (ES6+) ✨
-
-ES6-dan etibarən, massivlərin (və ya istənilən **iterasiya edilə bilən obyektin**) elementləri arasında dövr etməyin ən asan yolu **`for/of`** dövrüdür. Bu, daha əvvəl §5.4.4-də ətraflı izah edilmişdi.
+`pop()` metodu massivin son elementini silir və onu qaytarır. Uzunluğu 1 azaldır.
 
 ```javascript
-let herfler = [..."Salam dünya"]; // Hərflər massivi yaradırıq
-let metn = "";
-for (let herf of herfler) { // Hər hərfi tək-tək gəzirik
-  metn += herf;
-}
-console.log(metn); // => "Salam dünya" (original mətni yenidən qurduq)
-```
-`for/of` dövrünün istifadə etdiyi daxili massiv iteratoru elementləri artan sırada qaytarır. Seyrək massivlər üçün xüsusi bir davranışı yoxdur və mövcud olmayan elementlər üçün sadəcə `undefined` qaytarır.
-
-### 2. `for/of` ilə İndeks və Dəyəri Birlikdə Əldə Etmək (`entries()`) 📊
-
-Əgər `for/of` dövrü istifadə edərkən həm elementin özünə, həm də onun **indeksinə** ehtiyacınız varsa, massivin **`entries()`** metodundan və **destructuring assignment**-dən istifadə edin:
-
-```javascript
-let herfler = [..."Salam"];
-let herIkinci = "";
-for (let [index, herf] of herfler.entries()) { // Hər indeks və hərfi birlikdə alırıq
-  if (index % 2 === 0) { // Cüt indeksli hərfləri götürürük (0, 2, 4...)
-    herIkinci += herf;
-  }
-}
-console.log(herIkinci); // => "Sla"
+let a = [1, 2, 3];
+let last = a.pop();         // Son elementi silir və qaytarır
+console.log(last);          // => 3
+console.log(a);             // => [1, 2]
+console.log(a.length);      // => 2
 ```
 
-### 3. `forEach()` Metodu (Funksional Yanaşma) 🚀
+---
 
-`forEach()` massivləri iterasiya etmək üçün funksional bir yanaşma təklif edən bir massiv metodudur, bu, `for` dövrünün yeni bir forması deyil. Massivin `forEach()` metoduna bir funksiya ötürürsünüz və `forEach()` massivin hər bir elementi üzərində sizin funksiyanızı bir dəfə çağırır:
+### 3. `shift()` Metodu ilə (Əvvəldən Silmək)
+
+`shift()` metodu massivin ilk elementini silir, onu qaytarır və digər elementləri bir indeks aşağı sürüşdürür.
 
 ```javascript
-let boyukHerfler = "";
-herfler.forEach(herf => { // Hər hərfi böyük hərflərlə boyukHerfler stringinə əlavə edir
-  boyukHerfler += herf.toUpperCase();
+let a = [1, 2, 3];
+let first = a.shift();      // İlk elementi silir və qaytarır
+console.log(first);         // => 1
+console.log(a);             // => [2, 3]
+console.log(a.length);      // => 2
+```
+
+---
+
+### 4. `length` Xüsusiyyətini Dəyişdirməklə
+
+`length`-i azaldaraq massivdən son elementləri asanlıqla silə bilərsiniz.
+
+```javascript
+let a = [1, 2, 3, 4, 5];
+a.length = 3;               
+// Massivin uzunluğunu 3-ə endirir, sonrakı elementlər silinir
+console.log(a);             // => [1, 2, 3]
+```
+
+---
+
+### 5. `splice()` Metodu ilə (Ümumi Məqsədli Silmə/Əlavə Etmə)
+
+`splice()` ilə istənilən yerdən elementləri silmək və ya əlavə etmək mümkündür.
+
+```javascript
+let a = [1, 2, 3, 4, 5];
+let removed = a.splice(1, 2); 
+// İndeks 1-dən başlayaraq 2 element silir
+console.log(removed);          // => [2, 3]
+console.log(a);                // => [1, 4, 5]
+```
+
+Bu methodların daha çox nümunə ilə izahı növbəti bölmədə olacaqdır.
+
+---
+
+## 7.6 Massivlərdə Dövr Etmək (Iterating Arrays)
+
+Massivin hər bir elementi üzərində dövr etmək üçün bir neçə üsul var. Bu üsullar, işinizin tələbinə uyğun olaraq müxtəlif ssenarilərdə faydalı ola bilər.
+
+### 1\. `for/of` Dövrü (ES6+)
+
+ES6-dan etibarən, massivlərin (və ya istənilən **iterasiya edilə bilən obyektin**) elementləri arasında dövr etməyin ən asan və ən oxunaqlı yolu **`for/of`** dövrüdür. Bu, daha əvvəl §5.4.4-də ətraflı izah edilmişdi. O, birbaşa elementlərin üzərindən keçir və kodu daha təmiz edir.
+
+```javascript
+let fruits = ["apple", "pear", "pomegranate", "quince"]; 
+// Meyvələr massivi yaradırıq
+console.log("My favorite fruits:");
+for (let fruit of fruits) { 
+  // Hər meyvəni tək-tək gəzirik
+  console.log(fruit);
+}
+// Nəticə:
+// My favorite fruits:
+// apple
+// pear
+// pomegranate
+// quince
+```
+
+-----
+
+### 2\. `for/of` ilə İndeks və Dəyəri Birlikdə Əldə Etmək (`entries()`)
+
+Əgər `for/of` dövrü istifadə edərkən həm elementin özünə, həm də onun **indeksinə** ehtiyacınız varsa, massivin **`entries()`** metodundan və **destructuring assignment**-dən (strukturu pozaraq mənimsətmə) istifadə edin. Bu üsul, elementlərin sıra nömrəsi ilə birlikdə işləməli olduğunuz hallar üçün idealdır.
+
+```javascript
+let cities = ["Baku", "Ganja", "Sumgayit", "Lankaran"];
+console.log("Major cities of Azerbaijan:");
+for (let [index, city] of cities.entries()) { 
+  // Hər indeks və şəhəri birlikdə alırıq
+  console.log(`${index + 1}. ${city}`); 
+  // Sıra nömrəsi ilə çap edirik
+}
+// Nəticə:
+// Major cities of Azerbaijan:
+// 1. Baku
+// 2. Ganja
+// 3. Sumgayit
+// 4. Lankaran
+```
+
+-----
+
+### 3\. `forEach()` Metodu (Funksional Yanaşma)
+
+`forEach()` massivləri iterasiya etmək üçün funksional bir yanaşma təklif edən bir massiv metodudur, bu, `for` dövrünün yeni bir forması deyil. Massivin `forEach()` metoduna bir funksiya ötürürsünüz və `forEach()` massivin hər bir elementi üzərində sizin funksiyanızı bir dəfə çağırır. Bu metod, hər element üzərində müəyyən bir əməliyyat aparmaq istədiyiniz zaman çox faydalıdır.
+
+```javascript
+let students = ["Ayşe", "Elvin", "Leyla", "Murad"];
+let greetings = [];
+
+students.forEach(student => { 
+  // Hər tələbə üçün salamlama mətni hazırlayırıq
+  greetings.push(`Hello, ${student}!`);
 });
-console.log(boyukHerfler); // => "SALAM"
+console.log(greetings);
+// Nəticə:
+// [ 'Hello, Ayşe!', 'Hello, Elvin!', 'Hello, Leyla!', 'Hello, Murad!' ]
 ```
-`forEach()` massivi ardıcıl şəkildə iterasiya edir və funksiyanıza ikinci arqument olaraq massiv indeksini də ötürür (bu bəzən faydalı ola bilər). `for/of` dövründən fərqli olaraq, `forEach()` seyrək massivlərdən xəbərdardır və **mövcud olmayan elementlər üçün funksiyanızı çağırmır.**
 
-`forEach()` metodu haqqında daha ətraflı §7.8.1-də danışılacaq. Həmin bölmədə `map()` və `filter()` kimi xüsusi massiv iterasiyası edən metodlar da əhatə olunacaq.
+-----
 
-### 4. Ənənəvi `for` Dövrü (Old School) 👴
+### 4\. Ənənəvi `for` Dövrü (Old School)
 
-Massiv elementləri arasında dövr etmək üçün köhnə, lakin etibarlı `for` dövründən də istifadə edə bilərsiniz (§5.4.3):
+Massiv elementləri arasında dövr etmək üçün köhnə, lakin etibarlı `for` dövründən də istifadə edə bilərsiniz (§5.4.3). Bu dövr növü massivin **indeksləri** üzərində işləyir və sizə hər bir elementə indeks vasitəsilə müraciət etməyə imkan verir. Nəzarətin tamamilə sizin əlinizdə olduğu ssenarilərdə, məsələn, massivin bir hissəsini tərsinə gəzmək və ya yalnız müəyyən şərtləri ödəyən elementlərə baxmaq lazım gəldikdə, bu dövr növü hələ də faydalıdır.
 
 ```javascript
-let herfler = [..."JavaScript"];
-let saitler = "";
-for (let i = 0; i < herfler.length; i++) { // Massivdəki hər indeks üçün
-  let herf = herfler[i];                     // Həmin indeksdəki elementi alırıq
-  if (/[aeiouəiöü]/.test(herf.toLowerCase())) { // Sait olub olmadığını yoxlayırıq (kiçik hərflərlə müqayisə üçün)
-    saitler += herf;                         // Əgər saitdirsə, onu yadda saxlayırıq
+let scores = [12, 5, 20, 8, 15]; // Tələbə qiymətləri
+let passingScores = [];
+for (let i = 0; i < scores.length; i++) { 
+  // Massivdəki hər indeks üçün
+  let score = scores[i];                  
+  // Həmin indeksdəki elementi alırıq
+  if (score >= 10) {                         
+    // Əgər qiymət keçid balından yuxarıdırsa
+    passingScores.push(score);              
+    // Onu keçən qiymətlər massivinə əlavə edirik
   }
 }
-console.log(saitler); // => "aai"
+console.log("Passing scores:", passingScores); 
+// => Passing scores: [ 12, 20, 15 ]
 ```
 
-* **Performans İpucları (Nadir Hallarda):**
-    İç-içə dövrlər kimi performansın kritik olduğu yerlərdə, bəzən massivin uzunluğu hər iterasiyada deyil, yalnız bir dəfə alınaraq yerli bir dəyişkəndə saxlanılır. Müasir JavaScript interpretatorları ilə bunun performans fərqi yaratdığı aydın deyil, lakin bu yanaşmalar da var:
+-----
 
-    ```javascript
-    // Massivin uzunluğunu yerli dəyişəndə saxlayın
-    for (let i = 0, len = herfler.length; i < len; i++) {
-      // dövrün gövdəsi
-    }
+Tamamilə haqlısan\! Bu nümunə həqiqətən də bir az uzundur və yeni başlayan üçün birbaşa "çoxölçülü massiv" konsepsiyasını anlamaq üçün ən sadə yanaşma deyil. Vurma cədvəli əla bir tətbiq olsa da, massivin necə yaradıldığını və doldurulduğunu izah edən kod hissəsi diqqəti əsas mövzudan yayındıra bilər.
 
-    // Massivi sondan əvvələ doğru iterasiya edin
-    for (let i = herfler.length - 1; i >= 0; i--) {
-      // dövrün gövdəsi
-    }
-    ```
+Məqsəd, "massivlərin massivləri" ideyasını sadə və dərhal anlaşıqlı bir şəkildə göstərməkdir. Bu hissəni aşağıdakı kimi yenidən quraq. Əsas diqqəti qısa və məqsədəuyğun nümunələrə yönəldəcəm:
 
-* **Seyrək Massivlərdə Nəzərə Alınmalı:**
-    Yuxarıdakı `for` dövrü nümunələri massivin sıx olduğunu və bütün elementlərin etibarlı məlumat ehtiva etdiyini fərz edir. Əgər belə deyilsə (massiv seyrəkdirsə və ya `undefined` elementlər varsa), elementləri istifadə etməzdən əvvəl onları yoxlamalısınız. `undefined` və mövcud olmayan elementləri ötürmək istəyirsinizsə, belə yaza bilərsiniz:
+-----
 
-    ```javascript
-    let a = [1,,3, undefined, 5]; // Seyrək və undefined elementli massiv
-    for (let i = 0; i < a.length; i++) {
-      if (!(i in a)) continue; // Mövcud olmayan elementləri ötürür (sparse)
-      if (a[i] === undefined) continue; // undefined dəyərli elementləri ötürür
-      // dövrün gövdəsi burada
-      console.log(`İndeks ${i}: ${a[i]}`);
-    }
-    // Nəticə:
-    // İndeks 0: 1
-    // İndeks 2: 3
-    // İndeks 4: 5
-    ```
-
----
-
-# 7.7 Çoxölçülü Massivlər (Multidimensional Arrays) 📊
+## 7.7 Çoxölçülü Massivlər (Multidimensional Arrays)
 
 JavaScript birbaşa olaraq "həqiqi çoxölçülü massivləri" dəstəkləmir. Lakin siz **massivlərin massivlərini** (yəni bir massivin elementləri başqa massivlər olan) yaratmaqla bunu təxmin edə bilərsiniz. Bu üsulla, iki, üç və ya daha çox ölçülü massivlər kimi davranan strukturlar qura bilərsiniz.
 
-* **Dəyərə Daxil Olmaq:** Bir massivlər massivindəki bir dəyərə daxil olmaq üçün sadəcə **`[]` operatorunu ardıcıl olaraq iki dəfə** istifadə edirsiniz. Məsələn, əgər `matrix` dəyişəni ədədlər massivlərinin massividirsə, `matrix[x]` bu massivdəki hər hansı bir sıranı (özü də bir massiv olan) təmsil edir. Bu sıradakı müəyyən bir ədədə daxil olmaq üçün `matrix[x][y]` yazarsınız.
+Təsəvvür edin ki, bir cədvəl və ya matris kimi məlumat saxlamaq istəyirsiniz. Hər sıra özü bir massiv, bu sıralar isə əsas massivin elementləri olacaq.
 
----
+  * **Dəyərə Daxil Olmaq:** Bir massivlər massivindəki bir dəyərə daxil olmaq üçün sadəcə **`[]` operatorunu ardıcıl olaraq iki dəfə** istifadə edirsiniz. Məsələn, əgər `matrix` dəyişəni ədədlər massivlərinin massividirsə, `matrix[x]` bu massivdəki hər hansı bir sıranı (özü də bir massiv olan) təmsil edir. Bu sıradakı müəyyən bir ədədə daxil olmaq üçün `matrix[x][y]` yazarsınız.
 
-### Konkret Nümunə: Vurma Cədvəli ✖️
+-----
 
-Gəlin, iki ölçülü bir massivi vurma cədvəli kimi necə istifadə edəcəyimizə dair bir nümunəyə baxaq:
+### Sadə Nümunə: Şəhər və Ölkə Məlumatları 
+
+Gəlin, iki ölçülü bir massivi şəhər və onun aid olduğu ölkə məlumatlarını saxlamaq üçün necə istifadə edəcəyimizə baxaq. Bu, çoxölçülü massiv anlayışını sadə şəkildə göstərir.
 
 ```javascript
-// Çoxölçülü massiv yaradırıq
-let table = new Array(10); // 10 sıradan ibarət massiv yaradırıq (hələlik boş sətirlər)
-// console.log(table); // => [ <10 empty items> ]
+// İki ölçülü massiv yaradırıq: hər daxili massiv [ölkə, paytaxt] formatındadır
+let countriesAndCapitals = [
+  ["Azerbaijan", "Baku"],
+  ["Turkey", "Ankara"],
+  ["Germany", "Berlin"]
+];
 
-// Hər bir sıraya 10 sütundan ibarət bir massiv təyin edirik
-for (let i = 0; i < table.length; i++) {
-  table[i] = new Array(10); // Hər sıra üçün 10 sütunlu massiv (boş sütunlar)
-}
-// console.log(table);
-/*
- => [
-   [ <10 empty items> ],
-   [ <10 empty items> ],
-   ...
- ]
-*/
+console.log(countriesAndCapitals[0]);     // => [ 'Azerbaijan', 'Baku' ] (Birinci sıra)
+console.log(countriesAndCapitals[0][0]);  // => Azerbaijan (Birinci sıranın birinci elementi - ölkə)
+console.log(countriesAndCapitals[1][1]);  // => Ankara (İkinci sıranın ikinci elementi - paytaxt)
 
-// Massivi dəyərlərlə doldururuq (vurma cədvəli)
-for (let row = 0; row < table.length; row++) {      // Hər sıranı gəzirik (0-dan 9-a qədər)
-  for (let col = 0; col < table[row].length; col++) { // Hər sıradakı hər sütunu gəzirik (0-dan 9-a qədər)
-    table[row][col] = row * col; // Həmin indeksdəki dəyərə sıra * sütun hasilini yazırıq
-  }
-}
-// console.log(table);
-/*
- => [
-   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-   [0, 2, 4, 6, 8, 10, 12, 14, 16, 18],
-   ...
- ]
-*/
-
-// Çoxölçülü massivdən istifadə edərək 5 * 7 hasilini tapırıq
-// table[5][7] massivin 5-ci sırasının (row) 7-ci sütunundakı (col) dəyəri deməkdir.
-console.log(table[5][7]); // => 35 (5 * 7-nin nəticəsi)
+// Yeni məlumat əlavə etmək
+countriesAndCapitals.push(["France", "Paris"]);
+console.log(countriesAndCapitals[3][1]);  // => Paris
 ```
 
-Bu nümunə göstərir ki, massivlərin massivlərindən istifadə edərək, mürəkkəb cədvəlvari və ya matrisvari məlumatları JavaScript-də necə effektiv şəkildə saxlamaq və onlara daxil olmaq olar.
+-----
 
----
+### Nümunə: Sadə Matris Əməliyyatları (Oyun Taxtası kimi) 🎮
 
-# 7.8 Massiv Metodları ⚙️
+Çoxölçülü massivlər tez-tez oyunlarda və ya cədvəl tipli məlumat strukturlarında istifadə olunur. Məsələn, bir oyun taxtasını təmsil edə bilər:
+
+```javascript
+// 3x3 ölçülü bir oyun taxtası yaradırıq (məsələn, xaç-sıfır oyunu üçün)
+// Boş xanaları "" ilə işarələyirik
+let gameBoard = [
+  ["X", "", "O"],
+  ["", "O", ""],
+  ["X", "X", ""]
+];
+
+console.log(gameBoard[0][0]); // => X (Yuxarı sol küncdəki dəyər)
+console.log(gameBoard[1][1]); // => O (Mərkəzdəki dəyər)
+
+// Bir xananın dəyərini dəyişmək
+gameBoard[2][2] = "O"; // Aşağı sağ küncə 'O' yerləşdiririk
+console.log(gameBoard);
+/*
+Nəticə:
+[
+  [ 'X', '', 'O' ],
+  [ '', 'O', '' ],
+  [ 'X', 'X', 'O' ]
+]
+*/
+
+```
+
+-----
+
+# 7.8 Massiv Metodları
 
 Əvvəlki hissələr massivlərlə işləmək üçün əsas JavaScript sintaksisinə fokuslanırdı. Ümumiyyətlə, ən güclü olanlar **`Array` sinfi tərəfindən təyin olunan metodlardır**. Bu metodları oxuyarkən, bəzilərinin çağırıldığı massivi dəyişdirdiyini (modify), bəzilərinin isə dəyişdirmədiyini yadda saxlamaq vacibdir.
 
-* Bəzi metodlar yeni bir massiv qaytarır və orijinal massiv dəyişməz qalır.
-* Digər metodlar isə massivi yerində dəyişdirir (`in place`) və dəyişdirilmiş massivə istinad qaytarır.
-
-Aşağıdakı bölmələrdə əlaqəli massiv metod qruplarına baxacağıq:
-
-* **İterator metodları:** Massiv elementləri üzərində dövr edir.
-* **Stak və Növbə metodları:** Massivə başlanğıcdan və ya sondan element əlavə edir və ya silir.
-* **Alt-massiv metodları:** Massivin ardıcıl hissələrini çıxarmaq, silmək, yerləşdirmək, doldurmaq və kopyalamaq üçündür.
-* **Axtarış və Sıralama metodları:** Massiv daxilində elementləri tapmaq və ya massiv elementlərini sıralamaq üçündür.
-* Həmçinin `Array` sinfinin statik metodlarına və massivləri birləşdirmək, stringə çevirmək üçün bir neçə digər metoda da toxunacağıq.
 
 ---
 
 ## 7.8.1 Massiv İterator Metodları 🚶‍♂️🚶‍♀️
 
-Bu hissədəki metodlar massiv elementlərini ardıcıl olaraq sizin təqdim etdiyiniz bir funksiyaya ötürərək massivlər üzərində dövr edir. Onlar massivləri gəzmək, xəritələmək (`map`), filtrləmək (`filter`), test etmək (`test`) və yığmaq (`reduce`) üçün rahat yollar təqdim edir.
+Bu hissədəki metodlar, massiv elementlərini ardıcıl olaraq sizin təqdim etdiyiniz bir funksiyaya ötürərək massivlər üzərində effektiv şəkildə dövr etməyə imkan verir. Onlar massivləri gəzmək, **xəritələmək (`map`)**, **filtrləmək (`filter`)**, **test etmək (`test`)** və **yığmaq (`reduce`)** üçün güclü vasitələrdir.
 
 **Ümumi Xüsusiyyətlər:**
 
-* Bütün bu metodlar ilk arqument olaraq bir **funksiya** qəbul edir və massivin hər bir elementi (və ya bəzi elementləri) üçün bu funksiyanı çağırır.
-* Əgər massiv seyrəkdirsə (sparse), təqdim etdiyiniz funksiya **mövcud olmayan elementlər üçün çağırılmır**.
-* Əksər hallarda, sizin funksiyanız **üç arqumentlə** çağırılır:
-    1.  Massiv elementinin **dəyəri**.
-    2.  Massiv elementinin **indeksi**.
-    3.  Massivin **özü** (bütün massiv).
-    * Çox vaxt yalnız ilk arqument (dəyər) sizə lazım olur.
-* Bu iterator metodlarının əksəriyyəti **ixtiyari ikinci arqument** qəbul edir. Əgər bu arqument təyin olunarsa, funksiya bu ikinci arqumentin bir metodu kimi çağırılır. Yəni, bu ikinci arqument funksiyanın daxilindəki `this` açar sözünün dəyərinə çevrilir.
-* Sizin funksiyanızın qaytardığı dəyər adətən vacibdir, lakin fərqli metodlar bu dəyəri fərqli şəkildə idarə edir.
-* Burada təsvir olunan metodların heç biri çağırıldığı massivi **dəyişdirmir** (baxmayaraq ki, sizin ötürdüyünüz funksiya massivi dəyişdirə bilər).
-* Bu funksiyalar çox vaxt metod çağırışının bir hissəsi olaraq **inline (yerində)** təyin olunur. **Arrow function** sintaksisi (ox funksiyaları, §8.1.3) bu metodlarla xüsusilə yaxşı işləyir və biz misallarda ondan istifadə edəcəyik.
+* Bu metodlar ilk arqument olaraq bir **funksiya** qəbul edir və massivin hər bir elementi üçün bu funksiyanı çağırır.
+* Seyrək massivlərdə (sparse arrays) **mövcud olmayan elementlər üçün funksiya çağırılmır**.
+* Sizin funksiyanız adətən üç arqumentlə çağırılır: **elementin dəyəri**, **indeksi** və **massivin özü**. Çox vaxt sizə yalnız ilk arqument (dəyər) lazım olur.
+* Əksər hallarda, bu metodlar çağırıldığı massivi **dəyişdirmir**; onlar ya yeni bir massiv qaytarır, ya da müəyyən bir nəticə verir.
+* Bu funksiyalar tez-tez metod çağırışının bir hissəsi olaraq **yerində (inline)** təyin olunur. **Arrow function** sintaksisi (§8.1.3) bu metodlarla işləmək üçün ideal seçimdir və biz nümunələrdə ondan istifadə edəcəyik.
 
----
+-----
 
-### `forEach()` Metodu ✅
+### `forEach()` Metodu
 
-`forEach()` metodu massiv üzərində dövr edir və hər bir element üçün təyin etdiyiniz funksiyanı çağırır. Funksiya elementin dəyəri, indeksi və massivin özü ilə çağırılır. Əgər sizə yalnız dəyər lazımdırsa, bir parametrli funksiya yaza bilərsiniz.
+`forEach()` metodu massiv üzərində dövr edir və massivin hər bir elementi üçün sizin təyin etdiyiniz funksiyanı çağırır. Bu funksiya çağırılarkən avtomatik olaraq üç arqument alır: **elementin dəyəri**, **indeksi** və **massivin özü**. Sizə lazım olan arqumentləri funksiyanızda istifadə edə bilərsiniz. Məsələn, əgər yalnız elementin dəyəri lazımdırsa, funksiyanızı bir parametrli yaza bilərsiniz.
 
 ```javascript
-let data = [1, 2, 3, 4, 5];
-let cem = 0;
+let numbers = [1, 2, 3, 4, 5];
+let sum = 0;
 
 // Massiv elementlərinin cəmini hesablayırıq
-data.forEach(value => { // Yalnız dəyər lazımdır, digər arqumentlər gözardı edilir
-  cem += value;
+// Burada yalnız `number` (elementin dəyəri) arqumentindən istifadə edirik
+numbers.forEach(number => {
+  sum += number;
 });
-console.log(cem); // => 15
+console.log(sum); // => 15
 
-// Hər massiv elementini 1 vahid artırırıq
-data.forEach(function(v, i, a) { // Dəyər (v), İndeks (i), Massiv (a)
-  a[i] = v + 1; // Massivi dəyişdiririk
+let students = ["Ali", "Sara", "Emin", "Aygun"];
+
+// Nümunə 1: Hər tələbənin adını çap edirik
+// Yalnız `student` (elementin dəyəri) arqumentindən istifadə edirik
+console.log("Students List:");
+students.forEach(student => {
+  console.log(student);
 });
-console.log(data); // => [2, 3, 4, 5, 6]
+/*
+Nəticə:
+Students List:
+Ali
+Sara
+Emin
+Aygun
+*/
 ```
-**Vacib Qeyd:** `forEach()` dövrü `for` dövründəki `break` statementi kimi iterasiyanı vaxtından əvvəl dayandırmağa imkan vermir. Bütün elementlər funksiyaya ötürüləcək.
 
----
+-----
+
+**Vacib Qeyd:** `forEach()` dövrü `for` dövründəki `break` və ya `continue` kimi ifadələrlə **dayandırıla bilməz** və ya **ötürülə bilməz**. Yəni, bir dəfə başladıqdan sonra, massivin bütün elementləri üçün funksiyanız çağırılacaq. Əgər iterasiyanı erkən dayandırmaq lazımdırsa, `for` dövründən və ya `some()`, `every()` kimi digər massiv metodlarından istifadə etməlisiniz.
+
+-----
 
 ### `map()` Metodu 🗺️
 
@@ -719,95 +783,161 @@ let kvadratlar = a.map(x => x * x); // Hər x-i götürüb x*x qaytarır
 console.log(kvadratlar);          // => [1, 4, 9]
 console.log(a);                   // => [1, 2, 3] (Original massiv dəyişməyib!)
 ```
-`map()` metoduna ötürdüyünüz funksiya `forEach()`-də olduğu kimi çağırılır, lakin o, mütləq bir dəyər qaytarmalıdır. `map()` **həmişə yeni bir massiv qaytarır** və çağırıldığı massivi dəyişdirmir. Əgər original massiv seyrəkdirsə, qaytarılan massiv də eyni seyrəkliyə sahib olacaq (eyni uzunluğa və eyni boş elementlərə malik olacaq).
+`map()` metoduna ötürdüyünüz funksiya `forEach()`-də olduğu kimi çağırılır, lakin o, mütləq bir dəyər qaytarmalıdır. `map()` **həmişə yeni bir massiv qaytarır** və çağırıldığı massivi dəyişdirmir.
 
 ---
 
-### `filter()` Metodu 🧪
+### `filter()` Metodu 
 
-`filter()` metodu çağırıldığı massivin elementlərinin bir **alt çoxluğunu** (subset) ehtiva edən yeni bir massiv qaytarır. Bu metoda ötürdüyünüz funksiya bir **predikat** olmalıdır: `true` və ya `false` qaytaran bir funksiya. Predikat `forEach()` və `map()`-də olduğu kimi çağırılır. Əgər predikat `true` qaytararsa (və ya `true`-ya çevrilə bilən bir dəyər), həmin element alt çoxluğa əlavə olunur və qaytarılan massivin bir hissəsi olur.
+`filter()` metodu çağırıldığı massivin elementlərindən şərtə uyğun gələnləri seçərək yeni bir massiv qaytarır. Bu metoda ötürdüyünüz funksiya bir **predikat** olmalıdır: yəni, `true` (doğru) və ya `false` (yalan) qaytaran bir funksiya. Predikat hər element üçün çağırılır. Əgər predikat `true` qaytararsa, həmin element yeni massivə əlavə olunur.
 
 ```javascript
-let a = [5, 4, 3, 2, 1];
-let ucdenKicikler = a.filter(x => x < 3); // Dəyəri 3-dən kiçik olanları seçir
-console.log(ucdenKicikler);            // => [2, 1]
+let ages = [18, 12, 25, 6, 30, 15];
 
-let cutIndeksler = a.filter((x, i) => i % 2 === 0); // İndeksi cüt olanları seçir
-console.log(cutIndeksler);             // => [5, 3, 1] (indeks 0, 2, 4)
+// Nümunə 1: Yalnız 18 və daha yuxarı yaşda olanları seçirik
+let adults = ages.filter(age => age >= 18);
+console.log(adults); // => [18, 25, 30]
+
+// Nümunə 2: İndeksi cüt olan və yaşı 20-dən böyük olanları seçirik
+let selectedPeople = ages.filter((age, index) => index % 2 === 0 && age > 20);
+console.log(selectedPeople); // => [25, 30] (ages[2]=25, ages[4]=30)
 ```
-**Vacib Qeyd:** `filter()` seyrək massivlərdəki boş elementləri ötürür və onun qaytardığı massiv **həmişə sıx (dense)** olur.
 
-* Seyrək massivdəki boşluqları bağlamaq üçün:
+-----
+
+**Vacib Qeyd:** `filter()` metodu seyrək massivlərdəki boş elementləri (`empty items`) ötürür və onun qaytardığı massiv **həmişə sıx (dense)** olur. Bu o deməkdir ki, yeni massivdə heç bir "boş yer" olmayacaq.
+
+  * **Seyrək massivdəki boşluqları aradan qaldırmaq üçün:**
+
     ```javascript
-    let seyrekmassiv = [1,,3,,5];
-    let sixmassiv = seyrekmassiv.filter(() => true); // Bütün mövcud elementləri götürür
-    console.log(sixmassiv); // => [1, 3, 5]
-    ```
-* Boşluqları, `undefined` və `null` elementləri bağlamaq və silmək üçün:
-    ```javascript
-    let b = [1, undefined, 2, null, 3, , 4];
-    b = b.filter(x => x !== undefined && x !== null);
-    console.log(b); // => [1, 2, 3, 4]
+    let sparseArray = [1, , 3, , 5]; // İkinci və dördüncü elementlər boşdur
+    let denseArray = sparseArray.filter(() => true); // Bütün mövcud elementləri götürür
+    console.log(denseArray); // => [1, 3, 5]
     ```
 
----
+  * **Boşluqları, `undefined` və `null` elementləri silmək üçün:**
 
-### `find()` və `findIndex()` Metodları 🔍
+    ```javascript
+    let mixedArray = [1, undefined, 2, null, 3, , 4];
+    // `x` dəyəri `undefined` və ya `null` deyilsə, onu seç
+    let cleanedArray = mixedArray.filter(x => x !== undefined && x !== null);
+    console.log(cleanedArray); // => [1, 2, 3, 4]
+    ```
 
-`find()` və `findIndex()` metodları `filter()`-ə bənzəyir, çünki onlar massivdə sizin predikat funksiyanızın `true` qaytardığı elementləri axtarır. Lakin `filter()`-dən fərqli olaraq, bu iki metod predikat ilk dəfə uyğun bir element tapdıqda dövr etməyi dayandırır.
+-----
 
-* **`find()`:** Uyğun gələn elementi qaytarır. Əgər heç bir element tapılmazsa, `undefined` qaytarır.
-* **`findIndex()`:** Uyğun gələn elementin **indeksini** qaytarır. Əgər heç bir element tapılmazsa, `-1` qaytarır.
+### `find()` və `findIndex()` Metodları
+
+`findIndex()` və `find()` metodları massivdə müəyyən bir şərti ödəyən elementi axtarmaq üçün istifadə olunur. Hər iki metod da `filter()` kimi bir **predikat funksiya** qəbul edir. Predikat `true` qaytaran ilk element tapılan kimi axtarışı dayandırırlar.
+
+  * **`findIndex()`:** Şərti ödəyən **ilk elementin indeksini** qaytarır. Əgər belə bir element tapılmazsa, `-1` qaytarır.
+  * **`find()`:** Şərti ödəyən **ilk elementin dəyərini** qaytarır. Əgər belə bir element tapılmazsa, `undefined` qaytarır.
 
 ```javascript
-let a = [1, 2, 3, 4, 5];
+let students = [
+  { name: "Ali", grade: 88, passed: true },
+  { name: "Leyla", grade: 95, passed: true },
+  { name: "Murad", grade: 45, passed: false },
+  { name: "Nigar", grade: 78, passed: true }
+];
 
-let ucunIndeksi = a.findIndex(x => x === 3); // Dəyəri 3 olan elementin indeksini tapır
-console.log(ucunIndeksi);                  // => 2
+// 🔍 1. İlk "keçməyən" tələbəni tapırıq
+let failedStudent = students.find(student => student.passed === false);
+console.log("Failed student:", failedStudent);
+// => Failed student: { name: 'Murad', grade: 45, passed: false }
 
-let menfiEdedIndeksi = a.findIndex(x => x < 0); // Massivdə mənfi ədəd yoxdur
-console.log(menfiEdedIndeksi);             // => -1
+// 🔢 2. Balı 90-dan yuxarı olan ilk tələbənin indeksini tapırıq
+let topStudentIndex = students.findIndex(student => student.grade > 90);
+console.log("Index of top student:", topStudentIndex);
+// => Index of top student: 1 (Leyla)
 
-let besinMiskili = a.find(x => x % 5 === 0); // 5-ə bölünən ilk ədədi tapır
-console.log(besinMiskili);                 // => 5
+// ❌ 3. Adı "Rashad" olan tələbəni tapmağa çalışırıq (yoxdur)
+let rashad = students.find(student => student.name === "Rashad");
+console.log("Rashad:", rashad);
+// => Rashad: undefined
 
-let yeddininMiskili = a.find(x => x % 7 === 0); // Massivdə 7-yə bölünən yoxdur
-console.log(yeddininMiskili);              // => undefined
+// ❓ 4. Balı 50-dən aşağı olan ilk tələbənin indeksini tapırıq
+let lowGradeIndex = students.findIndex(student => student.grade < 50);
+console.log("Index of low grade student:", lowGradeIndex);
+// => Index of low grade student: 2 (Murad)
+```
+---
+
+### `every()` və `some()` Metodları
+
+`every()` və `some()` metodları massivlərdə şərtləri yoxlamaq üçün istifadə olunan güclü predikat metodlardır. Onlar sizin təyin etdiyiniz funksiyanı massiv elementlərinə tətbiq edir və nəticədə `true` (doğru) və ya `false` (yalan) qaytarırlar.
+
+-----
+
+#### `every()` Metodu (Hər kəs üçün)
+
+Bu metod riyaziyyatdakı "hər şey üçün" (`∀`) kəmiyyətçisinə bənzəyir. **Yalnız və yalnız** massivdəki **bütün elementlər** üçün sizin predikat funksiyanız `true` qaytararsa, `every()` metodu `true` qaytarır. Əgər bircə element belə şərti ödəmirsə, dərhal `false` qaytarır.
+
+```javascript
+let studentScores = [85, 92, 78, 95, 88]; // Tələbə balları
+
+// Nümunə 1: Bütün tələbələr keçid balını (70) keçibmi?
+let allPassed = studentScores.every(score => score >= 70);
+console.log("Did all students pass the exam?", allPassed); 
+// => Did all students pass the exam? true
+
+// Nümunə 2: Bütün məhsulların stokda olması şərti
+let productsInStock = [
+  { name: "Laptop", inStock: true },
+  { name: "Mouse", inStock: true },
+  { name: "Keyboard", inStock: false }
+];
+let areAllProductsAvailable = productsInStock.every(product => product.inStock === true);
+console.log("Are all products available?", areAllProductsAvailable); // => Are all products available? false
 ```
 
----
+-----
 
-### `every()` və `some()` Metodları ✅❌
+#### `some()` Metodu (Bəziləri üçün) ❔
 
-`every()` və `some()` metodları massiv predikatlarıdır: onlar sizin təyin etdiyiniz predikat funksiyasını massiv elementlərinə tətbiq edir, sonra `true` və ya `false` qaytarır.
+Bu metod riyaziyyatdakı "mövcuddur" (`∃`) kəmiyyətçisinə bənzəyir. Əgər massivdə predikatın `true` qaytardığı **ən azı bir element** mövcuddursa, `some()` metodu `true` qaytarır. Yalnız və yalnız predikat massivin bütün elementləri üçün `false` qaytararsa, `false` qaytarır.
 
-* **`every()`:** Riyazi "hər şey üçün" (`∀`) kəmiyyətçisi kimidir: yalnız və yalnız sizin predikat funksiyanız massivdəki **bütün elementlər üçün `true` qaytararsa**, `true` qaytarır.
+```javascript
+let userStatuses = ["active", "inactive", "pending", "active"]; 
+// İstifadəçi statusları
 
-    ```javascript
-    let a = [1, 2, 3, 4, 5];
-    let ondanKicikdir = a.every(x => x < 10);      // Bütün dəyərlər 10-dan kiçikdirmi?
-    console.log(ondanKicikdir);                    // => true
+// Nümunə 1: Aktiv istifadəçi varmı?
+let isAnyUserActive = userStatuses.some(status => status === "active");
+console.log("Is there any active user?", isAnyUserActive); 
+// => Is there any active user? true
 
-    let cutEdedler = a.every(x => x % 2 === 0);    // Bütün dəyərlər cütdürmü?
-    console.log(cutEdedler);                       // => false (1, 3, 5 təkdir)
-    ```
+// Nümunə 2: Massivdə mənfi ədəd varmı?
+let temperatureReadings = [15, 10, -5, 20, 0];
+let hasNegativeTemperature = temperatureReadings.some(temp => temp < 0);
+console.log("Is there any negative temperature reading?", hasNegativeTemperature); 
+// => Is there any negative temperature reading? true
 
-* **`some()`:** Riyazi "mövcuddur" (`∃`) kəmiyyətçisi kimidir: əgər massivdə predikatın `true` qaytardığı **ən azı bir element mövcuddursa**, `true` qaytarır. Yalnız və yalnız predikat massivin bütün elementləri üçün `false` qaytararsa, `false` qaytarır.
+// Nümunə 3: Massivdə "error" statusu varmı?
+let systemLogs = ["info", "warning", "debug"];
+let hasError = systemLogs.some(log => log === "error");
+console.log("Is there any 'error' in logs?", hasError); 
+// => Is there any 'error' in logs? false
+```
 
-    ```javascript
-    let a = [1, 2, 3, 4, 5];
-    let beziCutEdedler = a.some(x => x % 2 === 0); // Massivdə bəzi cüt ədədlər varmı?
-    console.log(beziCutEdedler);                   // => true (2 və 4 var)
+-----
 
-    let reqemDeyil = a.some(isNaN);                // Massivdə rəqəm olmayan dəyər varmı? (isNaN = is Not a Number)
-    console.log(reqemDeyil);                       // => false (hamısı rəqəmdir)
-    ```
-* **Dövrü Dayandırma Xüsusiyyəti:** Həm `every()`, həm də `some()` qaytaracaqları dəyəri bildikləri anda massiv elementləri üzərində dövr etməyi dayandırırlar.
-    * `some()` sizin predikatınız ilk dəfə `true` qaytaran kimi `true` qaytarır və yalnız predikatınız həmişə `false` qaytararsa, bütün massivi gəzir.
-    * `every()` isə bunun əksidir: sizin predikatınız ilk dəfə `false` qaytaran kimi `false` qaytarır və yalnız predikatınız həmişə `true` qaytararsa, bütün elementləri gəzir.
-* **Boş Massivlər:** Riyazi konvensiyaya görə, `every()` boş massivdə çağırılanda `true`, `some()` isə `false` qaytarır.
+**Dövrü Dayandırma Xüsusiyyəti:** Həm `every()`, həm də `some()` qaytaracaqları dəyəri bildikləri anda massiv elementləri üzərində dövr etməyi dayandırırlar.
 
----
+  * **`some()`** sizin predikatınız ilk dəfə `true` qaytaran kimi dərhal `true` qaytarır və axtarışı dayandırır. Yalnız predikatınız həmişə `false` qaytararsa, bütün massivi gəzir.
+  * **`every()`** isə bunun əksidir: sizin predikatınız ilk dəfə `false` qaytaran kimi dərhal `false` qaytarır və axtarışı dayandırır. Yalnız predikatınız həmişə `true` qaytararsa, bütün elementləri gəzir.
+
+-----
+
+**Boş Massivlər:** Riyazi konvensiyaya görə, `every()` boş massivdə çağırılanda `true` (çünki `false` qaytaran heç bir element yoxdur), `some()` isə `false` qaytarır (çünki `true` qaytaran heç bir element yoxdur).
+
+```javascript
+let emptyArray = [];
+console.log("every() on empty array:", emptyArray.every(x => x > 0)); // => true
+console.log("some() on empty array:", emptyArray.some(x => x > 0));   // => false
+```
+
+-----
+
 
 ### `reduce()` və `reduceRight()` Metodları 📉📈
 
