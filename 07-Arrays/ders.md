@@ -720,7 +720,7 @@ Nəticə:
 
 ---
 
-## 7.8.1 Massiv İterator Metodları 🚶‍♂️🚶‍♀️
+## 7.8.1 Massiv İterator Metodları
 
 Bu hissədəki metodlar, massiv elementlərini ardıcıl olaraq sizin təqdim etdiyiniz bir funksiyaya ötürərək massivlər üzərində effektiv şəkildə dövr etməyə imkan verir. Onlar massivləri gəzmək, **xəritələmək (`map`)**, **filtrləmək (`filter`)**, **test etmək (`test`)** və **yığmaq (`reduce`)** üçün güclü vasitələrdir.
 
@@ -773,7 +773,7 @@ Aygun
 
 -----
 
-### `map()` Metodu 🗺️
+### `map()` Metodu
 
 `map()` metodu çağırıldığı massivin hər bir elementini sizin təyin etdiyiniz funksiyaya ötürür və **həmin funksiyanın qaytardığı dəyərləri ehtiva edən yeni bir massiv** qaytarır.
 
@@ -939,635 +939,784 @@ console.log("some() on empty array:", emptyArray.some(x => x > 0));   // => fals
 -----
 
 
-### `reduce()` və `reduceRight()` Metodları 📉📈
-
-`reduce()` və `reduceRight()` metodları massivin elementlərini, sizin təyin etdiyiniz bir funksiyadan istifadə edərək, **tək bir dəyər** əldə etmək üçün birləşdirir. Bu, funksional proqramlaşdırmada tez-tez rast gəlinən bir əməliyyatdır və "inject" və ya "fold" kimi də tanınır.
-
-**Misallar:**
-
-```javascript
-let a = [1, 2, 3, 4, 5];
-
-// Elementlərin cəmi
-let cem = a.reduce((akkumulyator, cariDeyer) => akkumulyator + cariDeyer, 0); // Başlanğıc dəyəri 0
-console.log(cem); // => 15
-
-// Elementlərin hasili
-let hasil = a.reduce((akkumulyator, cariDeyer) => akkumulyator * cariDeyer, 1); // Başlanğıc dəyəri 1
-console.log(hasil); // => 120
-
-// Ən böyük dəyər
-let enBoyuk = a.reduce((akkumulyator, cariDeyer) => (akkumulyator > cariDeyer) ? akkumulyator : cariDeyer); // Başlanğıc dəyəri yoxdur
-console.log(enBoyuk); // => 5
-```
-
-* **`reduce()` Arqumentləri:**
-    `reduce()` iki arqument qəbul edir:
-    1.  **Reduksiya funksiyası (callback):** Bu funksiya iki dəyəri (əvvəlki nəticəni və cari elementi) birləşdirərək tək bir dəyər qaytarır.
-    2.  **İlkin dəyər (initial value, ixtiyari):** Bu, reduksiya funksiyasına ilk çağırışda birinci arqument kimi ötürülən dəyərdir. Əgər verilməzsə, massivin **ilk elementi** ilkin dəyər kimi istifadə olunur və reduksiya funksiyası massivin ikinci elementi ilə başlayır.
-
-* **Reduksiya Funksiyasının Çağırılması:**
-    `reduce()` ilə istifadə olunan funksiyalar `forEach()` və `map()` ilə istifadə olunanlardan fərqlidir.
-    * Birinci arqument: **Akkumulyasiya olunmuş nəticə** (reduction so far).
-    * İkinci arqument: Massiv elementinin **dəyəri**.
-    * Üçüncü arqument: Massiv elementinin **indeksi**.
-    * Dördüncü arqument: Massivin **özü**.
-
-    Yuxarıdakı cəmləmə nümunəsində (`a.reduce((x,y) => x+y, 0)`):
-    * İlk çağırış: `x = 0` (ilkin dəyər), `y = 1` (massivin ilk elementi). Qaytarır `1`.
-    * İkinci çağırış: `x = 1` (əvvəlki nəticə), `y = 2` (massivin ikinci elementi). Qaytarır `3`.
-    * Daha sonra `x = 3, y = 3` qaytarır `6`, sonra `x = 6, y = 4` qaytarır `10`, nəhayət `x = 10, y = 5` qaytarır `15`. Bu son dəyər `reduce()`-un qaytardığı dəyər olur.
-
-* **İlkin Dəyər Olmadan `reduce()`:**
-    Əgər `reduce()`-u ilkin dəyər arqumenti olmadan çağırırsınızsa, massivin **ilk elementi** ilkin dəyər kimi istifadə olunur. Bu halda, reduksiya funksiyasına ilk çağırışda massivin birinci və ikinci elementləri ilk və ikinci arqumentlər kimi ötürülür.
-
-    ```javascript
-    let b = [10, 20, 5];
-    let max = b.reduce((a, b) => (a > b) ? a : b); // İlk dəyər 10 olur, sonra 20 ilə müqayisə olunur, sonra 5 ilə.
-    console.log(max); // => 20
-    ```
-    **Boş massivdə ilkin dəyər olmadan `reduce()` çağırmaq `TypeError` səhvinə səbəb olur.**
-    Əgər massivdə bir element varsa və ya massiv boşdursa, lakin ilkin dəyər təyin olunubsa, `reduce()` reduksiya funksiyasını heç vaxt çağırmadan həmin bir dəyəri qaytarır.
-
-* **`reduceRight()`:**
-    `reduceRight()` `reduce()` ilə tamamilə eyni işləyir, lakin massivi ən yüksək indeksdən ən aşağıya (sağdan-sola) emal edir. Bu, reduksiya əməliyyatının sağdan-sola assosiativliyi olduğu hallarda (məsələn, üstləmə kimi) faydalı ola bilər:
-
-    ```javascript
-    // 2^(3^4) hesablayırıq. Üstləmə sağdan-sola prioritetə malikdir.
-    let a = [2, 3, 4];
-    // reduceRight: (4) alınır, sonra 3^(4), sonra 2^(3^4)
-    let netice = a.reduceRight((akkumulyator, cariDeyer) => Math.pow(cariDeyer, akkumulyator));
-    console.log(netice); // => 2.4178516392292583e+24 (yəni 2^(3^4) = 2^81 = bu böyük rəqəm)
-    ```
-* **Qeyd:** Nə `reduce()`, nə də `reduceRight()` reduksiya funksiyasının hansı `this` dəyəri ilə çağırılacağını təyin edən ixtiyari bir arqument qəbul etmir. Onun yerini ilkin dəyər arqumenti tutur. Əgər reduksiya funksiyanızın müəyyən bir obyektin metodu kimi çağırılmasına ehtiyacınız varsa, `Function.bind()` metodundan (§8.7.5) istifadə edə bilərsiniz.
-
-`reduce()` və `reduceRight()` yalnız riyazi hesablamalar üçün nəzərdə tutulmayıb. İki dəyəri (məsələn, iki obyekti) eyni tipdə bir dəyərə birləşdirə bilən istənilən funksiya reduksiya funksiyası kimi istifadə edilə bilər. Lakin, massiv reduksiyalarından istifadə edərək ifadə edilən alqoritmlər tez bir zamanda mürəkkəbləşə və başa düşülməsi çətinləşə bilər, buna görə də bəzən massivləri emal etmək üçün adi dövr konstruksiyalarından istifadə etmək kodunuzu oxumaq, yazmaq və başa düşmək üçün daha asan ola bilər.
+Bu bölmə artıq çox əhatəlidir və yaxşı yazılıb! Amma istədiyin kimi daha *kitab üslubuna uyğun*, **nümunələrlə zəngin** və **qısa anlayış blokları** şəklində təqdim edə bilərəm. Gəlin əvvəlcə analiz edib sonra son versiyanı təqdim edim:
 
 ---
 
-# 7.8.2 Massivləri Düzəltmək (Flattening Arrays) `flat()` və `flatMap()` Metodları ilə
+## `reduce()` və `reduceRight()` Metodları
+`reduce()` metodu massivin bütün elementlərini bir funksiya vasitəsilə **tək bir nəticəyə** çevirir.
+Əməliyyat **soldan-sağa** aparılır. Əgər sağdan başlamaq istəyirsənsə, `reduceRight()` istifadə olunur.
 
-ES2019-da təqdim olunan bu metodlar mürəkkəb (iç-içə) massivləri daha sadə, tək səviyyəli massivlərə çevirmək üçün istifadə olunur.
+---
+
+### 🧠 Sintaksis
+
+```javascript
+array.reduce((accumulator, currentValue, index, array) => { /* ... */ }, initialValue);
+```
+
+* **`accumulator`** – yığılmış nəticə.
+* **`currentValue`** – cari massiv elementi.
+* **`initialValue`** – ilkin başlanğıc dəyəri. (Əgər göstərilməzsə, massivdəki ilk element götürülür.)
+
+---
+
+###  Nümunələr
+
+```javascript
+let nums = [1, 2, 3, 4];
+
+let sum = nums.reduce((acc, val) => acc + val, 0);
+console.log(sum); // => 10
+
+let product = nums.reduce((acc, val) => acc * val, 1);
+console.log(product); // => 24
+
+let words = ["JS", "is", "fun"];
+
+let sentence = words.reduce((acc, val) => acc + " " + val);
+console.log(sentence); // => "JS is fun"
+
+let cart = [
+  { product: "Laptop", price: 1200 },
+  { product: "Book", price: 30 },
+  { product: "Pen", price: 5 }
+];
+
+let total = cart.reduce((sum, item) => sum + item.price, 0);
+console.log(total); // => 1235
+
+let entries = [["name", "Ali"], ["age", 25]];
+
+let obj = entries.reduce((acc, [key, val]) => {
+  acc[key] = val;
+  return acc;
+}, {});
+
+console.log(obj); // => { name: "Ali", age: 25 }
+```
+
+---
+
+###  `reduceRight()` — Eyni funksionallıq, amma sağdan başlayır
+
+```javascript
+let letters = ["a", "b", "c", "d"];
+
+// Sağdan-sola birləşdirərək stringi tərsinə çeviririk
+let reversed = letters.reduceRight((acc, char) => acc + char, "");
+
+console.log(reversed); // => "dcba"
+```
+
+---
+
+### Diqqət: Boş Massivdə İlkin Dəyər Vacibdir
+
+```javascript
+[].reduce((a, b) => a + b);
+// ❌ TypeError: Reduce of empty array with no initial value
+```
+---
+
+## 7.8.2 Massivləri Düzləndirmək: `flat()` və `flatMap()` Metodları
+
+Bəzən massiv daxilində başqa massivlər ola bilər — bu cür iç-içə strukturlar kodun işlənməsini çətinləşdirə bilər. Bu hallarda **`flat()`** və **`flatMap()`** metodları iç-içə massivləri daha **sadə və oxunaqlı** massivlərə çevirmək üçün istifadə olunur.
+
+---
 
 ### `flat()` Metodu
 
-`flat()` metodu çağırıldığı massivdəki elementləri ehtiva edən **yeni bir massiv (new array)** yaradır və qaytarır. Lakin, original massivdəki **massiv olan elementlər** (nested arrays) qaytarılan massivin daxilinə "düzəldilir" (flattened).
+`flat()` metodu, bir massiv içindəki **massivləri "düzləndirərək"** tək bir səviyyəli massiv yaradır. Bu metod massivə **toxunmur**, əvəzində **yeni bir düz massiv qaytarır**.
 
-**Misallar:**
+#### Əsas istifadə:
 
 ```javascript
-[1, [2, 3]].flat();    // => [1, 2, 3]
-[1, [2, [3]]].flat(); // => [1, 2, [3]] (yalnız bir səviyyə düzəldir)
+[1, [2, 3]].flat();    
+// => [1, 2, 3]
 ```
 
-* **Dərinlik (Depth):** Arqumentsiz çağırılanda, `flat()` **bir səviyyə (one level)** iç-içəlikləri düzəldir. Orijinal massivin özü massiv olan elementləri düzəldilir, lakin həmin massivlərin daxilindəki massivlər düzəldilmir. Əgər daha çox səviyyəni düzəltmək istəyirsinizsə, `flat()` metoduna bir rəqəm (dərinlik dərəcəsi) ötürün:
+#### Sadəcə bir səviyyə düzləndirilir:
 
-    ```javascript
-    let a = [1, [2, [3, [4]]]];
+```javascript
+[1, [2, [3]]].flat();  
+// => [1, 2, [3]]
+```
 
-    a.flat(1); // => [1, 2, [3, [4]]] (1 səviyyə düzəldildi)
-    a.flat(2); // => [1, 2, 3, [4]]   (2 səviyyə düzəldildi)
-    a.flat(3); // => [1, 2, 3, 4]     (3 səviyyə düzəldildi)
-    a.flat(4); // => [1, 2, 3, 4]     (4 səviyyə düzəldildi, artıq düzəldiləcək bir şey yoxdur)
-    ```
+---
+
+#### Dərinlik səviyyəsi (depth) necə idarə olunur?
+
+Əgər birdən çox səviyyəli iç-içə massivlər varsa, `flat()` metoduna bir rəqəm arqument kimi verərək neçə səviyyə düzləndiriləcəyini təyin edə bilərsiniz:
+
+```javascript
+let a = [1, [2, [3, [4]]]];
+
+a.flat(1); // => [1, 2, [3, [4]]]
+a.flat(2); // => [1, 2, 3, [4]]
+a.flat(3); // => [1, 2, 3, 4]
+a.flat(99); // => [1, 2, 3, 4] 
+// Dərinlikdən asılı olmayaraq tam düzləndirir
+```
+
+---
 
 ### `flatMap()` Metodu
 
-`flatMap()` metodu `map()` metodu kimi işləyir (bax "7.8.1 Array Iterator Methods" hissəsinə), lakin əlavə olaraq qaytarılan massiv avtomatik olaraq `flat()` metoduna ötürüldüyü kimi "düzəldilir" (flattened). Yəni, `a.flatMap(f)` çağırmaq `a.map(f).flat()` ilə eynidir, lakin daha **effektivdir (more efficient)**.
+`flatMap()` həm `map()` funksiyasını, həm də `flat(1)` funksiyasını **birdəfəlik və effektiv şəkildə** yerinə yetirir.
+
+#### Nümunə: Cümlələri sözlərə parçalamaq
 
 ```javascript
-let phrases = ["salam dünya", "JavaScript bələdçisi"];
-let words = phrases.flatMap(phrase => phrase.split(" ")); // Hər cümləni boşluqlara görə ayırır və nəticəni düzəldir
-console.log(words); // => ["salam", "dünya", "JavaScript", "bələdçisi"]
+let sentences = ["hello world", "js guide"];
+
+let words = sentences.flatMap(sentence => sentence.split(" "));
+console.log(words); 
+// => ["hello", "world", "js", "guide"]
 ```
 
-`flatMap()`-i, giriş massivinin hər bir elementinin çıxış massivinin istənilən sayda elementinə **xəritələməyə (map)** imkan verən `map()` metodunun ümumiləşdirilmiş (generalization) forması kimi düşünə bilərsiniz. Xüsusilə, `flatMap()` giriş elementlərini **boş bir massivə (empty array)** xəritələməyə imkan verir ki, bu da çıxış massivində heç bir şeyə düzəldilir:
+#### Qeyd:
+
+`sentences.map(...).flat()` yazmaqdansa `flatMap()` daha **qısa və performanslıdır**.
+
+---
+
+### İstisna və filtr funksiyası kimi istifadə:
+
+`flatMap()`-in gözəl xüsusiyyətlərindən biri də **bəzən elementləri filterləməyə** də imkan verməsidir. Sadəcə, həmin elementləri **boş massivə (`[]`)** xəritələyin:
 
 ```javascript
-// Mənfi olmayan ədədləri onların kvadrat köklərinə çevirir (map non-negative numbers to their square roots)
-[-2, -1, 1, 2, 3].flatMap(x => x < 0 ? [] : Math.sqrt(x)); // => [1, 1.4142135623730951, 1.73205081037989]
-// -2 və -1 üçün [] (boş massiv) qaytarıldığından, bunlar son nəticədə yer almır.
+["apple", "", "banana", null, "cherry", undefined]
+  .flatMap(fruit => fruit ? fruit : []);
+// => ["apple", "banana", "cherry"] (boş və null dəyərlər çıxarılır)
+```
+
+#### Alternativ `map()` ilə edilərsə:
+
+```javascript
+["apple", "", "banana", null, "cherry", undefined]
+  .map(fruit => fruit ? fruit : [])
+  .flat();
+// => ["apple", [], "banana", [], "cherry", []] (istədiyimiz kimi deyil!)
 ```
 
 ---
 
-# 7.8.3 Massivləri Birləşdirmək (Adding Arrays) `concat()` Metodu ilə
 
-`concat()` metodu, çağırıldığı orijinal massivin elementlərini və ardınca `concat()`-a verilən hər bir arqumenti ehtiva edən **yeni bir massiv (new array)** yaradır və qaytarır. Əgər bu arqumentlərdən hər hansı biri özü bir massivdirsə, o zaman massivin özü deyil, **massiv elementləri** birləşdirilir (concatenated).
+## 7.8.3 Massivləri Birləşdirmək: `concat()` Metodu ilə 🔗
 
-**Qeyd:** `concat()` massivlərin massivlərini rekursiv olaraq düzəltmir (does not recursively flatten). `concat()` çağırıldığı massivi dəyişdirmir (does not modify the array on which it is invoked).
+`concat()` metodu bir və ya bir neçə massivi və/və ya elementləri mövcud massivə **əlavə edərək** yeni bir massiv yaradır. Bu metod **orijinal massivi dəyişdirmir**, sadəcə **onun yeni bir nüsxəsini qaytarır**.
 
-**Misallar:**
+### İstifadə Sintaksisi:
+
+```javascript
+let newArray = array.concat(value1, value2, ..., valueN);
+```
+
+---
+
+### Nümunələr 
+
+#### 1. Sadə elementlərin əlavə olunması:
 
 ```javascript
 let a = [1, 2, 3];
-
-let yeni1 = a.concat(4, 5);      // => [1, 2, 3, 4, 5]
-console.log(yeni1);
-
-let yeni2 = a.concat([4, 5], [6, 7]); // Massivlər düzəldilir (flattened)
-console.log(yeni2);             // => [1, 2, 3, 4, 5, 6, 7]
-
-let yeni3 = a.concat(4, [5, [6, 7]]); // Lakin iç-içə massivlər düzəldilmir (not nested arrays)
-console.log(yeni3);             // => [1, 2, 3, 4, 5, [6, 7]]
-
-console.log(a);                 // => [1, 2, 3] (orijinal massiv dəyişdirilməyib!)
+let b = a.concat(4, 5);
+console.log(b); // => [1, 2, 3, 4, 5]
 ```
 
-**Vacib Qeyd:** `concat()` çağırıldığı massivin **yeni bir kopyasını (new copy)** yaradır. Bir çox hallarda bu doğru davranışdır, lakin bu, **baha başa gələn bir əməliyyatdır (expensive operation)**. Əgər kodunuzda `a = a.concat(x)` kimi bir şey yazırsınızsa, o zaman yeni bir massiv yaratmaq əvəzinə, massivinizi **yerində dəyişdirmək (modify in place)** üçün `push()` (bax "7.5 Adding and Deleting Array Elements" hissəsinə) və ya `splice()` (bax "7.8.5 Subarray Methods" hissəsinə) metodlarından istifadə etməyi düşünməlisiniz.
-
----
-
-# 7.8.4 Staklar (Stacks) və Növbələr (Queues) `push()`, `pop()`, `shift()` və `unshift()` Metodları ilə 📦 FIFO / LIFO
-
-`push()` və `pop()` metodları sizə massivlərlə **stak (stack)** kimi işləməyə imkan verir. Stak "Last-In, First-Out" (LIFO) prinsipi ilə işləyən bir məlumat strukturudur.
-
-* **`push()` metodu:** Bir və ya daha çox yeni elementi massivin sonuna əlavə edir (appends) və massivin yeni uzunluğunu (new length) qaytarır.
-    * `concat()`-dan fərqli olaraq, `push()` massiv arqumentlərini düzəltmir (does not flatten array arguments). Yəni, bir massivi `push()` etsəniz, həmin massiv tək bir element kimi daxil edilir.
-
-* **`pop()` metodu:** Əksini edir: massivin son elementini silir (deletes), massivin uzunluğunu bir vahid azaldır (decrements length) və sildiyi dəyəri qaytarır (returns the value).
-
-Hər iki metod massivi yerində dəyişdirir (modify the array in place). `push()` və `pop()` kombinasiyası sizə JavaScript massivi ilə bir **"Last-In, First-Out" (LIFO) stak** tətbiq etməyə imkan verir.
-
-**Misal (Stak):**
-
-```javascript
-let stack = [];     // stack == []
-stack.push(1, 2);   // stack == [1, 2];
-console.log(stack.pop());    // stack == [1]; qaytarır 2
-console.log(stack); // => [1]
-
-stack.push(3);      // stack == [1, 3]
-console.log(stack.pop());    // stack == [1]; qaytarır 3
-console.log(stack); // => [1]
-
-stack.push([4, 5]); // stack == [1, [4, 5]] (massiv düzəldilmir!)
-console.log(stack.pop());    // stack == [1]; qaytarır [4, 5]
-console.log(stack); // => [1]
-
-console.log(stack.pop());    // stack == []; qaytarır 1
-console.log(stack); // => []
-```
-
-`push()` metodu ona ötürdüyünüz massivi düzəltmir, lakin əgər bir massivdən bütün elementləri başqa bir massivə əlavə etmək istəyirsinizsə, bunu açıq şəkildə düzəltmək üçün **spread operatorundan (`...`)** istifadə edə bilərsiniz (§8.3.4):
+#### 2. Massivlərin birləşdirilməsi:
 
 ```javascript
 let a = [1, 2];
-let values = [3, 4, 5];
-a.push(...values); // 'values' massivinin elementlərini 'a' massivinin sonuna əlavə edir.
-console.log(a);   // => [1, 2, 3, 4, 5]
+let b = [3, 4];
+let c = a.concat(b);
+console.log(c); // => [1, 2, 3, 4]
+```
+
+#### 3. Birdən çox massiv və element birləşdirilir:
+
+```javascript
+let a = [1];
+let b = a.concat([2, 3], 4, [5, 6]);
+console.log(b); // => [1, 2, 3, 4, 5, 6]
+```
+
+#### 4. İç-içə massivlər (nested arrays) düzləşdirilmir:
+
+```javascript
+let a = [1, 2];
+let b = a.concat([3, [4, 5]]);
+console.log(b); // => [1, 2, 3, [4, 5]]
+```
+
+#### 5. Orijinal massiv dəyişmir:
+
+```javascript
+let a = [10, 20];
+a.concat(30);
+console.log(a); // => [10, 20]
 ```
 
 ---
 
-### `unshift()` və `shift()` Metodları
+## 7.8.4 **Staklar (Stacks) və Növbələr (Queues)**
 
-`unshift()` və `shift()` metodları `push()` və `pop()` kimi davranır, lakin onlar elementləri massivin sonundan deyil, **başlanğıcından (beginning)** əlavə edir və silir.
+`push()`, `pop()`, `shift()` və `unshift()` metodları ilə
 
-* **`unshift()`:** Massivin əvvəlinə bir və ya daha çox element əlavə edir, mövcud massiv elementlərini yer açmaq üçün daha yüksək indekslərə sürüşdürür (shifts up) və massivin yeni uzunluğunu qaytarır.
-* **`shift()`:** Massivin ilk elementini silir (removes) və qaytarır. Bütün sonrakı elementləri massivin əvvəlindəki yeni boş yerə sürüşdürür (shifts down).
+Massivlər, **stak (stack)** və **növbə (queue)** kimi tanınan iki məşhur məlumat strukturunu izah etmək üçün istifadə oluna bilər.
 
-Siz `unshift()` və `shift()` metodlarından bir stak tətbiq etmək üçün istifadə edə bilərsiniz, lakin bu, `push()` və `pop()` istifadə etməkdən daha az effektiv (less efficient) olardı. Çünki massivə element əlavə edildikdə və ya silindikdə elementlər hər dəfə yuxarı və ya aşağı sürüşdürülməlidir.
+---
 
-Bunun əvəzinə, siz **növbə (queue) məlumat strukturunu** massivin sonuna elementlər əlavə etmək üçün `push()` və başlanğıcından elementləri silmək üçün `shift()` istifadə edərək tətbiq edə bilərsiniz. Bu, "First-In, First-Out" (FIFO) prinsipidir.
+### Stack (Stak) — LIFO Prinsipi
 
-**Misal (Növbə):**
+**Last-In, First-Out (LIFO)**: Ən son daxil edilən element **birinci çıxır**. Kitabların üst-üstə yığılması kimi düşünün.
+
+#### `push()` – sonuna əlavə et
+
+Massivin **sonuna** bir və ya bir neçə element əlavə edir. `concat()`-dan fərqli olaraq, bu dəyişiklik **yerində baş verir**.
+
+#### `pop()` – sondan sil
+
+Massivin **sonundakı** elementi silir və **qaytarır**.
+
+
 
 ```javascript
-let q = [];     // q == []
-q.push(1, 2);   // q == [1, 2] (növbənin sonuna əlavə edilir)
-console.log(q.shift());     // q == [2]; qaytarır 1 (növbənin əvvəlindən silinir)
-console.log(q); // => [2]
-
-q.push(3);      // q == [2, 3]
-console.log(q.shift());     // q == [3]; qaytarır 2
-console.log(q); // => [3]
-
-console.log(q.shift());     // q == []; qaytarır 3
-console.log(q); // => []
+let stack = [];
+stack.push(10);      // stack = [10]
+stack.push(20);      // stack = [10, 20]
+console.log(stack.pop()); // => 20, stack = [10]
+console.log(stack.pop()); // => 10, stack = []
 ```
 
-`unshift()` metodunun diqqətə layiq bir xüsusiyyəti var ki, sizi təəccübləndirə bilər: Birdən çox arqumenti `unshift()`-ə ötürəndə, onlar eyni anda daxil edilir. Bu o deməkdir ki, onlar massivdə tək-tək daxil edildikləri zaman olduğundan fərqli qaydada yer alırlar:
+> **Qeyd:** Əgər `stack.pop()`-u boş massivdə çağırsanız, `undefined` qaytaracaq, xəta yox.
 
 ```javascript
-let a = [];    // a == []
-a.unshift(1);  // a == [1]
-a.unshift(2);  // a == [2, 1] (yeni element həmişə ən əvvələ gəlir)
-console.log(a); // => [2, 1]
+let stack = [];
+stack.push([1, 2]); // Bütün massiv bir element kimi əlavə olunur
+console.log(stack); // => [[1, 2]]
 
-let b = [];    // b == []
-b.unshift(1, 2); // a == [1, 2] (1 və 2 birlikdə daxil edilir, orijinal qaydada)
-console.log(b);  // => [1, 2]
+let s = [0];
+s.push(...[1, 2]); // array parçalanır
+console.log(s); // => [0, 1, 2]
 ```
 
 ---
 
-# 7.8.5 Alt-massivlər (Subarrays) `slice()`, `splice()`, `fill()` və `copyWithin()` Metodları ilə ✂️📝
+### 🚦 Queue (Növbə) — FIFO Prinsipi
 
-Massivlər, ardıcıl bölgələrdə, yəni massivin alt-massivləri (subarrays) və ya "dilimləri" (slices) üzərində işləyən bir sıra metodlar təyin edir. Aşağıdakı bölmələrdə dilimləri çıxarmaq (extracting), əvəz etmək (replacing), doldurmaq (filling) və kopyalamaq (copying) üçün metodlar təsvir edilir.
+**First-In, First-Out (FIFO):** Ən əvvəl daxil edilən element **birinci çıxır**. Supermarket növbəsi kimi düşünün.
 
----
+#### `push()` – sonuna əlavə et
 
-### `slice()` Metodu
+Yeni gələn növbənin sonuna durur.
 
-`slice()` metodu təyin olunmuş massivin bir dilimini (slice) və ya alt-massivini (subarray) qaytarır. Onun iki arqumenti qaytarılacaq dilimin başlanğıcını (start) və sonunu (end) təyin edir.
+#### `shift()` – əvvəldən sil
 
-* Qaytarılan massiv birinci arqumentlə təyin olunan elementi və ikinci arqumentlə təyin olunan elementə qədər (lakin daxil olmadan) bütün sonrakı elementləri ehtiva edir.
-* Əgər yalnız bir arqument təyin olunarsa, qaytarılan massiv başlanğıc mövqeyindən massivin sonuna qədər bütün elementləri ehtiva edir.
-* Əgər arqumentlərdən hər hansı biri mənfidirsə (negative), bu, massivin uzunluğuna nisbətən bir massiv elementini təyin edir. Məsələn, `-1` arqumenti massivdəki son elementi, `-2` arqumenti isə ondan əvvəlki elementi təyin edir.
-
-**Qeyd:** `slice()` çağırıldığı massivi dəyişdirmir (does not modify the array).
-
-**Misallar:**
+Növbədə ilk duran xidmət edilir və çıxarılır.
 
 ```javascript
-let a = [1, 2, 3, 4, 5];
-
-a.slice(0, 3);    // => [1, 2, 3] (indeks 0-dan 3-ə qədər, 3 daxil deyil)
-a.slice(3);       // => [4, 5] (indeks 3-dən massivin sonuna qədər)
-a.slice(1, -1);   // => [2, 3, 4] (indeks 1-dən sondan birinciyə qədər, sonuncu daxil deyil)
-a.slice(-3, -2);  // => [3] (sondan 3-cü elementdən sondan 2-ci elementə qədər, 2-ci daxil deyil)
+let q = [];
+q.push(1);            // q = [1]
+q.push(2);            // q = [1, 2]
+console.log(q.shift()); // => 1, q = [2]
+console.log(q.shift()); // => 2, q = []
 ```
 
 ---
 
-### `splice()` Metodu
+### Alternativ: `unshift()` və `shift()`
 
-`splice()` massivdən elementləri daxil etmək (inserting) və ya silmək (removing) üçün ümumi təyinatlı metoddur. `slice()` və `concat()`-dan fərqli olaraq, `splice()` çağırıldığı massivi **dəyişdirir (modifies the array)**. `splice()` və `slice()` adları çox oxşardır, lakin əsaslı şəkildə fərqli əməliyyatlar yerinə yetirirlər.
+Əgər növbənin **əvvəlinə əlavə edib**, **əvvəlindən silmək** istəyirsinizsə:
 
-`splice()` massivdən elementləri silə, yeni elementlər daxil edə və ya hər iki əməliyyatı eyni anda yerinə yetirə bilər. Daxiletmə və ya silinmə nöqtəsindən sonra gələn massiv elementlərinin indeksləri lazım olduqda artırılır və ya azaldılır ki, massivin qalan hissəsi ilə ardıcıl qalsınlar (remain contiguous).
+#### `unshift()` – əvvələ əlavə et
 
-* `splice()`-ın **ilk arqumenti (start index)** daxiletmə və/və ya silinmənin başlayacağı massiv mövqeyini təyin edir.
-* **İkinci arqument (delete count)** massivdən neçə elementin silinəcəyini (spliced out of) təyin edir. (Qeyd: bu, `slice()`-dan fərqli bir nöqtədir. `slice()`-ın ikinci arqumenti bitmə mövqeyidir. `splice()`-ın ikinci arqumenti uzunluqdur.) Əgər bu ikinci arqument buraxılarsa, başlanğıc elementdən massivin sonuna qədər bütün massiv elementləri silinir.
-* `splice()` silinmiş elementlərin massivini qaytarır (returns an array of the deleted elements) və ya heç bir element silinməyibsə, boş bir massiv qaytarır.
+#### `shift()` – əvvəldən sil
 
-**Silmə Misalları:**
 
 ```javascript
-let a = [1, 2, 3, 4, 5, 6, 7, 8];
-
-a.splice(4);    // => [5, 6, 7, 8]; (indeks 4-dən sonuna qədər silir)
-console.log(a); // a is now [1, 2, 3, 4]
-
-a.splice(1, 2); // => [2, 3]; (indeks 1-dən başlayaraq 2 element silir)
-console.log(a); // a is now [1, 4]
-
-a.splice(1, 1); // => [4]; (indeks 1-dən başlayaraq 1 element silir)
-console.log(a); // a is now [1]
+let a = [];
+a.unshift(1);      // a = [1]
+a.unshift(2);      // a = [2, 1]
+console.log(a.shift()); // => 2
+console.log(a);        // => [1]
 ```
+---
 
-`splice()`-ın ilk iki arqumenti hansı massiv elementlərinin silinəcəyini təyin edir. Bu arqumentləri, ilk arqumentlə təyin olunmuş mövqedən başlayaraq, massivə daxil ediləcək elementləri təyin edən **istənilən sayda əlavə arqumentlər** (additional arguments) izləyə bilər.
+## 7.8.5 Alt-massivlər (Subarrays) ilə işləmək: `slice()`, `splice()`, `fill()` və `copyWithin()`
 
-**Daxiletmə və Əvəz Etmə Misalları:**
-
-```javascript
-let a = [1, 2, 3, 4, 5];
-
-// İndeks 2-dən başlayaraq 0 element silir, "a" və "b" daxil edir
-a.splice(2, 0, "a", "b"); // => [] (heç nə silinmədi)
-console.log(a);         // a is now [1, 2, "a", "b", 3, 4, 5]
-
-// İndeks 2-dən başlayaraq 2 element silir ("a", "b"), sonra [1,2] və 3 daxil edir
-a.splice(2, 2, [1, 2], 3); // => ["a", "b"] (silinən elementlər)
-console.log(a);         // a is now [1, 2, [1, 2], 3, 3, 4, 5]
-```
-**Qeyd:** `concat()`-dan fərqli olaraq, `splice()` massivlərin **özlərini (arrays themselves)** daxil edir, həmin massivlərin elementlərini deyil.
+JavaScript-də massivlərin müəyyən hissələri ilə işləmək üçün bir neçə metod mövcuddur. Bu metodlar alt-massiv çıxarmaq, dəyişmək, doldurmaq və ya kopyalamaq üçün istifadə olunur.
 
 ---
 
-### `fill()` Metodu
+## `slice()` metodu
 
-`fill()` metodu massivin elementlərini və ya massivin bir dilimini (slice) təyin olunmuş bir dəyərə təyin edir. O, çağırıldığı massivi **mutasiya edir (mutates the array)** və həmçinin dəyişdirilmiş massivi qaytarır.
+Massivin müəyyən bir hissəsini çıxarır, **orijinal massiv dəyişmir**.
 
-* `fill()`-ın **ilk arqumenti** massiv elementlərini təyin ediləcək dəyərdir.
-* **İxtiyari ikinci arqument (start index)** başlanğıc indeksini təyin edir. Buraxılarsa, doldurma indeks 0-dan başlayır.
-* **İxtiyari üçüncü arqument (end index)** bitmə indeksini təyin edir — bu indeksə qədər (lakin daxil olmadan) massiv elementləri doldurulacaq. Bu arqument buraxılarsa, massiv başlanğıc indeksdən sona qədər doldurulur. `slice()`-da olduğu kimi mənfi rəqəmlər (negative numbers) ötürərək indeksləri massivin sonuna nisbətən təyin edə bilərsiniz.
-
-**Misallar:**
+### Sintaksis:
 
 ```javascript
-let a = new Array(5); // Heç bir elementi olmayan, uzunluğu 5 olan massivlə başlayır
-console.log(a);       // => [ <5 empty items> ]
+array.slice(start, end)
+```
 
-a.fill(0);            // => [0, 0, 0, 0, 0]; massivi sıfırlarla doldurur
-console.log(a);
+* `start` — başlanğıc indeks (daxildir)
+* `end` — son indeks (daxil deyil, optional)
 
-a.fill(9, 1);         // => [0, 9, 9, 9, 9]; indeks 1-dən başlayaraq 9-larla doldurur
-console.log(a);
+### Nümunələr:
 
-a.fill(8, 2, -1);     // => [0, 9, 8, 8, 9]; indeks 2-dən başlayaraq sondan 1-ciyə qədər (yəni indeks 2 və 3) 8-lərlə doldurur
-console.log(a);
+```javascript
+let arr = [10, 20, 30, 40, 50];
+
+console.log(arr.slice(1, 4));  // [20, 30, 40]
+console.log(arr.slice(2));     // [30, 40, 50]
+console.log(arr.slice(-3, -1));// [30, 40]
+console.log(arr.slice());      // [10, 20, 30, 40, 50] (tam surət)
+console.log(arr);              // [10, 20, 30, 40, 50] (dəyişməyib)
 ```
 
 ---
 
-### `copyWithin()` Metodu
+## `splice()` metodu
 
-`copyWithin()` massivin bir dilimini (slice) massivin daxilindəki yeni bir mövqeyə kopyalayır. O, massivi **yerində dəyişdirir (modifies the array in place)** və dəyişdirilmiş massivi qaytarır, lakin massivin uzunluğunu dəyişdirmir.
+Massivi **dəyişdirir**: elementləri silmək, əlavə etmək və ya əvəz etmək üçün istifadə olunur.
 
-* **İlk arqument (target index)** ilk elementin kopyalanacağı təyinat indeksini (destination index) təyin edir.
-* **İkinci arqument (start index)** kopyalanacaq ilk elementin indeksini təyin edir. Əgər buraxılarsa, 0 istifadə olunur.
-* **Üçüncü arqument (end index)** kopyalanacaq elementlər diliminin sonunu təyin edir. Əgər buraxılarsa, massivin uzunluğu istifadə olunur. Başlanğıc indeksdən bitmə indeksinə qədər (lakin daxil olmadan) elementlər kopyalanacaq. `slice()`-da olduğu kimi mənfi rəqəmlər ötürərək indeksləri massivin sonuna nisbətən təyin edə bilərsiniz.
-
-**Misallar:**
+### Sintaksis:
 
 ```javascript
-let a = [1, 2, 3, 4, 5];
-
-a.copyWithin(1);        // => [1, 1, 2, 3, 4]; massiv elementlərini bir vahid yuxarı kopyalayır (target 1, start 0, end length)
-console.log(a);         // 1-ci indeksdən başlayaraq 0-dan sonrakı elementlər kopyalanır.
-
-let b = [1, 2, 3, 4, 5]; // Yenidən təyin edək ki, misal aydın olsun
-b.copyWithin(2, 3, 5);  // => [1, 2, 4, 5, 5]; son 2 elementi (indeks 3 və 4) indeks 2-yə kopyalayır
-console.log(b);         // Element 3 (dəyəri 4) indeks 2-yə, element 4 (dəyəri 5) indeks 3-ə kopyalanır.
-
-let c = [1, 2, 3, 4, 5]; // Yenidən təyin edək
-c.copyWithin(0, -2);    // => [4, 5, 3, 4, 5]; mənfi offsetlər də işləyir (target 0, start sondan 2-ci (3), end length)
-console.log(c);         // 3-cü indeksdən sonrakı elementlər (4, 5) 0-cı indeksdən kopyalanır.
+array.splice(start, deleteCount, item1, item2, ...)
 ```
 
-`copyWithin()` xüsusilə **tipli massivlər (typed arrays)** (§11.2) üçün faydalı olan yüksək performanslı (high-performance) bir metod olaraq nəzərdə tutulub. O, C standart kitabxanasındakı `memmove()` funksiyasından modelləşdirilmişdir. Qeyd edək ki, mənbə (source) və təyinat (destination) bölgələri arasında üst-üstə düşmə olsa belə, kopyalama düzgün işləyəcək.
+* `start` — əməliyyatın başlanğıc indeksi
+* `deleteCount` — neçə element silinəcək
+* `item1, item2, ...` — əlavə olunacaq elementlər (optional)
+
+### Nümunələr:
+
+```javascript
+let arr = [1, 2, 3, 4, 5];
+
+// 2 element sil, indeks 1 və 2-də olanlar (2 və 3)
+console.log(arr.splice(1, 2)); // [2, 3]
+console.log(arr);              // [1, 4, 5]
+
+// İndeks 1-də heç nə silmədən "a", "b" əlavə et
+arr.splice(1, 0, 'a', 'b');
+console.log(arr);              // [1, "a", "b", 4, 5]
+
+// İndeks 3-də 1 element sil və 100 əlavə et
+arr.splice(3, 1, 100);
+console.log(arr);              // [1, "a", "b", 100, 5]
+
+// Bütün elementləri sil (indeks 0-dan sonuna qədər)
+console.log(arr.splice(0));    // [1, "a", "b", 100, 5]
+console.log(arr);              // []
+```
 
 ---
 
-# 7.8.6 Massiv Axtarış və Sıralama Metodları (Array Searching and Sorting Methods) 🔎🔄
+## `fill()` metodu
 
-Massivlər, `indexOf()`, `lastIndexOf()` və `includes()` kimi, stringlərin eyni adlı metodlarına bənzər metodları tətbiq edir. Həmçinin massiv elementlərinin sırasını dəyişdirmək üçün `sort()` və `reverse()` metodları da mövcuddur.
+Massivin elementlərini müəyyən dəyər ilə doldurur, **orijinal massiv dəyişir**.
 
-### `indexOf()` və `lastIndexOf()` Metodları
+### Sintaksis:
 
-`indexOf()` və `lastIndexOf()` massivdə **təyin olunmuş bir dəyərə (specified value)** malik elementi axtarır və tapılan ilk belə elementin **indeksini (index)** qaytarır. Əgər heç nə tapılmazsa, `-1` qaytarır.
+```javascript
+array.fill(value, start, end)
+```
 
-* `indexOf()` massivi **başlanğıcdan sona qədər (beginning to end)** axtarır.
-* `lastIndexOf()` massivi **sondan başlanğıca qədər (end to beginning)** axtarır.
+* `value` — doldurulacaq dəyər
+* `start` — başlanğıc indeks (optional)
+* `end` — bitmə indeksi (optional, daxil deyil)
 
-**Misallar:**
+### Nümunələr:
+
+```javascript
+let arr = new Array(5);      // [ <5 empty items> ]
+
+arr.fill(0);
+console.log(arr);            // [0, 0, 0, 0, 0]
+
+arr.fill(5, 2);
+console.log(arr);            // [0, 0, 5, 5, 5]
+
+arr.fill(9, 1, 4);
+console.log(arr);            // [0, 9, 9, 9, 5]
+
+arr.fill(7, -3, -1);
+console.log(arr);            // [0, 9, 7, 7, 5]
+```
+
+---
+
+## `copyWithin()` metodu
+
+Massivin bir hissəsini başqa yerə **yerində dəyişərək** kopyalayır. Massivin uzunluğunu dəyişdirmir.
+
+### Sintaksis:
+
+```javascript
+array.copyWithin(target, start, end)
+```
+
+* `target` — kopyalanacaq hissənin başlanacağı indeks
+* `start` — kopyalanacaq hissənin başlanğıc indeksi (optional)
+* `end` — kopyalanacaq hissənin bitmə indeksi (optional, daxil deyil)
+
+### Nümunələr:
+
+```javascript
+let arr = [1, 2, 3, 4, 5];
+
+// indeks 1-dən başlayaraq, 0-dan sonuna qədər elementləri kopyala
+arr.copyWithin(1);
+console.log(arr);            // [1, 1, 2, 3, 4]
+
+let arr2 = [10, 20, 30, 40, 50];
+
+// indeks 2-yə, 3-dən 5-ə qədər elementləri kopyala (yəni 40 və 50)
+arr2.copyWithin(2, 3, 5);
+console.log(arr2);           // [10, 20, 40, 50, 50]
+
+let arr3 = [5, 6, 7, 8, 9];
+
+// mənfi indekslərlə: 0-a sondan 2-ci elementdən başlayaraq kopyala
+arr3.copyWithin(0, -2);
+console.log(arr3);           // [8, 9, 7, 8, 9]
+```
+
+---
+
+# 7.8.6 Massiv Axtarış və Sıralama Metodları (Array Searching and Sorting Methods)
+
+JavaScript-də massivlərə eynilə stringlərdə olduğu kimi `indexOf()`, `lastIndexOf()` və `includes()` metodları tətbiq olunur. Bunlar massivdə müəyyən bir dəyərin olub-olmadığını və harada yerləşdiyini tapmaq üçün istifadə olunur. Massivdə elementlərin sırasını dəyişdirmək üçün isə `sort()` və `reverse()` metodları var.
+
+---
+
+## `indexOf()` və `lastIndexOf()`
+
+* **`indexOf(value, fromIndex)`** — Massivi əvvəldən sona doğru axtarır və `value` dəyərinin ilk tapıldığı indeksini qaytarır.
+* **`lastIndexOf(value, fromIndex)`** — Massivi sondan əvvələ doğru axtarır və `value` dəyərinin ilk tapıldığı (sondan başlayan) indeksini qaytarır.
+* Tapılmasa, nəticə `-1` olur.
+
+> **Qeyd:** İkinci arqument axtarışa başlanğıc indeksidir və mənfi dəyərlər də qəbul olunur (massivin sonundan geri saymaq kimi).
+
+**Nümunə:**
 
 ```javascript
 let a = [0, 1, 2, 1, 0];
 
-a.indexOf(1);       // => 1: a[1] 1-dir (ilk tapılan)
-a.lastIndexOf(1);   // => 3: a[3] 1-dir (sondan tapılan ilk)
-a.indexOf(3);       // => -1: heç bir elementin dəyəri 3 deyil
+console.log(a.indexOf(1));     // 1 (ilk 1-in indeksi)
+console.log(a.lastIndexOf(1)); // 3 (sondan ilk 1-in indeksi)
+console.log(a.indexOf(3));     // -1 (tapılmadı)
 ```
 
-`indexOf()` və `lastIndexOf()` arqumentlərini massiv elementləri ilə `===` operatorunun ekvivalenti olan alqoritmdən istifadə edərək müqayisə edir. Əgər massiviniz primitiv dəyərlər (primitive values) yerinə obyektləri (objects) ehtiva edirsə, bu metodlar iki istinadın (references) eyni obyekti göstərib-göstərmədiyini yoxlayır. Əgər siz bir obyektin məzmununa (content) əsasən axtarış etmək istəyirsinizsə, bunun yerinə öz **fərdi predikat funksiyanız (custom predicate function)** ilə `find()` metodundan istifadə edin.
+---
 
-`indexOf()` və `lastIndexOf()` axtarışa başlamaq üçün ixtiyari bir **ikinci arqument (optional second argument)** qəbul edir. Bu arqument buraxılarsa, `indexOf()` başlanğıcdan, `lastIndexOf()` isə sondan başlayır. İkinci arqument üçün mənfi dəyərlərə (negative values) icazə verilir və `slice()` metodu üçün olduğu kimi, massivin sonundan bir ofset (offset) kimi qəbul edilir: məsələn, `-1` dəyəri massivdəki son elementi təyin edir.
+## `findall()` funksiyası nümunəsi
 
-Aşağıdakı funksiya massivdə təyin olunmuş bir dəyəri axtarır və uyğun gələn bütün indekslərin (all matching indexes) massivini qaytarır. Bu, `indexOf()`-un ikinci arqumentinin ilk uyğunluqdan sonrakıları tapmaq üçün necə istifadə edilə biləcəyini göstərir:
+Massivdə müəyyən dəyərin bütün indekslərini tapmaq üçün `indexOf()`-un ikinci arqumentindən istifadə edərək belə funksiyanı yarada bilərik:
 
 ```javascript
-// 'a' massivində 'x' dəyərinin bütün halları tapır və uyğun indekslərin massivini qaytarır.
 function findall(a, x) {
-  let results = [], // Qaytaracağımız indekslər massivi
-    len = a.length,   // Axtarılacaq massivin uzunluğu
-    pos = 0;          // Axtarışın başlanğıc mövqeyi
-
-  while (pos < len) { // Axtarılacaq daha çox element olduğu müddətcə...
-    pos = a.indexOf(x, pos); // 'pos' mövqeyindən başlayaraq axtarır
-    if (pos === -1) break;   // Əgər heç nə tapılmasa, bitiririk.
-    results.push(pos);       // Əks halda, indeksi massivdə saxlayırıq
-    pos = pos + 1;           // Və növbəti axtarışı növbəti elementdən başlayırıq
+  let results = [], pos = 0;
+  while (pos < a.length) {
+    pos = a.indexOf(x, pos);
+    if (pos === -1) break;
+    results.push(pos);
+    pos++;
   }
-  return results; // İndekslər massivini qaytarır
+  return results;
 }
 
 let numbers = [10, 20, 10, 30, 10];
-console.log(findall(numbers, 10)); // => [0, 2, 4]
+console.log(findall(numbers, 10)); // [0, 2, 4]
 ```
-Qeyd edək ki, stringlərdə də `indexOf()` və `lastIndexOf()` metodları var, lakin onlarda mənfi ikinci arqument sıfır kimi qəbul edilir.
 
-### `includes()` Metodu
+---
 
-ES2016-da təqdim olunan `includes()` metodu tək bir arqument (single argument) qəbul edir və massivin həmin dəyəri ehtiva edib-etmədiyini göstərən `true` (ehtiva edirsə) və ya `false` (ehtiva etmirsə) qaytarır. O, dəyərin indeksini bildirmir, yalnız onun mövcud olub-olmadığını bildirir. `includes()` metodu massivlər üçün effektiv bir **set üzvlüyü testi (set membership test)** kimidir. Lakin, massivlər setlər üçün səmərəli bir təmsil (efficient representation) deyil və əgər bir neçə elementdən çox elementlə işləyirsinizsə, əsl `Set` obyektindən (§11.1.1) istifadə etməlisiniz.
+## `includes()`
 
-`includes()` metodu `indexOf()` metodundan bir vacib cəhətdən bir qədər fərqlidir. `indexOf()` bərabərliyi `===` operatorunun etdiyi eyni alqoritmdən istifadə edərək yoxlayır, bu alqoritm isə `NaN` (Not-a-Number) dəyərini özü də daxil olmaqla hər hansı başqa dəyərdən fərqli hesab edir. `includes()` isə bir qədər fərqli bir bərabərlik versiyasından istifadə edir ki, bu da **`NaN` dəyərini özü ilə bərabər hesab edir**. Bu o deməkdir ki, `indexOf()` bir massivdə `NaN` dəyərini aşkar etməyəcək, lakin `includes()` aşkar edəcək:
+* `includes(value)` — Massivdə `value`-nun olub-olmadığını `true`/`false` şəklində qaytarır.
+* `indexOf()`-dan fərqli olaraq, `includes()` **`NaN` dəyərini də aşkar edə bilir**.
+
+**Nümunə:**
 
 ```javascript
 let a = [1, true, 3, NaN];
 
-a.includes(true);  // => true
-a.includes(2);     // => false
-a.includes(NaN);   // => true
-a.indexOf(NaN);    // => -1; indexOf NaN-ı tapa bilməz
+console.log(a.includes(true));  // true
+console.log(a.includes(2));     // false
+console.log(a.includes(NaN));   // true
+console.log(a.indexOf(NaN));    // -1 (indexOf NaN-ı tapa bilməz)
 ```
 
-### `sort()` Metodu
+---
 
-`sort()` massivin elementlərini **yerində (in place)** sıralayır (sorts) və sıralanmış massivi qaytarır. Arqumentsiz çağırılanda, `sort()` massiv elementlərini **əlifba sırası ilə (alphabetical order)** sıralayır (lazım gələrsə müqayisəni yerinə yetirmək üçün onları müvəqqəti olaraq stringlərə çevirir):
+## `sort()`
+
+* `sort()` massiv elementlərini **yerində** (in place) sıralayır və sıralanmış massivi qaytarır.
+* Standart halda, elementləri **əlifba sırası ilə** sıralayır (rəqəmləri də string kimi).
+* Ədədi sıralama üçün xüsusi müqayisə funksiyası vermək lazımdır.
+
+**Nümunələr:**
 
 ```javascript
 let a = ["banana", "cherry", "apple"];
-a.sort(); // a == ["apple", "banana", "cherry"]
-console.log(a);
-```
-Əgər massiv `undefined` elementləri ehtiva edirsə, onlar massivin sonuna sıralanır.
+a.sort();
+console.log(a); // ["apple", "banana", "cherry"]
 
-Massivi əlifba sırasından fərqli bir ardıcıllıqla sıralamaq üçün `sort()`-a arqument olaraq bir **müqayisə funksiyası (comparison function)** ötürməlisiniz. Bu funksiya onun iki arqumentindən hansının sıralanmış massivdə birinci gəlməli olduğuna qərar verir.
+let nums = [33, 4, 1111, 222];
+nums.sort();
+console.log(nums); // [1111, 222, 33, 4] — əlifba sırası ilə (səhv!)
 
-* Əgər birinci arqument ikincidən əvvəl gəlməlidirsə, müqayisə funksiyası **sıfırdan kiçik (less than zero)** bir rəqəm qaytarmalıdır.
-* Əgər birinci arqument sıralanmış massivdə ikincidən sonra gəlməlidirsə, funksiya **sıfırdan böyük (greater than zero)** bir rəqəm qaytarmalıdır.
-* Və əgər iki dəyər bərabərdirsə (yəni, onların sırası əhəmiyyətsizdirsə), müqayisə funksiyası **`0`** qaytarmalıdır.
+nums.sort((a, b) => a - b);
+console.log(nums); // [4, 33, 222, 1111] — ədədi sıralama
 
-Məsələn, massiv elementlərini əlifba sırası yerinə **ədədi qaydada (numerical order)** sıralamaq üçün aşağıdakını edə bilərsiniz:
-
-```javascript
-let a = [33, 4, 1111, 222];
-a.sort(); // a == [1111, 222, 33, 4]; (əlifba sırası ilə)
-console.log(a);
-
-a.sort(function(a, b) { // Bir müqayisə funksiyası ötürürük
-  return a - b;          // Sıraya görə < 0, 0, və ya > 0 qaytarır
-}); // a == [4, 33, 222, 1111]; (ədədi qayda)
-console.log(a);
-
-a.sort((a, b) => b - a); // a == [1111, 222, 33, 4]; (ədədi qaydada tərs sıralama)
-console.log(a);
+nums.sort((a, b) => b - a);
+console.log(nums); // [1111, 222, 33, 4] — tərs ədədi sıralama
 ```
 
-Massiv elementlərini sıralamağın başqa bir nümunəsi olaraq, string massivini **hərf böyük-kiçik fərqinə həssas olmayan (case-insensitive)** əlifba sırası ilə sıralaya bilərsiniz. Bunun üçün hər iki arqumenti müqayisə etməzdən əvvəl kiçik hərflərə (toLowerCase() metodu ilə) çevirən bir müqayisə funksiyası ötürülür:
+---
+
+### Hərf böyük-kiçik fərqinə həssas olmayan sıralama
 
 ```javascript
 let a = ["ant", "Bug", "cat", "Dog"];
-a.sort(); // a == ["Bug", "Dog", "ant", "cat"]; (hərf böyük-kiçik fərqinə həssas sıralama)
-console.log(a);
 
-a.sort(function(s, t) {
-  let a_lower = s.toLowerCase();
-  let b_lower = t.toLowerCase();
-  if (a_lower < b_lower) return -1;
-  if (a_lower > b_lower) return 1;
+a.sort();
+console.log(a); // ["Bug", "Dog", "ant", "cat"] (böyük-kiçik hərflərə həssas)
+
+a.sort((s, t) => {
+  s = s.toLowerCase();
+  t = t.toLowerCase();
+  if (s < t) return -1;
+  if (s > t) return 1;
   return 0;
-}); // a == ["ant", "Bug", "cat", "Dog"]; (hərf böyük-kiçik fərqinə həssas olmayan sıralama)
-console.log(a);
+});
+console.log(a); // ["ant", "Bug", "cat", "Dog"] (həssas deyil)
 ```
 
-### `reverse()` Metodu
+---
 
-`reverse()` metodu massivin elementlərinin sırasını tərs çevirir (reverses the order) və tərs çevrilmiş massivi qaytarır. O, bunu **yerində (in place)** edir; başqa sözlə, elementləri yenidən sıralanmış yeni bir massiv yaratmır, əksinə onları mövcud massivdə yenidən düzəldir:
+## `reverse()`
+
+* Massivin elementlərinin sırasını tərs çevirir.
+* Bu da **yerində** edilir, yəni yeni massiv yaratmır.
+
+**Nümunə:**
 
 ```javascript
 let a = [1, 2, 3];
-a.reverse(); // a == [3, 2, 1]
-console.log(a);
+a.reverse();
+console.log(a); // [3, 2, 1]
 ```
 
 ---
 
 # 7.8.7 Massivi Stringə Çevirmə (Array to String Conversions) ✍️
 
-`Array` sinfi massivləri stringlərə çevirə bilən üç metod təyin edir ki, bu da adətən log və xəta mesajları yaradarkən istifadə olunur.
-
-### `join()` Metodu
-
-`join()` metodu massivin bütün elementlərini stringlərə çevirir (converts to strings) və onları birləşdirir (concatenates), nəticə olaraq bir string qaytarır. Nəticə stringdə elementləri ayıran ixtiyari bir ayırıcı string (separator string) təyin edə bilərsiniz. Əgər ayırıcı string təyin olunmazsa, vergül (comma) istifadə olunur:
-
-```javascript
-let a = [1, 2, 3];
-a.join();      // => "1,2,3" (defolt olaraq vergül ilə)
-a.join(" ");   // => "1 2 3" (boşluq ilə)
-a.join("");    // => "123" (ayırıcı olmadan)
-
-let b = new Array(10); // Elementləri olmayan, uzunluğu 10 olan massiv
-b.join("-");           // => "---------" (9 tire stringi)
-```
-
-`join()` metodu, bir stringi hissələrə ayıraraq massiv yaradan `String.split()` metodunun əksidir (inverse).
-
-### `toString()` Metodu
-
-Massivlər, bütün JavaScript obyektləri kimi, bir `toString()` metoduna malikdir. Bir massiv üçün bu metod, arqumentsiz `join()` metodu kimi işləyir:
-
-```javascript
-[1, 2, 3].toString();       // => "1,2,3"
-["a", "b", "c"].toString(); // => "a,b,c"
-[1, [2, "c"]].toString();   // => "1,2,c" (daxili massiv də stringə çevrilir)
-```
-Qeyd edək ki, çıxışda kvadrat mötərizələr və ya massiv dəyəri ətrafında hər hansı digər ayırıcı yoxdur.
-
-### `toLocaleString()` Metodu
-
-`toLocaleString()` `toString()` metodunun **lokallaşdırılmış (localized)** versiyasıdır. O, hər bir massiv elementini elementin `toLocaleString()` metodunu çağıraraq stringə çevirir, sonra isə nəticə stringləri **lokal-spesifik (locale-specific)** (və tətbiq tərəfindən təyin olunmuş) bir ayırıcı stringdən istifadə edərək birləşdirir.
+JavaScript-də massivləri stringlərə çevirmək üçün 3 əsas metod var. Bunlar əsasən məlumatları ekrana, loglara və ya xəta mesajlarına yazmaq üçün istifadə olunur.
 
 ---
 
-# 7.8.8 Statik Massiv Funksiyaları (Static Array Functions) 🏭
+## `join()` Metodu
 
-Daha əvvəl sənədləşdirdiyimiz massiv metodlarına əlavə olaraq, `Array` sinfi, massivlər üzərində deyil, `Array` konstruktoru vasitəsilə çağıra biləcəyiniz üç **statik funksiya (static functions)** da təyin edir.
+* Massivin bütün elementlərini stringə çevirir və onları müəyyən edilmiş ayırıcı ilə birləşdirir.
+* Əgər ayırıcı göstərilməzsə, **defolt olaraq vergül (",")** istifadə olunur.
 
-* `Array.of()` və `Array.from()` yeni massivlər yaratmaq üçün **fabrik metodlarıdır (factory methods)**. Onlar §7.1.4 və §7.1.5-də sənədləşdirilib.
+**Nümunələr:**
 
-* Digər statik massiv funksiyası isə **`Array.isArray()`**-dır ki, naməlum bir dəyərin massiv olub-olmadığını müəyyən etmək üçün faydalıdır:
+```javascript
+let a = [1, 2, 3];
 
-    ```javascript
-    Array.isArray([]);  // => true (boş massiv massivdir)
-    Array.isArray({});  // => false (obyekt massiv deyil)
-    ```
+console.log(a.join());     // "1,2,3"
+console.log(a.join(" "));  // "1 2 3"
+console.log(a.join(""));   // "123"
+
+let b = new Array(10);     // Uzunluğu 10, amma elementləri boş massiv
+console.log(b.join("-"));  // "---------"
+```
+
+> **Qeyd:** `join()` stringi hissələrə bölən `String.split()` metodunun əksidir.
+
+---
+
+## `toString()` Metodu
+
+* Massivlərin standart `toString()` metodu çağırıldığında, o, `join()` metodunun arqumentsiz versiyası kimi işləyir.
+* Yəni elementləri vergüllə birləşdirərək string qaytarır.
+
+**Nümunələr:**
+
+```javascript
+console.log([1, 2, 3].toString());       // "1,2,3"
+console.log(["a", "b", "c"].toString()); // "a,b,c"
+console.log([1, [2, "c"]].toString());   // "1,2,c"  (daxili massiv də stringə çevrilir)
+```
+
+> **Qeyd:** `toString()` nəticəsində kvadrat mötərizələr və ya digər ayırıcılar çıxmır.
+
+---
+
+## `toLocaleString()` Metodu
+
+* `toLocaleString()` metodunun işi `toString()` kimi olsa da, fərqli olaraq **hər bir elementin öz `toLocaleString()` metodunu çağırır**.
+* Bu, lokalizə edilmiş (məsələn, rəqəmlərdə və tarixlərdə regional format) stringlər almağa imkan verir.
+* Nəticədə elementlər lokal-spesifik ayırıcı ilə birləşdirilir.
+
+**Misal:**
+
+```javascript
+let numbers = [123456.789, new Date(Date.UTC(2020, 0, 1))];
+
+console.log(numbers.toString());
+// "123456.789,Wed Jan 01 2020 03:00:00 GMT+0300 (GMT+03:00)"
+
+console.log(numbers.toLocaleString('de-DE'));
+// "123.456,789; 01.01.2020"
+```
+
+Burada `toLocaleString()` metodu sayları və tarixləri Almaniya regional qaydasına uyğun formatlayır.
+
+---
+
+
+# 7.8.8 Statik Massiv Funksiyaları (Static Array Functions)
+
+JavaScript-də `Array` sinfi, massiv üzərində əməliyyat aparan metodlardan başqa, **statik funksiyalar** da təqdim edir. Bu funksiyalar `Array` konstruktoru vasitəsilə çağırılır və massivlərin yaradılması və yoxlanması üçün istifadə olunur.
+
+---
+
+### `Array.of()` və `Array.from()`
+
+* Bu iki metod **fabrik metodlarıdır (factory methods)** və yeni massiv yaratmaq üçün istifadə olunur.
+* Onların iş prinsipi və istifadəsi barədə daha əvvəl (§7.1.4 və §7.1.5) ətraflı sənədləşdirilib.
+
+---
+
+### `Array.isArray()`
+
+* `Array.isArray(value)` funksiyası daxil edilən `value` dəyərinin massiv olub-olmadığını müəyyən edir.
+* Əgər massivdirsə `true`, deyilsə `false` qaytarır.
+
+**Nümunələr:**
+
+```javascript
+console.log(Array.isArray([]));    // true (boş massiv)
+console.log(Array.isArray([1,2,3])); // true (elementləri olan massiv)
+console.log(Array.isArray({}));    // false (obyekt, massiv deyil)
+console.log(Array.isArray("foo")); // false (string, massiv deyil)
+console.log(Array.isArray(null));  // false
+```
 
 ---
 
 # 7.9 Massivə Bənzər Obyektlər (Array-Like Objects) 🎭
 
-Gördüyümüz kimi, JavaScript massivlərinin digər obyektlərdə olmayan bəzi xüsusi xüsusiyyətləri (special features) var:
-* `length` xüsusiyyəti (property) siyahıya yeni elementlər əlavə edildikcə avtomatik olaraq yenilənir (automatically updated).
-* `length` dəyərini daha kiçik bir dəyərə təyin etmək massivi kəsir (truncates the array).
-* Massivlər `Array.prototype`-dan faydalı metodları miras alır (inherit useful methods).
-* `Array.isArray()` massivlər üçün `true` qaytarır.
+JavaScript massivləri bəzi özəl xüsusiyyətlərə malikdir, məsələn:
 
-Bunlar JavaScript massivlərini adi obyektlərdən fərqləndirən xüsusiyyətlərdir. Lakin onlar bir massivi təyin edən əsas xüsusiyyətlər deyil. Çox vaxt **ədədi `length` xüsusiyyətinə (numeric length property)** və buna uyğun **mənfi olmayan tam ədəd xüsusiyyətlərinə (non-negative integer properties)** malik istənilən obyekti bir növ massiv kimi qəbul etmək tamamilə məqbuldur.
+* `length` xüsusiyyəti avtomatik yenilənir,
+* `length`-i kiçiltmək massivdə elementləri kəsir,
+* `Array.prototype`-dan metodları miras alırlar,
+* `Array.isArray()` onları aşkar edir.
 
-Bu **"massivə bənzər" obyektlər (array-like objects)** bəzən praktikada ortaya çıxır və siz birbaşa massiv metodlarını onlara tətbiq edə bilməsəniz və ya `length` xüsusiyyətindən xüsusi davranış gözləyə bilməsəniz də, əsl massiv üçün istifadə edəcəyiniz eyni kodla onlar üzərində yenə də dövr edə bilərsiniz (iterate through them). Məlum olur ki, bir çox massiv alqoritmləri (array algorithms) əsl massivlərlə olduğu kimi massivə bənzər obyektlərlə də eyni dərəcədə yaxşı işləyir. Bu, xüsusilə alqoritmləriniz massivi yalnız oxumaq üçün (read-only) qəbul etdiyi və ya ən azı massiv uzunluğunu dəyişməz qoyduğu hallarda doğrudur.
+Lakin, **ədədi `length` xüsusiyyətinə** və uyğun **0-dan başlayaraq tam ədəd indekslərə** sahib istənilən obyekt **massivə bənzər obyekt (array-like object)** sayılır.
 
-Aşağıdakı kod adi bir obyekti götürür, onu massivə bənzər bir obyekt etmək üçün xüsusiyyətlər əlavə edir və sonra yaranan psevdo-massivin "elementləri" üzərində dövr edir:
+---
+
+### Misal: adi obyektə massivə bənzər xüsusiyyətlər əlavə etmək
 
 ```javascript
-let a = {}; // Adi boş bir obyektlə başlayırıq
+let a = {};    // boş obyekt
 
-// Onu "massivə bənzər" etmək üçün xüsusiyyətlər əlavə edirik
-let i = 0;
-while (i < 10) {
-  a[i] = i * i;
-  i++;
+for (let i = 0; i < 10; i++) {
+  a[i] = i * i;   // indeks kimi string, dəyər kimi kvadrat
 }
-a.length = i; // 'length' xüsusiyyətini əlavə edirik
+a.length = 10;    // length əlavə edirik
 
-// İndi onu əsl massiv kimi gəzirik
 let total = 0;
 for (let j = 0; j < a.length; j++) {
   total += a[j];
 }
-console.log(total); // => 285 (0*0 + 1*1 + ... + 9*9)
+console.log(total); // 285 (0² + 1² + ... + 9²)
 ```
 
-Frontend (client-side) JavaScript-də, HTML sənədləri ilə işləmək üçün bir sıra metodlar (məsələn, `document.querySelectorAll()`) massivə bənzər obyektlər qaytarır. Budur, massivlər kimi işləyən obyektləri test etmək üçün istifadə edə biləcəyiniz bir funksiya:
+---
+
+### Massivə bənzər obyektləri yoxlamaq üçün funksiya
 
 ```javascript
-// 'o' obyektinin massivə bənzər olub olmadığını müəyyən edir.
-// Stringlər və funksiyalar ədədi 'length' xüsusiyyətlərinə malikdir, lakin
-// 'typeof' testi ilə istisna edilir. Client-side JavaScript-də DOM mətn
-// node-ları (text nodes) ədədi 'length' xüsusiyyətinə malikdir və əlavə
-// 'o.nodeType !== 3' testi ilə istisna edilməsi lazım gələ bilər.
 function isArrayLike(o) {
-  if (o &&                         // 'o' null, undefined və s. deyil.
-      typeof o === "object" &&     // 'o' bir obyektdir
-      Number.isFinite(o.length) && // 'o.length' sonlu bir ədəddir
-      o.length >= 0 &&             // 'o.length' mənfi deyil
-      Number.isInteger(o.length) && // 'o.length' bir tam ədəddir
-      o.length < 4294967295) {     // 'o.length' < 2^32 - 1 (massiv uzunluğunun maksimum dəyəri)
-    return true;                   // Onda 'o' massivə bənzərdir.
-  } else {
-    return false;                  // Əks halda, deyil.
-  }
+  return o && typeof o === "object" &&
+         Number.isFinite(o.length) &&
+         o.length >= 0 &&
+         Number.isInteger(o.length) &&
+         o.length < 4294967295;
 }
 
-console.log(isArrayLike([]));               // => true (əsl massiv)
-console.log(isArrayLike({0: 'a', 1: 'b', length: 2})); // => true (massivə bənzər obyekt)
-console.log(isArrayLike("salam"));          // => false (stringlər adətən massiv kimi işlənmir)
-console.log(isArrayLike(function(){}));    // => false (funksiyalar da)
+console.log(isArrayLike([]));                     // true
+console.log(isArrayLike({0: 'a', 1: 'b', length: 2})); // true
+console.log(isArrayLike("salam"));                // false (string)
+console.log(isArrayLike(function(){}));           // false (funksiya)
 ```
 
-Daha sonrakı bir hissədə stringlərin massivlər kimi davrandığını görəcəyik. Bununla belə, massivə bənzər obyektlər üçün bu kimi testlər adətən stringlər üçün `false` qaytarır — onlar adətən massivlər kimi deyil, stringlər kimi ən yaxşı şəkildə işlənir.
+---
 
-Əksər JavaScript massiv metodları, həqiqi massivlərə əlavə olaraq **massivə bənzər obyektlərə tətbiq edildikdə də düzgün işləməsi üçün qəsdən ümumi (generic)** təyin edilmişdir. Massivə bənzər obyektlər `Array.prototype`-dan miras almadığı üçün, massiv metodlarını birbaşa onlar üzərində çağıra bilməzsiniz. Lakin, siz onları `Function.call` metodundan istifadə edərək **dolayı yolla (indirectly)** çağıra bilərsiniz (ətraflı məlumat üçün §8.7.4-ə baxın):
+### Massiv metodlarını massivə bənzər obyektlərdə istifadə etmək
+
+`Array.prototype` metodları yalnız həqiqi massivlərdə var, ona görə massivə bənzər obyektlərdə onları birbaşa çağıra bilmərik. Amma `call` ilə dolayı istifadə edə bilərik:
 
 ```javascript
-let a = {"0": "a", "1": "b", "2": "c", length: 3}; // Massivə bənzər obyekt
+let a = {0: "a", 1: "b", 2: "c", length: 3};
 
-// join() metodunu 'a' obyekti üzərində çağırırıq
-console.log(Array.prototype.join.call(a, "+")); // => "a+b+c"
+console.log(Array.prototype.join.call(a, "+"));        
+// "a+b+c"
+console.log(Array.prototype.map.call(a, x => x.toUpperCase())); 
+// ["A", "B", "C"]
+console.log(Array.prototype.slice.call(a, 0));          
+// ["a", "b", "c"]
 
-// map() metodunu 'a' obyekti üzərində çağırırıq
-console.log(Array.prototype.map.call(a, x => x.toUpperCase())); // => ["A", "B", "C"]
-
-// slice() metodunu 'a' obyekti üzərində çağırırıq (əsl massiv kopyası)
-console.log(Array.prototype.slice.call(a, 0)); // => ["a", "b", "c"]: əsl massiv kopyası
-
-// Daha asan bir üsul: Array.from() (ES6+)
-console.log(Array.from(a)); // => ["a", "b", "c"]: daha asan massiv kopyası
+// Daha sadə üsul (ES6+)
+console.log(Array.from(a));                              
+// ["a", "b", "c"]
 ```
-Bu kodun sondan ikinci sətri, massivə bənzər obyektin elementlərini əsl massiv obyektinə kopyalamaq üçün `Array.slice()` metodunu çağırır. Bu, bir çox köhnə kodda (legacy code) mövcud olan bir idomatik fənddir (idiomatic trick), lakin indi `Array.from()` ilə bunu etmək çox daha asandır.
 
 ---
 
 # 7.10 Stringlər Massiv Kimi (Strings as Arrays) 📜
 
-JavaScript stringləri (strings) **UTF-16 Unicode simvollarının yalnız oxumaq üçün (read-only) massivləri** kimi davranır. Fərdi simvollara `charAt()` metodu ilə daxil olmaq əvəzinə, kvadrat mötərizələrdən (`[]`) istifadə edə bilərsiniz:
+JavaScript-də stringlər UTF-16 kodlu simvolların **yalnız oxumaq üçün nəzərdə tutulmuş massivləri (read-only arrays)** kimidir. Onların elementlərinə `charAt()` metodu ilə yanaşı, kvadrat mötərizələr (`[]`) vasitəsilə də daxil olmaq olar:
 
 ```javascript
 let s = "test";
-console.log(s.charAt(0)); // => "t"
-console.log(s[1]);        // => "e"
+console.log(s.charAt(0)); // "t"
+console.log(s[1]);        // "e"
 ```
 
-`typeof` operatoru stringlər üçün hələ də "string" qaytarır, əlbəttə ki, və `Array.isArray()` metoduna bir string ötürsəniz, `false` qaytarır.
+* `typeof s` hələ də `"string"` qaytarır.
+* `Array.isArray(s)` isə **`false`** döndərir — string massiv deyil.
 
-İndekslənə bilən stringlərin (indexable strings) əsas faydası sadəcə `charAt()` çağırışlarını daha qısa (more concise) və oxunaqlı (readable) olan, potensial olaraq daha effektiv (more efficient) kvadrat mötərizələrlə əvəz edə bilməyimizdir. Stringlərin massivlər kimi davranması, həmçinin onlara ümumi massiv metodlarını tətbiq edə biləcəyimiz deməkdir. Məsələn:
+---
+
+### Stringlərin massiv kimi davranmasının faydası
+
+* Daha qısa və oxunaqlı indeksləmə (kvadrat mötərizələrlə).
+* Stringlərə massiv metodlarını tətbiq etmək mümkün olur (dolayı yolla).
+
+Məsələn, stringin hər bir simvolunu aralarına boşluq qoyaraq birləşdirmək:
 
 ```javascript
-// JavaScript stringini boşluqlarla birləşdirir
-console.log(Array.prototype.join.call("JavaScript", " ")); // => "J a v a S c r i p t"
+console.log(Array.prototype.join.call("JavaScript", " ")); 
+// "J a v a S c r i p t"
 ```
-Unutmayın ki, stringlər **dəyişməz dəyərlərdir (immutable values)**, buna görə də onlar massivlər kimi qəbul edildikdə, onlar **yalnız oxumaq üçün massivlərdir (read-only arrays)**. `push()`, `sort()`, `reverse()` və `splice()` kimi massiv metodları bir massivi yerində dəyişdirir və stringlər üzərində işləmir. Bir stringi massiv metodu ilə dəyişdirməyə cəhd etmək, lakin, bir xətaya (error) səbəb olmur: o, sadəcə **səssizcə uğursuz olur (fails silently)**.
+
+---
+
+### Vacib məqamlar
+
+* Stringlər **dəyişməzdir (immutable)** — yəni onların içindəki simvolları dəyişmək olmaz.
+* Massiv metodları kimi `push()`, `sort()`, `reverse()`, `splice()` və s. stringlərdə **işləmir** (yerində dəyişiklik tələb edənlər).
+* Belə metodları stringə tətbiq etməyə cəhd etsəniz, **xəta vermir, amma heç bir dəyişiklik də etmir (fails silently)**.
 
 ---
