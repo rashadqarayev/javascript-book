@@ -1,80 +1,95 @@
-### Fəsil 11. JavaScript Standart Kitabxanası (Standard Library) 📚
+### Fəsil 11: JavaScript-in Standart Kitabxanasına Baxış
 
-JavaScript-in əsas datatiplərindən (datatypes) bəziləri, məsələn, rəqəmlər (numbers) və simvollar (strings) (Fəsil 3), obyektlər (objects) (Fəsil 6) və massivlər (arrays) (Fəsil 7) dilin özünün bir hissəsi kimi qəbul edilə bilər. Bu fəsil, JavaScript üçün "standart kitabxana" (standard library) təşkil edən digər vacib, lakin daha az fundamental API-ləri əhatə edir. Bunlar JavaScript-ə daxil edilmiş və həm veb brauzerlərdə (web browsers), həm də Node.js-də bütün JavaScript proqramları (programs) üçün mövcud olan faydalı siniflər (classes) və funksiyalardır (functions).
+Bu fəsildə JavaScript-in daxilində olan, **hər proqramda istifadə oluna bilən hazır siniflər və funksiyalar** təqdim olunur. Yəni əlavə heç nə yükləmədən, **JavaScript-in özündə olan güclü alətlərdən** danışırıq.
 
-Bu fəslin bölmələri bir-birindən müstəqildir, yəni onları istənilən ardıcıllıqla oxuya bilərsiniz. Onlar aşağıdakıları əhatə edir:
+### Bu fəsildə nə öyrənəcəyik?
 
-* **Set** (dəyərlər toplusu) və **Map** (dəyərlərdən dəyərlərə xəritələmə) sinifləri (classes).
-* **TypedArrays** adlanan massivəbənzər (array-like) obyektlər (objects), bunlar ikili data (binary data) massivlərini (arrays) təmsil edir, həmçinin qeyri-massiv (non-array) ikili datadan (binary data) dəyərləri (values) çıxarmaq üçün əlaqəli bir sinif (class).
-* **Regular expressions** (müntəzəm ifadələr) və **RegExp** sinfi (class), bunlar mətn nümunələrini (textual patterns) təyin edir və mətn emalı (text processing) üçün faydalıdır. Bu bölmə həmçinin müntəzəm ifadə sintaksisini (regular expression syntax) ətraflı şəkildə əhatə edir.
-* Tarixləri (dates) və vaxtları (times) təmsil etmək və manipulyasiya etmək üçün **Date** sinfi (class).
-* **Error** sinfi (class) və onun müxtəlif alt-sinifləri (subclasses), JavaScript proqramlarında (programs) səhvlər (errors) baş verdikdə bu instansiyalar (instances) atılır (thrown).
-* **JSON** obyekti (object), metodları (methods) obyektlər (objects), massivlər (arrays), simvollar (strings), rəqəmlər (numbers) və boolean-lardan (booleans) ibarət JavaScript data strukturlarının (data structures) seriyalaşdırılması (serialization) və deseryalaşdırılmasını (deserialization) dəstəkləyir.
-* **Intl** obyekti (object) və onun təyin etdiyi siniflər (classes), bunlar JavaScript proqramlarınızı (programs) lokallaşdırmağa (localize) kömək edə bilər.
-* **Console** obyekti (object), metodları (methods) proqramları (programs) debug (sazlamaq) etmək və onların davranışlarını (behaviors) qeyd etmək (logging) üçün xüsusilə faydalı yollarla simvollar (strings) çıxarır.
-* URL-ləri (URLs) ayrıştırma (parsing) və manipulyasiya etməyi (manipulating) asanlaşdıran **URL** sinfi (class). Bu bölmə həmçinin URL-ləri (URLs) və onların komponent hissələrini kodlaşdırmaq (encoding) və dekodlaşdırmaq (decoding) üçün global funksiyaları (functions) əhatə edir.
-* Müəyyən edilmiş vaxt intervalı keçdikdən sonra icra ediləcək kodu (code) təyin etmək üçün `setTimeout()` və əlaqəli funksiyalar (functions).
+Burada aşağıdakı **standart, hazır alətlərlə** tanış olacağıq:
 
-Bu fəsildəki bəzi bölmələr – xüsusən də tipli massivlər (typed arrays) və müntəzəm ifadələr (regular expressions) haqqında bölmələr – kifayət qədər uzundur, çünki bu tipləri (types) effektiv şəkildə istifadə etməzdən əvvəl başa düşməli olduğunuz əhəmiyyətli ilkin məlumatlar var. Lakin digər bölmələrin çoxu qısadır: onlar sadəcə yeni bir API təqdim edir və onun istifadəsinin bəzi nümunələrini göstərir.
+* **Set və Map** – Unikal dəyərlər və açar-dəyər (key-value) saxlamaq üçün.
+* **TypedArray və ArrayBuffer** – İkili data (binary) ilə işləmək üçün.
+* **RegExp** – Mətnlə (string) daha ağıllı işləmək üçün nümunələr yaratmaq.
+* **Date** – Tarix və zamanla işləmək.
+* **Error** – Səhvləri yaratmaq və idarə etmək.
+* **JSON** – Data-nı string kimi saxlamaq və oxumaq.
+* **Intl** – Lokallaşma (məsələn, fərqli valyuta və tarix formatları).
+* **Console** – Debug və log üçün.
+* **URL** – URL-ləri parçalayıb işləmək.
+* **setTimeout və s.** – Kodun müəyyən vaxtdan sonra işləməsi üçün.
+
+> ⚠️ Qeyd: TypedArray və RegExp hissələri bir az ağır ola bilər, amma digərləri daha yüngül və praktiki hissələrdir.
 
 ---
 
-### 11.1.1 `Set` Sinfi (Class) 📚
+### 11.1.1 `Set` Sinfi (Class)
 
-**Set** massiv (array) kimi dəyərlər (values) toplusudur. Lakin massivlərdən (arrays) fərqli olaraq, set-lər (sets) sifarişli (ordered) və ya indeksli (indexed) deyil. Ən əsası, onlar təkrarlara (duplicates) icazə vermir: bir dəyər (value) set-in (set) ya üzvü (member) olur, ya da olmur; bir dəyərin (value) set-də (set) neçə dəfə göründüyünü soruşmaq mümkün deyil.
+`Set` — JavaScript-də təkrarsız dəyərləri saxlayan xüsusi bir kolleksiyadır. Massivə bənzəsə də, onun fərqli xüsusiyyətləri var:
 
-#### Set Yaratmaq və İlkinləşdirmək (Creating and Initializing a Set) ✨
+* **Təkrarlara icazə vermir.** Yəni, bir dəyəri `Set`-ə iki dəfə əlavə etsən də, sadəcə bir dəfə saxlanır.
+* **İndeksli deyil.** `Set`-də `s[0]` kimi indeks vasitəsilə dəyərə birbaşa giriş yoxdur.
+* **Əlavə edilən elementlərin daxil olma sırasını saxlayır.** Yəni, iterasiya zamanı elementlər əlavə olunduğu qaydada gəlir.
 
-`Set()` konstruktoru (constructor) ilə yeni bir `Set` obyekti (object) yaradırsınız:
+### Set yaratmaq
 
-```javascript
-let s = new Set(); // Yeni, boş bir set
-let t = new Set([1, s]); // İki üzvü (member) olan yeni bir set
-```
-`Set()` konstruktoruna (constructor) ötürülən arqument (argument) massiv (array) olmaq məcburiyyətində deyil. İstənilən iterable (təkrarlana bilən) obyekt (object) (digər `Set` obyektləri (objects) daxil olmaqla) qəbul olunur:
+Yeni `Set` yaratmaq üçün `new Set()` yazırıq. İstəyə görə `Set`-ə əvvəlcədən elementlər verə bilərik.
 
 ```javascript
-let t = new Set(s); // "s" setinin (set) elementlərini (elements) kopyalayan yeni bir set
-let unique = new Set("Mississippi"); // 4 element: "M", "i", "s", və "p" (Unikal hərfləri saxlayır)
-console.log(unique.size); // => 4
+let s = new Set(); // boş Set
+
+let t = new Set([1, 2, 3]);  // 1, 2, 3 elementləri olan Set
+// new Set([1,2,3])
+
+let strSet = new Set("hello"); 
+// "h", "e", "l", "o" — stringdəki unikal hərfləri saxlayır
 ```
 
-#### Elementləri Əlavə Etmək və Silmək (`add()`, `delete()`, `clear()`) 🗑️
-
-Set-lər (sets) yaradılarkən ilkinləşdirilmək (initialize) məcburiyyətində deyil. `add()`, `delete()` və `clear()` metodları (methods) ilə istənilən vaxt elementlər (elements) əlavə edib silə bilərsiniz. Unutmayın ki, set-lər (sets) təkrarlara (duplicates) icazə vermir, buna görə də artıq mövcud olan bir dəyəri (value) əlavə etmək heç bir təsir göstərmir:
+* **Nəzərə alın:** `Set` konstruktoru istənilən iterable obyekt qəbul edir. Buna massiv, string, hətta başqa `Set` də daxildir.
 
 ```javascript
-let s = new Set(); // Boş başlayın
-console.log(s.size);    // => 0
-
-s.add(1);               // Bir rəqəm əlavə edin.
-console.log(s.size);    // => 1
-s.add(1);               // Eyni rəqəmi yenidən əlavə edin.
-console.log(s.size);    // => 1; ölçü dəyişmir.
-
-s.add(true);            // Başqa bir dəyər əlavə edin (tipləri qarışdırmaq mümkündür).
-console.log(s.size);    // => 2
-
-s.add([1,2,3]);         // Massiv dəyəri əlavə edin (massivin özü əlavə edildi, elementləri yox).
-console.log(s.size);    // => 3
-
-console.log(s.delete(1));      // => true: 1 silindi.
-console.log(s.size);           // => 2
-console.log(s.delete("test")); // => false: "test" yox idi.
-
-console.log(s.delete(true));   // => true: true silindi.
-console.log(s.delete([1,2,3]));// => false: setdəki massivin referansı fərqli idi.
-console.log(s.size);           // => 1 (hələ də həmin massiv setdədir).
-
-s.clear();              // Set-dən hər şeyi silin.
-console.log(s.size);    // => 0
+let s2 = new Set(t);  // t Set-in elementləri ilə yeni Set yaradırıq
 ```
-**Bu kod haqqında vacib qeydlər:**
-* `add()` metodu (method) tək arqument (argument) qəbul edir. Əgər massiv (array) ötürsəniz, massivin özünü əlavə edir, elementlərini yox. `add()` həmişə çağırıldığı set-i (set) qaytarır, bu da zəncirləməyə imkan verir: `s.add('a').add('b').add('c');`.
-* `delete()` metodu (method) hər dəfə yalnız bir elementi (element) silir və dəyərin (value) set-də (set) olub-olmamasına görə `true` və ya `false` qaytarır.
-* **Set üzvlüyü (`Set Membership`) sərt bərabərlik (`===`) yoxlamalarına əsaslanır.** Bu o deməkdir ki, `1` (rəqəm) və `"1"` (simvol) fərqli sayılır. Obyektlər (objects) (massivlər (arrays) və ya funksiyalar (functions) da daxil olmaqla) də referanslarına görə müqayisə edilir. Buna görə də yuxarıdakı nümunədə fərqli bir massiv referansı ilə seti (set) silmək mümkün olmadı.
 
-**QEYD:** Python setləri (sets) üzvləri (members) bərabərlik (equality) üçün müqayisə edir, identiklik (identity) üçün yox. Lakin onlar yalnız dəyişməz (immutable) üzvlərə (members) (məsələn, tuple-lara (tuples)) icazə verir, list-ləri (lists) və dict-ləri (dicts) isə set-lərə (sets) əlavə etmək olmur. JavaScript-də bu məhdudiyyət yoxdur.
+### **Element əlavə etmək — `add()`**
+
+`Set`-ə element əlavə etmək üçün `add()` metodundan istifadə edirik.
+
+```javascript
+let s = new Set();
+
+s.add(1);
+s.add(2);
+s.add(2);  // təkrar əlavə olunur, amma təsiri yoxdur
+
+console.log(s.size);  // 2
+```
+
+* `add()` metodunun qaytarışı `Set`-in özüdür, buna görə zəncirləmə mümkündür:
+
+```javascript
+s.add(3).add(4).add(5);
+console.log(s.size);  // 5
+```
+
+---
+
+### **Element silmək — `delete()` və `clear()`**
+
+* `delete()` metodu verilmiş elementi `Set`-dən silir. Əgər element varsa `true`, yoxdursa `false` qaytarır.
+
+```javascript
+s.delete(2);  // true
+s.delete(42); // false, belə element yoxdur
+```
+
+* `clear()` metodu `Set`-dəki bütün elementləri silir.
+
+```javascript
+s.clear();
+console.log(s.size);  // 0
+```
+
+---
+
 
 #### Üzvlük Yoxlaması (`has()`) ✅
 
