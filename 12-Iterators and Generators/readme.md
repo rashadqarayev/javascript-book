@@ -623,5 +623,3 @@ console.log(gen2.throw(new Error("Xarici müdaxilə")));
 // { value: undefined, done: true }
 ```
 ---
-### 12.4.4 Generatorlar Haqqında Son Qeyd ✍️
-Generatorlar çox güclü bir kontrol mexanizmidir. Onlar bir vaxtlar JavaScript-də asinxron (asynchronous) kodları idarə etmək üçün mürəkkəb yollarla istifadə olunurdu. Lakin müasir JavaScript-də bu məqsəd üçün xüsusi olaraq yaradılmış **`async` və `await`** açar sözləri (Fəsil 13) var. Bu səbəbdən, generatorları bu gün daha çox mürəkkəb və ya "tənbəl" (lazy) iterasiya məntiqi qurmaq üçün istifadə edirik.
