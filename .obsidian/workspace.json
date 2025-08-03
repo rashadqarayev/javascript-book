@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "05bacbd26dd9bf47",
+        "id": "c3a7b6b348a7c983",
         "type": "tabs",
         "children": [
           {
-            "id": "b1aa82ece6de5607",
+            "id": "c3db75632f8465e7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "11-The JavaScript Standard Library/readme.md",
+                "file": "12-Iterators and Generators/readme.md",
                 "mode": "source",
                 "source": false
               },
@@ -168,10 +168,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "b1aa82ece6de5607",
+  "active": "c3db75632f8465e7",
   "lastOpenFiles": [
-    "12-Iterators and Generators/readme.md",
+    "13-Asynchronous Javascript/readme.md",
+    "09-Classes/Readme.md",
     "11-The JavaScript Standard Library/readme.md",
+    "12-Iterators and Generators/readme.md",
+    "14-Metaprogramming/readme.md",
     "Pasted image 20250802171002.png",
     "Pasted image 20250802170907.png"
   ]
