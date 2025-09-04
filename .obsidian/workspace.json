@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "13-Asynchronous Javascript/readme.md",
+                "file": "15-Javascript in Web Browsers/readme.md",
                 "mode": "source",
                 "source": false
               },
@@ -168,10 +168,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c3db75632f8465e7",
+  "active": "aad9627ba9b5a4ec",
   "lastOpenFiles": [
-    "12-Iterators and Generators/readme.md",
+    "15-Javascript in Web Browsers/image-1.png",
+    "15-Javascript in Web Browsers/image.png",
+    "15-Javascript in Web Browsers/readme.md",
     "13-Asynchronous Javascript/readme.md",
+    "12-Iterators and Generators/readme.md",
     "09-Classes/Readme.md",
     "11-The JavaScript Standard Library/readme.md",
     "14-Metaprogramming/readme.md",

@@ -1,15 +1,15 @@
 ### Fəsil 15. Veb Brauzerlərdə JavaScript (JavaScript in Web Browsers) 🌐
 
-JavaScript 1994-cü ildə məhz veb brauzerlərdəki sənədlərə dinamik davranış vermək məqsədilə yaradılıb. O vaxtdan bəri həm dilin özü, həm də veb platforması inanılmaz dərəcədə inkişaf edib. Bu gün brauzer sadəcə sənədləri göstərən bir proqram deyil, qrafika, audio, video, şəbəkə (network), yaddaş (storage) və hətta thread-lər kimi xidmətlər təqdim edən tam bir proqram platformasıdır. JavaScript isə bu platformanın xidmətlərindən istifadə etməyə imkan verən dildir.
+JavaScript 1994-cü ildə məhz veb brauzerlərdəki sənədlərə dinamik davranış vermək məqsədilə yaradılıb. O vaxtdan bəri həm dilin özü, həm də veb platforması inanılmaz dərəcədə inkişaf edib. Bu gün brauzer sadəcə sənədləri göstərən bir proqram deyil, qrafika, audio, video, şəbəkə (network), yaddaş (storage) kimi xidmətlər təqdim edən tam bir proqram platformasıdır. JavaScript isə bu platformanın xidmətlərindən istifadə etməyə imkan verən dildir.
 
 Bu fəsildə veb proqramları yazmaq üçün lazım olan ən vacib JavaScript API-larını araşdıracağıq:
-* 📜 Sənədin məzmununu (**content**) idarə etmək (§15.3) və stilini (**style**) dəyişmək (§15.4)
+* 📜 Sənədin məzmununu  idarə etmək (§15.3) və stilini dəyişmək (§15.4)
 * 📍 Elementlərin ekrandakı mövqeyini təyin etmək (§15.5)
 * 🧩 Təkrar istifadə edilə bilən istifadəçi interfeysi komponentləri (**components**) yaratmaq (§15.6)
 * 🎨 Qrafika çəkmək (§15.7 və §15.8)
 * 🎵 Səsləri çalmaq və yaratmaq (§15.9)
-* 🧭 Brauzerin naviqasiyasını və tarixçəsini (**history**) idarə etmək (§15.10)
-* ↔️ Şəbəkə (network) üzərindən data mübadiləsi aparmaq (§15.11)
+* 🧭 Brauzerin naviqasiyasını və tarixçəsini idarə etmək (§15.10)
+* ↔️ Şəbəkə üzərindən data mübadiləsi aparmaq (§15.11)
 * 💾 İstifadəçinin kompüterində data saxlamaq (§15.12)
 * ⚙️ Thread-lər ilə paralel hesablamalar aparmaq (§15.13)
 
@@ -18,33 +18,34 @@ Bu fəsildə veb proqramları yazmaq üçün lazım olan ən vacib JavaScript AP
 Bu kitabda və ümumiyyətlə vebdə **"client-side JavaScript"** termini ilə tez-tez qarşılaşacaqsınız. Bu, sadəcə olaraq **veb brauzerdə** işləmək üçün yazılmış JavaScript deməkdir. Onun əksi isə **"server-side JavaScript"**-dir ki, bu da veb serverlərdə (məsələn, Node.js ilə) işləyir.
 
 Bunu bir restoran kimi düşünün:
-* **Frontend (Client-Side)** 🛋️: Sizin gördüyünüz, oturduğunuz zal, menyu və ofisiantla ünsiyyətiniz. Bu, istifadəçinin brauzerində baş verən hər şeydir.
-* **Backend (Server-Side)** 👨‍🍳: Mətbəxdə yeməklərin bişirildiyi, sifarişlərin idarə olunduğu və anbardakı məhsulların uçotunun aparıldığı, sizin görmədiyiniz hissə. Bu isə serverdə baş verən proseslərdir.
+* **Frontend (Client-Side)**: Sizin gördüyünüz, oturduğunuz zal, menyu və ofisiantla ünsiyyətiniz. Bu, istifadəçinin brauzerində baş verən hər şeydir.
+* **Backend (Server-Side)**: Mətbəxdə yeməklərin bişirildiyi, sifarişlərin idarə olunduğu və anbardakı məhsulların uçotunun aparıldığı, sizin görmədiyiniz hissə. Bu isə serverdə baş verən proseslərdir.
 
 ---
 #### ❗️ VACİB: Köhnə (Legacy) API-lar haqqında
 JavaScript-in 25 ildən artıq olan tarixində brauzerlərə saysız-hesabsız API-lar əlavə edilib. Onların bir çoxu bu gün artıq köhnəlmiş hesab olunur və istifadəsi məsləhət görülmür. Brauzerlər köhnə veb saytları pozmamaq üçün bu API-ları hələ də dəstəkləsə də, müasir proqramlaşdırmada onlardan uzaq durmaq lazımdır. Bu köhnəlmiş API-lar əsasən bunlardır:
-1.  **Mülkiyyətçi (Proprietary) API-lar:** Yalnız bir brauzer (əsasən köhnə Internet Explorer) tərəfindən yaradılıb, heç vaxt standartlaşdırılmayanlar.
+1.  **(Proprietary) API-lar:** Yalnız bir brauzer (əsasən köhnə Internet Explorer) tərəfindən yaradılıb, heç vaxt standartlaşdırılmayanlar.
 2.  **Səmərəsiz (Inefficient) API-lar:** `document.write()` kimi, səhifənin performansına kəskin mənfi təsir göstərən metodlar.
 3.  **Köhnəlmiş (Outdated) API-lar:** `document.bgColor` kimi, CSS-in gəlişi ilə əhəmiyyətini itirmiş və daha müasir alternativləri olanlar.
 4.  **Uğursuz Dizayn Edilmiş API-lar:** İlk DOM API-ları kimi, JavaScript-in təbiətinə uyğun olmayan və istifadəsi çətin olanlar.
 
 **Nəticə:** Bu kitabda və müasir proqramlaşdırmada biz bu köhnə API-ları öyrənməyəcəyik. Fokusumuz müasir, standart və stabil API-lar üzərində olacaq.
 
-Əla, bro! Fəsil 15-in ilk və ən təməl mövzusuna başlayırıq: JavaScript kodu veb səhifəyə necə daxil edilir və necə işləyir?
 
 ***
 ### 15.1 Veb Proqramlaşdırmanın Əsasları (Web Programming Basics)
-Bu bölmə, veb üçün yazılan JavaScript proqramlarının necə qurulduğunu, brauzerə necə yükləndiyini, istifadəçidən necə məlumat (input) aldığını, necə nəticə (output) çıxardığını və hadisələrə (events) reaksiya verərək necə asinxron (asynchronous) işlədiyini izah edir.
+Bu bölmə, veb üçün yazılan JavaScript proqramlarının necə qurulduğunu, brauzerə necə yükləndiyini, istifadəçidən necə məlumat (input) aldığını, necə nəticə (output) çıxardığını və hadisələrə (events) reaksiya verərək necə asinxron işlədiyini izah edir.
 
 ---
-### 15.1.1 HTML `<script>` Teqlərində JavaScript 📜
+### 15.1.1 HTML `<script>` Teqlərində JavaScript
 Brauzerlər HTML sənədlərini göstərir. Əgər brauzerin JavaScript kodunu icra etməsini istəyirsinizsə, həmin kodu HTML sənədinin içinə daxil etməli və ya ona istinad etməlisiniz. Bu işi `<script>` teqi görür.
 
 #### Daxili Skriptlər (Inline Scripts)
 JavaScript kodunu birbaşa HTML faylının içində, `<script>` və `</script>` teqləri arasında yaza bilərsiniz.
 
-**Geniş Nümunə: Rəqəmsal Saat ⏰**
+---
+
+**Rəqəmsal Saat ⏰**  
 Aşağıdakı nümunə, HTML, CSS və JavaScript-in birlikdə işləyərək səhifədə dinamik bir rəqəmsal saat yaratmasını göstərir.
 ```html
 <!DOCTYPE html>
@@ -88,39 +89,48 @@ Aşağıdakı nümunə, HTML, CSS və JavaScript-in birlikdə işləyərək səh
 </html>
 ```
 
-#### Xarici Skriptlər (External Scripts)
-JavaScript kodunu birbaşa HTML-ə yazmaq əvəzinə, onu ayrı bir `.js` faylında saxlamaq və `<script>` teqinin `src` (source) atributu ilə HTML-ə bağlamaq daha yaxşı təcrübədir (best practice).
+----
 
-Yuxarıdakı saatın kodunu `scripts/digital_clock.js` adlı bir fayla yerləşdirsəydik, HTML-də belə görünərdi:
+#### Xarici Skriptlər (External Scripts)
+JavaScript kodunu birbaşa HTML-ə yazmaq əvəzinə, onu ayrı bir `.js` faylında saxlamaq və `<script>` teqinin `src` (source) atributu ilə HTML-ə bağlamaq daha yaxşı təcrübədir
+
+Yuxarıdakı saatın kodunu `scripts/digital_clock.js` adlı bir fayla yerləşdirsəydik, HTML-də belə görünərdi:  
 `<script src="scripts/digital_clock.js"></script>`
 
 **Xarici skriptlərin üstünlükləri:**
-* **🧹 Təmiz Kod:** HTML (məzmun) və JavaScript-i (davranış) bir-birindən ayırır.
-* **♻️ Təkrar İstifadə:** Eyni JavaScript faylını bir neçə fərqli səhifədə istifadə etmək olar.
-* **🚀 Keşləmə (Caching):** Brauzer xarici `.js` faylını bir dəfə yükləyir və sonrakı səhifələrdə onu keşdən (cache) götürür, bu da saytın sürətini artırır.
-* **☁️ Kənar Mənbələr:** Başqa serverlərdə yerləşən skriptləri (məsələn, Google Analytics, reklam skriptləri) səhifənizə qoşmağa imkan verir.
+* **Təmiz Kod:** HTML (məzmun) və JavaScript-i (davranış) bir-birindən ayırır.
+* **Təkrar İstifadə:** Eyni JavaScript faylını bir neçə fərqli səhifədə istifadə etmək olar.
+* **Keşləmə (Caching):** Brauzer xarici `.js` faylını bir dəfə yükləyir və sonrakı səhifələrdə onu keşdən (cache) götürür, bu da saytın sürətini artırır.
+
+---
 
 #### Modullar (`type="module"`) 📦
-Əgər kodunuzu ES6 modulları (`import`/`export`) ilə yazmısınızsa, əsas skript faylınızı HTML-ə `type="module"` atributu ilə daxil etməlisiniz:
+Əgər kodunuzu ES6 modulları (`import`/`export`) ilə yazmısınızsa, əsas skript faylınızı HTML-ə `type="module"` atributu ilə daxil etməlisiniz:  
 `<script type="module" src="main.js"></script>`
 
-#### Skriptin İcra Zamanı: `async` və `defer` ⏳
+---
+
+#### Skriptin İcra Zamanı: `async` və `defer`
 Standart olaraq, brauzer `<script>` teqinə rast gəldikdə, HTML-i emal etməyi **dayandırır**, skripti yükləyib **icra edir** və yalnız bundan sonra davam edir. Bu, böyük skriptlərdə səhifənin açılışını ləngidə bilər. `async` və `defer` atributları bu davranışı dəyişir.
 
-* **Standart (Bloklayan) 🐢:** `<script src="..."></script>`
+* **Standart (Bloklayan):** `<script src="..."></script>`
     * HTML dayanır, skript yüklənir və icra olunur, sonra HTML davam edir.
 
-* **`defer` (Təxirə Salınmış) 🚶‍♂️...** `<script defer src="..."></script>`
+* **`defer` (Təxirə Salınmış)...** `<script defer src="..."></script>`
     * Skript HTML ilə paralel olaraq yüklənir.
     * HTML sənədi tam emal olunduqdan **sonra** icra olunur.
     * `defer` skriptləri HTML-dəki ardıcıllıqlarını qoruyur.
 
-* **`async` (Asinxron) 🚀:** `<script async src="..."></script>`
+* **`async` (Asinxron):** `<script async src="..."></script>`
     * Skript HTML ilə paralel olaraq yüklənir.
     * Yüklənən **kimi dərhal** icra olunur (HTML hələ emal olunarkən belə).
     * Hansı birinci yüklənsə, o birinci işə düşür, yəni ardıcıllıq pozula bilər.
 
+---    
+
 **Sadə Alternativ:** Çox vaxt ən sadə həll, `<script>` teqlərini `<body>`-nin ən sonunda, `</html>`-dən əvvəl yerləşdirməkdir. Bu zaman skript işə düşəndə, ondan yuxarıdakı bütün HTML elementləri artıq mövcud olur.
+
+----
 
 #### Skriptləri Tələbə Görə Yükləmək (Loading Scripts On Demand) ✨
 Bəzən bir skriptə səhifə açılan kimi deyil, yalnız istifadəçi bir düyməyə kliklədikdə ehtiyac olur. Bu cür skriptləri tələbə görə yükləmək üçün proqramatik olaraq səhifəyə yeni bir `<script>` elementi əlavə edə bilərik.
@@ -149,23 +159,28 @@ function importScript(url) {
   });
 }
 
-// İstifadəsi (məsələn, bir düyməyə kliklədikdə):
-// myButton.onclick = () => {
-//   importScript("/js/heavy-library.js")
-//     .then(() => { console.log("Kitabxana uğurla yükləndi!"); })
-//     .catch(() => { console.error("Kitabxananı yükləmək mümkün olmadı."); });
-// };
+// İstifadəsi (məsələn, bir düyməyə kliklədikdə)
+myButton.onclick = () => {
+  importScript("/js/heavy-library.js")
+    .then(() => { console.log("Kitabxana uğurla yükləndi!"); })
+    .catch(() => { console.error("Kitabxananı yükləmək mümkün olmadı."); });
+};
 ```
-Əla, bro! Davam edirik. Bu hissə, brauzerdə JavaScript-in "danışdığı" və idarə etdiyi ən vacib obyekt olan **DOM**-u izah edir.
 
 ***
-### 15.1.2 Sənəd Obyekt Modeli (The Document Object Model - DOM) 🌳
-Client-side (brauzer) JavaScript proqramlaşdırmasında ən vacib obyekt, brauzer pəncərəsində göstərilən HTML sənədini təmsil edən **`Document`** obyektidir. HTML sənədləri ilə işləmək üçün istifadə olunan API isə **Sənəd Obyekt Modeli (Document Object Model)**, yəni qısaca **DOM** adlanır.
 
-DOM, HTML sənədinin məntiqi quruluşunu bir obyekt ağacı şəklində təmsil edir.
+### 15.1.2 Sənəd Obyekt Modeli (The Document Object Model - DOM)
 
-#### HTML-in Ağac Quruluşu
-Gəlin belə sadə bir HTML sənədinə baxaq:
+Brauzerdə çalışan JavaScript-in ən vacib obyektlərindən biri **`Document`**-dir. Bu obyekt, brauzerdə göstərilən HTML sənədini təmsil edir. HTML sənədləri ilə işləmək üçün istifadə olunan API isə **Sənəd Obyekt Modeli (DOM)** adlanır.
+
+DOM, HTML sənədini **obyekt ağacı** kimi göstərir. Hər bir HTML elementi və mətn parçası JavaScript-də ayrıca obyekt kimi təmsil olunur.
+
+---
+
+#### HTML Sənədinin Ağac Quruluşu
+
+Məsələn, aşağıdakı sadə HTML sənədini nəzərdən keçirək:
+
 ```html
 <html>
   <head>
@@ -177,11 +192,9 @@ Gəlin belə sadə bir HTML sənədinə baxaq:
   </body>
 </html>
 ```
-Bu sənədin quruluşu bir ağaca bənzəyir: `<html>` teqi kökdür və onun `<body>` və `<head>` adlı "budaqları" var. Bu budaqların da öz daxilində başqa elementləri var.
 
-DOM, bu ağac quruluşunu JavaScript üçün bir obyekt modeli olaraq təqdim edir. Sənəddəki **hər bir HTML teqi** üçün müvafiq bir **`Element` obyekti**, hər bir **mətn parçası** üçün isə bir **`Text` obyekti** mövcuddur. Həm `Element`, həm `Text`, həm də `Document` siniflərinin özləri daha ümumi olan **`Node` (qovşaq)** sinifindən törəyir.
+Bu sənəd bir **ağac** kimi təsəvvür edilə bilər:
 
-Yuxarıdakı HTML-in DOM ağacı təxminən belə görünür:
 ```
 Document
 └── html
@@ -203,100 +216,134 @@ Document
         └── #text (boşluq)
 ```
 
-#### DOM Terminologiyası (DOM Terminology) 👨‍👩‍👧‍👦
-Ağac strukturlarını anlamaq üçün "ailə ağacı" terminologiyasından istifadə olunur:
-* **Parent (Valideyn):** Bir qovşağın (node) birbaşa yuxarısındakı qovşaq.
-* **Children (Övladlar):** Bir qovşağın birbaşa aşağısındakı qovşaqlar.
-* **Siblings (Bacı-qardaşlar):** Eyni valideynə sahib olan qovşaqlar.
-* **Descendants (Nəsil):** Bir qovşaqdan aşağıda yerləşən bütün qovşaqlar.
-* **Ancestors (Əcdadlar):** Bir qovşaqdan yuxarıda yerləşən bütün qovşaqlar (valideyn, nənə-baba və s.).
+**Qeyd:** Hər bir HTML teqi üçün bir `Element`, hər bir mətn üçün isə `Text` obyekti mövcuddur. Hər ikisi `Node` sinifindən törəyir.
 
-DOM API-ı, bu ağac üzərində hərəkət etməyə, yeni `Element` və `Text` qovşaqları yaratmağa, onları sənədə əlavə etməyə, yerlərini dəyişməyə və ya silməyə imkan verir. Server tərəfində `console.log()` ilə mətn çıxardığımız halda, brauzer tərəfində formatlı HTML nəticəsini məhz DOM API-ı ilə sənədi manipulyasiya edərək yaradırıq.
+---
 
-#### HTML Teqləri və JavaScript Obyektləri
-DOM-da hər bir HTML teq növü üçün xüsusi bir JavaScript sinifi (class) var. Məsələn:
-* `<body>` teqi `HTMLBodyElement` sinifinin bir nüsxəsidir.
-* `<img>` teqi `HTMLImageElement` sinifinin bir nüsxəsidir.
-* `<table>` teqi `HTMLTableElement` sinifinin bir nüsxəsidir.
+### DOM Terminologiyası 👨‍👩‍👧‍👦
 
-Bu JavaScript obyektlərinin xüsusiyyətləri (properties), HTML teqlərinin atributları (attributes) ilə birbaşa əlaqəlidir.
+DOM ağacını "ailə ağacı" kimi düşünə bilərik:
 
-**Nümunə: `<img>` teqi və onun `.src` xüsusiyyəti**
+* **Parent (Valideyn):** Bir node-un yuxarısındakı node.
+* **Children (Övladlar):** Bir node-un birbaşa alt node-ları.
+* **Siblings (Bacı-qardaşlar):** Eyni valideynə sahib node-lar.
+* **Descendants (Nəsil):** Bir node-un bütün alt node-ları.
+* **Ancestors (Əcdadlar):** Bir node-un bütün yuxarıdakı node-ları.
+
+DOM API ilə sənədin hər bir node-unı yaratmaq, dəyişdirmək və silmək mümkündür. Brauzerdə HTML-in vizual görünüşü, əslində bu API vasitəsilə formalaşır.
+
+---
+
+### HTML Teqləri və JavaScript Obyektləri
+
+DOM-da hər bir HTML elementi müəyyən bir JavaScript sinifi ilə təmsil olunur:
+
+| HTML Teqi | JavaScript Sinifi  |
+| --------- | ------------------ |
+| `<body>`  | `HTMLBodyElement`  |
+| `<img>`   | `HTMLImageElement` |
+| `<table>` | `HTMLTableElement` |
+
+**Nümunə: `<img>` elementi ilə işləmək**
+
 ```html
 <img id="myImage" src="images/cat.jpg" alt="Pişik şəkli">
 ```
+
 ```javascript
-// JavaScript-də həmin elementi seçirik
+// Elementi seçirik
 const imgElement = document.querySelector('#myImage');
 
-// Elementin .src propertisi, HTML-dəki src atributunun dəyərini qaytarır
-console.log(imgElement.src); // ✅ Nəticə (təxmini): "http://mysite.com/images/cat.jpg"
+// `.src` property-si HTML-dəki src atributunu qaytarır
+console.log(imgElement.src); // "http://mysite.com/images/cat.jpg"
 
-// İndi isə propertini dəyişək
-imgElement.src = "images/dog.jpg";
-// BU ANDA BRAUZER `cat.jpg`-i `dog.jpg` ilə əvəz edəcək!
+// `.src` property-ni dəyişirik
+imgElement.src = "images/dog.jpg"; 
+// Brauzer cat.jpg-i dog.jpg ilə əvəz edəcək
 ```
-Bəzi elementlərin isə `play()` (`<audio>`), `pause()` (`<video>`) kimi özlərinə məxsus xüsusi metodları da olur.
-
-Əla, bro! Bu hissədə brauzerdəki kodlarımızın "yaşadığı" mühitlə – **Qlobal Obyekt** və **Adlar Fəzası** ilə tanış olacağıq. Bu, skriptlərin bir-biri ilə necə əlaqə saxladığını anlamaq üçün vacibdir.
-
-***
-### 15.1.3 Veb Brauzerlərdə Qlobal Obyekt (The Global Object) 🌍
-Hər bir brauzer pəncərəsi və ya tabı (tab) üçün yalnız **bir ədəd qlobal obyekt (global object)** mövcuddur. Həmin pəncərədə işləyən bütün JavaScript kodları (istisna: worker thread-lər) bu tək qlobal obyekti paylaşır. Bu o deməkdir ki, əgər bir skript bu obyekt üzərində bir xüsusiyyət (property) yaratsa, digər bütün skriptlər də həmin xüsusiyyəti görə bilir.
-
-**Bu qlobal obyektin içində nə var?** 🤔
-1.  **JavaScript-in standart kitabxanası:** `parseInt()`, `Math` obyekti, `Date`, `Set`, `Map` sinifləri və s.
-2.  **Veb API-ları:** `document` obyekti, `fetch()` funksiyası, `Audio()` konstruktoru və s.
-3.  **Pəncərənin öz xüsusiyyətləri:** `history` (brauzerin tarixçəsi), `innerWidth` (pəncərənin eni), `location` (hazırkı URL) və s.
-
-Brauzerlərdə bu qlobal obyektin özünə istinad edən **`window`** adlı bir xüsusiyyəti də var. Yəni, brauzer mühitində **qlobal obyekt elə `window` obyektinin özüdür.**
-
-**Nümunə:**
-```javascript
-// Bu iki sətir tamamilə eynidir, çünki `innerWidth` qlobal obyektin bir xüsusiyyətidir.
-console.log(window.innerWidth); // Pəncərənin daxili enini göstərir
-console.log(innerWidth);      // `window.` prefiksini yazmaq məcburi deyil
-
-// `alert` funksiyası da qlobal `window` obyektinin bir metodudur.
-window.alert("Bu, window.alert()-dir!");
-alert("Bu isə sadəcə alert()-dir!"); // Eyni işi görür
-```
-Kodun daha aydın olması üçün, pəncərəyə aid xüsusiyyətləri çağırarkən `window.` prefiksini yazmaq yaxşı təcrübə hesab olunur (`window.history`, `window.location` və s.).
 
 ---
+
+### 15.1.3 Veb Brauzerlərdə Qlobal Obyekt (The Global Object) 🌍
+
+Hər bir brauzer pəncərəsi (tab) üçün **yalnız bir qlobal obyekt** mövcuddur. Bu obyekt həmin pəncərədə işləyən bütün JavaScript kodları tərəfindən paylaşılır
+
+Bu o deməkdir ki, əgər bir skript qlobal obyekt üzərində bir xüsusiyyət (property) yaratsa, digər skriptlər də onu görə bilər.
+
+---
+
+#### Qlobal Obyektin İçində Nələr Var? 🤔
+
+1. **JavaScript-in standart kitabxanası:**
+   `parseInt()`, `Math` obyekti, `Date`, `Set`, `Map`
+
+2. **Veb API-ları:**
+   `document`, `fetch()`, `Audio()` və s.
+
+3. **Pəncərəyə aid xüsusiyyətlər:**
+   `history` (tarixçə), `innerWidth` (pəncərənin eni), `location` (hazırkı URL) və s.
+
+---
+
+#### `window` – Brauzerin Qlobal Obyekti
+
+Brauzerlərdə qlobal obyekt **`window`** adlanır. Yəni, bütün qlobal dəyişənlər və funksiyalar əslində `window` obyektinin xüsusiyyətləri və metodlarıdır.
+
+**Nümunə:**
+
+```javascript
+// Eyni nəticə verirlər
+console.log(window.innerWidth); 
+// Pəncərənin daxili eni - 755
+console.log(innerWidth);        
+// window prefiksi olmadan da işləyir - 755
+
+// alert() funksiyası da window obyektinin metodudur
+window.alert("Bu, window.alert() metodudur!");
+alert("Bu isə sadəcə alert() funksiyasıdır!");
+```
+
+> 💡 **Tövsiyə:** Kodun daha aydın olması üçün pəncərəyə aid xüsusiyyətləri çağırarkən `window.` prefiksini istifadə etmək yaxşıdır.
+> Məsələn: `window.history`, `window.location`.
+
+---
+
 ### 15.1.4 Skriptlərin Ortaq Adlar Fəzası (Scripts Share a Namespace) 🤝
-Əgər modullardan (`type="module"`) istifadə etmirsinizsə, bir HTML sənədindəki bütün `<script>` teqləri **eyni qlobal adlar fəzasını (namespace)** paylaşır.
 
-Bunu belə təsəvvür et: eyni sənəddəki bütün `<script>` teqləri eyni otaqdadır. Birinin otağın ortasına qoyduğu bir əşyanı (dəyişən, funksiya), otaqdakı hər kəs görür və istifadə edə bilir. Bu, kiçik proqramlar üçün rahat olsa da, böyük proyektlərdə adların bir-birinə qarışması (`naming conflicts`) kimi ciddi problemlərə yol aça bilər.
+Əgər HTML-də **modullardan (`type="module"`) istifadə etmirsinizsə**, bütün `<script>` teqləri **eyni qlobal adlar fəzasını** paylaşır.
 
-#### `var`/`function` və `let`/`const`/`class` arasındakı vacib fərq
-Qlobal səviyyədə təyin olunan bütün dəyişənlər və funksiyalar ortaq olsa da, onların qlobal obyektlə əlaqəsi fərqlidir:
+Bunu belə təsəvvür edin: bütün `<script>` teqləri **eyni otaqdadır**. Bir skript otağın ortasına bir əşya (dəyişən, funksiya) qoyarsa, digər skriptlər də onu görə və istifadə edə bilər.
 
-* **Köhnə üsul (`var`, `function`):** Qlobal səviyyədə `var` və `function` ilə təyin olunan hər şey birbaşa qlobal `window` obyektinin bir **xüsusiyyətinə (property)** çevrilir.
-* **Müasir üsul (`let`, `const`, `class`):** ES6 ilə gələn bu açar sözlərlə qlobal səviyyədə təyin olunanlar ortaq adlar fəzasında mövcud olur, lakin `window` obyektinin bir xüsusiyyətinə çevrilmir.
+---
 
-**Geniş Nümunə: İki fərqli skriptin əlaqəsi**
-Təsəvvür edək ki, HTML sənədimizdə aşağıdakı iki skript ardıcıl yerləşdirilib.
+#### `var` / `function` vs `let` / `const` / `class`
+
+| Açar söz                  | Qlobal səviyyədə davranışı      | `window` obyektində?                                  |
+| ------------------------- | ------------------------------- | ----------------------------------------------------- |
+| `var` / `function`        | Ortaq adlar fəzasında mövcuddur | Bəli, birbaşa `window` obyekti xüsusiyyətinə çevrilir |
+| `let` / `const` / `class` | Ortaq adlar fəzasında mövcuddur | Xeyr, `window` obyektinin xüsusiyyəti deyil           |
+
+---
+
+#### Misal: İki Skriptin Qarşılıqlı Əlaqəsi
 
 **`script1.js`**
-```javascript
-// Köhnə üsulla təyin olunanlar
-var legacyVar = "Mən window-dayam!";
-function legacyFunc() {
-  console.log("Mən də window-dayam!");
-}
 
-// Müasir üsulla təyin olunanlar
+```javascript
+// Köhnə üsul
+var legacyVar = "Mən window-dayam!";
+function legacyFunc() { console.log("Mən də window-dayam!"); }
+
+// Müasir üsul
 let modernLet = "Mən window-da deyiləm.";
 const modernConst = "Mən də deyiləm.";
 class ModernClass {}
 ```
 
 **`script2.js`**
-```javascript
-// İndi isə ikinci skriptdən birincidəkilərə müraciət edək
 
-// `var` və `function` ilə yaradılanlar həm birbaşa, həm də `window` ilə əlçatandır
+```javascript
+// `var` və `function` ilə yaradılanlar birbaşa və window ilə əlçatandır
 console.log(legacyVar);         // ✅ "Mən window-dayam!"
 console.log(window.legacyVar);  // ✅ "Mən window-dayam!"
 legacyFunc();                   // ✅ "Mən də window-dayam!"
@@ -309,72 +356,76 @@ console.log(modernLet);         // ✅ "Mən window-da deyiləm."
 const instance = new ModernClass();
 console.log(instance);          // ✅ ModernClass {}
 
-// ...amma onlar `window` obyektinin xüsusiyyəti deyil!
+// ...amma window obyektinə aid deyil
 console.log(window.modernLet);  // ✅ undefined
 console.log(window.ModernClass);// ✅ undefined
 ```
-**Nəticə:** Adların bir-birinə qarışmaması və daha təmiz kod üçün, müasir proyektlərdə həmişə modullardan (`<script type="module">`) istifadə etmək ən yaxşı yoldur.
 
-Olar, bro. Bu hissə brauzerdə yazdığımız kodların ümumi işləmə prinsipini, yəni "oyunun qaydalarını" izah edir. Gəl bu vacib təməl məlumatları da mənimsəyək.
 
 ***
 ### 15.1.5 JavaScript Proqramlarının İcrası (Execution of JavaScript Programs) ▶️
 
-Brauzerdə işləyən bir JavaScript "proqramı", bir HTML sənədinin daxilindəki və ya ona xaricdən qoşulmuş bütün skriptlərin məcmusudur. Bu ayrı-ayrı skriptlər eyni qlobal `Window` obyektini paylaşır və eyni `Document` obyektini idarə edir.
+Brauzerdə işləyən JavaScript proqramı, bir HTML sənədinin daxilində yazılmış və ya xaricdən qoşulmuş bütün `<script>` teqlərinin birlikdə icrasıdır. Bu skriptlər eyni **qlobal `Window` obyektini** paylaşır və eyni **`Document` obyektini** idarə edir.
 
-JavaScript proqramının icrasını iki əsas mərhələyə bölmək olar:
-
-#### Mərhələ 1: Yüklənmə və Sinxron İcra 📜
-Bu, səhifənin ilk açıldığı andır.
-* Brauzer HTML sənədini yuxarıdan aşağıya doğru oxumağa (parse) başlayır.
-* `<script>` teqlərinə rast gəldikcə, onları (adətən) dayanıb icra edir. Bu skriptlər ya gələcəkdə istifadə olunacaq funksiyaları təyin edir, ya da səhifənin o anki vəziyyətini manipulyasiya edir.
-* Bu mərhələ qısadır və səhifə tam yüklənənə qədər davam edir.
-
-#### Mərhələ 2: Asinxron və Hadisə Yönümlü (Event-Driven) 🔄
-Sənəd tam yükləndikdən sonra proqram ikinci mərhələyə keçir.
-* Bu mərhələdə JavaScript passiv olaraq "gözləmə" rejiminə keçir.
-* O, yalnız müəyyən bir **hadisə (event)** baş verdikdə aktivləşir və müvafiq **hadisə işləyicisini (event handler)**, yəni bizim yazdığımız callback funksiyasını icra edir.
-* Bu hadisələr istifadəçi hərəkətləri (klik, klaviatura), şəbəkə cavabları, zamanlayıcılar (`setTimeout`) və s. ola bilər.
-
-Bu iki mərhələ arasındakı keçidi bildirən iki vacib hadisə var:
-* **`DOMContentLoaded`**: HTML sənədi tamamilə yüklənib emal olunduqda baş verir. Artıq DOM ağacı ilə işləmək olar.
-* **`load`**: Təkcə HTML deyil, həm də bütün xarici resurslar (şəkillər, stillər və s.) tam yüklənib bitdikdə `window` obyekti üzərində baş verir.
+JavaScript proqramlarının icrası iki əsas mərhələyə bölünür:
 
 ---
-#### JavaScript-in "Tək-Axınlı" (Single-Threaded) Modeli 🧵
-Bu, JavaScript-in ən fundamental xüsusiyyətlərindən biridir.
 
-**Single-threaded nə deməkdir?** Təsəvvür et ki, JavaScript bir restoranda işləyən **tək bir ofisiantdır**. O, eyni anda yalnız bir masaya xidmət edə bilər. Bir masanın sifarişini tam almamış, digərinə keçə bilməz. Yəni, JavaScript eyni anda yalnız bir əməliyyatı yerinə yetirə bilir.
+#### 1. Yüklənmə və Sinxron İcra 📜
 
-* **Üstünlüyü (+):** Kod yazmaq çox sadələşir. İki fərqli funksiyanın eyni anda işləyib bir-birinə mane olması, "race condition", "deadlock" kimi mürəkkəb problemlər haqqında narahat olmağa ehtiyac qalmır.
-* **Mənfi Cəhəti (-):** Əgər həmin tək axın uzun çəkən bir əməliyyatla məşğul olarsa (məsələn, mürəkkəb bir hesablama), bütün proqram, o cümlədən istifadəçi interfeysi (UI) **donur**. Brauzer istifadəçinin kliklərinə və digər hərəkətlərinə reaksiya vermir.
-* **Həll Yolu (`Web Worker`-lar):** Bu donma problemini həll etmək üçün arxa planda işləyən "köməkçi ofisiantlar", yəni **Web Worker**-lar mövcuddur. Onlar ağır hesablamaları arxa planda aparır və əsas proqramın donmasının qarşısını alır. Onlar əsas proqramla yalnız mesajlaşma yolu ilə əlaqə saxlayır.
+* Brauzer HTML sənədini yuxarıdan aşağıya oxuyur (parse edir).
+* `<script>` teqi ilə qarşılaşdıqda, HTML-in emalını dayandırır və həmin skripti icra edir.
+* Bu skriptlər funksiyalar təyin edə və ya səhifənin mövcud vəziyyətini dəyişə bilər.
+* Bu mərhələ səhifə tam yüklənənə qədər davam edir.
 
 ---
+
+#### 2. Asinxron və Hadisə-Yönümlü İcra 🔄
+
+* HTML tam emal olunduqdan sonra proqram hadisələrə əsaslanan mərhələyə keçir.
+* JavaScript bu mərhələdə passivdir, yalnız müəyyən **hadisələr (events)** baş verdikdə aktivləşir.
+* Hadisələr istifadəçi hərəkətləri (klik, klaviatura), şəbəkə cavabları, zamanlayıcılar (`setTimeout`) və s. ola bilər.
+* Hadisə baş verəndə brauzer müvafiq **hadisə işləyicisini (event handler)**, yəni bizim yazdığımız callback funksiyasını icra edir.
+
+---
+
+#### Əsas Hadisələr
+
+* **`DOMContentLoaded`** – HTML tam yüklənib emal olunduqda baş verir. DOM ilə işləmək üçün ideal vaxtdır.
+* **`load`** – yalnız HTML deyil, bütün xarici resurslar (şəkillər, stillər və s.) yüklənib bitdikdə `window` obyektində baş verir.
+
+---
+
+
+#### JavaScript-in Tək-Axınlı (Single-Threaded) Modeli 🧵
+
+JavaScript **single-threaded** dillərdən biridir. Bu o deməkdir ki, eyni anda yalnız bir əməliyyat icra olunur.
+
+* **Üstünlük:** Kodun sadələşməsi, çətin paralellik problemlərinin (race condition, deadlock) olmaması.
+* **Çatışmazlıq:** Uzunmüddətli əməliyyatlar (məsələn, böyük hesablama) proqramın donmasına səbəb ola bilər, UI cavabsız qalır.
+* **Həll yolu:** Arxa planda işləyə bilən **Web Worker**-lərdən istifadə. Onlar əsas axını bloklamadan ağır hesablama aparır və yalnız mesajlaşma yolu ilə əsas proqramla əlaqə qururlar.
+
+---
+
 #### Səhifə Yüklənməsinin Zaman Xətti (Timeline) ⏰
-Brauzer bir səhifəni açarkən baş verən proseslərin ardıcıllığı təxminən belədir:
 
-1.  **Başlanğıc:** Brauzer `Document` obyektini yaradır və HTML-i emal etməyə başlayır. `document.readyState` bu an `"loading"` olur.
-2.  **Sinxron Skript:** Brauzer `async` və ya `defer` atributu olmayan bir `<script>`-ə rast gəlir. HTML-in emalını dayandırır, skripti yükləyir və icra edir.
-3.  **`async` Skript:** Brauzer `async` atributu olan bir `<script>`-ə rast gəlir. Skripti arxa planda yükləməyə başlayır, amma HTML-in emalını dayandırmır. Skript yüklənən kimi dərhal icra olunur.
-4.  **HTML Bitdi:** Sənədin bütün HTML-i emal olunduqda, `document.readyState` `"interactive"` olur.
-5.  **`defer` Skriptləri:** İndi brauzer `defer` atributu ilə işarələnmiş bütün skriptləri HTML-dəki ardıcıllıqlarına uyğun olaraq icra edir.
-6.  **`DOMContentLoaded` Hadisəsi 🚀:** Bütün sinxron skriptlər və `defer` skriptləri işini bitirdikdən sonra, `Document` obyekti üzərində `DOMContentLoaded` hadisəsi baş verir. Bu an, DOM-la tam işləmək üçün ideal bir vaxtdır.
-7.  **`load` Hadisəsi 🏁:** Səhifədəki bütün xarici resurslar (şəkillər, iframe-lər və s.) tam yükləndikdən və bütün `async` skriptlər işini bitirdikdən sonra, `document.readyState` `"complete"` olur və `Window` obyekti üzərində `"load"` hadisəsi baş verir.
-8.  **Hadisə Gözləmə:** Bu andan etibarən, proqram istifadəçi və ya digər asinxron hadisələrə reaksiya vermək üçün passiv gözləmə rejiminə keçir.
-
-Bu ardıcıllığı anlamaq, skriptlərinizi niyə və harada yerləşdirməli olduğunuzu bilmək (məsələn, `defer` istifadə etmək və ya `<body>`-nin sonuna qoymaq) və veb səhifənizin sürətini optimallaşdırmaq üçün çox vacibdir.
-
-Əla, bro! Bu, fəslin son nəzəri hissəsidir. Burada proqramımızın xarici aləmlə necə "danışdığını", xətaların necə idarə olunduğunu və brauzerin bizi hansı təhlükələrdən qoruduğunu öyrənəcəyik.
+1. **`loading`** – `Document` yaradılır, HTML oxunmağa başlayır.
+2. **Sinxron skriptlər** – `async`/`defer` olmayan `<script>` HTML-in emalını dayandırır və dərhal icra olunur.
+3. **`async` skriptlər** – yüklənməsi HTML-i dayandırmadan aparılır, yüklənən kimi icra olunur.
+4. **`interactive`** – HTML tam emal olunub, amma bütün resurslar hələ yüklənməyib.
+5. **`defer` skriptlər** – HTML emalı bitəndən sonra, sənəddəki ardıcıllığa uyğun icra olunur.
+6. **`DOMContentLoaded`** – bütün sinxron və `defer` skriptlər icra edildikdən sonra baş verir.
+7. **`complete`** və **`load`** – bütün resurslar yükləndikdən sonra `window` üzərində `load` hadisəsi baş verir.
+8. **Gözləmə mərhələsi** – bu andan etibarən proqram yalnız istifadəçi və digər asinxron hadisələrə cavab verir.
 
 ***
-### 15.1.6 Proqramın Giriş və Çıxışları (Input and Output) 📥📤
-Hər proqram kimi, brauzerdəki JavaScript proqramları da müəyyən giriş (input) məlumatlarını emal edərək nəticə (output) hasil edir.
+### 15.1.6 Proqramın Giriş və Çıxışları (Input and Output)
+Hər proqram kimi, brauzerdəki **JavaScript** proqramları da müəyyən giriş (input) məlumatlarını emal edərək nəticə (output) hasil edir.
 
 #### Girişlər (Inputs)
 Brauzerdəki bir proqramın əldə edə biləcəyi əsas girişlər bunlardır:
 * **📜 Sənədin Məzmunu:** DOM API-ı vasitəsilə sənədin bütün məzmunu (`document`).
-* **🖱️ İstifadəçi Hərəkətləri:** Kliklər, klaviatura daxiletmələri, toxunmalar kimi hadisələr (events).
+* **🖱️ İstifadəçi Hərəkətləri:** Kliklər, klaviatura daxiletmələri
 * **🔗 Sənədin URL-i:** `document.URL` ilə hazırkı səhifənin tam URL-ini və ya `location` obyekti ilə onun hissələrini əldə etmək.
 * **🍪 "Cookie"-lər:** `document.cookie` ilə brauzerdə saxlanan cookie-ləri oxumaq və yazmaq.
 * **🖥️ Brauzer və Sistem Məlumatları:**
